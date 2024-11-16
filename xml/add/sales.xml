@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <noneditablegrid name="quotationdetail">
+    <columns>quotationdetails_amount,quotationdetails_rate,quotationdetails_quantity,product_productname</columns>
+    <columnlabels>Product Name,quotationdetails_quantity,quotationdetails_rate,quotationdetails_amount</columnlabels>
+    <query>select * from tbl_quotationdetails
+join tbl_quotation On quotation_quotationid=quotationdetails_quotationid
+Join tbl_product On quotationdetails_productid= product_productid
+where quotation_quotationid=$QUERYSTRING_quotationid$</query>
+    <title>Quotation Detail</title>
+  </noneditablegrid>
+  <noneditablegridname>Quotation Detail</noneditablegridname>
+</setting>

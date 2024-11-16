@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>test</title>
+  <module>test</module>
+  <table>tbl_test</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>test_testid DESC</defaultsort>
+  <columns>client_customername,test_date,test_referenceno,test_remarks,test_totalamount</columns>
+  <columnlabels>Customer,Date,Reference No,Remarks,Total Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>test_testname</gridcolumn>
+  <hiddencolumns>test_testid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_test JOIN tbl_client ON client_clientid=test_clientid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer,TEST NAME</searchbylabels>
+  <searchbycolumns>client_customername,test_testname</searchbycolumns>
+</setting>

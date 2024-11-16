@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Telecall</title>
+  <module>telecall</module>
+  <table>tbl_telecall</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>telecall_telecallid DESC</defaultsort>
+  <columns>telecall_customername,telecall_contactperson,telecall_mobileno,telecall_landlineno,telecall_subject,telecall_address,city_cityname,area_areaname,telecall_emailid,telecall_remarks,telecall_remindme,telecall_nextfollowup,telecall_assigneddate,employee_employeename,telecallstatus_status</columns>
+  <columnlabels>Customer Name,Contact Person,Mobile No,Landline No,Subject,Address,City,Area,Email Id,Remarks,Remind me,Next Followup,Assigned Date,Assigned To,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>telecall_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecall_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecall_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>area_areaname</name>
+      <headertext>Area</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecall_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecallstatus_status</name>
+      <headertext>Status</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecall_subject</name>
+      <headertext>Subject</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecall_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>telecall_telecallid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_telecall LEFT JOIN tbl_city ON city_cityid=telecall_cityid LEFT JOIN tbl_area ON area_areaid=telecall_areaid LEFT JOIN tbl_employee ON employee_employeeid=telecall_employeeid LEFT JOIN tbl_telecallstatus ON telecallstatus_telecallstatusid=telecall_telecallstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Name,Contact Person,Mobile No,Subject,City,Area,Email Id,Remarks,Assigned To,Status</searchbylabels>
+  <searchbycolumns>telecall_customername,telecall_contactperson,telecall_mobileno,telecall_subject,city_cityname,area_areaname,telecall_emailid,telecall_remarks,employee_employeename,telecallstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

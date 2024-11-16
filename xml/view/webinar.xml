@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Webinar</title>
+  <module>webinar</module>
+  <table>tbl_webinar</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>webinar_webinarid desc</defaultsort>
+  <columns>webinar_title,webinar_presenters,webinar_recordeddate,webinar_recordingurl,webinar_attachment</columns>
+  <columnlabels>Title,Presenters,Recorded Date,Recording Url,Attachment</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>webinar_title</name>
+      <headertext>Title</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>webinar_presenters</name>
+      <headertext>Presenters</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>webinar_recordeddate</name>
+      <headertext>Recorded Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>webinar_recordingurl</name>
+      <headertext>Recording Url</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>webinar_webinarid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_webinar
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Title,Presenters,Recording Url</searchbylabels>
+  <searchbycolumns>webinar_title,webinar_presenters,webinar_recordingurl</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

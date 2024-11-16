@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Exposuresoftwaremaster</title>
+		<module>exposuresoftwaremaster</module>
+		<table>tbl_exposuresoftwaremaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>exposuresoftwaremaster_exposuresoftwaremasterid desc</defaultsort>
+		<columns>exposuresoftwaremaster_exposuresoftware</columns>
+		<columnlabels>Exposure Software</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>exposuresoftwaremaster_exposuresoftware</name><headertext>Exposure Software</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>exposuresoftwaremaster_exposuresoftwaremasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_exposuresoftwaremaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Exposure Software</searchbylabels>
+		<searchbycolumns>exposuresoftwaremaster_exposuresoftware</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

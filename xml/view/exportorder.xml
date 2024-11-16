@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Exportorder</title>
+  <module>exportorder</module>
+  <table>tbl_exportorder</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>exportorder_exportorderid desc</defaultsort>
+  <columns>exportorder_exportorderno,exposurecurrencymaster_currency,exportorder_clientid,exportorder_exportorderamount,exportorder_exportorderdate,exportorder_amountreceived,exportorder_netamount,exportorder_costing,exportorder_expectedduedate,exportorder_unhedgedamount,exportorder_forwardbookingamount,exportorder_forwardbookingrate,exportorder_pcfcamount,exportorder_pcfcrate,exportorder_effectiverate,exportorder_conversionrate,exportorder_profitlossfromcosting,exportorder_profitlossfromspotrateonremittancereceived,exportorder_customername,exportorder_invoiceno,exportorder_invoicedate,exportorder_expectedshipmentdate,exportorder_creditdays,exportorder_spotrate,exportorder_forwardrate,exportorder_invoiceduedate,exportorder_remittancereceiveddate,exportorder_advanceamount,exportorder_remarks,exportorder_value</columns>
+  <columnlabels>Export Order No,Currency,Client Id,Export Order Amount,Export Order date,Amount Received,Net Receivable Amount,Costing,Expected Due Date,Unhedged Amount,Forward Booking Amount,Forward Booking Rate,PCFC Amount,PCFC Rate,Effective Rate,Conversion Rate,Profit/ Loss From Costing,Profit/ Loss from Spot rate on Remittance Received,Customer Name,Invoice No,Invoice date,Expected Shipment Date,Credit Days,Spot rate on Export Order Received Date,Forward rate on Export Order Received Date,Invoice Due Date,Remittance Received Date,Advance Amount,Remarks,Value in Rs.</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>exportorder_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>exportorder_exportorderamount</name>
+      <headertext>Export Order Amount</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exportorder_amountreceived</name>
+      <headertext>Amount Received</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exportorder_netamount</name>
+      <headertext>Net Amount</headertext>
+      <width>20%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exportorder_costing</name>
+      <headertext>Costing</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exportorder_expectedduedate</name>
+      <headertext>Expected Due Date</headertext>
+      <width>14%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>exportorder_unhedgedamount</name>
+      <headertext>Unhedged Amount</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exposurecurrencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>exportorder_exportorderid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_exportorder
+
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=exportorder_exposurecurrencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Export Order No,Currency,Export Order Amount,Export Order date,Net Receivable Amount,Expected Due Date,Unhedged Amount,Invoice date</searchbylabels>
+  <searchbycolumns>exportorder_exportorderno,exposurecurrencymaster_currency,exportorder_exportorderamount,exportorder_exportorderdate,exportorder_netamount,exportorder_expectedduedate,exportorder_unhedgedamount,exportorder_invoicedate</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

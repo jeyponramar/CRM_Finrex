@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>salesstatus</title>
+  <module>salesstatus</module>
+  <table>tbl_salesstatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>salesstatus_salesstatusid DESC</defaultsort>
+  <columns>salesstatus_status,salesstatus_textcolor,salesstatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>salesstatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>salesstatus_backgroundcolor</name>
+      <headertext>Background Color</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>salesstatus_salesstatusid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_salesstatus $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>salesstatus_status</searchbycolumns>
+</setting>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Bulk SMS Detail</title>
+  <module>BulkSMSDetail</module>
+  <table>tbl_bulksmsdetail</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulksmsdetail_bulksmsdetailid DESC</defaultsort>
+  <columns>bulksmsdetail_mobileno,bulksmsdetail_message,client_customername,emailsmssentstatus_status,bulksmsdetail_bulksmsid,bulksmsdetail_issuccess,bulksmsdetail_isfailed,bulksmsdetail_date</columns>
+  <columnlabels>Mobile No,Message,Client Name,Status,Bulk SMS Id,Is Success,Is Failed,Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bulksmsdetail_date</name>
+      <headertext>Date</headertext>
+      <width>21%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Client Name</headertext>
+      <width>19%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksmsdetail_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksmsdetail_message</name>
+      <headertext>Message</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulksmsdetail_bulksmsdetailid</hiddencolumns>
+  <query>SELECT * FROM tbl_bulksmsdetail
+JOIN tbl_client ON bulksmsdetail_clientid=client_clientid
+JOIN tbl_emailsmssentstatus ON bulksmsdetail_emailsmssentstatusid=emailsmssentstatus_emailsmssentstatusid $Search$</query>
+  <where>bulksmsdetail_bulksmsid=$QUERYSTRING_bulksmsid$</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

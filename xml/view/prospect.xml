@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Prospect</title>
+		<module>prospect</module>
+		<table>tbl_prospect</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>prospect_prospectid desc</defaultsort>
+		<columns>prospect_prospect</columns>
+		<columnlabels>Prospect</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>prospect_prospect</name><headertext>Prospect</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>prospect_prospectid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_prospect $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Prospect</searchbylabels>
+		<searchbycolumns>prospect_prospect</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Exportfactoringenquiry</title>
+  <module>exportfactoringenquiry</module>
+  <table>tbl_exportfactoringenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>exportfactoringenquiry_exportfactoringenquiryid desc</defaultsort>
+  <columns>exportfactoringenquiry_exportername,exportfactoringenquiry_contactperson,exportfactoringenquiry_email,exportfactoringenquiry_mobilenumber,exportfactoringenquiry_ieccode,exportfactoringenquiry_natureofbusiness,exportfactoringenquiry_numberofyearsinbusiness,exportfactoringenquiry_annualturnoverinrs,exportfactoringenquiry_importernamesupplier,exportfactoringenquiry_importercountry,exportfactoringenquiry_turnoverwithimporterinusd,exportfactoringenquiry_avginvoicevalueinusd,exportfactoringenquiry_volumepermonthinusd,exportfactoringenquiry_lcissuingbank,exportfactoringenquiry_portofloading,exportfactoringenquiry_portofdischarge,exportfactoringenquiry_transactionamountwithcurrency,exportfactoringenquiry_tenureoffinancecreditinday,exportfactoringenquiry_descriptionofunderlyinggoods,enquirymodeofpayment_modeofpayment,exportfactoringenquiry_remarks,exportfactoringenquiry_uploaddocuments</columns>
+  <columnlabels>Exporter  Name,Contact Person,Email,Mobile Number,IEC Code,Nature of Business,Number of Years in Business,Annual Turnover in Rs.,Importer Name (Supplier),Importer Country,Turnover with Importer in USD,Avg Invoice Value in USD,Volume Per Month in USD,LC Issuing Bank,Port of Loading,Port of  discharge,Transaction Amount with Currency,Tenure of Finance/ Credit in day,Description of Underlying Goods,Mode of Payment,Remarks,Upload Documents</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>exportfactoringenquiry_exportername</name>
+      <headertext>Exporter  Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>exportfactoringenquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>exportfactoringenquiry_email</name>
+      <headertext>Email</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>exportfactoringenquiry_mobilenumber</name>
+      <headertext>Mobile Number</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>exportfactoringenquiry_exportfactoringenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_exportfactoringenquiry
+
+ LEFT JOIN tbl_enquirymodeofpayment ON enquirymodeofpayment_enquirymodeofpaymentid=exportfactoringenquiry_enquirymodeofpaymentid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Contact Person,Mobile Number</searchbylabels>
+  <searchbycolumns>exportfactoringenquiry_contactperson,exportfactoringenquiry_mobilenumber</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>importdatamodule</title>
+		<module>importdatamodule</module>
+		<table>tbl_importdatamodule</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>importdatamodule_importdatamoduleid desc</defaultsort>
+		<columns>importdatamodule_modulename</columns>
+		<columnlabels>Module Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>importdatamodule_modulename</name><headertext>Module Name</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>importdatamodule_importdatamoduleid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_importdatamodule $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Module Name</searchbylabels>
+		<searchbycolumns>importdatamodule_modulename</searchbycolumns>
+	</setting>

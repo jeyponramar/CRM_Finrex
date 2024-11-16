@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Subreport</title>
+  <module>subreport</module>
+  <table>tbl_subreport</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>subreport_subreportid desc</defaultsort>
+  <columns>report_reportname,subreport_subreportname,subreport_searchfields,menu_menuname,subreport_extrawhere</columns>
+  <columnlabels>Report,Sub Report Name,Search Fields,Menu,Extra Where</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>report_reportname</name>
+      <headertext>Report</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subreport_subreportname</name>
+      <headertext>Sub Report Name</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subreport_searchfields</name>
+      <headertext>Search Fields</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>menu_menuname</name>
+      <headertext>Menu</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subreport_extrawhere</name>
+      <headertext>Extra Where</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>subreport_subreportid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_subreport JOIN tbl_report ON report_reportid=subreport_reportid JOIN tbl_menu ON menu_menuid=subreport_menuid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Report,Sub Report Name,Search Fields,Menu</searchbylabels>
+  <searchbycolumns>report_reportname,subreport_subreportname,subreport_searchfields,menu_menuname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

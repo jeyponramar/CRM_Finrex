@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Telecallstatus</title>
+		<module>telecallstatus</module>
+		<table>tbl_telecallstatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>telecallstatus_telecallstatusid desc</defaultsort>
+		<columns>telecallstatus_status</columns>
+		<columnlabels>Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>telecallstatus_status</name><headertext>Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>telecallstatus_telecallstatusid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_telecallstatus $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Status</searchbylabels>
+		<searchbycolumns>telecallstatus_status</searchbycolumns>
+	</setting>

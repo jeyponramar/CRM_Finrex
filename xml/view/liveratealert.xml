@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Liveratealert</title>
+  <module>liveratealert</module>
+  <table>tbl_liveratealert</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>liveratealert_liveratealertid desc</defaultsort>
+  <columns>client_customername,clientuser_name,currencymaster_currency,covertype_covertype,liveratealert_target,liveratealert_stoploss,liveratealert_expirydate,liveratealert_emailid,liveratealert_mobileno,alertstatus_status,liveratealert_targetsentdate,liveratealert_stoplosssentdate,liverate_rtdcode</columns>
+  <columnlabels>Client,User Name,Currency,Cover Type,Target,Stop Loss,Expiry Date,Email Id,Mobile No,Status,Target Sent Date,Stop Loss Sent Date,Liverate Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>covertype_covertype</name>
+      <headertext>Cover Type</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratealert_target</name>
+      <headertext>Target</headertext>
+      <width>7%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>liveratealert_stoploss</name>
+      <headertext>Stop Loss</headertext>
+      <width>7%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>liveratealert_expirydate</name>
+      <headertext>Expiry Date</headertext>
+      <width>7%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>liveratealert_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratealert_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alertstatus_status</name>
+      <headertext>Status</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>currencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>User Name</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>liveratealert_liveratealertid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_liveratealert
+
+ LEFT JOIN tbl_client ON client_clientid=liveratealert_clientid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=liveratealert_clientuserid
+ LEFT JOIN tbl_currencymaster ON currencymaster_currencymasterid=liveratealert_currencymasterid
+ LEFT JOIN tbl_covertype ON covertype_covertypeid=liveratealert_covertypeid
+ LEFT JOIN tbl_alertstatus ON alertstatus_alertstatusid=liveratealert_alertstatusid
+ LEFT JOIN tbl_liverate ON liverate_liverateid=liveratealert_liverateid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,User Name,Currency,Cover Type,Email Id,Mobile No,Status</searchbylabels>
+  <searchbycolumns>client_customername,clientuser_name,currencymaster_currency,covertype_covertype,liveratealert_emailid,liveratealert_mobileno,alertstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

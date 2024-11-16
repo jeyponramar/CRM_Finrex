@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>emailintegration</title>
+  <module>emailintegration</module>
+  <table>tbl_emailintegration</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>emailintegration_emailintegrationid desc</defaultsort>
+  <columns>emailintegration_sourceemail,emailintegrationmodule_modulename,emailintegration_remarks</columns>
+  <columnlabels>Source Email,Destination Module,Remarks</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>emailintegration_sourceemail</name>
+      <headertext>Source Email</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailintegrationmodule_modulename</name>
+      <headertext>Destination Module</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>emailintegration_emailintegrationid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_emailintegration JOIN tbl_emailintegrationmodule ON emailintegrationmodule_emailintegrationmoduleid=emailintegration_emailintegrationmoduleid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Destination Module</searchbylabels>
+  <searchbycolumns>emailintegrationmodule_modulename</searchbycolumns>
+</setting>

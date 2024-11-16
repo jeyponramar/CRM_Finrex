@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>invoicefor</title>
+		<module>invoicefor</module>
+		<table>tbl_invoicefor</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>invoicefor_invoiceforid desc</defaultsort>
+		<columns>invoicefor_invoicefor</columns>
+		<columnlabels>Invoice for</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>invoicefor_invoicefor</name><headertext>Invoice for</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>invoicefor_invoiceforid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_invoicefor $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Invoice for</searchbylabels>
+		<searchbycolumns>invoicefor_invoicefor</searchbycolumns>
+	</setting>

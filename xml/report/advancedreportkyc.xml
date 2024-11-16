@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Client</title>
+  <module>client</module>
+  <table>tbl_client</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>client_clientid DESC</defaultsort>
+  <columns>client_customercode,client_customername,client_panno,client_contactperson,designation_designation,client_mobileno,client_landlineno,client_emailid,state_state,area_areaname,client_website,client_address,industrytypes_industrytypes,campaign_campaignname,exposure_exposure,business_business,clientgroup_groupname,employee_employeename,subscriptionstatus_status,client_startdate,client_enddate,client_whatsappenddate,contacttype_contacttype</columns>
+  <columnlabels>Customer Code,Customer Name,Pan No,Contact Person,Designation,Mobile No,Landline No,Email Id,State,Area,Website,Address,Industry,Campaign,Exposure,Business,Client Group,Assign To,Subscription Status,Start Date,Software End Date,Whatsapp End Date,Contact Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_landlineno</name>
+      <headertext>Landline No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientgroup_groupname</name>
+      <headertext>Client Group</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscriptionstatus_status</name>
+      <headertext>Subscription Status</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customercode</name>
+      <headertext>Customer Code</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+
+  <hiddencolumns>client_clientid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_client
+    LEFT JOIN tbl_designation ON designation_designationid=client_designationid
+    LEFT JOIN tbl_state ON state_stateid=client_stateid
+    LEFT JOIN tbl_city ON city_cityid=client_cityid
+    LEFT JOIN tbl_industrytypes ON industrytypes_industrytypesid=client_industrytypesid
+    LEFT JOIN tbl_campaign ON campaign_campaignid=client_campaignid
+    LEFT JOIN tbl_exposure ON exposure_exposureid=client_exposureid
+    LEFT JOIN tbl_business ON business_businessid=client_businessid
+    LEFT JOIN tbl_clientgroup ON clientgroup_clientgroupid=client_clientgroupid
+    LEFT JOIN tbl_employee ON employee_employeeid=client_employeeid
+    LEFT JOIN tbl_subscriptionstatus ON subscriptionstatus_subscriptionstatusid=client_subscriptionstatusid
+    LEFT JOIN tbl_contacttype ON contacttype_contacttypeid=client_contacttypeid
+    LEFT JOIN tbl_kycbankdetail on kycbankdetail_clientid=client_clientid
+  </query>
+  <where>
+    ('$client_stateid$' = '0' OR client_stateid = '$client_stateid$')
+    AND ('$client_cityid$' = '0' OR client_cityid = '$client_cityid$')
+    AND ('$client_industrytypesid$' = '0' OR client_industrytypesid = '$client_industrytypesid$')
+    AND ('$client_businessid$' = '0' OR ','+client_businessintoids like '%,$client_businessid$%')
+    AND ('$client_businesstypeid$' = '0' OR ','+client_businesstypeids like '%,$client_businesstypeid$%')
+    AND ('$client_exportannualturnoverid$' = '0' OR client_exportannualturnoverid = '$client_exportannualturnoverid$')
+    AND ('$client_importannualturnoverid$' = '0' OR client_importannualturnoverid = '$client_importannualturnoverid$')
+    AND ('$client_enterprisetypeid$' = '0' OR ','+client_enterprisetypeids like '%,$client_enterprisetypeid$%')
+    AND ('$client_importexportcountryid$' = '0' OR ','+client_importingexportingcountryids like '%,$client_importexportcountryid$%')
+    AND ('$client_currencydealinginid$' = '0' OR ','+client_currencydealingids like '%,$client_currencydealinginid$%')
+    AND ('$client_hedgingpolicyid$' = '0' OR ','+client_hedgingpolicyids like '%,$client_hedgingpolicyid$%')
+    AND ('$client_exposuresoftwareid$' = '0' OR ','+client_exposuresheetmaintainedids like '%,$client_exposuresoftwareid$%')
+    AND ('$client_forwardlimitid$' = '0' OR ','+client_forwardlimitsids like '%,$client_forwardlimitid$%')
+    AND ('$client_forwardcontractbookingid$' = '0' OR ','+client_forwardcontractbookingids like '%,$client_forwardcontractbookingid$%')
+    AND ('$client_bookingtypeid$' = '0' OR ','+client_typeofbookingids like '%,$client_bookingtypeid$%')
+    AND ('$client_fundingtypeid$' = '0' OR ','+client_typeoffundingids like '%,$client_fundingtypeid$%')
+    AND ('$client_bankauditbankid$' = '0' OR kycbankdetail_bankauditbankid = '$client_bankauditbankid$')
+    AND ('$client_iskycupdated$' = '-1' OR client_iskycupdated = '$client_iskycupdated$')
+
+    AND ('$txtclient_sanctionedletterrenewaldate_from$' = '' OR kycbankdetail_sanctionedletterrenewaldate &gt;= '$client_sanctionedletterrenewaldate_from$')
+    AND ('$txtclient_sanctionedletterrenewaldate_to$' = '' OR kycbankdetail_sanctionedletterrenewaldate &lt;= '$client_sanctionedletterrenewaldate_to$')
+  </where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>True</applyviewrights>
+</setting>

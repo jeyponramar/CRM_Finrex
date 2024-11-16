@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Document</title>
+  <module>document</module>
+  <table>tbl_document</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>document_documentid desc</defaultsort>
+  <columns>finstationdocumenttype_documenttype,document_date,document_particular,document_url,document_remark,document_document</columns>
+  <columnlabels>Document Type,Date,Particular,Url,Remark,Document</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>document_date</name>
+      <headertext>Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>document_particular</name>
+      <headertext>Particular</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>finstationdocumenttype_documenttype</name>
+      <headertext>Document Type</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>document_remark</name>
+      <headertext>Remark</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>document_documentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_document
+
+ LEFT JOIN tbl_finstationdocumenttype ON finstationdocumenttype_finstationdocumenttypeid=document_finstationdocumenttypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Document Type,Particular,Remark</searchbylabels>
+  <searchbycolumns>finstationdocumenttype_documenttype,document_particular,document_remark</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

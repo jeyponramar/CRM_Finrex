@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Interestrateuploadhistory</title>
+  <module>interestrateuploadhistory</module>
+  <table>tbl_interestrateuploadhistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>interestrateuploadhistory_interestrateuploadhistoryid desc</defaultsort>
+  <columns>interestrateuploadhistory_uploaddate,employee_employeename,interestrateuploadhistory_uploadstatus</columns>
+  <columnlabels>Upload Date,Uploaded By,Upload Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>interestrateuploadhistory_uploaddate</name>
+      <headertext>Upload Date</headertext>
+      <width>50%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Uploaded By</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>interestrateuploadhistory_uploadstatus</name>
+      <headertext>Upload Status</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>interestrateuploadhistory_interestrateuploadhistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_interestrateuploadhistory
+
+ LEFT JOIN tbl_employee ON employee_employeeid=interestrateuploadhistory_employeeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Uploaded By,Upload Status</searchbylabels>
+  <searchbycolumns>employee_employeename,interestrateuploadhistory_uploadstatus</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

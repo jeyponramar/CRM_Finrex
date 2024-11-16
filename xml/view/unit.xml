@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>unit</title>
+  <module>unit</module>
+  <table>tbl_unit</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>unit_unitid desc</defaultsort>
+  <columns>unit_unit</columns>
+  <columnlabels>Unit</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>unit_unit</name>
+      <headertext>Unit</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>unit_unitid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_unit $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Unit</searchbylabels>
+  <searchbycolumns>unit_unit</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

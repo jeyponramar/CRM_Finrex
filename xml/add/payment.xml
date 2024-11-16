@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <purchaseorder>
+      <querystringcolumn>purchaseorderid</querystringcolumn>
+      <query>SELECT * FROM tbl_purchaseorder 
+JOIN tbl_vendor ON vendor_vendorid = purchaseorder_vendorid</query>
+    </purchaseorder>
+  </populateonadd>
+  <populateonadd>
+		<expenses>
+			<querystringcolumn>expensesid</querystringcolumn>
+			<query>SELECT * FROM tbl_expenses 
+JOIN tbl_employee ON employee_employeeid = expenses_employeeid</query>
+		</expenses>
+</populateonadd>
+</setting>

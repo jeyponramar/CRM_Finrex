@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Call Log</title>
+  <module>CallLog</module>
+  <table>tbl_calllog</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>calllog_calllogid desc</defaultsort>
+  <columns>subscription_subscriptioncode,client_customername,calllog_mobileno,calllog_emailid,notificationtype_notificationtype,bulksmstemplate_templatename,bulkemailtemplate_templatename,calllog_subject,calllog_message,emailsmssentstatus_status,employee_employeename,calllog_sentdate</columns>
+  <columnlabels>Subscription,Client,Mobile No,Email Id,Notification Type,SMS Template,Email Template,Subject,Message,Status,Sent By,Sent Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_emailid</name>
+      <headertext>Email Id</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>notificationtype_notificationtype</name>
+      <headertext>Notification Type</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Sent By</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_sentdate</name>
+      <headertext>Sent Date</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>calllog_calllogid</hiddencolumns>
+  <query>SELECT * FROM tbl_calllog
+JOIN tbl_client ON calllog_clientid=client_clientid
+JOIN tbl_notificationtype ON calllog_notificationtypeid=notificationtype_notificationtypeid
+JOIN tbl_emailsmssentstatus ON calllog_emailsmssentstatusid=emailsmssentstatus_emailsmssentstatusid
+JOIN tbl_employee ON calllog_employeeid=employee_employeeid</query>
+  <where>('$calllog_clientid$' = '0' OR calllog_clientid = '$calllog_clientid$') AND 
+('$calllog_notificationtypeid$' = '0' OR calllog_notificationtypeid = '$calllog_notificationtypeid$') AND 
+('$calllog_emailsmssentstatusid$' = '0' OR calllog_emailsmssentstatusid = '$calllog_emailsmssentstatusid$') AND 
+(calllog_sentdate BETWEEN '$calllog_sentdate_from$' AND '$calllog_sentdate_to$') AND 
+('$calllog_employeeid$' = '0' OR calllog_employeeid = '$calllog_employeeid$')</where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>True</applyviewrights>
+</setting>

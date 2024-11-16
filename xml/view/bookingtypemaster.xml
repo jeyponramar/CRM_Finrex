@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Bookingtypemaster</title>
+		<module>bookingtypemaster</module>
+		<table>tbl_bookingtypemaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>bookingtypemaster_bookingtypemasterid desc</defaultsort>
+		<columns>bookingtypemaster_bookingtype</columns>
+		<columnlabels>Booking Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>bookingtypemaster_bookingtype</name><headertext>Booking Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>bookingtypemaster_bookingtypemasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_bookingtypemaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Booking Type</searchbylabels>
+		<searchbycolumns>bookingtypemaster_bookingtype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Employee</title>
+  <module>employee</module>
+  <table>tbl_employee</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>True</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>employee_employeeid DESC</defaultsort>
+  <columns>employee_employeename,employeetype_employeetype,employee_mobileno,employee_emailid,employee_basicsalary,employee_address,employee_backuppersonname,employee_managername</columns>
+  <columnlabels>Employee Name,Employee Type,Mobile No,Email Id,Basic Salary,Address,Back Up Person,Manager</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Employee Name</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employeetype_employeetype</name>
+      <headertext>Employee Type</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>employee_employeeid</hiddencolumns>
+  <query>
+    select $COLUMNS$ ,(select employee_employeename from tbl_employee where employee_employeeid=employee_backuppersonid ) as employee_backuppersonname,
+    (select employee_employeename from tbl_employee where employee_employeeid=employee_managerid ) as employee_managername
+    from tbl_employee JOIN tbl_employeetype ON employeetype_employeetypeid=employee_employeetypeid
+    $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Employee Name,Employee Type,Mobile No,Email Id</searchbylabels>
+  <searchbycolumns>employee_employeename,employeetype_employeetype,employee_mobileno,employee_emailid</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Schedulereminderconfig</title>
+  <module>schedulereminderconfig</module>
+  <table>tbl_schedulereminderconfig</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>schedulereminderconfig_schedulereminderconfigid desc</defaultsort>
+  <columns>module_modulename,schedulereminderconfig_query,schedulereminderconfig_subject,schedulereminderconfig_toemailid,schedulereminderconfig_ccemailid,schedulereminderconfig_bccemailid,setting_settingname,schedulereminderconfig_isactive</columns>
+  <columnlabels>Module,Query,Subject,To Email Id,CC Email Id,BCC Email Id,Email Template,Is Active</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>module_modulename</name>
+      <headertext>Module</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>schedulereminderconfig_subject</name>
+      <headertext>Subject</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>schedulereminderconfig_toemailid</name>
+      <headertext>To Email Id</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>setting_settingname</name>
+      <headertext>Email Template</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>schedulereminderconfig_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>schedulereminderconfig_schedulereminderconfigid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_schedulereminderconfig
+
+ LEFT JOIN tbl_module ON module_moduleid=schedulereminderconfig_moduleid
+ LEFT JOIN tbl_setting ON setting_settingid=schedulereminderconfig_settingid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Module,Email Template</searchbylabels>
+  <searchbycolumns>module_modulename,setting_settingname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

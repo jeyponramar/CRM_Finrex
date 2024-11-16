@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>columns</title>
+  <module>columns</module>
+  <table>tbl_columns</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>200</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>columns_sequence asc</defaultsort>
+  <columns></columns>
+  <columnlabels></columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>columns_lbl</name>
+      <headertext>label</headertext>
+      <row>1</row>
+      <width>15%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_control</name>
+      <headertext>Control</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_size</name>
+      <headertext>Size</headertext>
+      <row>1</row>
+      <width>5%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_sequence</name>
+      <headertext>Sequence</headertext>
+      <row>1</row>
+      <width>5%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_isquickadd</name>
+      <headertext>Is QA</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_isrequired</name>
+      <headertext>Is Req</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_isunique</name>
+      <headertext>Is Uni</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_dropdowncolumn</name>
+      <headertext>DropdownColumn</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_isviewpage</name>
+      <headertext>Is View</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_issearchfield</name>
+      <headertext>Is Search</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>columns_isleftcolumn</name>
+      <headertext>Is Left</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    
+  </gridcolumn>
+  <hiddencolumns>columns_columnsid</hiddencolumns>
+  <query>
+    select * from tbl_columns join tbl_module on module_moduleid=columns_moduleid
+    where columns_moduleid=$QUERYSTRING_mid$
+    $Search$
+  </query>
+  <searchbylabels>User Name,Full Name,Role,Reporting To</searchbylabels>
+  <searchbycolumns>user_username,user_fullname,role_role,user_username</searchbycolumns>
+</setting>

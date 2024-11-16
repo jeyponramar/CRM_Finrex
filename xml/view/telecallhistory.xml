@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Telecallhistory</title>
+  <module>telecallhistory</module>
+  <table>tbl_telecallhistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>telecallhistory_telecallhistoryid desc</defaultsort>
+  <columns>telecallhistory_calldate,employee_employeename,telecallhistory_remarks,telecallstatus_status,telecallhistory_telecallid</columns>
+  <columnlabels>Call Date,Called By,Remarks,Status,Tele Call Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>telecallhistory_calldate</name>
+      <headertext>Call Date</headertext>
+      <width>25%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>telecallhistory_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>telecallstatus_status</name>
+      <headertext>Status</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>telecallhistory_telecallhistoryid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_telecallhistory LEFT JOIN tbl_employee ON employee_employeeid=telecallhistory_employeeid JOIN tbl_telecallstatus ON telecallstatus_telecallstatusid=telecallhistory_telecallstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Remarks,Status</searchbylabels>
+  <searchbycolumns>telecallhistory_remarks,telecallstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

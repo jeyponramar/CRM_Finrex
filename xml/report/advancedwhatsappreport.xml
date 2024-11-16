@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Whatsapp Report</title>
+  <module>client</module>
+  <table>tbl_client</table>
+  <isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>client_clientid desc</defaultsort>
+  <columns>client_customername,contacts_contactperson,contacts_mobileno,contacts_emailid,client_startdate,client_whatsappenddate,employee_employeename,subscriptionstatus_status</columns>
+  <columnlabels>Client,Contact Person,Mobile No,Email Id,Start Date,End Date,Assigned To,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+	  <column>
+		  <name>mobileno</name>
+		  <headertext>Mobile No</headertext>
+		  <width>20%</width>
+		  <format>
+		  </format>
+	  </column>
+	  <column>
+		  <name>contacts_emailid</name>
+		  <headertext>Email Id</headertext>
+		  <width>20%</width>
+		  <format>
+		  </format>
+	  </column>
+	  <column>
+		  <name>client_startdate</name>
+		  <headertext>Start Date</headertext>
+		  <width>20%</width>
+		  <format>Date</format>
+	  </column>
+	  <column>
+		  <name>client_whatsappenddate</name>
+		  <headertext>Whatsapp End Date</headertext>
+		  <width>20%</width>
+		  <format>Date</format>
+	  </column>
+	  <column>
+		  <name>employee_employeename</name>
+		  <headertext>Assigned To</headertext>
+		  <width>20%</width>
+		  <format>
+		  </format>
+	  </column>
+	 
+  </gridcolumn>
+  <hiddencolumns>client_clientid</hiddencolumns>
+  <query>
+	  select $COLUMNS$ from
+	  (
+	  select
+	  case when isnull(contacts_mobileno,'')='' then ''
+	  when contacts_mobileno like '91%' then contacts_mobileno
+	  else '91'+contacts_mobileno
+	  end as mobileno, *
+	  from tbl_client
+	  left JOIN tbl_contacts on contacts_clientid=client_clientid
+	  LEFT JOIN tbl_employee on employee_employeeid=client_employeeid
+	  join tbl_subscriptionstatus on subscriptionstatus_subscriptionstatusid=client_subscriptionstatusid
+	  )r2
+	  $CheckPermission$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+	  isnull(contacts_mobileno,'')&lt;&gt;'' AND contacts_iswhatsappcommunication=1
+	  AND ('$client_clientid$' = '0' OR client_clientid = '$client_clientid$')
+	  AND ('$client_startdate_from$' ='' OR client_startdate BETWEEN '$client_startdate_from$' AND '$client_startdate_to$')
+	  AND ('$client_whatsappenddate_from$' ='' OR client_whatsappenddate BETWEEN '$client_whatsappenddate_from$' AND '$client_whatsappenddate_to$')
+	  AND ('$client_employeeid$' = '0' OR client_employeeid = '$client_employeeid$')
+
+	  AND
+	  (
+	  ('$client_subscriptionstatusid$' = '0' AND cast(client_whatsappenddate as date)&gt;=cast(getdate() as date))
+	  OR
+	  ('$client_subscriptionstatusid$'='1' and client_subscriptionstatusid in(1,3) AND cast(client_whatsappenddate as date)&gt;=cast(getdate() as date))
+	  OR
+	  ('$client_subscriptionstatusid$'='2' and client_subscriptionstatusid in(2,4) AND cast(client_whatsappenddate as date)&gt;=cast(getdate() as date))
+	  OR
+	  ('$client_subscriptionstatusid$'='3' and client_subscriptionstatusid in(1,3) AND cast(client_whatsappenddate as date)&lt;=cast(getdate() as date))
+	  OR
+	  ('$client_subscriptionstatusid$'='4' and client_subscriptionstatusid in(2,4) AND cast(client_whatsappenddate as date)&lt;=cast(getdate() as date))
+	  )
+  </where>
+  <searchbylabels>Client,Status</searchbylabels>
+  <searchbycolumns>client_customername,subscriptionstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

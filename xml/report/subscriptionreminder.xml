@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>SUBSCRIPTION</title>
+  <module>SUBSCRIPTION</module>
+  <table>tbl_subscription</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>subscription_subscriptionid desc</defaultsort>
+  <columns>subscription_subscriptioncode,client_customername,client_contactperson,client_mobileno,client_emailid,subscription_startdate,subscription_enddate,subscription_DaysRemaining,subscription_NextRenewalDate</columns>
+  <columnlabels>Subscription Code,Customer Name,Contact Person,Mobile No,Email Id,Start Date,End Date,Days Remaining,Next Renewal Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>subscription_subscriptioncode</name>
+      <headertext>Subscription Code</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_startdate</name>
+      <headertext>Start Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscription_enddate</name>
+      <headertext>End Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscription_NextRenewalDate</name>
+      <headertext>Next Renewal Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscription_DaysRemaining</name>
+      <headertext>Days Remaining</headertext>
+      <width>16%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>subscription_subscriptionid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_subscription
+    JOIN tbl_client ON subscription_clientid=client_clientid
+    </query>
+  <where></where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

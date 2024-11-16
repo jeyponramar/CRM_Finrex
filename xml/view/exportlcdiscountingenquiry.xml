@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Exportlcdiscountingenquiry</title>
+  <module>exportlcdiscountingenquiry</module>
+  <table>tbl_exportlcdiscountingenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>exportlcdiscountingenquiry_exportlcdiscountingenquiryid desc</defaultsort>
+  <columns>exportlcdiscountingenquiry_exportername,exportlcdiscountingenquiry_contactperson,exportlcdiscountingenquiry_email,exportlcdiscountingenquiry_mobilenumber,exportlcdiscountingenquiry_ieccode,exportlcdiscountingenquiry_natureofbusiness,exportlcdiscountingenquiry_numberofyearsinbusiness,exportlcdiscountingenquiry_annualturnoverinrs,exportlcdiscountingenquiry_importernamesupplier,exportlcdiscountingenquiry_importercountry,exportlcdiscountingenquiry_turnoverwithimporterinusd,exportlcdiscountingenquiry_avginvoicevalueinusd,exportlcdiscountingenquiry_volumepermonthinusd,exportlcdiscountingenquiry_lcissuingbank,exportlcdiscountingenquiry_portofloading,exportlcdiscountingenquiry_portofdischarge,exportlcdiscountingenquiry_transactionamountwithcurrency,exportlcdiscountingenquiry_tenureoffinancecreditindays,exportlcdiscountingenquiry_descriptionofunderlyinggoods,enquirymodeofpayment_modeofpayment,exportlcdiscountingenquiry_remarks,exportlcdiscountingenquiry_uploaddocuments</columns>
+  <columnlabels>Exporter  Name,Contact Person,Email,Mobile Number,IEC Code,Nature of Business,Number of Years in Business,Annual Turnover in Rs.,Importer Name (Supplier),Importer Country,Turnover with Importer in USD,Avg Invoice Value in USD,Volume Per Month in USD,LC Issuing Bank,Port of Loading,Port of discharge,Transaction Amount with Currency,Tenure of Finance/ Credit in days,Description of Underlying Goods,Mode of Payment,Remarks,Upload Documents</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>exportlcdiscountingenquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>exportlcdiscountingenquiry_mobilenumber</name>
+      <headertext>Mobile Number</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>exportlcdiscountingenquiry_exportlcdiscountingenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_exportlcdiscountingenquiry
+
+ LEFT JOIN tbl_enquirymodeofpayment ON enquirymodeofpayment_enquirymodeofpaymentid=exportlcdiscountingenquiry_enquirymodeofpaymentid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Contact Person,Mobile Number</searchbylabels>
+  <searchbycolumns>exportlcdiscountingenquiry_contactperson,exportlcdiscountingenquiry_mobilenumber</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

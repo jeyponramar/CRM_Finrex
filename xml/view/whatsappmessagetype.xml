@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Whatsappmessagetype</title>
+		<module>whatsappmessagetype</module>
+		<table>tbl_whatsappmessagetype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>whatsappmessagetype_whatsappmessagetypeid desc</defaultsort>
+		<columns>whatsappmessagetype_messagetype</columns>
+		<columnlabels>Message Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>whatsappmessagetype_messagetype</name><headertext>Message Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>whatsappmessagetype_whatsappmessagetypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_whatsappmessagetype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Message Type</searchbylabels>
+		<searchbycolumns>whatsappmessagetype_messagetype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

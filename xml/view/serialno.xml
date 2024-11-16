@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>serialno</title>
+  <module>serialno</module>
+  <table>tbl_serialno</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>serialno_serialnoid desc</defaultsort>
+  <columns>serialno_serialno,serialno_date,product_productname,serialno_clientname,employee_employeename,serialno_module,serialno_inout,serialno_referenceno,serialno_remarks,serialno_m,serialno_mid</columns>
+  <columnlabels>Serial No,Date,Product,Client Name,Engineer,Module,In Out,Reference No,Remarks,m,mid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>serialno_serialno</name>
+      <headertext>Serial No</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>serialno_date</name>
+      <headertext>Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>serialno_module</name>
+      <headertext>Module</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>serialno_inout</name>
+      <headertext>In Out</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>serialno_referenceno</name>
+      <headertext>Reference No</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>serialno_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>serialno_clientname</name>
+      <headertext>Client Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Engineer</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>serialno_serialnoid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_serialno JOIN tbl_product ON product_productid=serialno_productid LEFT JOIN tbl_employee ON employee_employeeid=serialno_employeeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Serial No,Product,Client Name,Engineer,Module,In Out,Reference No,Remarks</searchbylabels>
+  <searchbycolumns>serialno_serialno,product_productname,serialno_clientname,employee_employeename,serialno_module,serialno_inout,serialno_referenceno,serialno_remarks</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

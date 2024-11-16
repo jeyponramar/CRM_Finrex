@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>quotation</title>
+  <module>quotation</module>
+  <table>tbl_quotation</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>quotation_quotationid DESC</defaultsort>
+  <columns>quotation_quotationno,quotation_quotationdate,quotationstatus_status,client_customername</columns>
+  <columnlabels>Quotation No,Quotation Date,Status,Customer Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>quotationstatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>quotation_quotationno</name>
+      <headertext>Quotation No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>quotation_quotationdate</name>
+      <headertext>Quotation Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>quotation_quotationid</hiddencolumns>
+  <query>
+    select * from tbl_quotation
+    join tbl_client On client_clientid=quotation_clientid
+    join tbl_quotationstatus on quotationstatus_quotationstatusid=quotation_quotationstatusid
+  </query>
+</setting>

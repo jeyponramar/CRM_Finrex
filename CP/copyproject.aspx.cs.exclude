@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using WebComponent;
+using System.IO;
+
+public partial class CP_copyproject : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnCreateDatabase_Click(object sender, EventArgs e)
+    {
+        if (IsDetached())
+        {
+
+            //copy the db files
+            string destmdf = txtDestDbPath.Text + "/" + txtDestDatabase.Text + ".mdf";
+            string destldf = txtDestDbPath.Text + "/" + txtDestDatabase.Text + "_log.ldf";
+            File.Copy(txtSourceDbPath.Text + "/" + txtSourceDatabase.Text + ".mdf", destmdf,true);
+            File.Copy(txtSourceDbPath.Text + "/" + txtSourceDatabase.Text + "_log.ldf", destldf,true);
+            string query = "CREATE DATABASE " + txtDestDatabase.Text +
+                            " ON (FILENAME = N'" + destmdf + "'), " +
+                            "(FILENAME = N'" + destldf + "') " +
+                            "FOR ATTACH; ";
+            try
+            {
+                DbTable.ExecuteQuery(query);
+            }
+            catch (Exception ex) { }
+            query = "ALTER DATABASE " + txtSourceDatabase.Text + " Modify Name = " + txtDestDatabase.Text;
+            DbTable.ExecuteQuery(query);
+        }
+        else
+        {
+            lblMessage.Text = "Please detach the source database first";
+        }
+    }
+    private bool IsDetached()
+    {
+        bool isdetached = true;
+        SqlConnection con = new SqlConnection(txtSourceConnectionString.Text);
+        try
+        {
+            con.Open();
+            string query = "select 1";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            isdetached = false;
+        }
+        catch(Exception ex) 
+        {
+            con = null;
+        }
+        return isdetached;
+    }
+    private bool DetachDB1()
+    {
+        string query = "declare @query varchar(max) " + Environment.NewLine +
+                    "set @query=''  " + Environment.NewLine +
+                    "select @query=@query+'kill '+convert(varchar, spid)+ '; '  " + Environment.NewLine +
+                    "from master..sysprocesses where dbid=db_id('" + txtSourceDatabase.Text + "')  " + Environment.NewLine +
+                    "if len(@query) > 0  " + Environment.NewLine +
+                    "begin  " + Environment.NewLine +
+                    "    exec(@query)  " + Environment.NewLine +
+                    "end";
+        string constring = txtSourceConnectionString.Text.Replace("Database", txtSourceDatabase.Text);
+        
+        SqlConnection con = new SqlConnection(constring);
+        con.Open();
+        
+        SqlCommand cmd = new SqlCommand(query, con);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch { }
+        query = "use master; EXEC sp_detach_db '" + txtSourceDatabase.Text + "'";
+        
+        bool isdetached = true;
+        try
+        {
+            constring = GlobalUtilities.ReplaceString(GlobalUtilities.ReplaceString(txtSourceConnectionString.Text, "Database", "master"),txtSourceDatabase.Text,"master");
+            SqlConnection con1 = new SqlConnection(constring);
+            con1.Open();
+            SqlCommand cmd1 = new SqlCommand(query, con1);
+            
+            cmd1.ExecuteNonQuery();
+
+            SqlConnection con2 = new SqlConnection(constring);
+            con2.Open();
+            isdetached = false;
+        }
+        catch (Exception ex)
+        {
+        }
+        if (isdetached == false)
+        {
+            lblMessage.Text = "Unable to detach the database";
+        }
+        return isdetached;
+
+    }
+}

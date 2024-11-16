@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Metalliverate</title>
+  <module>metalliverate</module>
+  <table>tbl_metalliverate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>metalliverate_metalliverateid desc</defaultsort>
+  <columns>metal_metalname,metalliverate_date,metalliverate_bid,metalliverate_ask,metalliverate_open,metalliverate_high,metalliverate_low,metalliverate_prevclose,metalliverate_change,metalliverate_changeper,metalliverate_oneweekchangeper,metalliverate_onemonthchangeper,metalliverate_threemonthchangeper,metalliverate_oneyearchangeper,metalliverate_ctweekhigh,metalliverate_ctmonthhigh,metalliverate_ctmonthlow,metalliverate_fiftytwoweekhigh,metalliverate_fiftytwoweeklow,metalliverate_cash,metalliverate_threemonths,metalliverate_oneyear,metalliverate_ctweeklow,metalliverate_close,metalliverate_expirydate,metalliverate_tradingvolume,metalliverate_tradingvalue,metalliverate_3mcashspreadbid,metalliverate_3mcashspreadask,metalliverate_3mcashspreadclose,metalliverate_3mcashspreadltp</columns>
+  <columnlabels>Metal Id,date,Bid,Ask,Open,High,Low,Prev Close,Change,Change Per,1 Week Change Per,1Month Change Per,3monthchangeper,1yearchangeper,ctweekhigh,ctmonthhigh,ctmonthlow,52weekhigh,52weeklow,cash,3months,1year,ctweeklow,close,ExpiryDate,Trading Volume,Trading Value,3m Cash Spread Bid,3m Cash Spread Ask,3m Cash Spread Close,3m Cash Spread LTP</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>Metal Id</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>metalliverate_ask</name>
+      <headertext>Ask</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>metalliverate_metalliverateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_metalliverate
+
+ LEFT JOIN tbl_metal ON metal_metalid=metalliverate_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Metal Id</searchbylabels>
+  <searchbycolumns>metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

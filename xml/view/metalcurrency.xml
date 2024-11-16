@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Metalcurrency</title>
+  <module>metalcurrency</module>
+  <table>tbl_metalcurrency</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>metalcurrency_metalcurrencyid desc</defaultsort>
+  <columns>metalcurrency_currencyname</columns>
+  <columnlabels>Currency Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metalcurrency_currencyname</name>
+      <headertext>Currency Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>metalcurrency_metalcurrencyid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_metalcurrency
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency Name</searchbylabels>
+  <searchbycolumns>metalcurrency_currencyname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

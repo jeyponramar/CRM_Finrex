@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Productmodel</title>
+  <module>productmodel</module>
+  <table>tbl_productmodel</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>productmodel_productmodelid desc</defaultsort>
+  <columns>productmodel_modelno</columns>
+  <columnlabels>Model No</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>productmodel_modelno</name>
+      <headertext>Model No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>productmodel_productmodelid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_productmodel $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Model No</searchbylabels>
+  <searchbycolumns>productmodel_modelno</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

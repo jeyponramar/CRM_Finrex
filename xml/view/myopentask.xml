@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Followups</title>
+  <module>followups</module>
+  <table>tbl_followups</table>
+  <isreport>false</isreport>
+  <enableedit>true</enableedit>
+  <enablepaging>false</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>10</toprecords>
+  <enablesorting>false</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>followups_followupsid DESC</defaultsort>
+  <columns>followups_followupsid,followupaction_action,client_customername,employee_employeename,followups_subject,followupaction_action,followupstatus_status,followups_date,followups_time,followups_ampm,followups_reminderampm,followups_isreminder,followups_remarks,followups_module,followups_mid,followups_isremoved,followups_issnoozed,followups_remindertime,user_username</columns>
+  <columnlabels>Sr no,Action,Client Name,Sales Person,Subject,Action,Status,Date,Time,AM/PM,Reminder AmPm,Is Reminder,Remarks,Module,mid,Is Removed,Is Snoozed,Reminder Time,Assigned To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client Name</headertext>
+      <row>1</row>
+      <width>15%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_date</name>
+      <headertext>Date</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>user_username</name>
+      <headertext>Assigned By</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Sales Person</headertext>
+      <row>1</row>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followupaction_action</name>
+      <headertext>Action</headertext>
+      <row>1</row>
+      <width>17%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_module</name>
+      <headertext>Section</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followups_followupsid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_followups
+    LEFT JOIN tbl_followupaction ON followups_followupactionid=followupaction_followupactionid
+    LEFT JOIN tbl_followupstatus ON followups_followupstatusid=followupstatus_followupstatusid
+    LEFT JOIN tbl_client ON client_clientid=followups_clientid
+    LEFT JOIN tbl_employee ON employee_employeeid=followups_employeeid
+    LEFT JOIN tbl_user ON user_userid=followups_userid
+    where followups_followupstatusid=1 and followups_userid = '$LoggedInUser$'
+    $Search$</query>
+  <where></where>
+</setting>

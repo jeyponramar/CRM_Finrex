@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Lcstatus</title>
+		<module>lcstatus</module>
+		<table>tbl_lcstatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>lcstatus_lcstatusid desc</defaultsort>
+		<columns>lcstatus_lcstatus</columns>
+		<columnlabels>LC Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>lcstatus_lcstatus</name><headertext>LC Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>lcstatus_lcstatusid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_lcstatus
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>LC Status</searchbylabels>
+		<searchbycolumns>lcstatus_lcstatus</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

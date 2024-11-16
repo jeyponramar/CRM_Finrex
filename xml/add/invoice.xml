@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <project>
+      <querystringcolumn>projectid</querystringcolumn>
+      <query>SELECT * FROM tbl_project 
+JOIN tbl_client ON client_clientid = project_clientid</query>
+    </project>
+  </populateonadd>
+  <populateonadd>
+    <client>
+      <querystringcolumn>clientid</querystringcolumn>
+      <query>SELECT * FROM tbl_client</query>
+    </client>
+  </populateonadd>
+  <populateonadd>
+		<subscription>
+			<querystringcolumn>subscriptionid</querystringcolumn>
+			<query>SELECT * FROM tbl_subscription 
+JOIN tbl_client ON client_clientid = subscription_clientid</query>
+		</subscription>
+</populateonadd>
+</setting>

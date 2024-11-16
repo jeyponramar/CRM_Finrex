@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>designation</title>
+  <module>designation</module>
+  <table>tbl_designation</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>designation_designationid desc</defaultsort>
+  <columns>designation_designation</columns>
+  <columnlabels>Designation</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>designation_designationid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_designation $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Designation</searchbylabels>
+  <searchbycolumns>designation_designation</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

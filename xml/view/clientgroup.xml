@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Clientgroup</title>
+		<module>clientgroup</module>
+		<table>tbl_clientgroup</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>clientgroup_clientgroupid desc</defaultsort>
+		<columns>clientgroup_groupname</columns>
+		<columnlabels>Group Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>clientgroup_groupname</name><headertext>Group Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>clientgroup_clientgroupid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_clientgroup $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Group Name</searchbylabels>
+		<searchbycolumns>clientgroup_groupname</searchbycolumns>
+	</setting>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Kycbusinesspaymentcycle</title>
+		<module>kycbusinesspaymentcycle</module>
+		<table>tbl_kycbusinesspaymentcycle</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>kycbusinesspaymentcycle_kycbusinesspaymentcycleid desc</defaultsort>
+		<columns>kycbusinesspaymentcycle_paymentcycle</columns>
+		<columnlabels>Payment Cycle</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>kycbusinesspaymentcycle_paymentcycle</name><headertext>Payment Cycle</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>kycbusinesspaymentcycle_kycbusinesspaymentcycleid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_kycbusinesspaymentcycle
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Payment Cycle</searchbylabels>
+		<searchbycolumns>kycbusinesspaymentcycle_paymentcycle</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

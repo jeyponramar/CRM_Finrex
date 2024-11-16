@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Followups</title>
+  <module>followups</module>
+  <table>tbl_followups</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>followups_followupsid DESC</defaultsort>
+  <columns>client_customername,followups_subject,followups_date,employee_employeename,followupaction_action,followups_reminderdate,followups_isreminder,followups_meetingdonedate,followupstatus_status,followups_remarks,followups_closeallprevioustasks,followups_momsent,followups_meetingrequestsent,followups_module,followups_mid,followups_isremoved,followups_issnoozed,followups_userid</columns>
+  <columnlabels>Client,Subject,Date,Assigned To,Followup Action,Reminder Date,Is Reminder,Meeting Done Date,Followup Status,Remarks,Close All Previous Tasks,MOM Sent,Meeting Request Sent,Module,mid,Is Removed,Is Snoozed,User Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>followups_date</name>
+      <headertext>Date</headertext>
+      <width>17%</width>
+      <format>DateTime</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_momsent</name>
+      <headertext>MOM Sent</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_meetingrequestsent</name>
+      <headertext>Meeting Request Sent</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_reminderdate</name>
+      <headertext>Reminder Date</headertext>
+      <width>9%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>followups_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_isreminder</name>
+      <headertext>Is Reminder</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followups_meetingdonedate</name>
+      <headertext>Meeting Done Date</headertext>
+      <width>10%</width>
+      <format>Date</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followups_followupsid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_followups LEFT JOIN tbl_client ON client_clientid=followups_clientid LEFT JOIN tbl_employee ON employee_employeeid=followups_employeeid JOIN tbl_followupaction ON followupaction_followupactionid=followups_followupactionid JOIN tbl_followupstatus ON followupstatus_followupstatusid=followups_followupstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client</searchbylabels>
+  <searchbycolumns>client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

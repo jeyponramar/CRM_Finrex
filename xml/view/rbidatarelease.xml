@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Rbidatarelease</title>
+  <module>rbidatarelease</module>
+  <table>tbl_rbidatarelease</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>rbidatarelease_rbidatareleaseid desc</defaultsort>
+  <columns>rbidatarelease_referencedate,rbidatarelease_particular,rbidatarelease_title,rbidatarelease_document,rbidatarelease_remark</columns>
+  <columnlabels>Reference Date,Particular,Title,Document,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>rbidatarelease_referencedate</name>
+      <headertext>Reference Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>rbidatarelease_particular</name>
+      <headertext>Particular</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>rbidatarelease_title</name>
+      <headertext>Title</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>rbidatarelease_rbidatareleaseid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_rbidatarelease
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Particular,Title</searchbylabels>
+  <searchbycolumns>rbidatarelease_particular,rbidatarelease_title</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

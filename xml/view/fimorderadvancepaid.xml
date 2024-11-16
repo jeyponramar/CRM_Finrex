@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimorderadvancepaid</title>
+  <module>fimorderadvancepaid</module>
+  <table>tbl_fimorderadvancepaid</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimorderadvancepaid_fimorderadvancepaidid desc</defaultsort>
+  <columns>fimorderadvancepaid_advancepaid,fimorderadvancepaid_conversionrate,fimorderadvancepaid_profitlossfromcosting,fimorderadvancepaid_spotrateonremittancereceived,fimorderadvancepaid_profitlossfromspotrateonremittancereceived,fimorderadvancepaid_invoiceno,fimorderadvancepaid_invoiceduedate,fimorderadvancepaid_remittancereceiveddate,fimorderadvancepaid_bankbookingrefno,fimorderadvancepaid_remark,fimorderadvancepaid_clientid,fimorderadvancepaid_fimimportorderid</columns>
+  <columnlabels>Advance Paid,Conversion  rate *,Profit/ Loss from Costing,Spot Rate on Remittance Received,Profit/ Loss from Spot rate on Remittance Received,Invoice No.,Invoice Due date,Remittance Received Date,Bank Booking Ref No.,Remark,Client Id,fimimportorderid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimorderadvancepaid_fimorderadvancepaidid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimorderadvancepaid
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

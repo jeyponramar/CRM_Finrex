@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Monthlyratechange</title>
+  <module>monthlyratechange</module>
+  <table>tbl_monthlyratechange</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>monthlyratechange_monthlyratechangeid desc</defaultsort>
+  <columns>currencymaster_currency,month_month,monthlyratechange_year,monthlyratechange_changepercentage</columns>
+  <columnlabels>Currency,Month,Year,Change Percentage</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>month_month</name>
+      <headertext>Month</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>monthlyratechange_year</name>
+      <headertext>Year</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>monthlyratechange_changepercentage</name>
+      <headertext>Change Percentage</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>currencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>monthlyratechange_monthlyratechangeid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_monthlyratechange
+
+ LEFT JOIN tbl_currencymaster ON currencymaster_currencymasterid=monthlyratechange_currencymasterid
+ LEFT JOIN tbl_month ON month_monthid=monthlyratechange_monthid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency,Month</searchbylabels>
+  <searchbycolumns>currencymaster_currency,month_month</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

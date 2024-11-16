@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <enquiry>
+			<querystringcolumn>enquiryid</querystringcolumn>
+			<query>SELECT * FROM tbl_enquiry 
+JOIN tbl_client ON client_clientid = enquiry_clientid
+LEFT JOIN tbl_employee ON employee_employeeid=enquiry_employeeid</query>
+		</enquiry>
+  </populateonadd>
+</setting>

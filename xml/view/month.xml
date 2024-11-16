@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Month</title>
+		<module>month</module>
+		<table>tbl_month</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>month_monthid desc</defaultsort>
+		<columns>month_month</columns>
+		<columnlabels>Month</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>month_month</name><headertext>Month</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>month_monthid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_month
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Month</searchbylabels>
+		<searchbycolumns>month_month</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

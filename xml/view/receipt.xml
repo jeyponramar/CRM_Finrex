@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>receipt</title>
+  <module>receipt</module>
+  <table>tbl_receipt</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>receipt_receiptid DESC</defaultsort>
+  <columns>invoice_invoiceno,receipt_paymentdate,paymentmode_paymentmode,receipt_discount,receipt_amountpaid,receipt_totalamount,receipt_chequeno,receipt_bankname,receipt_bankbranch,receipt_comment,client_customername,receipt_contactperson,receipt_mobileno,receipt_emailid</columns>
+  <columnlabels>Invoice No,Payment Date,Payment Mode,Discount,Amount Paid,Total Amount,Cheque No,Bank Name,Bank Branch,Comment,Customer Name,Contact Person,Mobile No,Email Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>receipt_paymentdate</name>
+      <headertext>Payment Date</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true">
+      <name>invoice_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>receipt_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>receipt_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>paymentmode_paymentmode</name>
+      <headertext>Payment Mode</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>receipt_chequeno</name>
+      <headertext>Cheque No</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>receipt_bankname</name>
+      <headertext>Bank Name</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>receipt_bankbranch</name>
+      <headertext>Bank Branch</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>receipt_amountpaid</name>
+      <headertext>Amount Paid</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column ismobile="true">
+      <name>receipt_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>receipt_receiptid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_receipt LEFT JOIN tbl_invoice ON invoice_invoiceid=receipt_invoiceid JOIN tbl_paymentmode ON paymentmode_paymentmodeid=receipt_paymentmodeid LEFT JOIN tbl_client ON client_clientid=receipt_clientid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Invoice No,Amount Paid,Total Amount,Customer Name</searchbylabels>
+  <searchbycolumns>invoice_invoiceno,receipt_amountpaid,receipt_totalamount,client_customername</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

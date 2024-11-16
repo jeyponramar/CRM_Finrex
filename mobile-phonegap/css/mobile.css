@@ -1,0 +1,72 @@
+﻿body
+{
+    font:normal 12px Arial,Helvetica,sans-serif !important;
+    margin:0px;
+    background-color:#000;
+    color:#fff;
+}
+.lr-header td
+{
+    background-color:#000;font-size:17px;padding:5px;color:#d76709;font-weight:bold;text-align:center;border-bottom:solid 1px #d76709;
+}
+.lr-title
+{
+	font-size:17px;	font-weight:bold;text-align:center;color:#fff;
+}
+.lr-rate
+{
+    background-color:#000;padding:0px;text-align:center;font-size:15px;padding:10px 0px;font-weight:bold;
+}
+.rate-up
+{
+    background-color:#ff0000;
+    color:#fff;
+    /*padding:5px 5px 0px 5px;*/
+}
+.rate-mid
+{
+    background-color:#533233;
+    color:#fff;
+    /*padding:5px 5px 0px 5px;*/
+}
+.rate-down
+{
+    background-color:#00b050;
+    color:#fff;
+    /*padding:5px 5px 0px 5px;*/
+}
+.btn
+{
+	background-color:#eee;
+	padding:5px 20px;
+	border:solid 1px #222;
+}
+.error{color:#ff0000;}
+.hidden{display:none;}
+/*Login Start*/
+.login-form {
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
+}
+
+input[type=email], input[type=password] {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  padding-top: 15px;
+  padding-bottom: 16px;
+}
+
+.login-button {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.forgot-password {
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
+}
+/*Login End*/

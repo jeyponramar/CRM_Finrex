@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>status</title>
+  <module>status</module>
+  <table>tbl_status</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>status_statusid desc</defaultsort>
+  <columns>status_status,status_textcolor,status_backgroundcolor</columns>
+  <columnlabels>Status,textcolor,backgroundcolor</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>status_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>status_textcolor</name>
+      <headertext>textcolor</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>status_backgroundcolor</name>
+      <headertext>backgroundcolor</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>status_statusid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_status $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>status_status</searchbycolumns>
+</setting>

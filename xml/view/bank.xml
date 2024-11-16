@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bank</title>
+  <module>bank</module>
+  <table>tbl_bank</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bank_bankid desc</defaultsort>
+  <columns>bank_bankname,client_customercode</columns>
+  <columnlabels>Bank Name,Customer Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bank_bankname</name>
+      <headertext>Bank Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bank_bankid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bank
+
+ LEFT JOIN tbl_client ON client_clientid=bank_clientid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Bank Name</searchbylabels>
+  <searchbycolumns>bank_bankname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

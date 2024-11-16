@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Customerqueryreply</title>
+  <module>customerqueryreply</module>
+  <table>tbl_customerqueryreply</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>customerqueryreply_customerqueryreplyid desc</defaultsort>
+  <columns>customerqueryreply_reply,customerqueryreply_date,customerqueryreply_iscustomerreply,customerqueryreply_replyattachment,user_name,clientuser_name,customerqueryreply_customerqueryid</columns>
+  <columnlabels>Reply,Date,Is Customer Reply,Attachments,User,Client User,customerqueryid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>customerqueryreply_reply</name>
+      <headertext>Reply</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>customerqueryreply_date</name>
+      <headertext>Date</headertext>
+      <width>50%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>customerqueryreply_customerqueryreplyid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_customerqueryreply
+
+ LEFT JOIN tbl_user ON user_userid=customerqueryreply_userid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=customerqueryreply_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Reply</searchbylabels>
+  <searchbycolumns>customerqueryreply_reply</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

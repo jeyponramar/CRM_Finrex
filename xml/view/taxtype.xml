@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>taxtype</title>
+		<module>taxtype</module>
+		<table>tbl_taxtype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>taxtype_taxtypeid desc</defaultsort>
+		<columns>taxtype_taxtype</columns>
+		<columnlabels>Tax Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>taxtype_taxtype</name><headertext>Tax Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>taxtype_taxtypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_taxtype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Tax Type</searchbylabels>
+		<searchbycolumns>taxtype_taxtype</searchbycolumns>
+	</setting>

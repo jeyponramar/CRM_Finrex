@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertTrialToSubscription_child'>
+		<fromtable>tbl_select</fromtable>
+		<totable>tbl_select</totable>
+		<frommoduleid>0</frommoduleid>
+		<tomoduleid>0</tomoduleid>
+	</setting>

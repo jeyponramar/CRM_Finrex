@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Whatsapp Report - Trial</title>
+  <module>client</module>
+  <table>tbl_client</table>
+  <isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>client_clientid desc</defaultsort>
+  <columns>client_customername,contacts_contactperson,contacts_mobileno,contacts_emailid,client_startdate,client_whatsappenddate,employee_employeename,subscriptionstatus_status</columns>
+  <columnlabels>Client,Contact Person,Mobile No,Email Id,Start Date,End Date,Assigned To,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+	  <column>
+		  <name>mobileno</name>
+		  <headertext>Mobile No</headertext>
+		  <width>20%</width>
+		  <format>
+		  </format>
+	  </column>
+	 
+  </gridcolumn>
+  <hiddencolumns>client_clientid</hiddencolumns>
+  <query>
+	  select $COLUMNS$ from
+	  (
+	  select
+	  case when isnull(contacts_mobileno,'')='' then ''
+	  else '91'+contacts_mobileno
+	  end as mobileno, *
+	  from tbl_client
+	  left JOIN tbl_contacts on contacts_clientid=client_clientid
+	  LEFT JOIN tbl_employee on employee_employeeid=client_employeeid
+	  join tbl_subscriptionstatus on subscriptionstatus_subscriptionstatusid=client_subscriptionstatusid
+	  )r2
+
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+	  isnull(mobileno,'')&lt;&gt;'' AND contacts_iswhatsappcommunication=1
+	  AND client_subscriptionstatusid in(2,4)
+	  AND cast(client_whatsappenddate as date)&gt;=cast(getdate() as date)
+  </where>
+  <searchbylabels>Client,Status</searchbylabels>
+  <searchbycolumns>client_customername,subscriptionstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Servicetype</title>
+  <module>servicetype</module>
+  <table>tbl_servicetype</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>servicetype_servicetypeid desc</defaultsort>
+  <columns>servicetype_servicetype</columns>
+  <columnlabels>Service Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>servicetype_servicetype</name>
+      <headertext>Service Type</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>servicetype_servicetypeid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_servicetype
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Service Type</searchbylabels>
+  <searchbycolumns>servicetype_servicetype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

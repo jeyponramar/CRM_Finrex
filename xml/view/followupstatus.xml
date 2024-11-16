@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>followupstatus</title>
+  <module>followupstatus</module>
+  <table>tbl_followupstatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>followupstatus_followupstatusid desc</defaultsort>
+  <columns>followupstatus_status,followupstatus_textcolor,followupstatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>followupstatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followupstatus_followupstatusid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_followupstatus $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+</setting>

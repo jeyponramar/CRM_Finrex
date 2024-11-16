@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Broadcastmessage</title>
+  <module>broadcastmessage</module>
+  <table>tbl_broadcastmessage</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>broadcastmessage_broadcastmessageid desc</defaultsort>
+  <columns>broadcastmessage_message</columns>
+  <columnlabels>Message</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>broadcastmessage_message</name>
+      <headertext>Message</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>broadcastmessage_broadcastmessageid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_broadcastmessage
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Message</searchbylabels>
+  <searchbycolumns>broadcastmessage_message</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

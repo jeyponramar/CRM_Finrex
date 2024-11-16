@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Hedgingperiodmaster</title>
+		<module>hedgingperiodmaster</module>
+		<table>tbl_hedgingperiodmaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>hedgingperiodmaster_hedgingperiodmasterid desc</defaultsort>
+		<columns>hedgingperiodmaster_hedgingperiod</columns>
+		<columnlabels>Hedging Period</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>hedgingperiodmaster_hedgingperiod</name><headertext>Hedging Period</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>hedgingperiodmaster_hedgingperiodmasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_hedgingperiodmaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Hedging Period</searchbylabels>
+		<searchbycolumns>hedgingperiodmaster_hedgingperiod</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

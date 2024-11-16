@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>emailtemplate</title>
+  <module>emailtemplate</module>
+  <table>tbl_emailtemplate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>emailtemplate_emailtemplateid DESC</defaultsort>
+  <columns>emailtemplate_templatename,emailtemplate_subject,emailtemplate_message,emailtemplate_mailformat</columns>
+  <columnlabels>TemplateName,Subject,Message,Mail Format</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>emailtemplate_templatename</name>
+      <headertext>TemplateName</headertext>
+      <row>1</row>
+      <width>34%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailtemplate_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailtemplate_mailformat</name>
+      <headertext>Mail Format</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>emailtemplate_emailtemplateid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_emailtemplate $Search$</query>
+  <searchbylabels>
+    Template Name,Subject
+  </searchbylabels>
+  <searchbycolumns>
+    emailtemplate_templatename,emailtemplate_subject
+  </searchbycolumns>
+</setting>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimforwardcontract</title>
+  <module>fimforwardcontract</module>
+  <table>tbl_fimforwardcontract</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimforwardcontract_fimforwardcontractid desc</defaultsort>
+  <columns>fimimportorder_importorderinvoiceno,bank_bankname,exposurecurrencymaster_currency,fimforwardcontract_bankbookingrefno,fimforwardcontract_bookingdate,fimforwardcontract_forwardbookingamount,fimforwardcontract_utilisationamount,fimforwardcontract_cancellationamount,fimforwardcontract_forwardbalanceamount,fimforwardcontract_forwardbookingrate,fimforwardcontract_fromdate,fimforwardcontract_todate,fimforwardcontract_spotratebookingdate,fimforwardcontract_spotrateonutilisationdate,fimforwardcontract_spotrateoncancellationdate,fimforwardcontract_utilisationrate,fimforwardcontract_profitandlossonutilisation,fimforwardcontract_cancellationrate,fimforwardcontract_profitandlossoncancellation,fimforwardcontract_totalprofitandlossonforwardcontract,fimforwardcontract_invoiceno,fimforwardcontract_remark,fimforwardcontract_tradecreditbankrefno,fimforwardcontract_clientid,fimforwardcontract_fimtradecreditid</columns>
+  <columnlabels>Import Order/ Invoice No.,Bank,Currency,Bank Booking Ref No.,Booking Date,Forward Booking Amount,Utilisation Amount,Cancellation Amount,Forward  Balance Amount,Forward Booking Rate,From Date,To Date,Spot rate - Booking Date,Spot Rate on Utilisation Date,Spot Rate on Cancellation Date,Utilisation Rate,Profit and Loss on Utilisation,Cancellation Rate,Profit and Loss on Cancellation,Total Profit and Loss on Forward Contract,Invoice No.,Remark,Trade Credit Bank Ref No.,Client Id,fimtradecreditid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimforwardcontract_fimforwardcontractid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimforwardcontract
+
+ LEFT JOIN tbl_fimimportorder ON fimimportorder_fimimportorderid=fimforwardcontract_fimimportorderid
+ LEFT JOIN tbl_bank ON bank_bankid=fimforwardcontract_bankid
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=fimforwardcontract_exposurecurrencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Booking Date,Forward Booking Amount,Forward  Balance Amount,Forward Booking Rate,Total Profit and Loss on Forward Contract</searchbylabels>
+  <searchbycolumns>fimforwardcontract_bookingdate,fimforwardcontract_forwardbookingamount,fimforwardcontract_forwardbalanceamount,fimforwardcontract_forwardbookingrate,fimforwardcontract_totalprofitandlossonforwardcontract</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

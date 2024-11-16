@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Opportunity</title>
+  <module>Opportunity</module>
+  <table>tbl_opportunity</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>opportunity_opportunityid DESC</defaultsort>
+  <columns>opportunity_subject,opportunity_contactperson,product_productname,opportunity_modelno,opportunity_description,priority_priority,opportunitystatus_status,opportunity_remarks,opportunity_opportunitydate,opportunity_emailid,opportunity_mobileno,opportunity_landlineno,city_cityname,area_areaname,enquiry_enquiryno,enquirystage_enquirystage,opportunity_reasonforrating,opportunity_address,employee_employeename</columns>
+  <columnlabels>Subject,Contact Person,Product,Model No,Description,Priority,Status,Remarks,Opportunity Date,Email Id,Mobile No,Landline No,City Name,Area Name,Enquiry No,Rating,Reason for rating,Address,Assign To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>opportunity_opportunitydate</name>
+      <headertext>Opportunity Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true">
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>quotation_quotecode</name>
+      <headertext>Quotation No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>priority_priority</name>
+      <headertext>Priority</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Employee Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunitystatus_status</name>
+      <headertext>Status</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>quotation_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>opportunity_opportunityid</hiddencolumns>
+  <query>SELECT * FROM(
+	  SELECT *,(select top 1 quotation_quotationno from tbl_quotation
+	  WHERE quotation_opportunityid=opportunity_opportunityid
+	  order by quotation_quotationid desc) AS quotation_quotecode,
+	  (select top 1 quotation_totalamount from tbl_quotation
+	  WHERE quotation_opportunityid=opportunity_opportunityid
+	  order by quotation_quotationid desc) AS quotation_totalamount,
+	  (select top 1 quotation_quotationid from tbl_quotation
+	  WHERE quotation_opportunityid=opportunity_opportunityid
+	  order by quotation_quotationid desc)AS quotation_quotationid
+	  FROM tbl_opportunity
+	  LEFT JOIN tbl_product ON opportunity_productid=product_productid
+	  LEFT JOIN tbl_city ON opportunity_cityid=city_cityid
+	  JOIN tbl_client ON opportunity_clientid=client_clientid
+
+	  LEFT JOIN tbl_enquirystage ON opportunity_enquirystageid=enquirystage_enquirystageid
+	  LEFT JOIN tbl_priority ON opportunity_priorityid=priority_priorityid
+	  LEFT JOIN tbl_opportunitystatus ON opportunity_opportunitystatusid=opportunitystatus_opportunitystatusid
+	  LEFT JOIN tbl_employee ON opportunity_employeeid=employee_employeeid
+	  JOIN tbl_enquiry ON opportunity_enquiryid=enquiry_enquiryid
+	  LEFT JOIN tbl_campaign ON campaign_campaignid=enquiry_campaignid
+	  )r</query>
+  <where>
+    ('$opportunity_employeeid$' = '0' OR opportunity_employeeid = '$opportunity_employeeid$')
+    AND
+    ('$opportunity_opportunitystatusid$' = '0' OR opportunity_opportunitystatusid = '$opportunity_opportunitystatusid$') AND
+    opportunity_opportunitydate BETWEEN '$opportunity_opportunitydate_from$' AND '$opportunity_opportunitydate_to$'
+  </where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

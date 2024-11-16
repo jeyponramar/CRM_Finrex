@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditconversionmargin</title>
+  <module>bankauditconversionmargin</module>
+  <table>tbl_bankauditconversionmargin</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditconversionmargin_bankauditconversionmarginid desc</defaultsort>
+  <columns>bankauditconversionmargin_bankauditid,bankauditcurrency_currency,bankauditconversionmargin_marginamount,bankauditconversionmargin_clientid,bankauditconversionmargin_clientuserid</columns>
+  <columnlabels>Bank Audit Id,Curency,Margin Amount,Client Id,Client User Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditcurrency_currency</name>
+      <headertext>Curency</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditconversionmargin_bankauditconversionmarginid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditconversionmargin
+
+ LEFT JOIN tbl_bankauditcurrency ON bankauditcurrency_bankauditcurrencyid=bankauditconversionmargin_bankauditcurrencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

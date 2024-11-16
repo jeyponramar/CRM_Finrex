@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>TRIAL</title>
+  <module>TRIAL</module>
+  <table>tbl_trial</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>trial_trialid desc</defaultsort>
+  <columns>trial_trialcode,client_customername,client_contactperson,client_mobileno,client_emailid,trial_startdate,trial_enddate,trial_DaysRemaining,trial_NextRenewalDate</columns>
+  <columnlabels>Trial Code,Customer Name,Contact Person,Mobile No,Email Id,Start Date,End Date,Days Remaining,Next Renewal Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>trial_trialcode</name>
+      <headertext>Trial Code</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_startdate</name>
+      <headertext>Start Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>trial_enddate</name>
+      <headertext>End Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>trial_NextRenewalDate</name>
+      <headertext>Next Renewal Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>trial_DaysRemaining</name>
+      <headertext>Days Remaining</headertext>
+      <width>16%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>trial_trialid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_trial
+    JOIN tbl_client ON trial_clientid=client_clientid
+  </query>
+  <where></where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

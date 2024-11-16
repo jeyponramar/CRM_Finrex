@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>type</title>
+		<module>type</module>
+		<table>tbl_type</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>type_typeid desc</defaultsort>
+		<columns>type_type</columns>
+		<columnlabels>Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>type_type</name><headertext>Type</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>type_typeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_type $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Type</searchbylabels>
+		<searchbycolumns>type_type</searchbycolumns>
+	</setting>

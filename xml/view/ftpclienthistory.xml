@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Ftpclienthistory</title>
+  <module>ftpclienthistory</module>
+  <table>tbl_ftpclienthistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>ftpclienthistory_ftpclienthistoryid desc</defaultsort>
+  <columns>ftpclient_ftpusername,ftpclienthistory_datageneratedate,ftpclienthistory_issuccess</columns>
+  <columnlabels>FTP User,Data Generate Date,Is Success</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>ftpclient_ftpusername</name>
+      <headertext>FTP User</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ftpclienthistory_datageneratedate</name>
+      <headertext>Data Generate Date</headertext>
+      <width>50%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>ftpclienthistory_ftpclienthistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_ftpclienthistory
+
+ LEFT JOIN tbl_ftpclient ON ftpclient_ftpclientid=ftpclienthistory_ftpclientid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

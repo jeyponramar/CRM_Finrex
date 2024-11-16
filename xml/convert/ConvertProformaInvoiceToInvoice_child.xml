@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertProformaInvoiceToInvoice_child'>
+		<fromtable>tbl_proformainvoiceproductdetail</fromtable>
+		<totable>tbl_invoicedetail</totable>
+		<frommoduleid>2279</frommoduleid>
+		<tomoduleid>154</tomoduleid>
+		<mapping><name>productid</name><value>0</value></mapping>
+		<mapping><name>quantity</name><value>0</value></mapping>
+		<mapping><name>rate</name><value>0</value></mapping>
+		<mapping><name>amount</name><value>proformainvoiceproductdetail_amount</value></mapping>
+		<mapping><name>istax</name><value>0</value></mapping>
+		<mapping><name>sequence</name><value>proformainvoiceproductdetail_sequence</value></mapping>
+		<mapping><name>servicetypeid</name><value>proformainvoiceproductdetail_servicetypeid</value></mapping>
+		<mapping><name>cgstpercentage</name><value>0</value></mapping>
+		<mapping><name>sgstpercentage</name><value>0</value></mapping>
+		<mapping><name>igstpercentage</name><value>0</value></mapping>
+		<mapping><name>cgst</name><value>0</value></mapping>
+		<mapping><name>sgst</name><value>0</value></mapping>
+		<mapping><name>igst</name><value>0</value></mapping>
+		<mapping><name>taxableamount</name><value>0</value></mapping>
+		<mapping><name>gst</name><value>0</value></mapping>
+	</setting>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Yesno</title>
+		<module>yesno</module>
+		<table>tbl_yesno</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>yesno_yesnoid desc</defaultsort>
+		<columns>yesno_yesno</columns>
+		<columnlabels>YES/NO</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>yesno_yesno</name><headertext>YES/NO</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>yesno_yesnoid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_yesno
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>YES/NO</searchbylabels>
+		<searchbycolumns>yesno_yesno</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

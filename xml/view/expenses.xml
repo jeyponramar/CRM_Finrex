@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>expenses</title>
+  <module>expenses</module>
+  <table>tbl_expenses</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>expenses_expensesid DESC</defaultsort>
+  <columns>expenses_voucherno,expenses_expensedate,expenses_referanceno,client_customername,employee_employeename,expenses_expensesfor,expenses_totalamount,expenses_salesid,expenses_amcid,expenses_complaintid,expenses_amcserviceid,expenses_serviceid,expenses_invoiceid,expenses_amountpaid,expenses_balanceamount,expenses_ispaid</columns>
+  <columnlabels>Voucher No,Expense Date,Referance No,Customer Name,Employee Name,Expenses For,Total Amount,Sales Id,AMC ID,Complaint Id,Amcserviceid,Service Id,Invoice Id,Amount Paid,Balance Amount,Is Paid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>expenses_voucherno</name>
+      <headertext>Voucher No</headertext>
+      <row>1</row>
+      <width>17%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>expenses_expensedate</name>
+      <headertext>Expense Date</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true">
+      <name>expenses_referanceno</name>
+      <headertext>Referance No</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>expenses_expensesfor</name>
+      <headertext>Expenses For</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>expenses_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>expenses_amountpaid</name>
+      <headertext>Amount Paid</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>expenses_balanceamount</name>
+      <headertext>Balance Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>employee_employeename</name>
+      <headertext>Employee Name</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>expenses_expensesid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_expenses LEFT JOIN tbl_client ON client_clientid=expenses_clientid LEFT JOIN tbl_employee ON employee_employeeid=expenses_employeeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Voucher No,Referance No,Customer Name,Employee Name,Expenses For</searchbylabels>
+  <searchbycolumns>expenses_voucherno,expenses_referanceno,client_customername,employee_employeename,expenses_expensesfor</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <ismobile>True</ismobile>
+</setting>

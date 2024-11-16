@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Enquiry</title>
+  <module>enquiry</module>
+  <table>tbl_enquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>enquiry_enquiryid DESC</defaultsort>
+  <columns>enquiry_enquiryno,enquiry_enquirydate,client_customername,enquiry_companyname,priority_priority,enquiry_contactperson,designation_designation,enquiry_landlineno,enquiry_mobileno,enquiry_emailid,campaign_campaignname,enquiry_attachment,industrytypes_industrytypes,enquiry_website,state_state,area_areaname,exposure_exposure,business_business,employee_employeename,enquiry_assigneddate,enquirystatus_status,enquiry_followupsdate,enquiry_time,enquiry_ampm,enquiry_lastactivity,enquiry_telecallingid,enquiry_isemailsendtocustomer,emailsmssentstatus_status,enquiry_remarks,enquiry_subject,enquiry_description</columns>
+  <columnlabels>Enquiry No,Enquiry Date,Existing Customer,Company Name,Priority,Contact Person,Designation,Landline No,Mobile No,Email Id,Campaign,Attachment,Industry,Website,State,Area,Exposure,Business,Assigned To,Assigned Date,Enquiry Status,Followups Date,Time,Am Pm,Last Activity,Tele Calling Id,Is Email Send to Customer,Company Profile Sent Status,Remarks,Subject,Description</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>enquiry_enquirydate</name>
+      <headertext>Enquiry Date</headertext>
+      <width>11%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>enquiry_companyname</name>
+      <headertext>Company Name</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>enquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>enquiry_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>area_areaname</name>
+      <headertext>Area</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_assigneddate</name>
+      <headertext>Assigned Date</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>business_business</name>
+      <headertext>Business</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>industrytypes_industrytypes</name>
+      <headertext>Industry</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquiry_enquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_enquiry
+
+ LEFT JOIN tbl_client ON client_clientid=enquiry_clientid
+ LEFT JOIN tbl_priority ON priority_priorityid=enquiry_priorityid
+ LEFT JOIN tbl_designation ON designation_designationid=enquiry_designationid
+ LEFT JOIN tbl_campaign ON campaign_campaignid=enquiry_campaignid
+ LEFT JOIN tbl_industrytypes ON industrytypes_industrytypesid=enquiry_industrytypesid
+ LEFT JOIN tbl_state ON state_stateid=enquiry_stateid
+ LEFT JOIN tbl_area ON area_areaid=enquiry_areaid
+ LEFT JOIN tbl_exposure ON exposure_exposureid=enquiry_exposureid
+ LEFT JOIN tbl_business ON business_businessid=enquiry_businessid
+ LEFT JOIN tbl_employee ON employee_employeeid=enquiry_employeeid
+ LEFT JOIN tbl_enquirystatus ON enquirystatus_enquirystatusid=enquiry_enquirystatusid
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=enquiry_companyprofilesentstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Company Name,Contact Person,Mobile No,Industry,Area,Business,Assigned To</searchbylabels>
+  <searchbycolumns>enquiry_companyname,enquiry_contactperson,enquiry_mobileno,industrytypes_industrytypes,area_areaname,business_business,employee_employeename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <ismobile>True</ismobile>
+  <applyviewrights>True</applyviewrights>
+</setting>

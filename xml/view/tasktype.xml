@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>tasktype</title>
+		<module>tasktype</module>
+		<table>tbl_tasktype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>tasktype_tasktypeid desc</defaultsort>
+		<columns>tasktype_tasktype</columns>
+		<columnlabels>Task Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>tasktype_tasktype</name><headertext>Task Type</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>tasktype_tasktypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_tasktype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Task Type</searchbylabels>
+		<searchbycolumns>tasktype_tasktype</searchbycolumns>
+	</setting>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulksmsdetail</title>
+  <module>bulksmsdetail</module>
+  <table>tbl_bulksmsdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulksmsdetail_bulksmsdetailid desc</defaultsort>
+  <columns>client_customername,bulksmsdetail_mobileno,bulksmsdetail_message,emailsmssentstatus_status,bulksmsdetail_bulksmsid,bulksmsdetail_issuccess,bulksmsdetail_isfailed,bulksmsdetail_date</columns>
+  <columnlabels>Client Name,Mobile No,Message,Status,Bulk SMS Id,Is Success,Is Failed,Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksmsdetail_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksmsdetail_message</name>
+      <headertext>Message</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksmsdetail_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulksmsdetail_bulksmsdetailid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_bulksmsdetail JOIN tbl_client ON client_clientid=bulksmsdetail_clientid LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=bulksmsdetail_emailsmssentstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client Name</searchbylabels>
+  <searchbycolumns>client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

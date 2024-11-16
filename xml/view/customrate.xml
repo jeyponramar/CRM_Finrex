@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Customrate</title>
+  <module>customrate</module>
+  <table>tbl_customrate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>customrate_customrateid desc</defaultsort>
+  <columns>customrate_date,othercurrency_currency,customrate_import,customrate_export</columns>
+  <columnlabels>Date,Currency,Import,Export</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>customrate_date</name>
+      <headertext>Date</headertext>
+      <width>100%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>customrate_import</name>
+      <headertext>Import</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>customrate_export</name>
+      <headertext>Export</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>othercurrency_currency</name>
+      <headertext>Currency</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>customrate_customrateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_customrate
+
+ LEFT JOIN tbl_othercurrency ON othercurrency_othercurrencyid=customrate_othercurrencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency</searchbylabels>
+  <searchbycolumns>othercurrency_currency</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

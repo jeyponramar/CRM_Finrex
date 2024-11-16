@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Liverate</title>
+  <module>liverate</module>
+  <table>tbl_liverate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>liverate_liverateid desc</defaultsort>
+  <columns>liverate_rtdcode,liveratesection_name,liverate_prevrate,liverate_currentrate,liverate_issavehistory,currency_currency,liverate_isfuturerate,liverate_decimalplaces,liverate_isapirate,liverate_isexcelupdate,currencymaster_currency</columns>
+  <columnlabels>RTD Code,Section,Prev Rate,Current Rate,Is Save History,currency,Is Future Rate,Decimal Places,Is API Rate,IsExcelUpdate,Currency Master</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>liverate_rtdcode</name>
+      <headertext>RTD Code</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liverate_prevrate</name>
+      <headertext>Prev Rate</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>currencymaster_currency</name>
+      <headertext>Currency Master</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratesection_name</name>
+      <headertext>Section</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liverate_currentrate</name>
+      <headertext>Current Rate</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>liverate_isapirate</name>
+      <headertext>Is API Rate</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liverate_isexcelupdate</name>
+      <headertext>IsExcelUpdate</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>liverate_liverateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_liverate
+
+ LEFT JOIN tbl_liveratesection ON liveratesection_liveratesectionid=liverate_liveratesectionid
+ LEFT JOIN tbl_currency ON currency_currencyid=liverate_currencyid
+ LEFT JOIN tbl_currencymaster ON currencymaster_currencymasterid=liverate_currencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>RTD Code,Section,Currency Master</searchbylabels>
+  <searchbycolumns>liverate_rtdcode,liveratesection_name,currencymaster_currency</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

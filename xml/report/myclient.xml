@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Sales</title>
+  <module>Sales</module>
+  <table>tbl_sales</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>sales_salesid desc</defaultsort>
+  <columns>sales_date,sales_totalamount,client_customername,sales_contactperson,sales_mobileno,sales_emailid,sales_billingaddress,sales_remarks,sales_quotationid,salesstatus_status,sales_amcid,sales_isenquirystatusupdate,sales_isrenewed,sales_totalsalesquantity,sales_isconvertedtoinvoice,sales_enquiryid</columns>
+  <columnlabels>Date,Total Amount,Customer Name,Contact Person,Mobile No,Email Id,Billing Address,Remarks,Quotation Id,Status,AMCID,Is Enquiry Status Update,Is Renewed,Total Sales Quantity,Is Converted to Invoice,Enquiry Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_billingname</name>
+      <headertext>Billing Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_landlineno</name>
+      <headertext>Landline No</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_address</name>
+      <headertext>Address</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_billingaddress</name>
+      <headertext>Billing Address</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_cityid</name>
+      <headertext>City</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_areaid</name>
+      <headertext>Area</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_website</name>
+      <headertext>Website</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_companylogo</name>
+      <headertext>Company Logo</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_designationid</name>
+      <headertext>Designation</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>sales_salesid</hiddencolumns>
+  <query>SELECT * FROM tbl_sales
+JOIN tbl_client ON sales_clientid=client_clientid
+JOIN tbl_salesstatus ON sales_salesstatusid=salesstatus_salesstatusid $Search$</query>
+  <where>
+  </where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

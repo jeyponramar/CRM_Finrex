@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimorderdetail</title>
+  <module>fimorderdetail</module>
+  <table>tbl_fimorderdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimorderdetail_fimorderdetailid desc</defaultsort>
+  <columns>fimorderdetail_invoiceamount,fimorderdetail_advancepaidadjustedagainstinv,fimorderdetail_invoiceamountpaid,fimorderdetail_invoiceamountbalance,fimorderdetail_conversionrate,fimorderdetail_costing,fimorderdetail_profitlossfromcosting,fimorderdetail_spotrateonpaymentdate,fimorderdetail_profitlossfromspotrateonpaymentdate,fimorderdetail_invoiceno,fimorderdetail_invoiceduedate,fimorderdetail_paymentmadedate,fimorderdetail_bankbookingrefno,fimorderdetail_remark,fimorderdetail_paymentterm,fimorderdetail_documenttype,fimorderdetail_expectedduedate,fimorderdetail_tradecredit,fimorderdetail_clientid,fimorderdetail_fimimportorderid</columns>
+  <columnlabels>Invoice Amount,Advance Paid Adjusted Against Inv.,Invoice Amount Paid,Invoice  Amount Balance,Conversion  Rate,Costing,Profit/ Loss from Costing,Spot Rate on Payment Date,Profit/ Loss from Spot rate on Payment date,Invoice No.,Invoice Due Date,Payment made Date,Bank Booking Ref No.,Remark,Payment Term,Document Type,Expected Due Date,Trade Credit,Client Id,Fim Import Order Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimorderdetail_fimorderdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimorderdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

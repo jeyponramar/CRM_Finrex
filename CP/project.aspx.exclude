@@ -1,0 +1,45 @@
+﻿<%@ Page Title="Create Project" Language="C#" AutoEventWireup="true" CodeFile="project.aspx.cs" Inherits="configure_project" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="background-color:#2a2929;">
+    <form id="form1" runat="server">
+<table width="100%">
+    <tr><td align="center" style="padding-top:200px">
+        <table width="100%">
+            <tr><td align="center" style="background:#1f2022;
+                    box-shadow:0px 0px 15px #999;">
+                <table align="center">
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td>Select Report</td>
+                        <td>
+                            <asp:DropDownList id="ddlProject" runat="server" CssClass="ddl" OnSelectedIndexChanged="ddlProject_Changed" AutoPostBack="true"></asp:DropDownList>
+                            &nbsp;<asp:Button CssClass="button" runat="server" ID="btnCopyProject" OnClick="btnCopyProject_Click" Text="Copy Project"/>
+                        </td>
+                    </tr>
+                    <tr><td style="font-size:20px;text-align:center" colspan="2">OR</td></tr>
+                    <tr>
+                        <td>New Project</td><td><asp:TextBox id="txtProject" runat="server" CssClass="textbox" OnTextChanged="txtProject_Changed" AutoPostBack="true"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Connection String</td><td><asp:TextBox id="txtConnectionString" runat="server" CssClass="textbox"></asp:TextBox></td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                        <td colspan="2"><asp:Label ID="lblMessage" runat="server" CssClass="error"></asp:Label></td>
+                    </tr>
+                    <tr><td>&nbsp;</td><td><asp:Button CssClass="button" runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Submit"/></td></tr>
+                </table>
+            </td></tr>
+        </table>
+        
+    </td></tr>
+</table>
+    </form>
+</body>
+</html>

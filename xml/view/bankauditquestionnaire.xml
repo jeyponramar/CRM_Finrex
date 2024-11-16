@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditquestionnaire</title>
+  <module>bankauditquestionnaire</module>
+  <table>tbl_bankauditquestionnaire</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditquestionnaire_bankauditquestionnaireid desc</defaultsort>
+  <columns>bankauditquestionnaire_bankauditid,bankauditquestionnaire_bankauditquestiontypeid,bankauditquestionnaire_bankauditquestioncategoryid,bankauditquestionnaire_bankauditquestionnairemasterid,bankauditquestionnaire_question,bankauditquestionnaire_answer,bankauditquestionnaire_suggestion,bankauditquestionnaire_clientid,bankauditquestionnaire_clientuserid,bankauditquestionnaire_savingbenifit,bankauditquestionnaire_remarks,bankauditquestionnaire_savingbenefit,bankauditquestionnaire_isqueryresolved</columns>
+  <columnlabels>Bank Audit Id,Bank Audit Question Type Id,Bank Audit Question Category Id,Bank Audit Questionnaire Master Id,Question,Answer,Suggestion,Client Id,Client User Id,Saving Benifit,Remarks,Saving Benefit,Is Query Resolved</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>bankauditquestionnaire_bankauditquestionnaireid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditquestionnaire
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

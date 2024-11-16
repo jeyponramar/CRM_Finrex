@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>usertype</title>
+		<module>usertype</module>
+		<table>tbl_usertype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>usertype_usertypeid desc</defaultsort>
+		<columns>usertype_usertype</columns>
+		<columnlabels>User Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>usertype_usertype</name><headertext>User Type</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>usertype_usertypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_usertype $Search$</query>
+		<searchbylabels>User Type</searchbylabels>
+		<searchbycolumns>usertype_usertype</searchbycolumns>
+	</setting>

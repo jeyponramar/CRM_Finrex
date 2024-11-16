@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Invoice</title>
+  <module>Invoice</module>
+  <table>tbl_invoice</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>invoice_invoiceid desc</defaultsort>
+  <columns>invoice_invoiceno,client_customername,invoice_referenceno,invoice_emailid,invoice_mobileno,invoice_contactperson,invoice_invoicedate,invoice_quotationid,invoice_salesid,setupfortermsandcondition_name,invoice_billingaddress,invoice_amountpaid,invoice_balanceamount,invoice_totalamount,invoice_isupdatestatusforothermodule,invoice_ispaid,proformainvoice_proformainvoiceno,invoice_subject,invoice_projectid,invoice_module,invoice_moduleid,subscription_subscriptioncode,invoice_gstin,invoice_directorname,invoice_directormobile,invoice_directoremailid,invoice_financename,invoice_financemobile,invoice_financeemailid,invoice_officetelno,invoice_officeemailid,invoice_taxableamount,invoice_cgst,invoice_sgst,invoice_igst,invoice_gst,state_state,invoice_courieraddress,employee_employeename,employee_employeename,employee_employeename,employee_employeename,employee_employeename,invoice_periodfrom,invoice_periodto,invoicestatus_status</columns>
+  <columnlabels>Invoice No,Customer Name,Reference No,Email Id,Mobile No,Contact Person,Invoice Date,Quotation Id,Sales Id,Terms And Condition,Billing Address,Amount Paid,Balance Amount,Total Amount,Is Update Status For Other Module,Is Paid,Proforma Invoice No,Subject,ProjectId,Module,Module Id,Subscription Code,GSTIN,Director Name,Director Mobile,Director Email Id,Finance Name,Finance Mobile,Finance Email Id,Office Tel no,Office Email Id,Taxable Amount,CGST,SGST,IGST,GST,State,Courier Address,Lead By,Advisory by,Meeting1,Meeting2,Closed By,Period From,Period To,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>invoice_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>4%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_invoicedate</name>
+      <headertext>Invoice Date</headertext>
+      <width>4%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_billingaddress</name>
+      <headertext>Billing Address</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_courieraddress</name>
+      <headertext>Courier Address</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>state_state</name>
+      <headertext>State</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_gstin</name>
+      <headertext>GSTIN</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_directorname</name>
+      <headertext>Director Name</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_directormobile</name>
+      <headertext>Director Mobile</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_directoremailid</name>
+      <headertext>Director Email Id</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_financename</name>
+      <headertext>Finance Name</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_financemobile</name>
+      <headertext>Finance Mobile</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_financeemailid</name>
+      <headertext>Finance Email Id</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_officetelno</name>
+      <headertext>Office Tel no</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_officeemailid</name>
+      <headertext>Office Email Id</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_subject</name>
+      <headertext>Subject</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_periodfrom</name>
+      <headertext>Period From</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_periodto</name>
+      <headertext>Period To</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_subscriptioncode</name>
+      <headertext>Subscription Code</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_referenceno</name>
+      <headertext>Reference No</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename2</name>
+      <headertext>Advisory by</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename3</name>
+      <headertext>Meeting1</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename4</name>
+      <headertext>Meeting2</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename1</name>
+      <headertext>Lead By</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename5</name>
+      <headertext>Closed By</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_amountpaid</name>
+      <headertext>Amount Paid</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_balanceamount</name>
+      <headertext>Balance Amount</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_taxableamount</name>
+      <headertext>Taxable Amount</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_cgst</name>
+      <headertext>CGST</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_sgst</name>
+      <headertext>SGST</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_Igst</name>
+      <headertext>IGST</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoicestatus_status</name>
+      <headertext>Status</headertext>
+      <width>2%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>invoice_invoiceid</hiddencolumns>
+  <query>
+    SELECT *,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_leadbyid) as employee_employeename1,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_advisorybyid) as employee_employeename2
+    ,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_meeting1id) as employee_employeename3
+    ,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_meeting2id) as employee_employeename4
+    ,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_closedbyid) as employee_employeename5
+    ,
+    (select employee_employeename from tbl_employee WHERE employee_employeeid=invoice_employeeid) as employee_employeename6
+
+    FROM tbl_invoice
+    LEFT JOIN tbl_client ON client_clientid=invoice_clientid
+    LEFT JOIN tbl_setupfortermsandcondition ON setupfortermsandcondition_setupfortermsandconditionid=invoice_setupfortermsandconditionid
+    LEFT JOIN tbl_subscription ON subscription_subscriptionid=invoice_subscriptionid
+    LEFT JOIN tbl_proformainvoice ON proformainvoice_proformainvoiceid=invoice_proformainvoiceid
+    LEFT JOIN tbl_state ON state_stateid=invoice_stateid
+    LEFT JOIN tbl_employee ON employee_employeeid=invoice_employeeid
+    LEFT JOIN tbl_invoicestatus ON invoicestatus_invoicestatusid=invoice_invoicestatusid
+    
+  </query>
+  <where>
+    ('$invoice_clientid$' = '0' OR invoice_clientid = '$invoice_clientid$') AND
+    ('$invoice_invoicestatusid$' = '0' OR invoice_invoicestatusid = '$invoice_invoicestatusid$')
+    AND invoice_invoicedate BETWEEN '$invoice_invoicedate_from$' AND '$invoice_invoicedate_to$'
+    AND invoice_periodfrom BETWEEN '$invoice_periodfrom_from$' AND '$invoice_periodfrom_to$'
+    AND invoice_periodto BETWEEN '$invoice_periodto_from$' AND '$invoice_periodto_to$'
+  </where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>False</applyviewrights>
+</setting>

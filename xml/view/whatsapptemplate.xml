@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Whatsapptemplate</title>
+  <module>whatsapptemplate</module>
+  <table>tbl_whatsapptemplate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>whatsapptemplate_whatsapptemplateid desc</defaultsort>
+  <columns>whatsapptemplate_templatename,whatsapptemplate_whatsapptemplatecode,whatsapptemplate_message,whatsapptemplate_whatsappvariables,whatsapptemplate_isactive</columns>
+  <columnlabels>Template Name,WhatsApp Template Code,Message,WhatsApp Variables,Is Active</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>whatsapptemplate_templatename</name>
+      <headertext>Template Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsapptemplate_whatsapptemplatecode</name>
+      <headertext>WhatsApp Template Code</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsapptemplate_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>whatsapptemplate_whatsapptemplateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_whatsapptemplate
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Template Name,WhatsApp Template Code</searchbylabels>
+  <searchbycolumns>whatsapptemplate_templatename,whatsapptemplate_whatsapptemplatecode</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

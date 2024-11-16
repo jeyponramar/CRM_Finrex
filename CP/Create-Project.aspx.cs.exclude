@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.IO;
+using WebComponent;
+using System.Data.SqlClient;
+using System.Threading;
+
+public partial class CP_Create_Project : System.Web.UI.Page
+{
+    GlobalData gblData = new GlobalData("tbl_project", "projectid");
+    protected void Page_Load(object sender, EventArgs e)
+    {        
+        if (!IsPostBack)
+        {            
+            gblData.FillDropdown(ddlproject, "projectname");
+        }
+    }    
+    protected void ddlCopyprojectChanged(object sender, EventArgs e)
+    {
+        if (GlobalUtilities.ConvertToInt(ddlproject.SelectedValue) > 0)
+        {
+            
+        }
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        if (GlobalUtilities.ConvertToInt(ddlProjectType.SelectedValue) > 1)
+        {
+            if (GlobalUtilities.ConvertToInt(ddlproject.SelectedValue) == 0)
+            {
+                lblMessage.Text = "Please select any one project";
+                lblMessage.Visible = true;
+                return;
+            }
+        }
+        form.Visible = true;
+        int id = 0;
+        id = gblData.SaveForm(form);
+        
+        if (id > 0)
+        {            
+            createDatabase();
+            createProject();
+            gblData.ResetForm(form);
+            lblMessage.Text = "Project Created sucessfully!!!!!";
+            lblMessage.Visible = true;
+            //Response.Redirect("#");
+        }
+        else if (id == -1)
+        {
+            lblMessage.Text = "Data already exists, duplicate entry not allowed!";
+            lblMessage.Visible = true;
+        }
+        else
+        {
+            lblMessage.Text = "Error occurred while saving data</br>Error : " + gblData._error;
+            lblMessage.Visible = true;
+        }
+
+    }
+    private void createProject()
+    {
+        string Projectname = txtprojectname.Text.Replace(" ", "_");
+        string destFolder = Settings.Project_Root_Path + "\\" + Projectname;
+        string srcFolder = destFolder.Replace(Projectname,(GlobalUtilities.ConvertToInt(ddlproject.SelectedValue)>0)?ddlproject.SelectedItem.Text: Settings.Refux_Default_Project_Name);
+        Common.CopyDirectory(srcFolder, destFolder);
+    }
+    private void createDatabase()
+    {
+        bool isAlreadyDetached = true;
+        InsertUpdate obj = null;
+        string FromDatabseName = (GlobalUtilities.ConvertToInt(ddlproject.SelectedValue) > 0) ? ddlproject.SelectedItem.Text : Settings.Refux_Default_Project_Name;
+        //Detach the Source database first
+        string query = "";
+        try
+        {
+            if (!IsDetached(FromDatabseName))
+            {
+                query = " USE master; ALTER DATABASE " + FromDatabseName +" SET SINGLE_USER WITH ROLLBACK IMMEDIATE; EXEC sp_detach_db N'" + FromDatabseName + "'";
+                bool ans = false;                
+                obj = new InsertUpdate();
+                ans = obj.ExecuteQuery(query);
+                if (ans)
+                {
+                    isAlreadyDetached = false;
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            isAlreadyDetached = true;            
+            return;
+        }
+
+        //End
+        string NewDataBaseName = txtprojectname.Text.Replace(" ", "_");
+        //copy the db files\
+        string Newdbmdf = Settings.Database_Root_Path + "\\" + NewDataBaseName + ".mdf";
+        string Newdbldf = Newdbmdf.Replace(".mdf", "_log.ldf");
+        string Fromdbmdf = Newdbmdf.Replace(NewDataBaseName, FromDatabseName);
+        string Fromdbldf = Fromdbmdf.Replace(".mdf", "_log.ldf");
+        File.Copy(Fromdbmdf, Newdbmdf, true);
+        File.Copy(Fromdbldf, Newdbldf, true);
+        //End
+        //Attach the database
+        query = @"USE master; EXEC sp_attach_db N'" + NewDataBaseName + "'," +
+                    "@filename1 = N'" + Newdbmdf.Replace(@"\\RSERVER\Database", @"D:\Ram\Projects\Database") + "'," +
+                    "@filename2 = N'" + Newdbldf.Replace(@"\\RSERVER\Database", @"D:\Ram\Projects\Database") + "'";               
+        query = query.Replace("\r", "").Replace("\n", "").Replace("GO", "");
+        obj = new InsertUpdate();
+        obj.ExecuteQuery(query);
+        if (!isAlreadyDetached)
+        {
+            query = query.Replace(NewDataBaseName, FromDatabseName).Replace(Newdbmdf, Fromdbmdf).Replace(Newdbldf, Fromdbldf);//Project name and databse
+            obj = new InsertUpdate();
+            obj.ExecuteQuery(query);
+        }
+
+    }     
+    private bool IsDetached(string dbname)
+    {
+        bool isdetached = true;
+        SqlConnection con = new SqlConnection(Settings.Conn_String.Replace("$DbName$", dbname));
+        try
+        {
+            con.Open();
+            string query = "select 1";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            isdetached = false;
+        }
+        catch (Exception ex)
+        {            
+            con = null;
+        }
+        return isdetached;
+    }
+    
+}

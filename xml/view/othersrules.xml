@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Othersrules</title>
+  <module>othersrules</module>
+  <table>tbl_othersrules</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>othersrules_othersrulesid desc</defaultsort>
+  <columns>othersrules_date,othersrules_particular,othersrules_url,othersrules_remark,othersrules_document</columns>
+  <columnlabels>Date,Particular,Url,Remark,Document</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>othersrules_date</name>
+      <headertext>Date</headertext>
+      <width>100%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>othersrules_particular</name>
+      <headertext>Particular</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>othersrules_remark</name>
+      <headertext>Remark</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>othersrules_document</name>
+      <headertext>Document</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>othersrules_othersrulesid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_othersrules
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Particular</searchbylabels>
+  <searchbycolumns>othersrules_particular</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

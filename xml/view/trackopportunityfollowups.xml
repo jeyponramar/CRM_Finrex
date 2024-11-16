@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>followups</title>
+  <module>followups</module>
+  <table>tbl_followups</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>followups_followupsid DESC</defaultsort>
+  <columns>followups_subject,followupaction_action,followups_date,followups_time,followups_remarks,employee_employeename,enquiry_enquiryno</columns>
+  <columnlabels>Subject,Action,Date,Time,Remarks,Salesperson,Enquiry No</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>followups_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>followupaction_action</name>
+      <headertext>Action</headertext>
+      <row>2</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>followups_date</name>
+      <headertext>Date</headertext>
+      <row>2</row>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>followupstatus_status</name>
+      <headertext>Status</headertext>
+      <row>2</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>followups_remarks</name>
+      <headertext>Remarks</headertext>
+      <row>3</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Salesperson</headertext>
+      <row>3</row>
+      <width>25%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followups_followupsid</hiddencolumns>
+  <query>
+    select * from tbl_followups
+    join tbl_client On client_clientid=followups_clientid
+    LEFT JOIN tbl_followupstatus on followupstatus_followupstatusid=followups_followupstatusid
+    LEFT JOIN tbl_followupaction on followupaction_followupactionid=followups_followupactionid
+    left JOIN tbl_employee ON employee_employeeid = followups_assignedtoid
+    join tbl_opportunity On opportunity_opportunityid=followups_mid
+    join tbl_enquiry On enquiry_enquiryid=opportunity_enquiryid
+  </query>
+</setting>

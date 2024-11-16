@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertSalesToInvoice'>
+		<fromtable>tbl_sales</fromtable>
+		<totable>tbl_invoice</totable>
+		<frommoduleid>10</frommoduleid>
+		<tomoduleid>23</tomoduleid>
+		<statuscolumn>salesstatusid,isconvertedtoinvoice</statuscolumn>
+		<statusvalue>4,1</statusvalue>
+		<mapping><name>invoice_invoiceforid</name><value>1</value></mapping>
+		<mapping><name>invoice_clientid</name><value>sales_clientid</value></mapping>
+		<mapping><name>invoice_referenceno</name><value>sales_billno</value></mapping>
+		<mapping><name>invoice_emailid</name><value>sales_emailid</value></mapping>
+		<mapping><name>invoice_mobileno</name><value>sales_mobileno</value></mapping>
+		<mapping><name>invoice_contactperson</name><value>sales_contactperson</value></mapping>
+		<mapping><name>invoice_invoicedate</name><value>dbo.GetDate()</value></mapping>
+		<mapping><name>invoice_quotationid</name><value>sales_quotationid</value></mapping>
+		<mapping><name>invoice_amcid</name><value>0</value></mapping>
+		<mapping><name>invoice_salesid</name><value>sales_salesid</value></mapping>
+		<mapping><name>invoice_setupfortermsandconditionid</name><value>3</value></mapping>
+		<mapping><name>invoice_billingaddress</name><value>sales_billingaddress</value></mapping>
+		<mapping><name>invoice_balanceamount</name><value>sales_totalamount</value></mapping>
+		<mapping><name>invoice_amountpaid</name><value>0</value></mapping>
+		<mapping><name>invoice_totalamount</name><value>sales_totalamount</value></mapping>
+		<mapping><name>invoice_invoiceno</name><value>Code=Inv-</value></mapping>
+		<mapping><name>invoice_serviceid</name><value>0</value></mapping>
+		<mapping><name>invoice_amcserviceid</name><value>0</value></mapping>
+		<mapping><name>invoice_complaintid</name><value>0</value></mapping>
+		<mapping><name>invoice_isupdatestatusforothermodule</name><value>0</value></mapping>
+		<mapping><name>invoice_ispaid</name><value>0</value></mapping>
+		<mapping><name>invoice_quotationstatusisupdate</name><value>0</value></mapping>
+		<mapping><name>invoice_proformainvoiceid</name><value>0</value></mapping>
+	</setting>

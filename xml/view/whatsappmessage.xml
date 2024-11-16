@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Whatsappmessage</title>
+  <module>whatsappmessage</module>
+  <table>tbl_whatsappmessage</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>whatsappmessage_whatsappmessageid desc</defaultsort>
+  <columns>whatsappmessage_whatsappuniqueid,whatsappmessage_mobileno,whatsapptemplate_templatename,whatsappmessage_module,whatsappmessage_moduleid,whatsappmessage_message,whatsappmessage_filename,whatsappmessage_link,whatsappmessagetype_messagetype,whatsappmessagestatus_status</columns>
+  <columnlabels>WhatsApp Unique Id,Mobile No,WhatsApp Template Id,module,moduleid,Message,File Name,Link,Message Type,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>whatsappmessage_whatsappuniqueid</name>
+      <headertext>WhatsApp Unique Id</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsappmessage_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsapptemplate_templatename</name>
+      <headertext>WhatsApp Template Id</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsappmessage_filename</name>
+      <headertext>File Name</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsappmessagetype_messagetype</name>
+      <headertext>Message Type</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>whatsappmessagestatus_status</name>
+      <headertext>Status</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>whatsappmessage_whatsappmessageid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_whatsappmessage
+
+ LEFT JOIN tbl_whatsapptemplate ON whatsapptemplate_whatsapptemplateid=whatsappmessage_whatsapptemplateid
+ LEFT JOIN tbl_whatsappmessagetype ON whatsappmessagetype_whatsappmessagetypeid=whatsappmessage_whatsappmessagetypeid
+ LEFT JOIN tbl_whatsappmessagestatus ON whatsappmessagestatus_whatsappmessagestatusid=whatsappmessage_whatsappmessagestatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>WhatsApp Unique Id,Mobile No,WhatsApp Template Id,Message,File Name,Message Type,Status</searchbylabels>
+  <searchbycolumns>whatsappmessage_whatsappuniqueid,whatsappmessage_mobileno,whatsapptemplate_templatename,whatsappmessage_message,whatsappmessage_filename,whatsappmessagetype_messagetype,whatsappmessagestatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

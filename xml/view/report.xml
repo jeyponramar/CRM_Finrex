@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Report</title>
+		<module>report</module>
+		<table>tbl_report</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>report_reportid desc</defaultsort>
+		<columns>report_reportname</columns>
+		<columnlabels>Report Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>report_reportname</name><headertext>Report Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>report_reportid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_report $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Report Name</searchbylabels>
+		<searchbycolumns>report_reportname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

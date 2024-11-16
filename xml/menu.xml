@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menus>
+  <menu>
+    <name>Client</name>
+    <submenu>Add Client List</submenu>
+    <submenu>View Client List</submenu>
+  </menu>
+  <menu>
+    <name>Complaint</name>
+  </menu>
+  <menu>
+    <name>AMC</name>
+  </menu>
+  <menu>
+    <name>Master</name>
+  </menu>
+  <menu>
+    <name>Service</name>
+  </menu>
+</menus>

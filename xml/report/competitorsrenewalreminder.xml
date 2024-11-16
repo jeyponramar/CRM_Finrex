@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>CLIENTCOMPETITOR</title>
+  <module>CLIENTCOMPETITOR</module>
+  <table>tbl_clientcompetitor</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>clientcompetitor_clientcompetitorid desc</defaultsort>
+  <columns>client_customercode,client_customername,client_contactperson,client_mobileno,client_emailid,clientcompetitor_expirydate,clientcompetitor_DaysRemaining</columns>
+  <columnlabels>Client Code,Customer Name,Contact Person,Mobile No,Email Id,Expired Date,Days Remaining</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customercode</name>
+      <headertext>Client Code</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <row>1</row>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientcompetitor_expirydate</name>
+      <headertext>Expired Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>clientcompetitor_DaysRemaining</name>
+      <headertext>Days Remaining</headertext>
+      <width>16%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>clientcompetitor_clientcompetitorid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_clientcompetitor
+    JOIN tbl_client ON clientcompetitor_clientid=client_clientid
+  </query>
+  <where></where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

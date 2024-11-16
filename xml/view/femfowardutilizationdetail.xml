@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Femfowardutilizationdetail</title>
+  <module>femfowardutilizationdetail</module>
+  <table>tbl_femfowardutilizationdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>femfowardutilizationdetail_femfowardutilizationdetailid desc</defaultsort>
+  <columns>femfowardutilizationdetail_bankbookingrefno,femfowardutilizationdetail_forwardcontractid,femfowardutilizationdetail_clientid,femfowardutilizationdetail_forwardbookingrate,femfowardutilizationdetail_utilisationamount,femfowardutilizationdetail_utilisationdate,femfowardutilizationdetail_spotrateonutilisationdate,femfowardutilizationdetail_premium,femfowardutilizationdetail_utilizationrate,femfowardutilizationdetail_profitandlossonutilisation,femfowardutilizationdetail_invoiceno,femfowardutilizationdetail_exportorderno,femfowardutilizationdetail_remark</columns>
+  <columnlabels>Bank Booking Ref No.,forwardcontractid,Client Id,Forward Booking Rate,Utilisation Amount,Utilisation  Date,Spot Rate on Utilisation Date,Premium,Utilization Rate,Profit and Loss on Utilisation,Invoice No,Export Order No,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>femfowardutilizationdetail_bankbookingrefno</name>
+      <headertext>Bank Booking Ref No.</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_forwardbookingrate</name>
+      <headertext>Forward Booking Rate</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_utilisationamount</name>
+      <headertext>Utilisation Amount</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_utilisationdate</name>
+      <headertext>Utilisation  Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_spotrateonutilisationdate</name>
+      <headertext>Spot Rate on Utilisation Date</headertext>
+      <width>20%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_premium</name>
+      <headertext>Premium</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_utilizationrate</name>
+      <headertext>Utilization Rate</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_profitandlossonutilisation</name>
+      <headertext>Profit and Loss on Utilisation</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardutilizationdetail_remark</name>
+      <headertext>Remark</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>femfowardutilizationdetail_femfowardutilizationdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_femfowardutilizationdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>convert</title>
+		<module>convert</module>
+		<table>tbl_convert</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>convert_convertid desc</defaultsort>
+		<columns>convert_frommoduleid,convert_name,convert_tomoduleid</columns>
+		<columnlabels>From Module Id,Name,To Module Id</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>convert_name</name><headertext>Name</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>convert_convertid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_convert $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Name</searchbylabels>
+		<searchbycolumns>convert_name</searchbycolumns>
+	</setting>

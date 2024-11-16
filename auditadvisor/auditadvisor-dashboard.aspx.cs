@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.Data.SqlClient;
+using System.Web.UI.HtmlControls;
+using System.Text;
+
+public partial class auditadvisor_dashboard : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            BindCharts();
+        }
+    }
+    private void BindCharts()
+    {
+        string query = "";
+        string extrawhere = "";
+       
+        query = @"select bankauditstatus_status as lbl,count(*) as val from tbl_bankaudit
+                join tbl_bankauditstatus on bankauditstatus_bankauditstatusid=bankaudit_bankauditstatusid
+                group by bankauditstatus_status";
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        StringBuilder html = new StringBuilder();
+        StringBuilder lbls = new StringBuilder();
+        StringBuilder vals = new StringBuilder();
+        Finstation.GetChartData(dttbl, 0, ref lbls, ref vals);
+        html.Append("<div class='db-chartjs-panel' ct='5'  xaxislabel='Count' data='" + vals + "' labels='" + lbls + "' pointradius='0'></div>");
+        ltquerystatus.Text = html.ToString();
+
+        query = @"select top 100 count(*) as val, substring(DATENAME(mm,bankaudit_date),1,3)+' ' +cast(year(bankaudit_date) as varchar) as lbl from tbl_bankaudit
+                    group by year(bankaudit_date),DATENAME(mm,bankaudit_date)";
+        dttbl = DbTable.ExecuteSelect(query);
+
+        html = new StringBuilder();
+        lbls = new StringBuilder();
+        vals = new StringBuilder();
+        Finstation.GetChartData(dttbl, 0, ref lbls, ref vals);
+        html.Append("<div class='db-chartjs-panel' ct='3'  xaxislabel='Count' data='" + vals + "' labels='" + lbls + "' pointradius='5'></div>");
+        ltmonthlyquery.Text = html.ToString();
+
+//        query = @"select querytopic_topicname as lbl,count(*) as val from tbl_bankaudit
+//                  join tbl_querytopic on querytopic_querytopicid=bankaudit_querytopicid
+//                   " + extrawhere + @"
+//                  group by querytopic_topicname";
+//        dttbl = DbTable.ExecuteSelect(query);
+
+        //html = new StringBuilder();
+        //lbls = new StringBuilder();
+        //vals = new StringBuilder();
+        //Finstation.GetChartData(dttbl, 0, ref lbls, ref vals);
+        //html.Append("<div class='db-chartjs-panel' ct='1' colors='red' xaxislabel='Count' data='" + vals + "' labels='" + lbls + "'></div>");
+        //ltquerybytopic.Text = html.ToString();
+
+        string countwhere = "";
+        if (extrawhere == "")
+        {
+            countwhere = " where 1=1";
+        }
+        else
+        {
+            countwhere = extrawhere;
+        }
+        SetCount(countwhere, lbltotalcount);
+        SetCount(countwhere + " and bankaudit_bankauditstatusid=1", lblopencount);
+        SetCount(countwhere + " and bankaudit_bankauditstatusid=4", lblclosedcount);
+        SetCount(countwhere + " and bankaudit_bankauditstatusid<>4", lblpendingcount);
+        SetCount(countwhere + " and bankaudit_bankauditstatusid=3", lblpendingresponsecount);
+    }
+    private void SetCount(string extrawhere, Label lbl)
+    {
+        string query = "";
+        query = @"select count(*) as c from tbl_bankaudit";
+        query += extrawhere;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        lbl.Text = Convert.ToString(dr["c"]);
+    }
+}

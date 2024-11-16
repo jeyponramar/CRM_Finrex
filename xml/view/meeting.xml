@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Meeting</title>
+  <module>meeting</module>
+  <table>tbl_meeting</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>meeting_meetingid desc</defaultsort>
+  <columns>meeting_subject,client_customername,meeting_date,meeting_agenda,meeting_minutesofmeeting,meeting_ismeetingrequestsent,meeting_ismomsent,meeting_isthanksmailsent,meeting_remarks,meeting_module,meeting_moduleid</columns>
+  <columnlabels>Subject,Client,Date,Agenda,Minutes of Meeting,Is Meeting Request Sent,Is MOM Sent,Is Thanks Mail Sent,Remarks,Module,Module Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>meeting_subject</name>
+      <headertext>Subject</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>meeting_date</name>
+      <headertext>Date</headertext>
+      <width>12%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>meeting_agenda</name>
+      <headertext>Agenda</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>meeting_ismeetingrequestsent</name>
+      <headertext>Is Meeting Request Sent</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>meeting_ismomsent</name>
+      <headertext>Is MOM Sent</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>meeting_isthanksmailsent</name>
+      <headertext>Is Thanks Mail Sent</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>meeting_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>meeting_meetingid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_meeting JOIN tbl_client ON client_clientid=meeting_clientid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,Minutes of Meeting,Remarks</searchbylabels>
+  <searchbycolumns>client_customername,meeting_minutesofmeeting,meeting_remarks</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

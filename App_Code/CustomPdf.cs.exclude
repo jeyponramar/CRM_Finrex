@@ -1,0 +1,237 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using WebComponent;
+using System.Collections;
+using System.Data;
+using iTextSharp;
+using iTextSharp.text.html;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
+using System.Text.RegularExpressions;
+
+/// <summary>
+/// Summary description for MyPdf
+/// </summary>
+public class CustomPdf
+{
+    public Document _doc;
+    public DataTable _Data = new DataTable();
+    private ArrayList _arrHeaderColumns = new ArrayList();
+    private ArrayList _arrColumns = new ArrayList();
+    private ArrayList _arrColWidth = new ArrayList();
+
+    public CustomPdf()
+    {
+        AppConstants.CheckRequest();
+	}
+    public void AddColumn(string header, string columnName, double widthPercentage)
+    {
+        _arrHeaderColumns.Add(header);
+        _arrColumns.Add(columnName);
+        _arrColWidth.Add(widthPercentage);
+    }
+    public void ClearColumns()
+    {
+        _arrColumns.Clear();
+        _arrColWidth.Clear();
+        _arrHeaderColumns.Clear();
+    }
+    public void SetText(Document doc, string text)
+    {
+        SetText(doc, text, 0);
+    }   
+    public void SetText(Document doc, string text, int align)
+    {
+        SetText(doc, text, align,0f);
+    }
+    public void SetText(Document doc, string text, float SpacingAfter)
+    {
+        SetText(doc, text, 0, SpacingAfter);
+    }
+    public void SetText(Document doc, string text, int align, float SpacingAfter)
+    {
+        //Font font = FontFactory.GetFont("Tahoma", 28f, 1);
+        Phrase ph = new Phrase(text);
+        Paragraph p = new Paragraph(ph);
+        p.Alignment = align;
+        p.SpacingAfter = SpacingAfter;
+        doc.Add(p);
+    }
+    public void SetText(Document doc, string text, int align, float SpacingAfter, Font font)
+    {
+        Phrase ph = new Phrase(text, font);
+        Paragraph p = new Paragraph(ph);
+        p.Alignment = align;
+        p.SpacingAfter = SpacingAfter;
+        doc.Add(p);
+    }
+    public void SetAddress(Document doc)
+    {
+        string address = GlobalUtilities.GetAppSetting("CompanyAddress");
+        Phrase ph = new Phrase(address);
+        Paragraph p = new Paragraph(ph);
+        p.Alignment = 1;
+        p.SpacingAfter = 10f;
+        doc.Add(p);
+    }
+    public void SetTermsAndConditions(Document doc, string settingName)
+    {
+        string termsandconditions = GlobalUtilities.GetAppSetting(settingName);
+        Phrase ph = new Phrase("TERMS & CONDITIONS");
+        Paragraph p = new Paragraph(ph);
+        p.Alignment = 1;
+        p.SpacingAfter = 10f;
+        doc.Add(p);
+
+        RomanList romanlist = new RomanList(true, 20);
+        romanlist.IndentationLeft = 10f;
+        string[] lines = Regex.Split(termsandconditions, "\r\n");
+        foreach (string line in lines)
+        {
+            romanlist.Add(line);
+        }
+        doc.Add(romanlist);
+
+    }
+    public void SetClientAddress(Document doc, DataTable dttbl)
+    {
+        BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+        Color c = new Color(18, 80, 150);
+        Font times = new Font(bfTimes, 12, Font.BOLD, c);
+        Phrase ph = new Phrase(Convert.ToString(dttbl.Rows[0]["client_clientname"]), times);
+        Paragraph p = new Paragraph(ph);
+        doc.Add(p);
+
+        ph = new Phrase(Convert.ToString(dttbl.Rows[0]["client_address"]));
+        p = new Paragraph(ph);
+        p.SpacingAfter = 10f;
+        doc.Add(p);
+    }
+
+    public void AddLine(Document doc)
+    {
+        System.Drawing.Image img = System.Drawing.Image.FromFile(HttpContext.Current.Server.MapPath("~/images/dot.png"));
+        iTextSharp.text.Image imgLine = iTextSharp.text.Image.GetInstance(img, System.Drawing.Imaging.ImageFormat.Png);
+        imgLine.Alignment = iTextSharp.text.Image.ALIGN_CENTER;
+        imgLine.ScaleAbsolute(600f, 0.5f);
+        doc.Add(imgLine);
+    }
+    public void BindGrid()
+    {
+        BindGrid(-1);
+    }
+
+    public void BindTable(ArrayList arrcolumn, ArrayList arrval)
+    {
+        if (arrcolumn.Count == arrval.Count)
+        {
+            for (int i = 0; i < arrcolumn.Count; i++)
+            {
+
+                Document doc = _doc;
+                PdfPTable table = new PdfPTable(2);
+                table.HorizontalAlignment = 0;
+                float totalWidth = 270;
+                table.TotalWidth = totalWidth;
+                table.LockedWidth = true;
+                float[] fwidths = new float[3];
+
+                fwidths.SetValue(70, 0);
+                fwidths.SetValue(270, 1);
+
+                PdfPCell c1 = new PdfPCell();
+                c1.VerticalAlignment = 1;
+                string val = Convert.ToString(arrcolumn[i]);
+
+                Phrase ph1 = new Phrase(val);
+                c1.Column.SetText(ph1);
+                table.AddCell(c1);
+                c1 = new PdfPCell();                
+                val = Convert.ToString(arrval[i]);
+                ph1 = new Phrase(val);
+                c1.Column.SetText(ph1);
+                c1.VerticalAlignment = 1;
+                table.AddCell(c1);
+
+                doc.Add(table);
+            }
+        }
+
+    }
+    public void BindGrid(double dblTotal)
+    {
+        Document doc = _doc;
+        PdfPTable table = new PdfPTable(_arrHeaderColumns.Count);
+        float totalWidth = 520;
+        table.TotalWidth = totalWidth;
+        
+        table.LockedWidth = true;
+        float[] fwidths = new float[_arrColWidth.Count];
+        for (int i = 0; i < _arrColWidth.Count; i++)
+        {
+            float w = (float)(Convert.ToDecimal(_arrColWidth[i])) / 100 * totalWidth;
+            fwidths.SetValue((float)w, i);
+        }
+        table.SetWidths(fwidths);
+        table.HorizontalAlignment = 1;
+
+        for (int i = 0; i < _arrHeaderColumns.Count; i++)
+        {
+            PdfPCell c1 = new PdfPCell();
+            Phrase ph1 = new Phrase(_arrHeaderColumns[i].ToString());
+            c1.Column.SetText(ph1);
+            table.AddCell(c1);
+        }
+
+        for (int i = 0; i < _Data.Rows.Count; i++)
+        {
+            for (int j = 0; j < _arrHeaderColumns.Count; j++)
+            {
+                PdfPCell c1 = new PdfPCell();
+
+                string val = Convert.ToString(_Data.Rows[i][_arrColumns[j].ToString()]);
+                string colName = _arrHeaderColumns[j].ToString().ToLower();
+                if (colName.ToUpper() != "AMOUNT IN WORD (RUPEES)")
+                {
+                    if (colName.Contains("amount") || colName.Contains("price") || colName.Contains("rate"))
+                    {
+                        val = GlobalUtilities.FormatAmount(val);
+                        c1.HorizontalAlignment = 2;
+                    }
+                }
+                Phrase ph1 = new Phrase(val);
+                c1.Column.SetText(ph1);
+                table.AddCell(c1);
+
+            }
+        }
+        //display total
+        if (dblTotal >= 0)
+        {
+            PdfPCell c1 = new PdfPCell();
+            Phrase ph1 = new Phrase("Total : ");
+            c1.Column.SetText(ph1);
+            c1.Colspan = _arrColumns.Count-1;
+            c1.HorizontalAlignment = 2;
+            table.AddCell(c1);
+
+            c1 = new PdfPCell();
+            ph1 = new Phrase(GlobalUtilities.FormatAmount(dblTotal));
+            c1.HorizontalAlignment = 2;
+            c1.Column.SetText(ph1);
+            table.AddCell(c1);
+        }
+
+        doc.Add(table);
+    }
+}

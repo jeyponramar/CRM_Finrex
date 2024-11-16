@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Interestrate</title>
+  <module>interestrate</module>
+  <table>tbl_interestrate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>interestrate_interestrateid desc</defaultsort>
+  <columns>interestratetype_type,interestrate_date,interestrate_particular,interestrate_rate,interestrate_isactive,interestrateuploadhistory_uploaddate</columns>
+  <columnlabels>Rate Type,Date,Particular,Rate,Is Active,Import Interest Rate History</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>interestratetype_type</name>
+      <headertext>Rate Type</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>interestrate_particular</name>
+      <headertext>Particular</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>interestrate_rate</name>
+      <headertext>Rate</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>interestrate_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>interestrate_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>interestrate_interestrateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_interestrate
+
+ LEFT JOIN tbl_interestratetype ON interestratetype_interestratetypeid=interestrate_interestratetypeid
+ LEFT JOIN tbl_interestrateuploadhistory ON interestrateuploadhistory_interestrateuploadhistoryid=interestrate_interestrateuploadhistoryid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Rate Type,Particular</searchbylabels>
+  <searchbycolumns>interestratetype_type,interestrate_particular</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

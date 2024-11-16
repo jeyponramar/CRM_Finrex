@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Module</title>
+  <module>module</module>
+  <table>tbl_module</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>module_moduleid desc</defaultsort>
+  <columns>module_modulename</columns>
+  <columnlabels>Module Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>module_modulename</name>
+      <headertext>Module Name</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>module_moduleid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_module
+
+ $Search$
+</query>
+  <searchbylabels>Module Name</searchbylabels>
+  <searchbycolumns>module_modulename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

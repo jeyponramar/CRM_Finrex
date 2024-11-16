@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using WebComponent;
+
+public partial class whatsappreport : System.Web.UI.Page
+{
+    GlobalData gblData = new GlobalData();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!(Common.RoleId == 1 || Common.RoleId == 8))//Research
+        {
+            global.PageTitle = "Permission Denied";
+            global.Message = "You do not have enough access rights to perform this operation, please contact Administrator to assign rights to you!";
+            Response.Redirect("~/message/message.aspx");
+        }
+		//ChartEvent_START
+		
+		//ChartEvent_END
+        if (!IsPostBack)
+        {
+			//FillDropDown_START
+			//FillDropDown_END
+            //BindDataOnLoad_START
+			
+			//BindDataOnLoad_END
+            //BindSubReportControl_START
+			Common.BindSubReportControls(plSearch);
+			//BindSubReportControl_END
+            BindData();    
+        }
+
+        ClientScript.RegisterClientScriptBlock(typeof(Page), "title", "<script>parent.setTitle('" + lblPageTitle.Text + "')</script>");
+    }
+    protected void btnReport_Click(object sender, EventArgs e)
+    {
+        BindData();
+    }
+    private void BindData()
+    {
+        grid.SearchHolderId = plSearch.ID;
+        grid.Report();
+    }
+    private void BindDataOnLoad()
+    {
+        BindData();
+    }
+    //BindChart_START
+	
+	//BindChart_END
+    
+}

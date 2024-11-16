@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>menurights</title>
+		<module>menurights</module>
+		<table>tbl_menurights</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>menurights_menurightsid desc</defaultsort>
+		<columns>role_rolename,menurights_menuid,menurights_submenuid</columns>
+		<columnlabels>Role,Menu Id,Sub Menu Id</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>role_rolename</name><headertext>Role</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>menurights_menurightsid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_menurights JOIN tbl_role ON role_roleid=menurights_roleid $Search$</query>
+		<searchbylabels>Role</searchbylabels>
+		<searchbycolumns>role_rolename</searchbycolumns>
+	</setting>

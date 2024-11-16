@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Liveratehistory</title>
+  <module>liveratehistory</module>
+  <table>tbl_liveratehistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>liveratehistory_liveratehistoryid desc</defaultsort>
+  <columns>liveratehistory_liverateid,liveratehistory_date,liveratehistory_currentrate,currency_currency</columns>
+  <columnlabels>liverateid,date,current rate,currency</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>liveratehistory_liveratehistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_liveratehistory
+
+ LEFT JOIN tbl_currency ON currency_currencyid=liveratehistory_currencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

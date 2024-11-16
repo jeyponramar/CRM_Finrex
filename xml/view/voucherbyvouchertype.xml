@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>ledgervoucher</title>
+  <module>ledgervoucher</module>
+  <table>tbl_ledgervoucher</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>ledgervoucher_ledgervoucherid desc</defaultsort>
+  <columns>ledgervoucher_voucherno,ledgervoucher_referenceno,ledgervoucher_voucherdate,ledgervoucher_totalamount,ledgervoucher_narration,ledger_ledgername,accountvouchertype_vouchertype,accountadjustmentmethod_adjustmentmethod,paymentmode_paymentmode,ledgervoucher_chequeno,ledgervoucher_amountpaid,ledgervoucher_balanceamount,ledgervoucher_dramount,ledgervoucher_cramount,ledgervoucher_module,ledgervoucher_moduleid</columns>
+  <columnlabels>Voucher No,Reference No,Voucher Date,Total Amount,Narration,Ledger,Voucher Type,Adjustment Method,Payment Mode,Cheque No,Amount Paid,Balance Amount,Dr Amount,Cr Amount,Module,Module Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>ledgervoucher_voucherno</name>
+      <headertext>Voucher No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_referenceno</name>
+      <headertext>Reference No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_voucherdate</name>
+      <headertext>Voucher Date</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>ledger_ledgername</name>
+      <headertext>Ledger</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_dramount</name>
+      <headertext>Dr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>ledgervoucher_cramount</name>
+      <headertext>Cr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>ledgervoucher_ledgervoucherid</hiddencolumns>
+  <query>
+    select $COLUMNS$ from tbl_ledgervoucher
+    LEFT JOIN tbl_ledger ON ledger_ledgerid=ledgervoucher_ledgerid
+    LEFT JOIN tbl_accountvouchertype ON accountvouchertype_accountvouchertypeid=ledgervoucher_accountvouchertypeid
+    LEFT JOIN tbl_accountadjustmentmethod ON accountadjustmentmethod_accountadjustmentmethodid=ledgervoucher_accountadjustmentmethodid
+    LEFT JOIN tbl_paymentmode ON paymentmode_paymentmodeid=ledgervoucher_paymentmodeid
+    where ledgervoucher_accountvouchertypeid = $QUERYSTRING_tid$
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Voucher No,Reference No,Ledger</searchbylabels>
+  <searchbycolumns>ledgervoucher_voucherno,ledgervoucher_referenceno,ledger_ledgername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

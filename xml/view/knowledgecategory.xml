@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>knowledgecategory</title>
+  <module>knowledgecategory</module>
+  <table>tbl_knowledgecategory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>knowledgecategory_knowledgecategoryid desc</defaultsort>
+  <columns>knowledgecategory_category</columns>
+  <columnlabels>Category</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>knowledgecategory_category</name>
+      <headertext>Category</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>knowledgecategory_knowledgecategoryid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_knowledgecategory $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Category</searchbylabels>
+  <searchbycolumns>knowledgecategory_category</searchbycolumns>
+</setting>

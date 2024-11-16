@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Serviceplan</title>
+  <module>serviceplan</module>
+  <table>tbl_serviceplan</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>serviceplan_serviceplanid desc</defaultsort>
+  <columns>serviceplan_planname</columns>
+  <columnlabels>Plan Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>serviceplan_planname</name>
+      <headertext>Plan Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>serviceplan_serviceplanid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_serviceplan
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Plan Name</searchbylabels>
+  <searchbycolumns>serviceplan_planname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

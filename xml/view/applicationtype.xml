@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Applicationtype</title>
+		<module>applicationtype</module>
+		<table>tbl_applicationtype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>applicationtype_applicationtypeid desc</defaultsort>
+		<columns>applicationtype_applicationtype</columns>
+		<columnlabels>Application Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>applicationtype_applicationtype</name><headertext>Application Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>applicationtype_applicationtypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_applicationtype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Application Type</searchbylabels>
+		<searchbycolumns>applicationtype_applicationtype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

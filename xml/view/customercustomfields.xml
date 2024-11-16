@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Customercustomfields</title>
+		<module>customercustomfields</module>
+		<table>tbl_customercustomfields</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>customercustomfields_customercustomfieldsid desc</defaultsort>
+		<columns>client_customercode,customercustomfields_columnsid</columns>
+		<columnlabels>Customer,Columns Id</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn>
+		</gridcolumn>
+		<hiddencolumns>customercustomfields_customercustomfieldsid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_customercustomfields
+
+ LEFT JOIN tbl_client ON client_clientid=customercustomfields_clientid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditquestionnairemaster</title>
+  <module>bankauditquestionnairemaster</module>
+  <table>tbl_bankauditquestionnairemaster</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditquestionnairemaster_bankauditquestionnairemasterid desc</defaultsort>
+  <columns>bankauditquestiontype_questiontype,bankauditquestioncategory_category,bankauditquestionnairemaster_question,clientcontrol_control,bankauditquestionnairemaster_isrequired</columns>
+  <columnlabels>Question Type,Question Category,Question,Control,Is Required</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditquestiontype_questiontype</name>
+      <headertext>Question Type</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditquestioncategory_category</name>
+      <headertext>Question Category</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditquestionnairemaster_question</name>
+      <headertext>Question</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientcontrol_control</name>
+      <headertext>Control</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditquestionnairemaster_bankauditquestionnairemasterid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditquestionnairemaster
+
+ LEFT JOIN tbl_bankauditquestiontype ON bankauditquestiontype_bankauditquestiontypeid=bankauditquestionnairemaster_bankauditquestiontypeid
+ LEFT JOIN tbl_bankauditquestioncategory ON bankauditquestioncategory_bankauditquestioncategoryid=bankauditquestionnairemaster_bankauditquestioncategoryid
+ LEFT JOIN tbl_clientcontrol ON clientcontrol_clientcontrolid=bankauditquestionnairemaster_clientcontrolid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Question Type,Question Category,Question,Control</searchbylabels>
+  <searchbycolumns>bankauditquestiontype_questiontype,bankauditquestioncategory_category,bankauditquestionnairemaster_question,clientcontrol_control</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

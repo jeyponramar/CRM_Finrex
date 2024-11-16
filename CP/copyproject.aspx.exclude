@@ -1,0 +1,78 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/InnerMaster.master" AutoEventWireup="true" CodeFile="copyproject.aspx.cs" Inherits="CP_copyproject" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script>
+    $(document).ready(function() {
+        $(".sourceproject").blur(function() {
+            $(".sourcedb").val($(this).val());
+        });
+        $(".destproject").blur(function() {
+            $(".destdb").val($(this).val());
+        });
+    });
+</script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table width="100%">
+     <tr>
+        <td class="title">
+            <asp:Label ID="lblPageTitle" runat="server"/>
+        </td>
+        <td width="30"><img src="../images/refresh.png" class="refresh" title="Refresh this page"/></td>
+     </tr>
+    <tr>
+        <td colspan="2" class="form">
+            <table width="100%">
+                <tr>
+                    <td align="center" colspan="4"> <asp:Label ID="lblMessage" runat="server"  CssClass="error"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td class="label">Source Project</td>
+                    <td><asp:TextBox ID="txtSourceProject" Text="Refux-crm" runat="server" CssClass="textbox sourceproject"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Dest Project</td>
+                    <td><asp:TextBox ID="txtDestProject" Text="test1" runat="server" CssClass="textbox destproject"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Source Database</td>
+                    <td><asp:TextBox ID="txtSourceDatabase" Text="crm" runat="server" CssClass="textbox sourcedb"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Dest Database</td>
+                    <td><asp:TextBox ID="txtDestDatabase" Text="test1" runat="server" CssClass="textbox destdb"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Source Project Path</td>
+                    <td><asp:TextBox ID="txtSourceProjectPath" Text="D:\Ram\Projects\Websites\refux-crm" runat="server" Width="90%"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Dest Project Path</td>
+                    <td><asp:TextBox ID="txtDestProjectPath" Text="D:\Ram\Projects\Websites\test1" runat="server" Width="90%"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Source Database Path</td>
+                    <td><asp:TextBox ID="txtSourceDbPath" Text="D:\Ram\Projects\Database" runat="server" Width="90%"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Dest Database Path</td>
+                    <td><asp:TextBox ID="txtDestDbPath" Text="D:\Ram\Projects\Database" runat="server" Width="90%"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Source Connection String</td>
+                    <td><asp:TextBox ID="txtSourceConnectionString" runat="server" Width="90%" CssClass="sourcecon" Text="Data Source=RAM-LAPTOP\EZEENEXTGEN;Initial Catalog=CRM;Integrated Security=true;"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td class="label">Dest Connection String</td>
+                    <td><asp:TextBox ID="txtDestConnectionString" runat="server" Width="90%" CssClass="destcon" Text="Data Source=RAM-LAPTOP\EZEENEXTGEN;Initial Catalog=Test1;Integrated Security=true;"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><asp:Button ID="btnSubmit" runat="server" Text="Copy Database" OnClick="btnCreateDatabase_Click" CssClass="button"/></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</asp:Content>
+

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Product</title>
+  <module>product</module>
+  <table>tbl_product</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>product_productid DESC</defaultsort>
+  <columns>product_productname,productcategory_categoryname,hsn_hsn,product_price,product_openingstock,unit_unit,product_minimumstock,product_ischarges,product_productimage,product_maximumstock</columns>
+  <columnlabels>Product Name,Product Category,HSN,Price,Opening Stock,Unit,Minimum Stock,IsCharges,Product Image,Maximum Stock</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>product_productimage</name>
+      <headertext>Product Image</headertext>
+      <row>1</row>
+      <width>34%</width>
+      <format imgpath="upload/product">Image</format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product Name</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>unit_unit</name>
+      <headertext>Unit</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_price</name>
+      <headertext>Price</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>product_openingstock</name>
+      <headertext>Opening Stock</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>productcategory_categoryname</name>
+      <headertext>Product Category</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_minimumstock</name>
+      <headertext>Minimum Stock</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_maximumstock</name>
+      <headertext>Maximum Stock</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>hsn_hsn</name>
+      <headertext>HSN</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>product_productid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_product
+
+ LEFT JOIN tbl_productcategory ON productcategory_productcategoryid=product_productcategoryid
+ LEFT JOIN tbl_hsn ON hsn_hsnid=product_hsnid
+ LEFT JOIN tbl_unit ON unit_unitid=product_unitid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Product Name,HSN,Unit</searchbylabels>
+  <searchbycolumns>product_productname,hsn_hsn,unit_unit</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

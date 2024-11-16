@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Sales</title>
+  <module>Sales</module>
+  <table>tbl_sales</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <identitycolumn>none</identitycolumn>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>sales_salesid desc</defaultsort>
+  <columns>sales_date,sales_totalamount,client_customername,sales_contactperson,sales_mobileno,sales_emailid,sales_billingaddress,sales_remarks,sales_converttoinvoice,sales_quotationid,salesstatus_status,sales_amcid,sales_isenquirystatusupdate</columns>
+  <columnlabels>Date,Total Amount,Customer Name,Contact Person,Mobile No,Email Id,Billing Address,Remarks,Convert To Invoice,Quotation Id,Status,AMCID,Is Enquiry Status Update</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>sales_date</name>
+      <headertext>Date</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>sales_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>sales_salescount</name>
+      <headertext>Total Sales</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>sales_salesid</hiddencolumns>
+  <query>SELECT *,''AS sales_salescount FROM tbl_sales
+JOIN tbl_client ON sales_clientid=client_clientid
+JOIN tbl_salesstatus ON sales_salesstatusid=salesstatus_salesstatusid $Search$</query>
+  <where>sales_date BETWEEN '$sales_date_from$' AND '$sales_date_to$' OR</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>3</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

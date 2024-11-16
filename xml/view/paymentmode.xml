@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>paymentmode</title>
+		<module>paymentmode</module>
+		<table>tbl_paymentmode</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>paymentmode_paymentmodeid desc</defaultsort>
+		<columns>paymentmode_paymentmode</columns>
+		<columnlabels>Payment Mode</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>paymentmode_paymentmode</name><headertext>Payment Mode</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>paymentmode_paymentmodeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_paymentmode $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Payment Mode</searchbylabels>
+		<searchbycolumns>paymentmode_paymentmode</searchbycolumns>
+	</setting>

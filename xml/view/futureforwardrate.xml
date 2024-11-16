@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Futureforwardrate</title>
+		<module>futureforwardrate</module>
+		<table>tbl_futureforwardrate</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>futureforwardrate_futureforwardrateid desc</defaultsort>
+		<columns>futureforwardrate_futureforwardratehistoryid,futureforwardrate_monthenddate,futureforwardrate_usdinrbid,futureforwardrate_usdinrask,futureforwardrate_eurinrbid,futureforwardrate_eurinrask,futureforwardrate_gbpinrbid,futureforwardrate_gbpinrask</columns>
+		<columnlabels>futureforwardratehistoryid,monthenddate,usdinrbid,usdinrask,eurinrbid,eurinrask,gbpinrbid,gbpinrask</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn>
+		</gridcolumn>
+		<hiddencolumns>futureforwardrate_futureforwardrateid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_futureforwardrate
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

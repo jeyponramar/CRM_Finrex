@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <complaint>
+      <querystringcolumn>complaintid</querystringcolumn>
+      <query>SELECT * FROM tbl_complaint 
+JOIN tbl_client ON client_clientid = complaint_clientid</query>
+    </complaint>
+  </populateonadd>
+  <populateonadd>
+    <amcservice>
+      <querystringcolumn>amcserviceid</querystringcolumn>
+      <query>SELECT * FROM tbl_amcservice 
+JOIN tbl_client ON client_clientid = amcservice_clientid 
+JOIN tbl_amc ON amc_amcid = amcservice_amcid</query>
+    </amcservice>
+  </populateonadd>
+  <populateonadd>
+    <service>
+      <querystringcolumn>serviceid</querystringcolumn>
+      <query>SELECT * FROM tbl_service 
+JOIN tbl_client ON client_clientid = service_clientid</query>
+    </service>
+  </populateonadd>
+  <populateonadd>
+    <amc>
+      <querystringcolumn>amcid</querystringcolumn>
+      <query>SELECT * FROM tbl_amc 
+JOIN tbl_client ON client_clientid = amc_clientid</query>
+    </amc>
+  </populateonadd>
+  <populateonadd>
+    <invoice>
+      <querystringcolumn>invoiceid</querystringcolumn>
+      <query>SELECT * FROM tbl_invoice 
+JOIN tbl_client ON client_clientid = invoice_clientid</query>
+    </invoice>
+  </populateonadd>
+  <populateonadd>
+		<sales>
+			<querystringcolumn>salesid</querystringcolumn>
+			<query>SELECT * FROM tbl_sales 
+JOIN tbl_client ON client_clientid = sales_clientid</query>
+		</sales>
+</populateonadd>
+</setting>

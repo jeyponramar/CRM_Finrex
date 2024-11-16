@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>campaigntype</title>
+  <module>campaigntype</module>
+  <table>tbl_campaigntype</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>campaigntype_campaigntypeid desc</defaultsort>
+  <columns>campaigntype_campaigntype</columns>
+  <columnlabels>Campaign Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>campaigntype_campaigntype</name>
+      <headertext>Campaign Type</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>campaigntype_campaigntypeid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_campaigntype $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Campaign Type</searchbylabels>
+  <searchbycolumns>campaigntype_campaigntype</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

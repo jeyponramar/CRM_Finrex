@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View State</title>
+  <module>state</module>
+  <table>tbl_state</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>state_stateid desc</defaultsort>
+  <columns>state_state,state_statecode</columns>
+  <columnlabels>State,State Code</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>state_state</name>
+      <headertext>State</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>state_statecode</name>
+      <headertext>State Code</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>state_stateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_state
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>State,State Code</searchbylabels>
+  <searchbycolumns>state_state,state_statecode</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

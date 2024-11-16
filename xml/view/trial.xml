@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Trial</title>
+  <module>trial</module>
+  <table>tbl_trial</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>trial_trialid DESC</defaultsort>
+  <columns>trial_trialcode,client_customername,trial_startdate,trial_enddate,trial_whatsappenddate,trial_attachment,subscriptionstatus_status,trial_username,trial_remarks,enquiry_enquiryno,trial_password,trial_isfirstlogin,employee_employeename,emailsmssentstatus_status</columns>
+  <columnlabels>Trial Code,Customer Name,Start Date,Software End Date,Whatsapp End Date,Attachment,Status,User Name,Remarks,Enquiry No,Password,isfirstlogin,Assign To,Company Profile Sent Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_startdate</name>
+      <headertext>Start Date</headertext>
+      <width>6%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>trial_enddate</name>
+      <headertext>Software End Date</headertext>
+      <width>6%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_whatsappenddate</name>
+      <headertext>Whatsapp End Date</headertext>
+      <width>14%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscriptionstatus_status</name>
+      <headertext>Status</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>trial_trialid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_trial
+
+ LEFT JOIN tbl_client ON client_clientid=trial_clientid
+ LEFT JOIN tbl_subscriptionstatus ON subscriptionstatus_subscriptionstatusid=trial_subscriptionstatusid
+ LEFT JOIN tbl_enquiry ON enquiry_enquiryid=trial_enquiryid
+ LEFT JOIN tbl_employee ON employee_employeeid=trial_employeeid
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=trial_companyprofilesentstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Name,Status,Assign To</searchbylabels>
+  <searchbycolumns>client_customername,subscriptionstatus_status,employee_employeename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>True</applyviewrights>
+</setting>

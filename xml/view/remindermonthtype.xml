@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Remindermonthtype</title>
+		<module>remindermonthtype</module>
+		<table>tbl_remindermonthtype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>remindermonthtype_remindermonthtypeid desc</defaultsort>
+		<columns>remindermonthtype_remindermonthtype</columns>
+		<columnlabels>Reminder Month Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>remindermonthtype_remindermonthtype</name><headertext>Reminder Month Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>remindermonthtype_remindermonthtypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_remindermonthtype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Reminder Month Type</searchbylabels>
+		<searchbycolumns>remindermonthtype_remindermonthtype</searchbycolumns>
+	</setting>

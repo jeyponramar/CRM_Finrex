@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Enquirymodeofpayment</title>
+		<module>enquirymodeofpayment</module>
+		<table>tbl_enquirymodeofpayment</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>enquirymodeofpayment_enquirymodeofpaymentid desc</defaultsort>
+		<columns>enquirymodeofpayment_modeofpayment</columns>
+		<columnlabels>Mode of Payment</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>enquirymodeofpayment_modeofpayment</name><headertext>Mode of Payment</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>enquirymodeofpayment_enquirymodeofpaymentid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_enquirymodeofpayment
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Mode of Payment</searchbylabels>
+		<searchbycolumns>enquirymodeofpayment_modeofpayment</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Mclrhistory</title>
+  <module>mclrhistory</module>
+  <table>tbl_mclrhistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>mclrhistory_mclrhistoryid desc</defaultsort>
+  <columns>mclrbank_bankname,mclrhistory_1month,mclrhistory_3months,mclrhistory_6months,mclrhistory_1year,mclrhistory_effectivedate,mclrhistory_baserate,mclrhistory_mclrid</columns>
+  <columnlabels>Bank,1 Month,3 Months,6 Months,1 Year,Effective Date,Base Rate,MCLR Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>mclrhistory_mclrhistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_mclrhistory
+
+ LEFT JOIN tbl_mclrbank ON mclrbank_mclrbankid=mclrhistory_mclrbankid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

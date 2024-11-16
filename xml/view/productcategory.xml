@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>productcategory</title>
+		<module>productcategory</module>
+		<table>tbl_productcategory</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>productcategory_productcategoryid desc</defaultsort>
+		<columns>productcategory_categoryname</columns>
+		<columnlabels>Category Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>productcategory_categoryname</name><headertext>Category Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>productcategory_productcategoryid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_productcategory $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Category Name</searchbylabels>
+		<searchbycolumns>productcategory_categoryname</searchbycolumns>
+	</setting>

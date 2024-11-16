@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>task</title>
+  <module>task</module>
+  <table>tbl_task</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>task_taskid DESC</defaultsort>
+  <columns>employee_employeename,task_assigneddate,task_remarks,task_closeddate,status_status,client_customername,task_subject,tasktype_tasktype,task_description,task_attachment,task_module,task_mid,task_hold,task_close</columns>
+  <columnlabels>Assigned To,Assigned Date,Remarks,Closed Date,Status,Client,Subject,Task Type,Description,Attachment,Module,mid,Hold,Close</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>tasktype_tasktype</name>
+      <headertext>Task Type</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>task_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>task_assigneddate</name>
+      <headertext>Assigned Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>task_remarks</name>
+      <headertext>Remarks</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>task_closeddate</name>
+      <headertext>Closed Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>status_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>task_taskid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_task LEFT JOIN tbl_employee ON employee_employeeid=task_employeeid LEFT JOIN tbl_status ON status_statusid=task_statusid JOIN tbl_client ON client_clientid=task_clientid JOIN tbl_tasktype ON tasktype_tasktypeid=task_tasktypeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Assigned To,Remarks,Client,Subject,Task Type</searchbylabels>
+  <searchbycolumns>employee_employeename,task_remarks,client_customername,task_subject,tasktype_tasktype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

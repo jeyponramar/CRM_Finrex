@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Pushnotificationdevice</title>
+		<module>pushnotificationdevice</module>
+		<table>tbl_pushnotificationdevice</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>pushnotificationdevice_pushnotificationdeviceid desc</defaultsort>
+		<columns>user_username,pushnotificationdevicetype_devicetype,pushnotificationdevice_onesignalid</columns>
+		<columnlabels>User,Device Type,OneSignal Id</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>user_username</name><headertext>User</headertext><width>33%</width><format></format></column><column><name>pushnotificationdevicetype_devicetype</name><headertext>Device Type</headertext><width>33%</width><format></format></column><column><name>pushnotificationdevice_onesignalid</name><headertext>OneSignal Id</headertext><width>33%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>pushnotificationdevice_pushnotificationdeviceid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_pushnotificationdevice
+
+ LEFT JOIN tbl_user ON user_userid=pushnotificationdevice_userid
+ LEFT JOIN tbl_pushnotificationdevicetype ON pushnotificationdevicetype_pushnotificationdevicetypeid=pushnotificationdevice_pushnotificationdevicetypeid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>User,Device Type,OneSignal Id</searchbylabels>
+		<searchbycolumns>user_username,pushnotificationdevicetype_devicetype,pushnotificationdevice_onesignalid</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

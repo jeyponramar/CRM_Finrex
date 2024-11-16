@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Client</title>
+  <module>Client</module>
+  <table>tbl_client</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>client_clientid DESC</defaultsort>
+  <columns>client_billingname,client_contactperson,client_mobileno,client_landlineno,client_emailid,client_address,client_billingaddress,client_panno,client_cstno,client_vatno,client_tinno,client_servicetaxno,client_website,client_otherinfo,client_companylogo,client_reference,client_skypeid,area_areaname,designation_designation,client_password</columns>
+  <columnlabels>Billing Name,Contact Person,Mobile No,Landline No,Email Id,Address,Billing Address,Pan No,CST NO,VAT NO,TIN NO,Service TAX NO,Website,Other Info,Company Logo,Reference,Skype Id,Area,Designation,Password</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_companylogo</name>
+      <headertext>Company Logo</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format imgpath="upload/client-logo">Image</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_landlineno</name>
+      <headertext>Landline No</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_billingaddress</name>
+      <headertext>Billing Address</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_cstno</name>
+      <headertext>CST NO</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_vatno</name>
+      <headertext>VAT NO</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_otherinfo</name>
+      <headertext>Other Info</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>client_clientid</hiddencolumns>
+  <query>
+    select * from tbl_client
+	left JOIN tbl_area ON client_areaid=area_areaid
+	left JOIN tbl_designation ON client_designationid=designation_designationid 
+  where client_clientid in(select sales_clientid from tbl_sales)
+  $Search$</query>
+  <where>
+  </where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

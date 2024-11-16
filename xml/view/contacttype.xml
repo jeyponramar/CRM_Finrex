@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Contacttype</title>
+		<module>contacttype</module>
+		<table>tbl_contacttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>contacttype_contacttypeid desc</defaultsort>
+		<columns>contacttype_contacttype</columns>
+		<columnlabels>Contact Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>contacttype_contacttype</name><headertext>Contact Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>contacttype_contacttypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_contacttype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Contact Type</searchbylabels>
+		<searchbycolumns>contacttype_contacttype</searchbycolumns>
+	</setting>

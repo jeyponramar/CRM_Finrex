@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Businesstype</title>
+		<module>businesstype</module>
+		<table>tbl_businesstype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>businesstype_businesstypeid desc</defaultsort>
+		<columns>businesstype_businesstype</columns>
+		<columnlabels>Business Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>businesstype_businesstype</name><headertext>Business Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>businesstype_businesstypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_businesstype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Business Type</searchbylabels>
+		<searchbycolumns>businesstype_businesstype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

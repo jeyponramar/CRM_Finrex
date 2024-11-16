@@ -1,0 +1,31 @@
+﻿<script>
+$(document).ready(function() {
+	//add or update
+	setTotal($(".grid"));
+	$(".newrow").find("input").live("keypress", function(event) {
+		if (event.which == 13) {
+			CalculateTaxAmount($(this));
+			addGridRow($(this));
+			setTotal($(this).closest(".grid"));
+			return false;
+		}
+	});
+	$(".newrow").find("input").live("change", function(event) {
+		findAmount($(this));
+	});
+	//delete
+	$(".delete-row").live("click", function(event) {
+		var grid = $(this).closest(".grid");
+		removeGridRow($(this));
+		setTotal(grid);
+	});
+	//edit
+	$(".gridtr").live("click", function(event) {
+		editGridRow($(this));
+	});
+	$("#productname").live("blur", function(event){
+	    CalculateTaxAmount($(this));
+	});
+	
+});
+</script>

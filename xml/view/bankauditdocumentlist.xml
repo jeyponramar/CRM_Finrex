@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditdocumentlist</title>
+  <module>bankauditdocumentlist</module>
+  <table>tbl_bankauditdocumentlist</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditdocumentlist_bankauditdocumentlistid desc</defaultsort>
+  <columns>bankauditdocumentlist_documentname,bankauditdocumentcategory_categoryname</columns>
+  <columnlabels>Document Name,Document Category</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditdocumentlist_documentname</name>
+      <headertext>Document Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditdocumentcategory_categoryname</name>
+      <headertext>Document Category</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditdocumentlist_bankauditdocumentlistid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditdocumentlist
+
+ LEFT JOIN tbl_bankauditdocumentcategory ON bankauditdocumentcategory_bankauditdocumentcategoryid=bankauditdocumentlist_bankauditdocumentcategoryid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Document Name,Document Category</searchbylabels>
+  <searchbycolumns>bankauditdocumentlist_documentname,bankauditdocumentcategory_categoryname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimforwardcancellationdetail</title>
+  <module>fimforwardcancellationdetail</module>
+  <table>tbl_fimforwardcancellationdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimforwardcancellationdetail_fimforwardcancellationdetailid desc</defaultsort>
+  <columns>fimforwardcancellationdetail_bankbookingrefno,fimforwardcancellationdetail_forwardbookingrate,fimforwardcancellationdetail_cancellationamount,fimforwardcancellationdetail_cancellationdate,fimforwardcancellationdetail_premium,fimforwardcancellationdetail_cancellationrate,fimforwardcancellationdetail_spotrateoncancellationdate,fimforwardcancellationdetail_profitandlossoncancellation,fimforwardcancellationdetail_invoiceno,fimforwardcancellationdetail_importorderno,fimforwardcancellationdetail_remark,fimforwardcancellationdetail_clientid,fimforwardcancellationdetail_fimforwardcontractid</columns>
+  <columnlabels>Bank Booking Ref No.,Forward Booking Rate,Cancellation Amount,Cancellation Date,Premium,Cancellation Rate,Spot Rate on Cancellation date,Profit and Loss on cancellation,Invoice No.,Import Order No.,Remark,Client Id,fimforwardcontractid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimforwardcancellationdetail_fimforwardcancellationdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimforwardcancellationdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Currencymaster</title>
+  <module>currencymaster</module>
+  <table>tbl_currencymaster</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>currencymaster_currencymasterid desc</defaultsort>
+  <columns>currencymaster_currency,currencytype_type,currencymaster_liveraterow,country_country</columns>
+  <columnlabels>Currency,Currency Type,Liverate Row,Country</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>currencytype_type</name>
+      <headertext>Currency Type</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>country_country</name>
+      <headertext>Country</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>currencymaster_currencymasterid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_currencymaster
+
+ LEFT JOIN tbl_currencytype ON currencytype_currencytypeid=currencymaster_currencytypeid
+ LEFT JOIN tbl_country ON country_countryid=currencymaster_countryid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency,Currency Type,Country</searchbylabels>
+  <searchbycolumns>currencymaster_currency,currencytype_type,country_country</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

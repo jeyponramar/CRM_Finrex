@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>priority</title>
+  <module>priority</module>
+  <table>tbl_priority</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>priority_priorityid desc</defaultsort>
+  <columns>priority_priority</columns>
+  <columnlabels>Priority</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>priority_priority</name>
+      <headertext>Priority</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>priority_priorityid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_priority $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Priority</searchbylabels>
+  <searchbycolumns>priority_priority</searchbycolumns>
+</setting>

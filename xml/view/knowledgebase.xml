@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>knowledgebase</title>
+  <module>knowledgebase</module>
+  <table>tbl_knowledgebase</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>knowledgebase_knowledgebaseid desc</defaultsort>
+  <columns>knowledgecategory_category,knowledgebase_title,knowledgebase_keyword,knowledgebase_description,knowledgebase_knowlegbasedocument</columns>
+  <columnlabels>Category,Title ,Keyword,Description,Knowleg Base Document</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>knowledgecategory_category</name>
+      <headertext>Category</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>knowledgebase_title</name>
+      <headertext>Title </headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>knowledgebase_keyword</name>
+      <headertext>Keyword</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>knowledgebase_knowledgebaseid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_knowledgebase JOIN tbl_knowledgecategory ON knowledgecategory_knowledgecategoryid=knowledgebase_knowledgecategoryid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Category,Title ,Keyword</searchbylabels>
+  <searchbycolumns>knowledgecategory_category,knowledgebase_title,knowledgebase_keyword</searchbycolumns>
+</setting>

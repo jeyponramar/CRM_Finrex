@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulkemailtemplate</title>
+  <module>bulkemailtemplate</module>
+  <table>tbl_bulkemailtemplate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulkemailtemplate_bulkemailtemplateid desc</defaultsort>
+  <columns>bulkemailtemplate_templatename,bulkemailtemplate_subject</columns>
+  <columnlabels>Template Name,Subject</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bulkemailtemplate_templatename</name>
+      <headertext>Template Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkemailtemplate_subject</name>
+      <headertext>Subject</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulkemailtemplate_bulkemailtemplateid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_bulkemailtemplate $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Template Name,Subject</searchbylabels>
+  <searchbycolumns>bulkemailtemplate_templatename,bulkemailtemplate_subject</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

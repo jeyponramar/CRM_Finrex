@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.Data.SqlClient;
+using System.Text;
+
+public partial class _Default : System.Web.UI.Page 
+{
+    GlobalData gblData = new GlobalData("tbl_ledgervoucher", "ledgervoucherid");
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        int ledgervoucherid = Convert.ToInt32(Request.QueryString["ledgervoucherid"]);
+        PaymentDAO detail = new PaymentDAO();
+        DataRow dr = detail.chequeprintcontractordetail(ledgervoucherid);
+
+
+        if (dr != null)
+        {
+            lblCompanyName.Text = Convert.ToString(dr["ledger_ledgername"]);
+            lblamount.Text = Convert.ToString(dr["ledgervoucher_amountpaid"]) + "&nbsp;/-";
+            lblamountinword.Text = GlobalUtilities.AmountInWords(dr["ledgervoucher_amountpaid"]);
+        }
+
+    }
+}

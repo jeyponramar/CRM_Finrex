@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Buysellscripttype</title>
+		<module>buysellscripttype</module>
+		<table>tbl_buysellscripttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>buysellscripttype_buysellscripttypeid desc</defaultsort>
+		<columns>buysellscripttype_scriptname</columns>
+		<columnlabels>Script Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>buysellscripttype_scriptname</name><headertext>Script Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>buysellscripttype_buysellscripttypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_buysellscripttype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Script Name</searchbylabels>
+		<searchbycolumns>buysellscripttype_scriptname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

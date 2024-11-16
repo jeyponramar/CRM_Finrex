@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>followupaction</title>
+  <module>followupaction</module>
+  <table>tbl_followupaction</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>followupaction_followupactionid desc</defaultsort>
+  <columns>followupaction_action</columns>
+  <columnlabels>action</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>followupaction_action</name>
+      <headertext>Action</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followupaction_followupactionid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_followupaction $Search$</query>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+</setting>

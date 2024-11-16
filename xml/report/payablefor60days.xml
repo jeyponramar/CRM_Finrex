@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>Purchase Order</title>  
+		<module>PurchaseOrder</module>
+		<table>tbl_purchaseorder</table>
+		<isreport>true</isreport>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>purchaseorder_purchaseorderid desc</defaultsort>
+		<columns>purchaseorder_orderdate,vendor_vendorname,client_customername,purchaseorder_remarks,purchaseorder_totalquantity,purchaseorder_receivedquantity,purchaseorder_balancequantity,purchaseorder_totalamount,purchaseorder_amountpaid,purchaseorder_balanceamount,purchaseorder_referenceno,purchasestatus_status</columns>
+		<columnlabels>Order Date,Vendor Name,Customer Name,Remarks,Total Quantity,Received Quantity,Balance Quantity,Total Amount,Amount Paid,Balance Amount,Reference No,Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn>
+			<column><name>purchaseorder_orderdate</name><headertext>Order Date</headertext><row>1</row><width>7%</width><format>Date</format></column>
+			<column><name>vendor_vendorname</name><headertext>Vendor Name</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>client_customername</name><headertext>Customer Name</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchaseorder_remarks</name><headertext>Remarks</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchaseorder_totalquantity</name><headertext>Total Quantity</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchaseorder_receivedquantity</name><headertext>Received Quantity</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchaseorder_balancequantity</name><headertext>Balance Quantity</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchaseorder_totalamount</name><headertext>Total Amount</headertext><row>1</row><width>7%</width><format>Amount</format></column>
+			<column><name>purchaseorder_amountpaid</name><headertext>Amount Paid</headertext><row>1</row><width>7%</width><format>Amount</format></column>
+			<column><name>purchaseorder_balanceamount</name><headertext>Balance Amount</headertext><row>1</row><width>7%</width><format>Amount</format></column>
+			<column><name>purchaseorder_referenceno</name><headertext>Reference No</headertext><row>1</row><width>7%</width><format></format></column>
+			<column><name>purchasestatus_status</name><headertext>Status</headertext><row>1</row><width>7%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>purchaseorder_purchaseorderid</hiddencolumns>
+		<query>SELECT * FROM tbl_purchaseorder
+JOIN tbl_vendor ON purchaseorder_vendorid=vendor_vendorid
+JOIN tbl_client ON purchaseorder_clientid=client_clientid
+JOIN tbl_purchasestatus ON purchaseorder_purchasestatusid=purchasestatus_purchasestatusid $Search$</query>
+		<where>(DATEDIFF(dd,purchaseorder_orderdate,getdate())&gt;30 AND DATEDIFF(dd,purchaseorder_orderdate,getdate())&lt;=60) AND purchaseorder_balanceamount&gt;0</where>
+		<isbindonload>True</isbindonload>
+		<isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+		<charttype>0</charttype>
+		<chartheadercolumns></chartheadercolumns>
+		<chartcolumns></chartcolumns>
+		<chartcolors></chartcolors>
+		<chartattributes></chartattributes>
+	</setting>

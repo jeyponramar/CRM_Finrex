@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Clientuser</title>
+  <module>clientuser</module>
+  <table>tbl_clientuser</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>clientuser_clientuserid desc</defaultsort>
+  <columns>subscription_subscriptioncode,trial_trialcode,client_customername,clientuser_name,contacts_contactperson,clientuser_username,clientuser_password,clientuser_isfirstlogin,clientuser_isloggedin,clientuser_sessionid,clientuser_lastbroadcastmessageid,clientuser_isportalfirstlogin,clientuser_iswebuser,clientuser_isexeuser,clientuser_exesessionid,clientuser_lastexeheartbeat,clientuser_ismobileuser,clientuser_mobilesessionid,clientuser_isfinmessenger,clientuser_currencymargin,clientuser_isactive</columns>
+  <columnlabels>Subscription Code,Trial Code,Customer Name,Name,Contact Person,User Name,Password,isfirstlogin,Is Logged In,Session Id,Last Broadcast Message Id,Is Portal First Login,Finstation,Finwatch,Exe Session Id,Last Exe Heart Beat,FinIcon,Mobile Session Id,FinPulse,Currency Margin,Is Active</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_username</name>
+      <headertext>User Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_iswebuser</name>
+      <headertext>Finstation</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_isexeuser</name>
+      <headertext>Finwatch</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_ismobileuser</name>
+      <headertext>FinIcon</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_isfinmessenger</name>
+      <headertext>FinPulse</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_subscriptioncode</name>
+      <headertext>Subscription Code</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_trialcode</name>
+      <headertext>Trial Code</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>clientuser_clientuserid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_clientuser
+
+ LEFT JOIN tbl_subscription ON subscription_subscriptionid=clientuser_subscriptionid
+ LEFT JOIN tbl_trial ON trial_trialid=clientuser_trialid
+ LEFT JOIN tbl_client ON client_clientid=clientuser_clientid
+ LEFT JOIN tbl_contacts ON contacts_contactsid=clientuser_contactsid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Subscription Code,Trial Code,Customer Name,Name,Contact Person,User Name</searchbylabels>
+  <searchbycolumns>subscription_subscriptioncode,trial_trialcode,client_customername,clientuser_name,contacts_contactperson,clientuser_username</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

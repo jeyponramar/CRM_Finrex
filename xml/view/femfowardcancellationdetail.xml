@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Femfowardcancellationdetail</title>
+  <module>femfowardcancellationdetail</module>
+  <table>tbl_femfowardcancellationdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>femfowardcancellationdetail_femfowardcancellationdetailid desc</defaultsort>
+  <columns>femfowardcancellationdetail_bankbookingrefno,femfowardcancellationdetail_forwardcontractid,femfowardcancellationdetail_clientid,femfowardcancellationdetail_forwardbookingrate,femfowardcancellationdetail_cancellationamount,femfowardcancellationdetail_cancellationdate,femfowardcancellationdetail_spotrateoncancellationdate,femfowardcancellationdetail_premium,femfowardcancellationdetail_cancellationrate,femfowardcancellationdetail_profitandlossoncancellation,femfowardcancellationdetail_invoiceno,femfowardcancellationdetail_exportorderno,femfowardcancellationdetail_remark</columns>
+  <columnlabels>Bank Booking Ref No.,forwardcontractid,Client Id,Forward Booking Rate,Cancellation Amount,Cancellation Date,Spot Rate on Cancellation date,Premium,Cancellation Rate,Profit and Loss on cancellation,Invoice No,Export Order No,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>femfowardcancellationdetail_bankbookingrefno</name>
+      <headertext>Bank Booking Ref No.</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_forwardbookingrate</name>
+      <headertext>Forward Booking Rate</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_cancellationamount</name>
+      <headertext>Cancellation Amount</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_cancellationdate</name>
+      <headertext>Cancellation Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_spotrateoncancellationdate</name>
+      <headertext>Spot Rate on Cancellation date</headertext>
+      <width>20%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_premium</name>
+      <headertext>Premium</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_cancellationrate</name>
+      <headertext>Cancellation Rate</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_profitandlossoncancellation</name>
+      <headertext>Profit and Loss on cancellation</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femfowardcancellationdetail_remark</name>
+      <headertext>Remark</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>femfowardcancellationdetail_femfowardcancellationdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_femfowardcancellationdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

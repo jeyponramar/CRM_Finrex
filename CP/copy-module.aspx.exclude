@@ -1,0 +1,34 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/InnerMaster.master" AutoEventWireup="true" CodeFile="copy-module.aspx.cs" Inherits="CP_copy_module" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table width="100%">
+  <tr><td class="title"><asp:Label id="lblTitle" runat="server" Text="Copy Module"></asp:Label></td></tr>
+  <tr><td><asp:Label ID="lblMessage" runat="server" CssClass="error"></asp:Label></td></tr>
+  <tr>
+  <td>
+    <table>
+        <tr>
+            <td>Copy From Project <span class="error">*</span></td>
+            <td><asp:DropDownList ID="ddlproject" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlproject_Change"></asp:DropDownList></td>
+            <td>Copy Module <span class="error">*</span></td>
+            <td><asp:DropDownList ID="ddlmodule" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlmodule_Change"></asp:DropDownList>
+            <asp:RequiredFieldValidator ID="rfv1" runat="server" ErrorMessage="Required Copy Module" Display="Dynamic" ControlToValidate="ddlmodule" ValidationGroup="vg" InitialValue="0"></asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>Module name <span class="error">*</span></td>
+            <td><asp:TextBox ID="txtmodulename" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Required Module Name" Display="Dynamic" ControlToValidate="txtmodulename" ValidationGroup="vg"></asp:RequiredFieldValidator></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="button" ValidationGroup="vg"/></td>
+        </tr>
+    </table>
+  </td>
+</tr>
+</table>          
+</asp:Content>
+

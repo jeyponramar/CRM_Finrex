@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimorderinvoice</title>
+  <module>fimorderinvoice</module>
+  <table>tbl_fimorderinvoice</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimorderinvoice_fimorderinvoiceid desc</defaultsort>
+  <columns>fimorderinvoice_invoiceamount,fimorderinvoice_advancepaidadjustedagainstinv,fimorderinvoice_invoiceamountpaid,fimorderinvoice_invoiceamountbalance,fimorderinvoice_conversionrate,fimorderinvoice_costing,fimorderinvoice_profitlossfromcosting,fimorderinvoice_spotrateonpaymentdate,fimorderinvoice_profitlossfromspotrateonpaymentdate,fimorderinvoice_invoiceno,fimorderinvoice_invoiceduedate,fimorderinvoice_paymentmadedate,fimorderinvoice_bankbookingrefno,fimorderinvoice_remark,fimorderinvoice_paymentterm,fimorderinvoice_documenttype,fimorderinvoice_expectedduedate,fimorderinvoice_tradecredit,fimorderinvoice_clientid,fimorderinvoice_billofentryno,fimorderinvoice_fimimportorderid</columns>
+  <columnlabels>Invoice Amount,Advance Paid Adjusted Against Inv.,Invoice Amount Paid,Invoice  Amount Balance,Conversion  Rate,Costing,Profit/ Loss from Costing,Spot Rate on Payment Date,Profit/ Loss from Spot rate on Payment date,Invoice No.,Invoice Due Date,Payment made Date,Bank Booking Ref No.,Remark,Payment Term,Document Type,Expected Due Date,Trade Credit,Client Id,Bill of Entry No.,Fim Import Order Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimorderinvoice_fimorderinvoiceid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimorderinvoice
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

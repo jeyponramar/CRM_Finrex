@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditannualcurrencyturnover</title>
+  <module>bankauditannualcurrencyturnover</module>
+  <table>tbl_bankauditannualcurrencyturnover</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditannualcurrencyturnover_bankauditannualcurrencyturnoverid desc</defaultsort>
+  <columns>bankauditannualcurrencyturnover_bankauditid,bankauditcurrency_currency,bankauditannualcurrencyturnover_exportamount,bankauditannualcurrencyturnover_importamount,bankauditannualcurrencyturnover_fcyloanamount,bankauditannualcurrencyturnover_custom1,bankauditannualcurrencyturnover_custom2,bankauditannualcurrencyturnover_custom3,bankauditannualcurrencyturnover_custom4,bankauditannualcurrencyturnover_custom5,bankauditannualcurrencyturnover_clientid,bankauditannualcurrencyturnover_clientuserid,bankauditannualcurrencyturnover_customlabel1,bankauditannualcurrencyturnover_customlabel2,bankauditannualcurrencyturnover_customlabel3,bankauditannualcurrencyturnover_customlabel4,bankauditannualcurrencyturnover_customlabel5,bankauditannualcurrencyturnover_download</columns>
+  <columnlabels>Bank Audit Id,Currency,Export Amount,Import Amount,FCY Loan Amount,Custom1,Custom2,Custom3,Custom4,Custom5,Client Id,Client User Id,CustomLabel1,CustomLabel2,CustomLabel3,CustomLabel4,CustomLabel5,Download</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditcurrency_currency</name>
+      <headertext>Currency</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditannualcurrencyturnover_download</name>
+      <headertext>Download</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditannualcurrencyturnover_bankauditannualcurrencyturnoverid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditannualcurrencyturnover
+
+ LEFT JOIN tbl_bankauditcurrency ON bankauditcurrency_bankauditcurrencyid=bankauditannualcurrencyturnover_bankauditcurrencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

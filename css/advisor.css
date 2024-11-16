@@ -1,0 +1,37 @@
+﻿.main-menu-bg
+{
+	background-color:#1668a1;
+	border-bottom:2px solid #0663a3;
+}
+.menu-sep
+{
+	background-color:#1668a1;
+}
+.menu:hover,.menu-hover
+{
+	color:#ffffff;
+    background-image:-webkit-linear-gradient(top,#02365b,#02365b);
+    background-color:#02365b;
+}
+.menu
+{
+	color:#fafafa;
+}
+.tab-hover
+{
+	background:none;
+	background-image:none;
+	border:solid 1px #cccccc;
+	border-bottom:0px;
+	color:#000;
+}
+.tab
+{
+	background:none;
+	background-image:none;
+	border-bottom:solid 1px #ddd;
+}
+.tab-sep
+{
+	height:27px;
+}

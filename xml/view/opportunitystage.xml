@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Opportunitystage</title>
+		<module>opportunitystage</module>
+		<table>tbl_opportunitystage</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>opportunitystage_opportunitystageid desc</defaultsort>
+		<columns>opportunitystage_stage</columns>
+		<columnlabels>Stage</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>opportunitystage_stage</name><headertext>Stage</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>opportunitystage_opportunitystageid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_opportunitystage $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Stage</searchbylabels>
+		<searchbycolumns>opportunitystage_stage</searchbycolumns>
+	</setting>

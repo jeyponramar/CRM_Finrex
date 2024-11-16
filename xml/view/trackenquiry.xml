@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Enquiry</title>
+  <module>Enquiry</module>
+  <table>tbl_enquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>enquiry_enquiryid DESC</defaultsort>
+  <columns>enquiry_enquiryno,client_customername,enquiry_enquirydate,enquiry_contactperson,enquirystatus_status,product_productname,employee_employeename</columns>
+  <columnlabels>Enquiry No,Client,Enquiry Date,Contact Person,Status,Product,Assigned To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>enquirystatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_enquirydate</name>
+      <headertext>Enquiry Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>enquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquiry_enquiryid</hiddencolumns>
+  <query>
+    select * from tbl_enquiry
+    join tbl_client On client_clientid=enquiry_clientid
+    join tbl_enquirystatus on enquirystatus_enquirystatusid=enquiry_enquirystatusid
+    left join tbl_product on enquiry_productid=product_productid
+    LEFT JOIN tbl_employee ON employee_employeeid=enquiry_employeeid
+  </query>
+</setting>

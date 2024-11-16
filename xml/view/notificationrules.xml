@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Notificationrules</title>
+  <module>notificationrules</module>
+  <table>tbl_notificationrules</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>notificationrules_notificationrulesid desc</defaultsort>
+  <columns>finstationnotificationtype_type,notificationrules_date,notificationrules_particular,notificationrules_url,notificationrules_remark,notificationrules_document</columns>
+  <columnlabels>Notification Type,Date,Particular,Url,Remark,Document</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>notificationrules_date</name>
+      <headertext>Date</headertext>
+      <width>100%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>notificationrules_particular</name>
+      <headertext>Particular</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>notificationrules_remark</name>
+      <headertext>Remark</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>notificationrules_document</name>
+      <headertext>Document</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>finstationnotificationtype_type</name>
+      <headertext>Notification Type</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>notificationrules_notificationrulesid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_notificationrules
+
+ LEFT JOIN tbl_finstationnotificationtype ON finstationnotificationtype_finstationnotificationtypeid=notificationrules_finstationnotificationtypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Notification Type,Particular</searchbylabels>
+  <searchbycolumns>finstationnotificationtype_type,notificationrules_particular</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Leadsheet</title>
+  <module>leadsheet</module>
+  <table>tbl_leadsheet</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>leadsheet_leadsheetid desc</defaultsort>
+  <columns>leadsheet_date,leadsheet_companyname,leadsheet_mdname,leadsheet_mdmobile,leadsheet_mdemail,leadsheet_financepersonname,leadsheet_designation,leadsheet_financepersonmobile,leadsheet_financepersonemail,city_cityname,leadsheet_areaname,leadsheet_officelandline,leadsheet_remark,business_business,leadsheet_bank,leadsheet_exposure,yesno_yesno,currency_currency,yesno_yesno2,leadsheet_proposal,leadsheet_advisors,leadsheetstatus_status,employee_employeename</columns>
+  <columnlabels>Date,Company Name,MD Name,MD Mobile,MD Email,Finance Person Name,Designation,Finance Person Mobile,Finance Person Email,City,Area Name,Office Landline,Remark,Export / Import,Bank,Exposure,Whatsapp Added and Seen,Currency,Meeting,Proposal,Advisors,Status,Employee</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>leadsheet_date</name>
+      <headertext>Date</headertext>
+      <width>100%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>leadsheet_companyname</name>
+      <headertext>Company Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_mdname</name>
+      <headertext>MD Name</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_mdmobile</name>
+      <headertext>MD Mobile</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_mdemail</name>
+      <headertext>MD Email</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_financepersonname</name>
+      <headertext>Finance Person Name</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_designation</name>
+      <headertext>Designation</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_financepersonmobile</name>
+      <headertext>Finance Person Mobile</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_financepersonemail</name>
+      <headertext>Finance Person Email</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_officelandline</name>
+      <headertext>Office Landline</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_remark</name>
+      <headertext>Remark</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>business_business</name>
+      <headertext>Export / Import</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_bank</name>
+      <headertext>Bank</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_exposure</name>
+      <headertext>Exposure</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>yesno_yesno</name>
+      <headertext>Whatsapp Added and seen</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>currency_currency</name>
+      <headertext>Currency</headertext>
+      <width>5%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_proposal</name>
+      <headertext>Proposal</headertext>
+      <width>5%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheet_advisors</name>
+      <headertext>Advisors</headertext>
+      <width>5%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>leadsheetstatus_status</name>
+      <headertext>Status</headertext>
+      <width>4%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>yesno_yesno2</name>
+      <headertext>Meeting</headertext>
+      <width>4%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>leadsheet_leadsheetid</hiddencolumns>
+  <query>select * from (
+select $COLUMNS$,
+(select yesno_yesno from tbl_yesno WHERE yesno_yesnoid=leadsheet_ismeetingdoneid) as yesno_yesno2
+ from tbl_leadsheet
+
+ LEFT JOIN tbl_city ON city_cityid=leadsheet_cityid
+ LEFT JOIN tbl_business ON business_businessid=leadsheet_businessid
+ LEFT JOIN tbl_yesno ON yesno_yesnoid=leadsheet_iswhatsappseenid
+ LEFT JOIN tbl_currency ON currency_currencyid=leadsheet_currencyid
+ LEFT JOIN tbl_leadsheetstatus ON leadsheetstatus_leadsheetstatusid=leadsheet_leadsheetstatusid
+ LEFT JOIN tbl_employee ON employee_employeeid=leadsheet_employeeid
+)mq1 $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Company Name,MD Name,MD Mobile,MD Email,Finance Person Name,Designation,Finance Person Mobile,Finance Person Email,City,Export / Import,Whatsapp Added and Seen,Currency,Meeting,Advisors,Status</searchbylabels>
+  <searchbycolumns>leadsheet_companyname,leadsheet_mdname,leadsheet_mdmobile,leadsheet_mdemail,leadsheet_financepersonname,leadsheet_designation,leadsheet_financepersonmobile,leadsheet_financepersonemail,city_cityname,business_business,yesno_yesno,currency_currency,yesno_yesno2,leadsheet_advisors,leadsheetstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

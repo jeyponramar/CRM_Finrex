@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View dailyhistoricalliverate</title>
+  <module>dailyhistoricalliverate</module>
+  <table>tbl_dailyhistoricalliverate</table>
+	<isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>dailyhistoricalliverate_dailyhistoricalliverateid DESC</defaultsort>
+  <columns>currency_currency,dailyhistoricalliverate_date</columns>
+  <columnlabels>Currency,Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currency_currency</name>
+      <headertext>Currency</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyhistoricalliverate_date</name>
+      <headertext>Date</headertext>
+      <width>40%</width>
+      <format>Date</format>
+    </column>
+    
+  </gridcolumn>
+  <hiddencolumns>dailyhistoricalliverate_dailyhistoricalliverateid</hiddencolumns>
+  <query>
+	  select min(dailyhistoricalliverate_dailyhistoricalliverateid) as dailyhistoricalliverate_dailyhistoricalliverateid,
+	  cast(dailyhistoricalliverate_date as date) as dailyhistoricalliverate_date,min(currency_currency) as currency_currency
+	  from tbl_dailyhistoricalliverate
+	  join tbl_liverate on liverate_liverateid=dailyhistoricalliverate_liverateid
+	  join tbl_currency on currency_currencyid=liverate_currencyid
+	  $Search$
+	  group by cast(dailyhistoricalliverate_date as date),liverate_currencyid
+  </query>
+  <customequery>
+  </customequery>
+	<where>
+		('$dailyhistoricalliverate_currencyid$' = '0' OR liverate_currencyid = '$dailyhistoricalliverate_currencyid$') AND
+		dailyhistoricalliverate_date BETWEEN '$dailyhistoricalliverate_date_from$' AND '$dailyhistoricalliverate_date_to$'
+	</where>
+  <searchbylabels>Currency</searchbylabels>
+  <searchbycolumns>currency_currency</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

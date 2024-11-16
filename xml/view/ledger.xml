@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>ledger</title>
+		<module>ledger</module>
+		<table>tbl_ledger</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>ledger_ledgerid desc</defaultsort>
+		<columns>ledger_ledgername,ledger_billingname,ledgergroup_ledgergroupname,ledger_openingbalancecr,ledger_openingbalancedr,ledger_module,ledger_moduleid,ledger_emailid,ledger_mobileno,ledger_landlineno,ledger_address,ledger_ledgertype,ledger_isdefault</columns>
+		<columnlabels>Ledger Name,Billing Name,Ledger Group,Opening Balance Cr,Opening Balance Dr,Module,Module Id,Email Id,Mobile No,Landline No,Address,Ledger Type,Is Default</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>ledger_ledgername</name><headertext>Ledger Name</headertext><width>20%</width><format></format></column><column><name>ledger_billingname</name><headertext>Billing Name</headertext><width>20%</width><format></format></column><column><name>ledgergroup_ledgergroupname</name><headertext>Ledger Group</headertext><width>20%</width><format></format></column><column><name>ledger_openingbalancecr</name><headertext>Opening Balance Cr</headertext><width>20%</width><format>Amount</format></column><column><name>ledger_openingbalancedr</name><headertext>Opening Balance Dr</headertext><width>20%</width><format>Amount</format></column>
+		</gridcolumn>
+		<hiddencolumns>ledger_ledgerid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_ledger JOIN tbl_ledgergroup ON ledgergroup_ledgergroupid=ledger_ledgergroupid where ledger_isdefault=0 $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Ledger Name,Billing Name,Ledger Group</searchbylabels>
+		<searchbycolumns>ledger_ledgername,ledger_billingname,ledgergroup_ledgergroupname</searchbycolumns>
+	</setting>

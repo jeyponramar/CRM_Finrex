@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Invoicestatus</title>
+  <module>invoicestatus</module>
+  <table>tbl_invoicestatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>invoicestatus_invoicestatusid desc</defaultsort>
+  <columns>invoicestatus_status,invoicestatus_textcolor,invoicestatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>invoicestatus_status</name>
+      <headertext>Status</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoicestatus_textcolor</name>
+      <headertext>Text Color</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoicestatus_backgroundcolor</name>
+      <headertext>Background Color</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>invoicestatus_invoicestatusid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_invoicestatus
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>invoicestatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

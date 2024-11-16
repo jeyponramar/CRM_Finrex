@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankaudit</title>
+  <module>bankaudit</module>
+  <table>tbl_bankaudit</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankaudit_bankauditid desc</defaultsort>
+  <columns>client_customername,bankaudit_date,bankaudit_industry,bankaudit_businessinto,bankauditbank_bankname,bankaudit_bankbranch,bankauditstatus_status,bankaudit_currencies,bankaudit_invoicecountpermonth,bankaudit_avgpcfcamount,bankaudit_forexexpectedsaving,bankaudit_forexremarks,bankaudit_forwardcontractexpectedsaving,bankaudit_forwardcontractremarks,bankaudit_clientuserid,bankaudit_year1,bankaudit_year2,bankaudit_year3,bankaudit_iscustomervisited,bankaudit_lastupdateddate,bankaudit_clientremarks,bankaudit_finrexremarks,bankaudit_currencyids,bankaudit_code,bankaudit_lastremarks,bankaudit_closeddate,bankaudit_guid,bankaudit_isbanklettersent,bankaudit_banklettersentdate,bankaudit_valueofshipment,bankaudit_modifiedclientuserid,bankaudit_completedsteps</columns>
+  <columnlabels>Client,Date,Industry,Business Into,Bank,Bank Branch,Status,Currencies,Invoice Count Per Month,Avg PCFC Amount,Forex Expected Saving,Forex Remarks,Forward Contract Expected Saving,Forward Contract Remarks,Client User Id,Year 1,Year 2,Year 3,iscustomervisited,Last Updated Date,Client Remarks,Finrex Remarks,Currency Ids,Code,Last Remarks,Closed Date,Guid,Is Bank Letter Sent,Bank Letter Sent Date,Value Of Shipment,Modified Client User Id,Completed Steps</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_date</name>
+      <headertext>Date</headertext>
+      <width>50%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>bankauditstatus_status</name>
+      <headertext>Status</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_bankbranch</name>
+      <headertext>Bank Branch</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_currencies</name>
+      <headertext>Currencies</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_code</name>
+      <headertext>Code</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_lastremarks</name>
+      <headertext>Last Remarks</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditbank_bankname</name>
+      <headertext>Bank</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_industry</name>
+      <headertext>Industry</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankaudit_bankauditid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankaudit
+
+ LEFT JOIN tbl_client ON client_clientid=bankaudit_clientid
+ LEFT JOIN tbl_bankauditbank ON bankauditbank_bankauditbankid=bankaudit_bankauditbankid
+ LEFT JOIN tbl_bankauditstatus ON bankauditstatus_bankauditstatusid=bankaudit_bankauditstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,Industry,Bank,Bank Branch,Status,Currencies,Code</searchbylabels>
+  <searchbycolumns>client_customername,bankaudit_industry,bankauditbank_bankname,bankaudit_bankbranch,bankauditstatus_status,bankaudit_currencies,bankaudit_code</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

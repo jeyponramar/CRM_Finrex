@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimimportorder</title>
+  <module>fimimportorder</module>
+  <table>tbl_fimimportorder</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimimportorder_fimimportorderid desc</defaultsort>
+  <columns>fimimportorder_importorderinvoiceno,exposurecurrencymaster_currency,fimimportorder_clientid,bank_bankname,fimimportorder_importorderinvoicelcamount,fimimportorder_invoiceraisedamount,fimimportorder_advancepaid,fimimportorder_invoiceamountpaid,fimimportorder_tradecredit,fimimportorder_netimportorderamountpayable,fimimportorder_costing,fimimportorder_expectedshipmentdate,fimimportorder_usanceperiod,fimimportorder_expectedduedate,fimimportorder_unhedgedamount,fimimportorder_forwardbookingamount,fimimportorder_forwardbookingrate,fimimportorder_conversionrate,fimimportorder_profitlossfromcosting,fimimportorder_profitlossfromspotrateonremittancereceived,fimimportorder_spotrateonimportorderreceiveddate,fimimportorder_forwardrateonimportorderreceiveddate,fimimportorder_product,fimimportorder_remark,fimimportorder_suppliername,fimimportorder_invoiceno,fimimportorder_invoicedate,fimimportorder_creditdays,fimimportorder_invoiceduedate,paymentterm_paymentterm,documenttype_documenttype,fimimportorder_importorderdate,fimimportorder_lcno,fimimportorder_lcissuingbankbankcollection,fimimportorder_bankrefno,fimimportorder_billofentryno</columns>
+  <columnlabels>Import Order/Invoice No.,Currency,Client Id,Bank,Import Order/Invoice  /LC Amount,Invoice Raised Amount,Advance Paid,Invoice Amount Paid,Trade Credit,Net Import Order Amount Payable,Costing,Expected Shipment Date,Usance Period,Expected Due Date,Unhedged Amount,Forward Booking Amount,Forward Booking Rate,Conversion Rate,Profit/ Loss From Costing,Profit/ Loss from Spot rate on Remittance Received,Spot rate on Import Order Received Date,Forward rate on Import Order Received Date,Product,Remark,Supplier  Name,Invoice No.,Invoice date,Credit Days,Invoice Due date,Payment Term,Document Type,Import Order Date,LC No.,LC Issuing Bank /Bank (Collection),Bank Ref No,Bill of Entry No.</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>exposurecurrencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>fimimportorder_importorderinvoiceno</name>
+      <headertext>Import Order/Invoice No.</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>fimimportorder_fimimportorderid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimimportorder
+
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=fimimportorder_exposurecurrencymasterid
+ LEFT JOIN tbl_bank ON bank_bankid=fimimportorder_bankid
+ LEFT JOIN tbl_paymentterm ON paymentterm_paymenttermid=fimimportorder_paymenttermid
+ LEFT JOIN tbl_documenttype ON documenttype_documenttypeid=fimimportorder_documenttypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Import Order/Invoice No.,Currency,Import Order/Invoice  /LC Amount,Net Import Order Amount Payable,Expected Due Date,Unhedged Amount,Invoice date,Import Order Date</searchbylabels>
+  <searchbycolumns>fimimportorder_importorderinvoiceno,exposurecurrencymaster_currency,fimimportorder_importorderinvoicelcamount,fimimportorder_netimportorderamountpayable,fimimportorder_expectedduedate,fimimportorder_unhedgedamount,fimimportorder_invoicedate,fimimportorder_importorderdate</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

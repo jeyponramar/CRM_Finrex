@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimtradecredit</title>
+  <module>fimtradecredit</module>
+  <table>tbl_fimtradecredit</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimtradecredit_fimtradecreditid desc</defaultsort>
+  <columns>fimimportorder_importorderinvoiceno,tradecredittype_tradecredittype,exposurecurrencymaster_currency,fimtradecredit_tradecreditamount,bank_bankname,fimtradecredit_tradecreditdate,fimtradecredit_totalcreditperioddays,fimtradecredit_tradecreditduedate,fimtradecredit_totalinterestamount,fimtradecredit_totalpayableamount,fimtradecredit_tradecreditamountpaid,fimtradecredit_outstandingtradecreditamount,fimtradecredit_forwardbookingamount,fimtradecredit_forwardbookingrate,fimtradecredit_unhedgedamount,fimtradecredit_spotontradecreditavailed,fimtradecredit_conversionrate,fimtradecredit_profitlossfromcosting,fimtradecredit_profitlossfromspotontradecredit,fimtradecredit_tradecreditbankrefno,fimtradecredit_remark,fimtradecredit_invoiceno,fimtradecredit_suppliername,fimtradecredit_clientid</columns>
+  <columnlabels>Import Order/ Invoice No.,Trade Credit,Currency,Trade Credit Amount,Bank,Trade Credit date,Total Credit Period (Days),Trade Credit Due Date,Total Interest Amount,Total Payable Amount,Trade Credit Amount Paid,Outstanding Trade Credit Amount,Forward Booking Amount,Forward Booking Rate,Unhedged Amount,Spot on Trade Credit availed,Conversion rate,Profit/ Loss From Costing,Profit/ Loss from Spot on Trade Credit,Trade Credit Bank Ref No.,Remark,Invoice No.,Supplier Name,Client Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimtradecredit_fimtradecreditid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimtradecredit
+
+ LEFT JOIN tbl_fimimportorder ON fimimportorder_fimimportorderid=fimtradecredit_fimimportorderid
+ LEFT JOIN tbl_tradecredittype ON tradecredittype_tradecredittypeid=fimtradecredit_tradecredittypeid
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=fimtradecredit_exposurecurrencymasterid
+ LEFT JOIN tbl_bank ON bank_bankid=fimtradecredit_bankid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Import Order/ Invoice No.,Currency,Trade Credit Amount,Trade Credit date,Trade Credit Due Date,Outstanding Trade Credit Amount,Unhedged Amount,Trade Credit Bank Ref No.</searchbylabels>
+  <searchbycolumns>fimimportorder_importorderinvoiceno,exposurecurrencymaster_currency,fimtradecredit_tradecreditamount,fimtradecredit_tradecreditdate,fimtradecredit_tradecreditduedate,fimtradecredit_outstandingtradecreditamount,fimtradecredit_unhedgedamount,fimtradecredit_tradecreditbankrefno</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

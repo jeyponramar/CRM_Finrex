@@ -1,0 +1,81 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CP/ConfigureMaster.master" AutoEventWireup="true" CodeFile="addsubmodule.aspx.cs" Inherits="configure_Default" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td style="background-color:#3d3c3c; vertical-align:top;width:200px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="background-color:#262729;border:1px solid #3f3e3e;vertical-align:top;">
+                        <table width="100%" cellpadding="0" cellspacing="0" class="left-options">
+                            <tr><td class="smenu-title">Tools</td></tr>
+                            <tr><td>
+                                <table cellpadding="0" cellspacing="0" width="100%">
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/textbox.png" /></div><div>Text Box</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/email.png" /></div><div>Email Id</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/phone.png" /></div><div>Phone No</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/amount.png" /></div><div>Amount</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/number.png" /></div><div>Number</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/date.png" /></div><div>Date</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/textarea.png" /></div><div>Multi Line</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/dropdown.png" /></div><div>Dropdown</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/checkbox.png" /></div><div>Checkbox</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/fileupload.png" /></div><div>File Upload</div></td></tr>
+                                    <tr><td class="smenu tool"><div class="menu-ico"><img src="img/image.png" /></div><div>Image Upload</div></td></tr>
+                                </table>
+                            </td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="vertical-align:top;height:100%;" class="content-panel">
+            <table width="100%" cellspacing="5">
+                <tr><td style="vertical-align:top;height:500px;border:solid 1px #3d3c3c;">
+                    <table width="100%" cellspacing="5">
+                        <tr><td class="page-title"><asp:Label ID="lblTitle" runat="server"></asp:Label></td></tr>
+                        <tr><td style="vertical-align:top;height:50px;border:solid 1px #3d3c3c;">
+                            <asp:Panel ID="pmodule" runat="server">
+                            <form name="frmmodule" method="post">
+                                <table>
+                                    <tr>
+                                        <td>Module Name</td>
+                                        <td>
+                                            <asp:TextBox ID="txtModuleName" runat="server" CssClass="textbox modulename" name="modulename"></asp:TextBox>
+                                            <asp:TextBox ID="hdnModuleId" runat="server" CssClass="nodisplay hdnmoduleid" Text="0"></asp:TextBox>
+                                        </td>
+                                        <td>Table Name</td>
+                                        <td><asp:TextBox Width="50" class="textbox tablename" ID="txtTablename" runat="server"/></td>
+                                        <td>Add Title</td>
+                                        <td><asp:TextBox Width="50" class="textbox addtitle" ID="txtAddtitle" runat="server"/></td>
+                                        <td>Edit Title</td>
+                                        <td><asp:TextBox Width="50" class="textbox edittitle" ID="txtEditTitle" runat="server"/></td>
+                                        <td>View Title</td>
+                                        <td><asp:TextBox Width="50" class="textbox viewtitle" ID="txtViewTitle" runat="server"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="10" align="center"><input type="button" class="button btnsavepage" value="Save" m="module"/></td>
+                                    </tr>
+                                </table>
+                            </form>
+                            </asp:Panel>
+                        </td></tr>
+                        <tr><td>    
+                            <asp:Literal ID="ltContainer" runat="server"></asp:Literal>
+                        </td></tr>
+                        <tr>
+                            <td align="center">
+                                <asp:Button ID="btnSubmit" CssClass="button" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                            </td>
+                        </tr>
+                    </table>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+</table>
+ 
+</asp:Content>
+

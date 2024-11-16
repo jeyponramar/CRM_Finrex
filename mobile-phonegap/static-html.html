@@ -1,0 +1,50 @@
+﻿<template id="home.html">
+  <ons-page id="homepage">
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="document.querySelector('ons-splitter-side').open();">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center" ripple>FinIcon</div>
+    </ons-toolbar>
+	<div class="addpage-content">
+		<div class="jq-liverate">
+		<table width='100%' cellpadding='0' cellspacing=0>
+            <tr class='lr-header'><td>Currency</td><td>Price</td><td>High</td><td>Low</td></tr>
+            <tr>
+                <td class='lr-title'>USDINR</td>
+                <td><div class='lr-rate' id='lr1'>0</div></td>
+                <td><div class='lr-rate' id='lr4'>0</div></td>
+                <td><div class='lr-rate' id='lr5'>0</div></td>
+            </tr>
+            <tr>
+                <td class='lr-title'>EURINR</td>
+                <td><div class='lr-rate' id='lr10'>0</div></td>
+                <td><div class='lr-rate' id='lr13'>0</div></td>
+                <td><div class='lr-rate' id='lr14'>0</div></td>
+            </tr>
+            <tr>
+                <td class='lr-title'>GBPINR</td>
+                <td><div class='lr-rate' id='lr19'>0</div></td>
+                <td><div class='lr-rate' id='lr22'>0</div></td>
+                <td><div class='lr-rate' id='lr23'>0</div></td>
+            </tr>
+            <tr>
+                <td class='lr-title'>EURUSD</td>
+                <td><div class='lr-rate' id='lr37'>0</div></td>
+                <td><div class='lr-rate' id='lr40'>0</div></td>
+                <td><div class='lr-rate' id='lr41'>0</div></td>
+            </tr>
+            <tr>
+                <td class='lr-title'>GBPUSD</td>
+                <td><div class='lr-rate' id='lr46'>0</div></td>
+                <td><div class='lr-rate' id='lr76'>0</div></td>
+                <td><div class='lr-rate' id='lr77'>0</div></td>
+            </tr>
+        </table>
+		</div>
+	</div>
+    
+  </ons-page>
+</template>

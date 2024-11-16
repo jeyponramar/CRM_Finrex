@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Documenttype</title>
+		<module>documenttype</module>
+		<table>tbl_documenttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>documenttype_documenttypeid desc</defaultsort>
+		<columns>documenttype_documenttype</columns>
+		<columnlabels>Document Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>documenttype_documenttype</name><headertext>Document Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>documenttype_documenttypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_documenttype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Document Type</searchbylabels>
+		<searchbycolumns>documenttype_documenttype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

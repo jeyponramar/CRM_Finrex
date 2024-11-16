@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Faq</title>
+  <module>faq</module>
+  <table>tbl_faq</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>faq_faqid desc</defaultsort>
+  <columns>faqcategory_categoryname,faq_question</columns>
+  <columnlabels>FAQ Category,Question</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>faq_question</name>
+      <headertext>Question</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>faqcategory_categoryname</name>
+      <headertext>FAQ Category</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>faq_faqid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_faq
+
+ LEFT JOIN tbl_faqcategory ON faqcategory_faqcategoryid=faq_faqcategoryid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>FAQ Category,Question</searchbylabels>
+  <searchbycolumns>faqcategory_categoryname,faq_question</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

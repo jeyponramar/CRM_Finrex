@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Domesticlcdiscountingenquiry</title>
+  <module>domesticlcdiscountingenquiry</module>
+  <table>tbl_domesticlcdiscountingenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>domesticlcdiscountingenquiry_domesticlcdiscountingenquiryid desc</defaultsort>
+  <columns>domesticlcdiscountingenquiry_applicantname,domesticlcdiscountingenquiry_contactperson,domesticlcdiscountingenquiry_email,domesticlcdiscountingenquiry_mobilenumber,domesticlcdiscountingenquiry_gstno,domesticlcdiscountingenquiry_natureofbusiness,domesticlcdiscountingenquiry_numberofyearsinbusiness,domesticlcdiscountingenquiry_annualturnoverinrs,domesticlcdiscountingenquiry_beneficiarynamesupplier,domesticlcdiscountingenquiry_turnoverwithsupplierinrs,domesticlcdiscountingenquiry_avginvoicevalueinrs,domesticlcdiscountingenquiry_volumepermonthinrs,domesticlcdiscountingenquiry_lcissuingbank,domesticlcdiscountingenquiry_transactionamountwithcurrency,domesticlcdiscountingenquiry_tenureoffinancecreditindays,domesticlcdiscountingenquiry_descriptionofunderlyinggoods,enquirymodeofpayment_modeofpayment,domesticlcdiscountingenquiry_remarks,domesticlcdiscountingenquiry_uploaddocuments</columns>
+  <columnlabels>Applicant  Name,Contact Person,Email,Mobile Number,GST No.,Nature of Business,Number of Years in Business,Annual Turnover in Rs.,Beneficiary Name (Supplier),Turnover with Supplier in Rs.,Avg Invoice Value in Rs.,Volume Per Month in Rs.,LC Issuing Bank,Transaction Amount with Currency,Tenure of Finance/ Credit in days,Description of Underlying Goods,Mode of Payment,Remarks,Upload Documents</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>domesticlcdiscountingenquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>domesticlcdiscountingenquiry_email</name>
+      <headertext>Email</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>domesticlcdiscountingenquiry_mobilenumber</name>
+      <headertext>Mobile Number</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>domesticlcdiscountingenquiry_gstno</name>
+      <headertext>GST No.</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirymodeofpayment_modeofpayment</name>
+      <headertext>Mode of Payment</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>domesticlcdiscountingenquiry_domesticlcdiscountingenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_domesticlcdiscountingenquiry
+
+ LEFT JOIN tbl_enquirymodeofpayment ON enquirymodeofpayment_enquirymodeofpaymentid=domesticlcdiscountingenquiry_enquirymodeofpaymentid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Contact Person,Mobile Number,Mode of Payment</searchbylabels>
+  <searchbycolumns>domesticlcdiscountingenquiry_contactperson,domesticlcdiscountingenquiry_mobilenumber,enquirymodeofpayment_modeofpayment</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Loginhistory</title>
+  <module>loginhistory</module>
+  <table>tbl_loginhistory</table>
+  <isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>loginhistory_loginhistoryid desc</defaultsort>
+  <columns>client_customername,clientuser_name,loginhistory_username,loginhistory_logintime,applicationtype_applicationtype,employee_employeename</columns>
+  <columnlabels>Client,Client User,User Name,Login Time,Application Type,Assigned To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>loginhistory_logintime</name>
+      <headertext>Login Time</headertext>
+      <width>33%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>Client User</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>loginhistory_username</name>
+      <headertext>User Name</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>applicationtype_applicationtype</name>
+      <headertext>Application Type</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+	  <column>
+		  <name>employee_employeename</name>
+		  <headertext>Assigned To</headertext>
+		  <width>20%</width>
+		  <format>
+		  </format>
+	  </column>
+  </gridcolumn>
+  <hiddencolumns>loginhistory_loginhistoryid</hiddencolumns>
+  <query>
+	  select $COLUMNS$ from tbl_loginhistory
+	  JOIN tbl_client ON client_clientid=loginhistory_clientid
+	  JOIN tbl_clientuser ON clientuser_clientuserid=loginhistory_clientuserid
+	  JOIN tbl_applicationtype ON applicationtype_applicationtypeid=loginhistory_applicationtypeid
+	  LEFT JOIN tbl_employee on employee_employeeid=client_employeeid
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+	  ('$loginhistory_clientid$' = '0' OR loginhistory_clientid = '$loginhistory_clientid$') AND
+	  ('$loginhistory_clientuserid$' = '0' OR loginhistory_clientuserid = '$loginhistory_clientuserid$') AND
+	  ('$loginhistory_applicationtypeid$' = '0' OR loginhistory_applicationtypeid = '$loginhistory_applicationtypeid$') AND
+	  ('$loginhistory_employeeid$' = '0' OR client_employeeid = '$loginhistory_employeeid$') AND
+	  (loginhistory_logintime BETWEEN '$loginhistory_logintime_from$' AND '$loginhistory_logintime_to$')
+  </where>
+  <searchbylabels>Client,Client User,User Name,Application Type</searchbylabels>
+  <searchbycolumns>client_customername,clientuser_name,loginhistory_username,applicationtype_applicationtype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

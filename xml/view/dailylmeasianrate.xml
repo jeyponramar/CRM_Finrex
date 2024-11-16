@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Dailylmeasianrate</title>
+		<module>dailylmeasianrate</module>
+		<table>tbl_dailylmeasianrate</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>dailylmeasianrate_dailylmeasianrateid desc</defaultsort>
+		<columns>dailylmeasianrate_date,metal_metalname,dailylmeasianrate_contract,dailylmeasianrate_rate</columns>
+		<columnlabels>date,metalid,contract,rate</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>dailylmeasianrate_date</name><headertext>date</headertext><width>100%</width><format>Date</format></column>
+		</gridcolumn>
+		<hiddencolumns>dailylmeasianrate_dailylmeasianrateid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_dailylmeasianrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=dailylmeasianrate_metalid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>date</searchbylabels>
+		<searchbycolumns>dailylmeasianrate_date</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

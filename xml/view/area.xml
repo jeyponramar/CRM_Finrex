@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Area</title>
+		<module>area</module>
+		<table>tbl_area</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>area_areaid desc</defaultsort>
+		<columns>state_state,area_areaname</columns>
+		<columnlabels>State,Area Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>state_state</name><headertext>State</headertext><width>50%</width><format></format></column><column><name>area_areaname</name><headertext>Area Name</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>area_areaid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_area
+
+ LEFT JOIN tbl_state ON state_stateid=area_stateid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>State,Area Name</searchbylabels>
+		<searchbycolumns>state_state,area_areaname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

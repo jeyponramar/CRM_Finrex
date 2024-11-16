@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Annualturnover</title>
+		<module>annualturnover</module>
+		<table>tbl_annualturnover</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>annualturnover_annualturnoverid desc</defaultsort>
+		<columns>annualturnover_turnover</columns>
+		<columnlabels>Turnover</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>annualturnover_turnover</name><headertext>Turnover</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>annualturnover_annualturnoverid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_annualturnover
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Turnover</searchbylabels>
+		<searchbycolumns>annualturnover_turnover</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <subscription>
+      <querystringcolumn>subscriptionid</querystringcolumn>
+      <query>SELECT * FROM tbl_subscription 
+JOIN tbl_client ON client_clientid = subscription_clientid</query>
+    </subscription>
+  </populateonadd>
+  <populateonadd>
+		<trial>
+			<querystringcolumn>trialid</querystringcolumn>
+			<query>SELECT * FROM tbl_trial 
+JOIN tbl_client ON client_clientid = trial_clientid</query>
+		</trial>
+</populateonadd>
+</setting>

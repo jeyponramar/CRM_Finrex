@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditdocument</title>
+  <module>bankauditdocument</module>
+  <table>tbl_bankauditdocument</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditdocument_bankauditdocumentid desc</defaultsort>
+  <columns>bankauditdocument_bankauditid,bankauditdocument_userid,bankauditdocument_clientuserid,bankauditdocument_modifiedclientuserid,bankauditdocument_bankauditdocumentlistid,bankauditdocument_filenames,bankauditdocument_clientid</columns>
+  <columnlabels>BankAuditId,User Id,Client User Id,Modified Client User Id,bankauditdocumentlistid,File Names,Client Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>bankauditdocument_bankauditdocumentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditdocument
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

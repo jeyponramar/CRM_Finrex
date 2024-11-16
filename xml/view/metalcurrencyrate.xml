@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Metalcurrencyrate</title>
+  <module>metalcurrencyrate</module>
+  <table>tbl_metalcurrencyrate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>metalcurrencyrate_metalcurrencyrateid desc</defaultsort>
+  <columns>metalcurrencyrate_date,metal_metalname,metalcurrency_currencyname,metalcurrencyrate_rate</columns>
+  <columnlabels>date,metalid,metalcurrencyid,rate</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metalcurrencyrate_date</name>
+      <headertext>date</headertext>
+      <width>50%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>metalid</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>metalcurrencyrate_metalcurrencyrateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_metalcurrencyrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=metalcurrencyrate_metalid
+ LEFT JOIN tbl_metalcurrency ON metalcurrency_metalcurrencyid=metalcurrencyrate_metalcurrencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>date,metalid</searchbylabels>
+  <searchbycolumns>metalcurrencyrate_date,metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

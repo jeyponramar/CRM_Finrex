@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Actionrights</title>
+		<module>actionrights</module>
+		<table>tbl_actionrights</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>actionrights_actionrightsid desc</defaultsort>
+		<columns>role_rolename,actionrights_moduleid,actionrights_action</columns>
+		<columnlabels>Role,Module Id,Action</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>role_rolename</name><headertext>Role</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>actionrights_actionrightsid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_actionrights JOIN tbl_role ON role_roleid=actionrights_roleid $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Role</searchbylabels>
+		<searchbycolumns>role_rolename</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

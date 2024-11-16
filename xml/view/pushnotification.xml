@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Pushnotification</title>
+  <module>pushnotification</module>
+  <table>tbl_pushnotification</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>pushnotification_pushnotificationid desc</defaultsort>
+  <columns>pushnotification_date,user_fullname,pushnotification_title,pushnotification_shortmessage,pushnotification_clientgroupsvalues,clientgroup_groupname,pushnotification_attachment,pushnotification_totalusersnotified,pushnotification_totaldevicesnotified</columns>
+  <columnlabels>Date,Sent By,Title,Short Message,Client Group,Client Group,Attachment,Total Users Notified,Total Devices Notified</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>pushnotification_date</name>
+      <headertext>Date</headertext>
+      <width>10%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>user_fullname</name>
+      <headertext>Sent By</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pushnotification_shortmessage</name>
+      <headertext>Short Message</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pushnotification_totalusersnotified</name>
+      <headertext>Total Users Notified</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pushnotification_totaldevicesnotified</name>
+      <headertext>Total Devices Notified</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pushnotification_title</name>
+      <headertext>Title</headertext>
+      <width>15%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pushnotification_clientgroupsvalues</name>
+      <headertext>Client Group</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>pushnotification_pushnotificationid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_pushnotification
+
+ LEFT JOIN tbl_user ON user_userid=pushnotification_userid
+ LEFT JOIN tbl_clientgroup ON clientgroup_clientgroupid=pushnotification_clientgroupid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Title,Short Message,Client Group</searchbylabels>
+  <searchbycolumns>pushnotification_title,pushnotification_shortmessage,pushnotification_clientgroupsvalues</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

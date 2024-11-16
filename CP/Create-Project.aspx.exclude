@@ -1,0 +1,135 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/CP/ConfigureMaster.master" AutoEventWireup="true" CodeFile="Create-Project.aspx.cs" Inherits="CP_Create_Project" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script>
+    $(document).ready(function() {
+        $(".projecttype").change(function() {
+            var val = $(this).val();
+            if (val == 2) {//Copy Project
+                $("#copyproject").show();
+            }
+            else if (val == 1) {//Default Project
+                $("#copyproject").hide();
+            }
+            if (val > 0) {
+                $(".tdprojectdetails").show();
+            }
+            else {
+                $(".tdprojectdetails").hide();
+            }
+        });
+        $(".save").click(function() {
+            if (ConvertToInt($(".projecttype").val()) > 1) {
+                if (ConvertToInt($(".copyproject").val()) == 0) {
+                    alert("Please select any one project");
+                    $(".copyproject").focus();
+                    return false;
+                }
+            }
+            else if (ConvertToInt($(".projecttype").val()) == 1) {
+            }
+            else {
+                alert("Please select project type");
+                return false;
+            }
+
+        });
+    });
+</script>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td class="title">
+            <asp:Label ID="lblPageTitle" runat="server"/>
+        </td>
+     </tr>
+     <tr>
+        <td>
+            <asp:TextBox ID="h_IsCopy" runat="server" CssClass="iscopy hidden" Text="0"></asp:TextBox>
+        </td>
+     </tr>
+    <tr>
+        <td>
+            Select Project Type
+        </td>
+        <td>
+            <asp:DropDownList runat="server" ID="ddlProjectType" CssClass="projecttype">
+            <asp:ListItem Text="Select Project Type" Value="0" Selected="True"></asp:ListItem>
+            <asp:ListItem Text="Default Project" Value="1"></asp:ListItem>
+            <asp:ListItem Text="Copy Project" Value="2"></asp:ListItem>
+            </asp:DropDownList>
+        </td>        
+    </tr>
+    <tr id="copyproject" style="display:none">
+        <td>Copy Project From</td>
+        <td>
+            <asp:DropDownList runat="server" ID="ddlproject" CssClass="copyproject" OnSelectedIndexChanged="ddlCopyprojectChanged"></asp:DropDownList>
+        </td>
+    </tr>
+</table>
+<table width="100%" class="tdprojectdetails" id="form" runat="server">
+         
+         <tr>
+            <td class="form" colspan="2">
+                <table width="90%" cellpadding="0">
+                <tr>
+                    <td align="center" colspan="4"><asp:Label ID="lblMessage" runat="server" Visible="false" CssClass="error"></asp:Label></td>
+                </tr>
+                <tr>
+					<td>
+					    <table>
+					<!--CONTROLS_START-->
+					
+					        <tr>
+						        <td class="label">Project Name <span class="error">*</span></td>
+						        <td><asp:TextBox ID="txtprojectname"  IsUnique="true" runat="server"  dcn="project_projectname" CssClass="textbox"></asp:TextBox>
+						        <asp:RequiredFieldValidator ID="rfv1" Display="Dynamic" runat="server" ErrorMessage="Required Project Name" ValidationGroup="vg" ControlToValidate="txtprojectname"></asp:RequiredFieldValidator></td>
+					        </tr>
+					        <tr>
+						        <td class="label">Description</td>
+						        <td><asp:TextBox TextMode="MultiLine" ID="txtdescription"  dcn="project_description" runat="server" CssClass="textarea"></asp:TextBox></td>
+					        </tr>
+					        <%--<tr>
+						        <td class="label">Project Path <span class="error">*</span></td>
+						        <td><asp:TextBox ID="txtprojectpath"  Text="\\RSERVER\Websites" runat="server"  dcn="project_projectpath" CssClass="textbox"></asp:TextBox>
+						        <asp:RequiredFieldValidator ID="rfv3" Display="Dynamic" runat="server" ErrorMessage="Required Project Path" ValidationGroup="vg" ControlToValidate="txtprojectpath"></asp:RequiredFieldValidator></td>
+					        </tr>
+					        <tr>
+						        <td class="label">Database Path <span class="error">*</span></td>
+						        <td><asp:TextBox ID="txtdatabasepath"  Text="\\RSERVER\Database" runat="server"  dcn="project_databasepath" CssClass="textbox"></asp:TextBox>
+						        <asp:RequiredFieldValidator ID="rfv4" Display="Dynamic" runat="server" ErrorMessage="Required Database Path" ValidationGroup="vg" ControlToValidate="txtdatabasepath"></asp:RequiredFieldValidator></td>
+					        </tr>--%>
+					        <tr>
+						        <td class="label">Project Start Date</td>
+						        <td><asp:TextBox ID="txtprojectstartdate"  dcn="project_projectstartdate" runat="server" Format="Date" CssClass="textbox datepicker"></asp:TextBox></td>
+					        </tr>
+					        <tr>
+						        <td class="label">Expected End Date</td>
+						        <td><asp:TextBox ID="txtexpectedenddate"  dcn="project_expectedenddate" runat="server" Format="Date" CssClass="textbox datepicker"></asp:TextBox></td>
+					        </tr>
+					        <tr>
+						        <td class="label">Project End Date</td>
+						        <td><asp:TextBox ID="txtprojectenddate"  dcn="project_projectenddate" runat="server" Format="Date" CssClass="textbox datepicker"></asp:TextBox></td>
+					        </tr>
+					        <tr>
+						        <td class="label">Project Duration</td>
+						        <td><asp:TextBox ID="txtprojectduration" runat="server"  dcn="project_projectduration" CssClass="textbox"></asp:TextBox></td>
+					        </tr>
+					<!--CONTROLS_END-->
+					    </table>
+					</td>
+                </tr>
+                </table>
+            </td>
+         </tr>
+		 <tr>
+            <td align="center">
+                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" CssClass="save button" ValidationGroup="vg"/>
+                <input type="button" class="close-page cancel" value="Cancel"/>
+            </td>
+        </tr>
+
+    </table>
+</asp:Content>
+

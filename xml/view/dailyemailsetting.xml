@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Dailyemailsetting</title>
+  <module>dailyemailsetting</module>
+  <table>tbl_dailyemailsetting</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>dailyemailsetting_dailyemailsettingid desc</defaultsort>
+  <columns>dailyemailsetting_name,dailyemailsetting_subject,dailyemailsetting_query,dailyemailsetting_toemailid,dailyemailsetting_role,dailyemailsetting_time,dailyemailsetting_isemail</columns>
+  <columnlabels>Name,Subject,Query,To Email Id,Role,Time,Is Email</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>dailyemailsetting_name</name>
+      <headertext>Name</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyemailsetting_subject</name>
+      <headertext>Subject</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyemailsetting_toemailid</name>
+      <headertext>To Email Id</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyemailsetting_role</name>
+      <headertext>Role</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyemailsetting_time</name>
+      <headertext>Time</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailyemailsetting_isemail</name>
+      <headertext>Is Email</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>dailyemailsetting_dailyemailsettingid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_dailyemailsetting $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Name,Subject</searchbylabels>
+  <searchbycolumns>dailyemailsetting_name,dailyemailsetting_subject</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Clientcontrol</title>
+  <module>clientcontrol</module>
+  <table>tbl_clientcontrol</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>clientcontrol_clientcontrolid desc</defaultsort>
+  <columns>clientcontrol_control</columns>
+  <columnlabels>Control</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>clientcontrol_control</name>
+      <headertext>Control</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>clientcontrol_clientcontrolid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_clientcontrol
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Control</searchbylabels>
+  <searchbycolumns>clientcontrol_control</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

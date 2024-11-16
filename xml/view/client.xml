@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Client</title>
+  <module>client</module>
+  <table>tbl_client</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>True</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>client_clientid DESC</defaultsort>
+  <columns>client_customercode,client_customername,client_panno,client_contactperson,designation_designation,client_mobileno,client_landlineno,client_emailid,state_state,area_areaname,client_website,client_address,industrytypes_industrytypes,campaign_campaignname,exposure_exposure,business_business,clientgroup_groupname,employee_employeename,subscriptionstatus_status,client_startdate,client_enddate,client_whatsappenddate,contacttype_contacttype</columns>
+  <columnlabels>Customer Code,Customer Name,Pan No,Contact Person,Designation,Mobile No,Landline No,Email Id,State,Area,Website,Address,Industry,Campaign,Exposure,Business,Client Group,Assign To,Subscription Status,Start Date,Software End Date,Whatsapp End Date,Contact Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_landlineno</name>
+      <headertext>Landline No</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientgroup_groupname</name>
+      <headertext>Client Group</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscriptionstatus_status</name>
+      <headertext>Subscription Status</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customercode</name>
+      <headertext>Customer Code</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_address</name>
+      <headertext>Address</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>state_state</name>
+      <headertext>State</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_pincode</name>
+      <headertext>Pincode</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_landlineno</name>
+      <headertext>LandlineNo</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>client_clientid</hiddencolumns>
+  <query>
+    select $COLUMNS$ from tbl_client
+
+    LEFT JOIN tbl_designation ON designation_designationid=client_designationid
+    LEFT JOIN tbl_state ON state_stateid=client_stateid
+    LEFT JOIN tbl_city ON city_cityid=client_cityid
+    LEFT JOIN tbl_area ON area_areaid=client_areaid
+    LEFT JOIN tbl_industrytypes ON industrytypes_industrytypesid=client_industrytypesid
+    LEFT JOIN tbl_campaign ON campaign_campaignid=client_campaignid
+    LEFT JOIN tbl_exposure ON exposure_exposureid=client_exposureid
+    LEFT JOIN tbl_business ON business_businessid=client_businessid
+    LEFT JOIN tbl_clientgroup ON clientgroup_clientgroupid=client_clientgroupid
+    LEFT JOIN tbl_employee ON employee_employeeid=client_employeeid
+    LEFT JOIN tbl_subscriptionstatus ON subscriptionstatus_subscriptionstatusid=client_subscriptionstatusid
+    LEFT JOIN tbl_contacttype ON contacttype_contacttypeid=client_contacttypeid
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Code,Customer Name,Contact Person,Mobile No,Area,Client Group,Assign To,Subscription Status</searchbylabels>
+  <searchbycolumns>client_customercode,client_customername,client_contactperson,client_mobileno,area_areaname,clientgroup_groupname,employee_employeename,subscriptionstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

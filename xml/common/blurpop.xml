@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<setting>
+	<pop m="product-category">
+		<query>
+			select * from tbl_category where categoryid=$QueryString_id$
+		</query>
+	</pop>
+</setting>

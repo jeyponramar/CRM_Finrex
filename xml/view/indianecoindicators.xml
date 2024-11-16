@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Indianecoindicators</title>
+  <module>indianecoindicators</module>
+  <table>tbl_indianecoindicators</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>indianecoindicators_indianecoindicatorsid desc</defaultsort>
+  <columns>indianecoindicators_ecoindicators,indianecoindicators_reference,indianecoindicators_last,indianecoindicators_previous,indianecoindicators_frequency</columns>
+  <columnlabels>Eco Indicators,Reference,Last,Previous,Frequency</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>indianecoindicators_ecoindicators</name>
+      <headertext>Eco Indicators</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>indianecoindicators_reference</name>
+      <headertext>Reference</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>indianecoindicators_last</name>
+      <headertext>Last</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>indianecoindicators_indianecoindicatorsid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_indianecoindicators
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Eco Indicators,Reference</searchbylabels>
+  <searchbycolumns>indianecoindicators_ecoindicators,indianecoindicators_reference</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Contactpersontype</title>
+		<module>contactpersontype</module>
+		<table>tbl_contactpersontype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>contactpersontype_contactpersontypeid desc</defaultsort>
+		<columns>contactpersontype_contacttype</columns>
+		<columnlabels>Contact Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>contactpersontype_contacttype</name><headertext>Contact Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>contactpersontype_contactpersontypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_contactpersontype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Contact Type</searchbylabels>
+		<searchbycolumns>contactpersontype_contacttype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

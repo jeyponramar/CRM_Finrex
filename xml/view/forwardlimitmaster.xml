@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Forwardlimitmaster</title>
+		<module>forwardlimitmaster</module>
+		<table>tbl_forwardlimitmaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>forwardlimitmaster_forwardlimitmasterid desc</defaultsort>
+		<columns>forwardlimitmaster_forwardlimit</columns>
+		<columnlabels>Forward Limit</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>forwardlimitmaster_forwardlimit</name><headertext>Forward Limit</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>forwardlimitmaster_forwardlimitmasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_forwardlimitmaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Forward Limit</searchbylabels>
+		<searchbycolumns>forwardlimitmaster_forwardlimit</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

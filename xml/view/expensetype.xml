@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>expensetype</title>
+		<module>expensetype</module>
+		<table>tbl_expensetype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>expensetype_expensetypeid desc</defaultsort>
+		<columns>expensetype_expensetype</columns>
+		<columnlabels>Expense Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>expensetype_expensetype</name><headertext>Expense Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>expensetype_expensetypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_expensetype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Expense Type</searchbylabels>
+		<searchbycolumns>expensetype_expensetype</searchbycolumns>
+	</setting>

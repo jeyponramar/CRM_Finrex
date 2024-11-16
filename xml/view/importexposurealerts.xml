@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Importexposurealerts</title>
+		<module>importexposurealerts</module>
+		<table>tbl_importexposurealerts</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>importexposurealerts_importexposurealertsid desc</defaultsort>
+		<columns>importexposurealerts_clientid,importexposurealerts_emailid,importexposurealerts_senddailydashboard,importexposurealerts_sendforwardcontractduedatemail,importexposurealerts_sendtradecreditduedatemail,importexposurealerts_sendimportorderduedatemail,importexposurealerts_duesentdate</columns>
+		<columnlabels>Client Id,Email Id,Send Daily Dashboard,Send Forward Contract due date mail,Send Trade Credit due date mail,Send Import Order due date mail,duesentdate</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn>
+		</gridcolumn>
+		<hiddencolumns>importexposurealerts_importexposurealertsid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_importexposurealerts
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

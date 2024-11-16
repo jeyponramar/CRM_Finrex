@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Covertype</title>
+		<module>covertype</module>
+		<table>tbl_covertype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>covertype_covertypeid desc</defaultsort>
+		<columns>covertype_covertype</columns>
+		<columnlabels>Cover Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>covertype_covertype</name><headertext>Cover Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>covertype_covertypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_covertype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Cover Type</searchbylabels>
+		<searchbycolumns>covertype_covertype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

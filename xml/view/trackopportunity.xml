@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Opportunity</title>
+  <module>Opportunity</module>
+  <table>tbl_opportunity</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>opportunity_opportunityid DESC</defaultsort>
+  <columns>enquiry_enquiryno,client_customername,opportunity_opportunitydate,enquiry_contactperson,opportunitystatus_status,product_productname,employee_employeename</columns>
+  <columnlabels>Enquiry No,Client,Opportunity Date,Contact Person,Status,Product,Assigned To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>opportunitystatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunity_opportunitydate</name>
+      <headertext>Opportunity Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>enquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format></format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquiry_enquiryid</hiddencolumns>
+  <query>
+    select * from tbl_opportunity
+    join tbl_client On client_clientid=opportunity_clientid
+    join tbl_opportunitystatus on opportunitystatus_opportunitystatusid=opportunity_opportunitystatusid
+    left join tbl_product on opportunity_productid=product_productid
+    join tbl_enquiry on enquiry_enquiryid=opportunity_enquiryid
+    LEFT JOIN tbl_employee ON employee_employeeid=opportunity_employeeid
+  </query>
+</setting>

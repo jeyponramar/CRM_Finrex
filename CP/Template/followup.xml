@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+    <start></start>
+		<module>followups</module>
+		<table>tbl_followup</table>
+		<enablepaging>true</enablepaging>
+    <enablegridsetting>false</enablegridsetting>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>false</enablesearch>
+		<defaultsort>followup_followupid desc</defaultsort>
+		<columns>followup_subject</columns>
+		<columnlabels>Subject</columnlabels>
+		<gridtype>list</gridtype>
+    <gridcolumn>
+      <column>
+        <name>followup_subject</name>
+        <headertext>Subject</headertext>
+        <row>1</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followupaction_action</name>
+        <headertext>Action</headertext>
+        <row>2</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followup_date</name>
+        <headertext>Date</headertext>
+        <row>2</row>
+        <width>25%</width>
+        <format>Date</format>
+      </column>
+      <column>
+        <name>followup_time</name>
+        <headertext>Time</headertext>
+        <row>2</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followupstatus_status</name>
+        <headertext>Status</headertext>
+        <row>2</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followup_remarks</name>
+        <headertext></headertext>
+        <row>3</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followup_createdby</name>
+        <headertext></headertext>
+        <row>3</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>followup_createddate</name>
+        <headertext></headertext>
+        <row>3</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      
+		</gridcolumn>
+		<hiddencolumns>followup_followupid</hiddencolumns>
+		<query>
+      select $COLUMNS$ from tbl_followup
+      LEFT JOIN tbl_followupstatus on followupstatus_followupstatusid=followup_followupstatusid
+      LEFT JOIN tbl_followupaction on followupaction_followupactionid=followup_followupactionid
+      WHERE followup_module='$Module$' AND followup_mid=$QUERYSTRING_id$
+      $Search$</query>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+	</setting>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>productsubmittedby</title>
+		<module>productsubmittedby</module>
+		<table>tbl_productsubmittedby</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>productsubmittedby_productsubmittedbyid desc</defaultsort>
+		<columns>productsubmittedby_productsubmittedby</columns>
+		<columnlabels>Product Submitted By</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>productsubmittedby_productsubmittedby</name><headertext>Product Submitted By</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>productsubmittedby_productsubmittedbyid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_productsubmittedby $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Product Submitted By</searchbylabels>
+		<searchbycolumns>productsubmittedby_productsubmittedby</searchbycolumns>
+	</setting>

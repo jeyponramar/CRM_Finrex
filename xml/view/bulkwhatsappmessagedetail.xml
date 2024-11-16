@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulkwhatsappmessagedetail</title>
+  <module>bulkwhatsappmessagedetail</module>
+  <table>tbl_bulkwhatsappmessagedetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulkwhatsappmessagedetail_bulkwhatsappmessagedetailid desc</defaultsort>
+  <columns>client_customername,bulkwhatsappmessagedetail_date,bulkwhatsappmessagedetail_mobileno,bulkwhatsappmessagedetail_message,emailsmssentstatus_status,bulkwhatsappmessagedetail_bulkwhatsappmessageid,bulkwhatsappmessagedetail_issuccess,bulkwhatsappmessagedetail_isfailed,bulkwhatsappmessagedetail_whatsappvariables,bulkwhatsappmessagedetail_sentdate</columns>
+  <columnlabels>Client Name,Date,Mobile No,Message,Status,Bulk WhatsApp Message Id,Is Success,Is Failed,WhatsApp Variables,Sent Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client Name</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkwhatsappmessagedetail_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkwhatsappmessagedetail_date</name>
+      <headertext>Date</headertext>
+      <width>25%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulkwhatsappmessagedetail_bulkwhatsappmessagedetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bulkwhatsappmessagedetail
+
+ LEFT JOIN tbl_client ON client_clientid=bulkwhatsappmessagedetail_clientid
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=bulkwhatsappmessagedetail_emailsmssentstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client Name,Mobile No,Status</searchbylabels>
+  <searchbycolumns>client_customername,bulkwhatsappmessagedetail_mobileno,emailsmssentstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

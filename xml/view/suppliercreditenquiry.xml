@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Suppliercreditenquiry</title>
+  <module>suppliercreditenquiry</module>
+  <table>tbl_suppliercreditenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>suppliercreditenquiry_suppliercreditenquiryid desc</defaultsort>
+  <columns>suppliercreditenquiry_importerfirmname,suppliercreditenquiry_contactperson,suppliercreditenquiry_email,suppliercreditenquiry_mobilenumber,suppliercreditenquiry_beneficiarynamesupplier,suppliercreditenquiry_importercountry,suppliercreditenquiry_lcissuingbank,goodstype_goodstype,suppliercreditenquiry_descriptionofunderlyinggoods,lcstatus_lcstatus,enquirymodeofpayment_modeofpayment,suppliercreditenquiry_expectedlcopeningdate,suppliercreditenquiry_transactionamountwithcurrency,suppliercreditenquiry_tenureoffinancecreditindays,suppliercreditenquiry_countryoforigin,suppliercreditenquiry_expectedshippingdate,suppliercreditenquiry_portofloading,suppliercreditenquiry_lcnoifapplicable,suppliercreditenquiry_remarks,suppliercreditenquiry_uploaddocuments</columns>
+  <columnlabels>Importer Firm Name,Contact Person,Email,Mobile Number,Beneficiary Name (Supplier),Importer Country,LC Issuing Bank,Goods Type,Description of Underlying Goods,LC Status,Mode of Payment,Expected LC Opening Date,Transaction Amount with Currency,Tenure of Finance/ Credit in Days,Country of Origin,Expected Shipping Date,Port of Loading,LC No (If applicable),Remarks,Upload Documents</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>suppliercreditenquiry_importerfirmname</name>
+      <headertext>Importer Firm Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>suppliercreditenquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>suppliercreditenquiry_beneficiarynamesupplier</name>
+      <headertext>Beneficiary Name (Supplier)</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>goodstype_goodstype</name>
+      <headertext>Goods Type</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>lcstatus_lcstatus</name>
+      <headertext>LC Status</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirymodeofpayment_modeofpayment</name>
+      <headertext>Mode of Payment</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>suppliercreditenquiry_mobilenumber</name>
+      <headertext>Mobile Number</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>suppliercreditenquiry_suppliercreditenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_suppliercreditenquiry
+
+ LEFT JOIN tbl_goodstype ON goodstype_goodstypeid=suppliercreditenquiry_goodstypeid
+ LEFT JOIN tbl_lcstatus ON lcstatus_lcstatusid=suppliercreditenquiry_lcstatusid
+ LEFT JOIN tbl_enquirymodeofpayment ON enquirymodeofpayment_enquirymodeofpaymentid=suppliercreditenquiry_enquirymodeofpaymentid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Importer Firm Name,Contact Person,Mobile Number,Goods Type,LC Status,Mode of Payment</searchbylabels>
+  <searchbycolumns>suppliercreditenquiry_importerfirmname,suppliercreditenquiry_contactperson,suppliercreditenquiry_mobilenumber,goodstype_goodstype,lcstatus_lcstatus,enquirymodeofpayment_modeofpayment</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

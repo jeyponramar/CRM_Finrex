@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>group</title>
+		<module>group</module>
+		<table>tbl_group</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>group_groupid desc</defaultsort>
+		<columns>group_group</columns>
+		<columnlabels>Group</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>group_group</name><headertext>Group</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>group_groupid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_group $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Group</searchbylabels>
+		<searchbycolumns>group_group</searchbycolumns>
+	</setting>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>setupfortermsandcondition</title>
+  <module>setupfortermsandcondition</module>
+  <table>tbl_setupfortermsandcondition</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>setupfortermsandcondition_setupfortermsandconditionid desc</defaultsort>
+  <columns>setupfortermsandcondition_name,termsandconditiontype_termsandconditiontype,setupfortermsandcondition_description</columns>
+  <columnlabels>Name,Terms And Condition Type,Description</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>setupfortermsandcondition_name</name>
+      <headertext>Name</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>termsandconditiontype_termsandconditiontype</name>
+      <headertext>Terms And Condition Type</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>setupfortermsandcondition_setupfortermsandconditionid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_setupfortermsandcondition JOIN tbl_termsandconditiontype ON termsandconditiontype_termsandconditiontypeid=setupfortermsandcondition_termsandconditiontypeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Name,Terms And Condition Type</searchbylabels>
+  <searchbycolumns>setupfortermsandcondition_name,termsandconditiontype_termsandconditiontype</searchbycolumns>
+</setting>

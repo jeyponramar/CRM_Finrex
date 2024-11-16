@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Mclrbank</title>
+  <module>mclrbank</module>
+  <table>tbl_mclrbank</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>mclrbank_mclrbankid desc</defaultsort>
+  <columns>mclrbank_bankname</columns>
+  <columnlabels>Bank Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>mclrbank_bankname</name>
+      <headertext>Bank Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>mclrbank_mclrbankid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_mclrbank
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Bank Name</searchbylabels>
+  <searchbycolumns>mclrbank_bankname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

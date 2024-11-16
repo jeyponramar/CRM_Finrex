@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Country</title>
+		<module>country</module>
+		<table>tbl_country</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>country_countryid desc</defaultsort>
+		<columns>country_country</columns>
+		<columnlabels>Country</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>country_country</name><headertext>Country</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>country_countryid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_country
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Country</searchbylabels>
+		<searchbycolumns>country_country</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

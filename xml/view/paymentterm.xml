@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Paymentterm</title>
+		<module>paymentterm</module>
+		<table>tbl_paymentterm</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>paymentterm_paymenttermid desc</defaultsort>
+		<columns>paymentterm_paymentterm</columns>
+		<columnlabels>Payment Term</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>paymentterm_paymentterm</name><headertext>Payment Term</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>paymentterm_paymenttermid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_paymentterm
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Payment Term</searchbylabels>
+		<searchbycolumns>paymentterm_paymentterm</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

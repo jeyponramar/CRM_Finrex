@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Lmestockmetalrate</title>
+		<module>lmestockmetalrate</module>
+		<table>tbl_lmestockmetalrate</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>lmestockmetalrate_lmestockmetalrateid desc</defaultsort>
+		<columns>lmestockmetalrate_date,metal_metalname,lmestockmetalrate_livewarrants,lmestockmetalrate_cancelledwarrants,lmestockmetalrate_openingstock,lmestockmetalrate_prevdayopeningstock,lmestockmetalrate_stocknetchange</columns>
+		<columnlabels>Date,Metal,livewarrants,cancelledwarrants,openingstock,prevdayopeningstock,stocknetchange</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>lmestockmetalrate_date</name><headertext>Date</headertext><width>50%</width><format>DateTime</format></column><column><name>metal_metalname</name><headertext>Metal</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>lmestockmetalrate_lmestockmetalrateid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_lmestockmetalrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=lmestockmetalrate_metalid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Metal</searchbylabels>
+		<searchbycolumns>metal_metalname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

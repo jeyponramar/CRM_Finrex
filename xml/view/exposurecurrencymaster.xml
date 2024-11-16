@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Exposurecurrencymaster</title>
+		<module>exposurecurrencymaster</module>
+		<table>tbl_exposurecurrencymaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>exposurecurrencymaster_exposurecurrencymasterid desc</defaultsort>
+		<columns>exposurecurrencymaster_currency</columns>
+		<columnlabels>Currency</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>exposurecurrencymaster_currency</name><headertext>Currency</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>exposurecurrencymaster_exposurecurrencymasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_exposurecurrencymaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Currency</searchbylabels>
+		<searchbycolumns>exposurecurrencymaster_currency</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

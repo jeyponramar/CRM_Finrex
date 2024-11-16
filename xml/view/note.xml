@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>note</title>
+		<module>note</module>
+		<table>tbl_note</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>note_noteid desc</defaultsort>
+		<columns>note_note,priority_priority</columns>
+		<columnlabels>Note,Priority</columnlabels>
+		<gridtype>grid</gridtype>
+    <gridcolumn>
+      <column>
+        <name>note_createddate</name>
+        <headertext>Date</headertext>
+        <row>1</row>
+        <width>25%</width>
+        <format>Date</format>
+      </column>
+      <column>
+        <name>note_note</name>
+        <headertext>Note</headertext>
+        <row>1</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>priority_priority</name>
+        <headertext>Priority</headertext>
+        <row>1</row>
+        <width>25%</width>
+        <format></format>
+      </column>
+		</gridcolumn>
+		<hiddencolumns>note_noteid</hiddencolumns>
+		<query>
+      select $COLUMNS$ from tbl_note
+      LEFT JOIN tbl_priority ON priority_priorityid=note_priorityid
+      where note_createdby = '$LoggedInUser$'
+      $Search$
+    </query>
+		<searchbylabels>Note,Priority</searchbylabels>
+		<searchbycolumns>note_note,priority_priority</searchbycolumns>
+	</setting>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Dailymetalstock</title>
+  <module>dailymetalstock</module>
+  <table>tbl_dailymetalstock</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>dailymetalstock_dailymetalstockid desc</defaultsort>
+  <columns>metal_metalname,dailymetalstock_date,dailymetalstock_livewarrants,dailymetalstock_cancelledwarrants,dailymetalstock_prevdayopeningstock,dailymetalstock_openingstock</columns>
+  <columnlabels>metalid,date,livewarrants,cancelledwarrants,prevdayopeningstock,openingstock</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>metalid</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>dailymetalstock_dailymetalstockid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_dailymetalstock
+
+ LEFT JOIN tbl_metal ON metal_metalid=dailymetalstock_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>metalid</searchbylabels>
+  <searchbycolumns>metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

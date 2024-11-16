@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankaudit</title>
+  <module>bankaudit</module>
+  <table>tbl_bankaudit</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>bankaudit_bankauditid desc</defaultsort>
+  <columns>client_customername,bankaudit_date,bankaudit_businessinto,bankauditbank_bankname,bankaudit_bankbranch,bankauditstatus_status,bankaudit_lastremarks,bankaudit_currencies,bankaudit_invoicecountpermonth,bankaudit_avgpcfcamount,bankaudit_forexexpectedsaving,bankaudit_forexremarks,bankaudit_forwardcontractexpectedsaving,bankaudit_forwardcontractremarks,bankaudit_clientuserid,bankaudit_year1,bankaudit_year2,bankaudit_year3,bankaudit_isbanklettersent,bankaudit_closeddate</columns>
+  <columnlabels>Client,Date,Business Into,Bank,Bank Branch,Status,Last Remarks,Currencies,Invoice Count Per Month,Avg PCFC Amount,Forex Expected Saving,Forex Remarks,Forward Contract Expected Saving,Forward Contract Remarks,Client User Id,Year 1,Year 2,Year 3,Is Bank Letter Sent,Closed Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankaudit_code</name>
+      <headertext>Code</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>bankauditstatus_status</name>
+      <headertext>Status</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_lastremarks</name>
+      <headertext>Last Remarks</headertext>
+      <width>15%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditbank_bankname</name>
+      <headertext>Bank</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_bankbranch</name>
+      <headertext>Bank Branch</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_currencies</name>
+      <headertext>Currencies</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_isbanklettersent</name>
+      <headertext>Is Bank Letter Sent</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_closeddate</name>
+      <headertext>Closed Date</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudit_download</name>
+      <headertext>Download</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankaudit_bankauditid</hiddencolumns>
+  <query>
+    select $COLUMNS$ from tbl_bankaudit
+
+    LEFT JOIN tbl_client ON client_clientid=bankaudit_clientid
+    LEFT JOIN tbl_bankauditbank ON bankauditbank_bankauditbankid=bankaudit_bankauditbankid
+    LEFT JOIN tbl_bankauditstatus ON bankauditstatus_bankauditstatusid=bankaudit_bankauditstatusid
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+    ('$bankaudit_clientid$' = '0' OR bankaudit_clientid='$bankaudit_clientid$')
+    AND ('$bankaudit_bankauditbankid$' = '0' OR bankaudit_bankauditbankid='$bankaudit_bankauditbankid$')
+    AND ('$bankaudit_bankauditstatusid$' = '0' OR bankaudit_bankauditstatusid='$bankaudit_bankauditstatusid$')
+    AND (bankaudit_date BETWEEN '$bankaudit_date_from$' AND '$bankaudit_date_to$')
+  </where>
+  <searchbylabels>Client,Bank,Bank Branch,Status,Last Remarks,Currencies</searchbylabels>
+  <searchbycolumns>client_customername,bankauditbank_bankname,bankaudit_bankbranch,bankauditstatus_status,bankaudit_lastremarks,bankaudit_currencies</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

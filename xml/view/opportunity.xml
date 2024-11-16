@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Opportunity</title>
+  <module>opportunity</module>
+  <table>tbl_opportunity</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>opportunity_opportunityid DESC</defaultsort>
+  <columns>client_customername,opportunity_subject,opportunity_contactperson,opportunity_description,priority_priority,opportunitystatus_status,opportunitystage_stage,opportunity_remarks,opportunity_opportunitydate,opportunity_emailid,opportunity_mobileno,opportunity_landlineno,state_state,area_areaname,enquiry_enquiryno,opportunity_address,employee_employeename</columns>
+  <columnlabels>Customer Name,Subject,Contact Person,Description,Priority,Status,Stage,Remarks,Opportunity Date,Email Id,Mobile No,Landline No,State,Area Name,Enquiry No,Address,Assign To</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunity_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>area_areaname</name>
+      <headertext>Area Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunitystatus_status</name>
+      <headertext>Status</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunity_subject</name>
+      <headertext>Subject</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>priority_priority</name>
+      <headertext>Priority</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunitystage_stage</name>
+      <headertext>Stage</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunity_opportunitydate</name>
+      <headertext>Opportunity Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>opportunity_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>opportunity_opportunityid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_opportunity JOIN tbl_client ON client_clientid=opportunity_clientid LEFT JOIN tbl_priority ON priority_priorityid=opportunity_priorityid JOIN tbl_opportunitystatus ON opportunitystatus_opportunitystatusid=opportunity_opportunitystatusid LEFT JOIN tbl_opportunitystage ON opportunitystage_opportunitystageid=opportunity_opportunitystageid LEFT JOIN tbl_state ON state_stateid=opportunity_stateid LEFT JOIN tbl_area ON area_areaid=opportunity_areaid JOIN tbl_enquiry ON enquiry_enquiryid=opportunity_enquiryid LEFT JOIN tbl_employee ON employee_employeeid=opportunity_employeeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Name,Contact Person,Priority,Status,Stage,Area Name,Enquiry No,Assign To</searchbylabels>
+  <searchbycolumns>client_customername,opportunity_contactperson,priority_priority,opportunitystatus_status,opportunitystage_stage,area_areaname,enquiry_enquiryno,employee_employeename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

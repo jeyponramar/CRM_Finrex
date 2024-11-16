@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Usercurrencymargin</title>
+  <module>usercurrencymargin</module>
+  <table>tbl_usercurrencymargin</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>usercurrencymargin_usercurrencymarginid desc</defaultsort>
+  <columns>clientuser_subscriptionid,currencymaster_currency,usercurrencymargin_margin</columns>
+  <columnlabels>User,Currency,Margin</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>usercurrencymargin_margin</name>
+      <headertext>Margin</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>clientuser_subscriptionid</name>
+      <headertext>User</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>usercurrencymargin_usercurrencymarginid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_usercurrencymargin
+
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=usercurrencymargin_clientuserid
+ LEFT JOIN tbl_currencymaster ON currencymaster_currencymasterid=usercurrencymargin_currencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>User,Currency</searchbylabels>
+  <searchbycolumns>clientuser_subscriptionid,currencymaster_currency</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

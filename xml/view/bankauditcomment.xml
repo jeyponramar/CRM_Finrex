@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditcomment</title>
+  <module>bankauditcomment</module>
+  <table>tbl_bankauditcomment</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditcomment_bankauditcommentid desc</defaultsort>
+  <columns>bankauditcomment_bankauditid,client_customername,user_fullname,bankauditcomment_comment,bankauditcomment_clientuserid,bankauditcomment_isclientcomment</columns>
+  <columnlabels>Bank Audit Id,Client,User,Comment,Client User Id,isclientcomment</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>user_fullname</name>
+      <headertext>User</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditcomment_bankauditcommentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditcomment
+
+ LEFT JOIN tbl_client ON client_clientid=bankauditcomment_clientid
+ LEFT JOIN tbl_user ON user_userid=bankauditcomment_userid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,User</searchbylabels>
+  <searchbycolumns>client_customername,user_fullname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

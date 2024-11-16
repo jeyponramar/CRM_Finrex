@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Alternativereferencerate</title>
+  <module>alternativereferencerate</module>
+  <table>tbl_alternativereferencerate</table>
+	<isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>alternativereferencerate_alternativereferencerateid desc</defaultsort>
+  <columns>currency_currency,arrmaster_name,alternativereferencerate_date,alternativereferencerate_on,alternativereferencerate_1week,alternativereferencerate_1monthtermaverage,alternativereferencerate_3monthtermaverage,alternativereferencerate_6monthtermaverage,alternativereferencerate_12monthtermaverage</columns>
+  <columnlabels>Currency,ARR,Date,O/n,1 Week,1-month TERM  / Average,3-month TERM  / Average,6-month TERM  / Average,12-month TERM  / Average</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currency_currency</name>
+      <headertext>Currency</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>arrmaster_name</name>
+      <headertext>ARR</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>alternativereferencerate_on</name>
+      <headertext>O/n</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_1week</name>
+      <headertext>1 Week</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_1monthtermaverage</name>
+      <headertext>1-month TERM  / Average</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_3monthtermaverage</name>
+      <headertext>3-month TERM  / Average</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_6monthtermaverage</name>
+      <headertext>6-month TERM  / Average</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerate_12monthtermaverage</name>
+      <headertext>12-month TERM  / Average</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>alternativereferencerate_alternativereferencerateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_alternativereferencerate
+
+ LEFT JOIN tbl_currency ON currency_currencyid=alternativereferencerate_currencyid
+ LEFT JOIN tbl_arrmaster ON arrmaster_arrmasterid=alternativereferencerate_arrmasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+	<where>
+		('$alternativereferencerate_currencyid$' = '0' OR alternativereferencerate_currencyid = '$alternativereferencerate_currencyid$') AND
+		('$alternativereferencerate_arrmasterid$' = '0' OR alternativereferencerate_arrmasterid = '$alternativereferencerate_arrmasterid$') AND
+		alternativereferencerate_date BETWEEN '$alternativereferencerate_date_from$' AND '$alternativereferencerate_date_to$'
+	</where>
+  <searchbylabels>Currency,ARR</searchbylabels>
+  <searchbycolumns>currency_currency,arrmaster_name</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

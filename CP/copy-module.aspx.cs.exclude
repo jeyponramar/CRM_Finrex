@@ -1,0 +1,150 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.IO;
+
+public partial class CP_copy_module : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            GlobalData gblp = new GlobalData();
+            gblp.FillDropdown(ddlproject, "tbl_project", "project_projectname", "");
+        }
+    }
+    protected void ddlproject_Change(object sender, EventArgs e)
+    {
+        int projectId = GlobalUtilities.ConvertToInt(ddlproject.SelectedValue);
+        string query = "select * from tbl_module where module_projectid=" + projectId + " order by module_modulename";
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        ddlmodule.DataSource = dttbl;
+        ddlmodule.DataTextField = "module_modulename";
+        ddlmodule.DataValueField = "module_moduleid";
+        ddlmodule.DataBind();
+        ddlmodule.Items.Insert(0,new ListItem("Select","0"));
+    }
+    protected void ddlmodule_Change(object sender, EventArgs e)
+    {
+        DataRow dr = DbTable.GetOneRow("tbl_module", GlobalUtilities.ConvertToInt(ddlmodule.SelectedValue));
+        txtmodulename.Text = GlobalUtilities.ConvertToString(dr["module_modulename"]);
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        if (!IsValid()) return;
+        //copy module table
+        int fromModuleId = GlobalUtilities.ConvertToInt(ddlmodule.SelectedValue);
+        string moduleName = txtmodulename.Text;
+        string destProjectName = CustomSession.Session("S_ProjectName");
+        string copyFromProject = ddlproject.SelectedItem.Text;
+        CopyModule(copyFromProject,destProjectName, fromModuleId, moduleName);
+
+        lblMessage.Text = "Module copied successfully!";
+
+    }
+    private bool IsValid()
+    {
+        int projectId = GlobalUtilities.ConvertToInt(CustomSession.Session("ProjectId"));
+        string query = "select * from tbl_module where module_modulename='" + txtmodulename.Text + "' AND module_projectid=" + projectId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null)
+        {
+            query = "select * from tbl_module where module_modulename='" + ddlmodule.SelectedItem.Text + "' AND module_projectid=" + projectId;
+            dr = DbTable.ExecuteSelectRow(query);
+            if (dr == null)
+            {
+                return true;
+            }
+            else
+            {
+                lblMessage.Text = "Module already exists in your project!";
+                return false;
+            }
+        }
+        else
+        {
+            lblMessage.Text = "Module already exists in your project!";
+            return false;
+        }
+    }
+    private void CopyModule(string copyFromProject,string destProjectName,int sourceModuleId, string moduleName)
+    {
+        string tableName = "tbl_" + moduleName.Replace(" ", "").ToLower();
+        string addTitle = "Add " + moduleName;
+        string viewTitle = "View " + moduleName;
+        string editTitle = "Edit " + moduleName;
+        string destModuleName = moduleName.Replace(" ", "").ToLower();
+        int targetProjectId = GlobalUtilities.ConvertToInt(CustomSession.Session("ProjectId"));
+        int fromProjectId = GlobalUtilities.ConvertToInt(ddlproject.SelectedValue);
+
+        DataRow drSourceModule=DbTable.GetOneRow("tbl_module",sourceModuleId);
+        string sourceModuleName = Convert.ToString(drSourceModule["module_modulename"]).Replace(" ","").ToLower();
+
+        Hashtable hstbl = new Hashtable();
+        hstbl.Add("modulename", moduleName);
+        hstbl.Add("tablename", tableName);
+        hstbl.Add("addtitle", addTitle);
+        hstbl.Add("viewtitle", viewTitle);
+        hstbl.Add("edittitle", editTitle);
+        hstbl.Add("iseditable", 1);
+        hstbl.Add("projectid", targetProjectId);
+
+        InsertUpdate obj = new InsertUpdate();
+        int newModuleId = obj.InsertData(hstbl, "tbl_module");
+
+        //add columns in table
+        ArrayList arrColumns = GlobalUtilities.GetColumnsOfTable("tbl_columns");
+        string columns = "";
+        for (int i = 1; i < arrColumns.Count; i++)
+        {
+            if (i == 1)
+            {
+                columns = Convert.ToString(arrColumns[i]);
+            }
+            else
+            {
+                columns += "," + Convert.ToString(arrColumns[i]);
+            }
+        }
+        string columnValues = columns.Replace("columns_moduleid", newModuleId.ToString());
+        string query = "insert into tbl_columns(" + columns + ") select " + columnValues + " from tbl_columns where columns_moduleid=" + sourceModuleId;
+        DbTable.ExecuteQuery(query);
+
+        //copy main folder
+        string fromProjectPath = AppConstants.REFUXCP_WEBSITE_PATH + "/" + copyFromProject;
+        string toProjectPath = AppConstants.REFUXCP_WEBSITE_PATH + "/" + destProjectName;
+        string fromFolder = fromProjectPath + "/" + sourceModuleName;
+        string toFolder = toProjectPath + "/" + destModuleName;
+        GlobalUtilities.CopyFolder(fromFolder, toFolder);
+
+        //copy view xml
+        string fromFile = fromProjectPath + "/xml/view/" + sourceModuleName + ".xml";
+        string toFile = toProjectPath + "/xml/view/" + destModuleName + ".xml";
+        File.Copy(fromFile, toFile, true);
+        //copy add xml
+        fromFile = fromProjectPath + "/xml/add/" + sourceModuleName + ".xml";
+        toFile = toProjectPath + "/xml/add/" + destModuleName + ".xml";
+        GlobalUtilities.CopyFile(fromFile, toFile, true);
+        //copy dao
+        fromFile = fromProjectPath + "/App_Code/Component/DataAccess/" + sourceModuleName + "DAO.cs";
+        toFile = toProjectPath + "/App_Code/Component/DataAccess/" + sourceModuleName + "DAO.cs";
+        GlobalUtilities.CopyFile(fromFile, toFile, true);
+
+        //copy bisiness logic
+        fromFile = fromProjectPath + "/App_Code/Component/BusinessLogic/" + sourceModuleName + "BL.cs";
+        toFile = toProjectPath + "/App_Code/Component/BusinessLogic/" + sourceModuleName + "BL.cs";
+        GlobalUtilities.CopyFile(fromFile, toFile, true);
+
+        //create upload folders
+
+
+    }
+    
+
+}

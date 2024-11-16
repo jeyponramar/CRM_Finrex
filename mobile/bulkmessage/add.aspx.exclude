@@ -1,0 +1,79 @@
+ <%@ Page Language="C#" MasterPageFile="~/Mobile/MasterPage.master" AutoEventWireup="true" 
+ CodeFile="~/BulkMessage/add.aspx.cs" Inherits="BulkMessage_add" EnableEventValidation="false" ValidateRequest="false"%>
+ <%@ Register Src="~/usercontrols/NextPrevDetail.ascx" TagName="NextPrevDetail" TagPrefix="uc" %>
+<%--CONTROLREGISTER_START--%><%--CONTROLREGISTER_END--%>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script>
+    $(document).ready(function() {
+        SetDetailPage('<%=Request.QueryString["id"]%>');
+    });
+</script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<!--DESIGN_START-->
+    <asp:PlaceHolder ID="form" runat="server">
+    <table width="100%">
+         <tr>
+            <td class="title">
+                <asp:Label ID="lblPageTitle" runat="server"/>
+            </td>
+         </tr>
+         <tr>
+            <td>
+                <input type="button" value="Edit" class="edit button dpage"/>
+                <input type="button" value="Copy" class="copy button dpage"/>
+                <asp:TextBox ID="h_IsCopy" runat="server" CssClass="iscopy hidden" Text="0"></asp:TextBox>
+                <!--ACTION_START--><!--ACTION_END-->
+            </td>
+            <td align="right"> 
+                <uc:NextPrevDetail ID="NextPrevDetail" runat="server" />
+            </td>
+         </tr>
+         <tr>
+            <td class="form" colspan="2">
+                <table width="100%" cellpadding="0">
+                <tr>
+                    <td align="center"><asp:Label ID="lblMessage" runat="server" Visible="false" CssClass="error"></asp:Label></td>
+                </tr>
+                <tr>
+                <td>
+				<!--CONTROLS_START-->
+					<table width='100%' cellpadding='5' cellspacing='0' id='tblcontrols2' runat='server'>
+					<tr>
+					<td><div class='label'>Message <span class="error">*</span></div>
+						<div><asp:TextBox TextMode="MultiLine" ID="txtmessage"  dcn="bulkmessage_message"  runat="server" CssClass="textarea"></asp:TextBox>
+						<asp:RequiredFieldValidator ID="rfv3" SetFocusOnError="true" Display="Dynamic" runat="server" ErrorMessage="Required Message" ValidationGroup="vg" ControlToValidate="txtmessage"></asp:RequiredFieldValidator></div></td>
+				</tr>
+					<tr>
+					<td><div class='label'>Sent By</div>
+						<div><asp:TextBox ID="user"  Enabled="false"  search='true'  dcn="user_fullname" MaxLength="100" runat="server" m="user" cn="fullname" CssClass="textbox ac txtac"></asp:TextBox><asp:TextBox id="txtuserid"  dcn="bulkmessage_userid"  Text="0" runat="server" class=" hdnac"/><img src="../../images/down-arrow.png" class="quick-new epage"/></div></td>
+				</tr>
+					<tr>
+					<td><div class='label'>Date</div>
+						<div><asp:TextBox ID="txtdate"  dcn="bulkmessage_date"  Enabled="false" runat="server" autocomplete="off" MaxLength="11" Format="Date" CssClass="textbox datepicker"></asp:TextBox></div></td>
+				</tr>
+					</table>
+					<!--CONTROLS_END-->
+				</td>
+				</tr>
+                </table>
+            </td>
+         </tr>
+		 <tr>
+            <td align="center" colspan="2">
+				<!--SAVEBUTTON_START-->
+					<asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Save" CssClass="save button" ValidationGroup="vg"/>
+				<asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" CssClass="delete button" Visible="false"/>
+				<input type="button" class="close-page cancel" value="Cancel"/>
+				<asp:Button ID="btnSubmitAndView" runat="server" Visible="false"/>
+					<!--SAVEBUTTON_END-->
+            </td>
+        </tr>
+    </table>
+</asp:PlaceHolder>
+<!--DESIGN_END-->
+<!--JSCODE_START-->
+					
+					<!--JSCODE_END-->
+
+</asp:Content>

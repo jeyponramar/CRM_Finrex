@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Liverateuserconfig</title>
+  <module>liverateuserconfig</module>
+  <table>tbl_liverateuserconfig</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>liverateuserconfig_liverateuserconfigid desc</defaultsort>
+  <columns>clientuser_username,applicationtype_applicationtype,liverateuserconfig_currencies,currencytype_type,liverateuserconfig_rows,liverateuserconfig_columns</columns>
+  <columnlabels>Client User Id,Application Type,Currencies,Currency Type,Rows,Columns</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>clientuser_username</name>
+      <headertext>Client User Id</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>applicationtype_applicationtype</name>
+      <headertext>Application Type</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>liverateuserconfig_liverateuserconfigid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_liverateuserconfig
+
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=liverateuserconfig_clientuserid
+ LEFT JOIN tbl_applicationtype ON applicationtype_applicationtypeid=liverateuserconfig_applicationtypeid
+ LEFT JOIN tbl_currencytype ON currencytype_currencytypeid=liverateuserconfig_currencytypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client User Id</searchbylabels>
+  <searchbycolumns>clientuser_username</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

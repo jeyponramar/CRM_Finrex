@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>termsandconditiontype</title>
+		<module>termsandconditiontype</module>
+		<table>tbl_termsandconditiontype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>termsandconditiontype_termsandconditiontypeid desc</defaultsort>
+		<columns>termsandconditiontype_termsandconditiontype</columns>
+		<columnlabels>Terms And Condition Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>termsandconditiontype_termsandconditiontype</name><headertext>Terms And Condition Type</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>termsandconditiontype_termsandconditiontypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_termsandconditiontype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Terms And Condition Type</searchbylabels>
+		<searchbycolumns>termsandconditiontype_termsandconditiontype</searchbycolumns>
+	</setting>

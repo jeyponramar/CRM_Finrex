@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Emailtype</title>
+  <module>emailtype</module>
+  <table>tbl_emailtype</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>emailtype_emailtypeid desc</defaultsort>
+  <columns>emailtype_emailtype</columns>
+  <columnlabels>Email Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>emailtype_emailtype</name>
+      <headertext>Email Type</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>emailtype_emailtypeid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_emailtype $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Email Type</searchbylabels>
+  <searchbycolumns>emailtype_emailtype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

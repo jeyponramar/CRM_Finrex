@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertTrialToSubscription'>
+		<fromtable>tbl_trial</fromtable>
+		<totable>tbl_subscription</totable>
+		<frommoduleid>180</frommoduleid>
+		<tomoduleid>155</tomoduleid>
+		<statuscolumn>subscriptionstatusid</statuscolumn>
+		<statusvalue>2</statusvalue>
+		<mapping><name>clientid</name><value>trial_clientid</value></mapping>
+		<mapping><name>startdate</name><value>trial_startdate</value></mapping>
+		<mapping><name>enddate</name><value></value></mapping>
+		<mapping><name>username</name><value></value></mapping>
+		<mapping><name>remarks</name><value></value></mapping>
+		<mapping><name>opportunityid</name><value>0</value></mapping>
+		<mapping><name>password</name><value></value></mapping>
+		<mapping><name>subscriptioncode</name><value>Code=SUBC-</value></mapping>
+		<mapping><name>isrenew</name><value>0</value></mapping>
+		<mapping><name>isdecline</name><value>0</value></mapping>
+		<mapping><name>parentcode</name><value></value></mapping>
+		<mapping><name>subscriptionparentid</name><value></value></mapping>
+		<mapping><name>subscriptionstatusid</name><value>6</value></mapping>
+		<mapping><name>lastcalllogsent</name><value>NULL</value></mapping>
+		<mapping><name>isfirstlogin</name><value></value></mapping>
+		<mapping><name>trialid</name><value>trial_trialid</value></mapping>
+		<mapping><name>enquiryid</name><value>trial_enquiryid</value></mapping>
+		<mapping><name>employeeid</name><value>trial_employeeid</value></mapping>
+	</setting>

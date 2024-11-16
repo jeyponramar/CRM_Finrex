@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulksmstemplate</title>
+  <module>bulksmstemplate</module>
+  <table>tbl_bulksmstemplate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulksmstemplate_bulksmstemplateid desc</defaultsort>
+  <columns>bulksmstemplate_templatename,bulksmstemplate_message</columns>
+  <columnlabels>Template Name,Message</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bulksmstemplate_templatename</name>
+      <headertext>Template Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulksmstemplate_bulksmstemplateid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_bulksmstemplate $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Template Name,Message</searchbylabels>
+  <searchbycolumns>bulksmstemplate_templatename,bulksmstemplate_message</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

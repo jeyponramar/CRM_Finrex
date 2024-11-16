@@ -1,0 +1,235 @@
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.Data.SqlClient;
+using System.Web.UI.HtmlControls;
+using System.Text;
+
+public partial class Payment_add : System.Web.UI.Page
+{
+    GlobalData gblData = new GlobalData("tbl_payment", "paymentid");
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+			CommonPage.DisableOnQuickAddEdit(btnSubmitAndView);
+            //FillDropDown_START
+			
+			gblData.FillDropdown(ddlpaymentmodeid, "tbl_paymentmode", "paymentmode_paymentmode", "paymentmode_paymentmodeid", "", "paymentmode_paymentmode");
+			EnableControlsOnEdit();
+			//FillDropDown_END
+            if (Request.QueryString["id"] == null)
+            {
+       			//PopulateAcOnAdd_START
+			
+			//PopulateAcOnAdd_END
+				//PopulateOnAdd_START
+				DataRow drpurchaseorder = CommonPage.PopulateOnAdd(form, "purchaseorderid");
+				DataRow drexpenses = CommonPage.PopulateOnAdd(form, "expensesid");
+				//PopulateOnAdd_END
+                //SetDefault_START//SetDefault_END
+                txttotalamount.Text = "";
+                txtamountpaid.Text = "";
+                populatePaymentDetail();
+            }
+            else
+            {
+                //Populate_START
+                gblData.PopulateForm(form, GetId());
+                //Populate_END
+            }
+            //CallPopulateSubGrid_START
+			
+			//CallPopulateSubGrid_END
+        }
+        //PageTitle_START
+        if (Request.QueryString["id"] == null)
+        {
+            lblPageTitle.Text = "Add Payment";
+        }
+        else
+        {
+            lblPageTitle.Text = "Edit Payment";
+        }
+        ClientScript.RegisterClientScriptBlock(typeof(Page), "title", "<script>setTitle('" + lblPageTitle.Text + "')</script>");
+        //PageTitle_START
+    }
+    //PopulateSubGrid_START
+			
+			//PopulateSubGrid_END
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        SaveData(true);
+    }
+    protected void btnSaveAndView_Click(object sender, EventArgs e)
+    {
+        if (SaveData(false) > 0)
+		{
+        	Response.Redirect("~/Payment/view.aspx");
+		}
+    }
+    private int SaveData(bool isclose)
+    {
+        lblMessage.Visible = false;
+        //SetCode_START//SetCode_END
+        //ExtraValues_START//ExtraValues_END
+        int id = 0;
+        CalculateTotalAmount();
+        if (CheckPaymentDetail())
+        {
+            id = gblData.SaveForm(form, GetId());
+        }
+        else
+        {
+            return 0;
+        }
+        id = gblData.SaveForm(form, GetId());
+
+        if (id > 0)
+        {
+            //SaveSubTable_START
+			
+			//SaveSubTable_END
+            //SaveFile_START
+			//SaveFile_END
+            //ParentCountUpdate_START
+			
+			//ParentCountUpdate_END
+            UpdateBalanceAmountForPurchaseOrderAsWellAsExpense();
+            lblMessage.Text = "Data saved successfully!";
+            lblMessage.Visible = true;
+            CommonPage.CloseQuickAddEditWindow(Page, form, id);
+        }
+        else if (id == -1)
+        {
+            lblMessage.Text = "Data already exists, duplicate entry not allowed!";
+            lblMessage.Visible = true;
+        }
+        else
+        {
+            lblMessage.Text = "Error occurred while saving data</br>Error : " + gblData._error;
+            lblMessage.Visible = true;
+        }
+        return id;
+    }
+    //EnableControlsOnEdit_START
+	private void EnableControlsOnEdit()
+	{
+		if (Request.QueryString["id"] == null) return;
+		btnDelete.Visible = true;
+	}//EnableControlsOnEdit_END
+    private int GetId()
+    {
+        if (h_IsCopy.Text == "1")
+        {
+            return 0;
+        }
+        else
+        {
+            return GlobalUtilities.ConvertToInt(Request.QueryString["id"]);
+        }
+    }
+    private void populatePaymentDetail()
+    {
+        int poid = GlobalUtilities.ConvertToInt(Request.QueryString["purchaseorderid"]);
+        int expenseId = GlobalUtilities.ConvertToInt(Request.QueryString["expensesid"]);
+        if (poid > 0)
+        {
+            DataRow dr = Common.GetOneRowData("tbl_purchaseorder", poid);
+            if (dr != null)
+            {
+                txtbillno.Text = GlobalUtilities.ConvertToString(dr["purchaseorder_orderno"]);
+                //trserviceengineerid.Visible = false;
+            }
+        }
+        else if (expenseId > 0)
+        {
+            DataRow dr = Common.GetOneRowData("tbl_expenses", expenseId);
+            if (dr != null)
+            {
+                txtbillno.Text = GlobalUtilities.ConvertToString(dr["expenses_voucherno"]);
+                //trvendorid.Visible = false;
+            }
+        }
+    }
+    private void CalculateTotalAmount()
+    {
+        double discountAmt = GlobalUtilities.ConvertToDouble(txtdiscount.Text);
+        double amountPaid = GlobalUtilities.ConvertToDouble(txtamountpaid.Text);
+        double totalAmt = discountAmt + amountPaid;
+        txttotalamount.Text = GlobalUtilities.ConvertToString(totalAmt);
+    }
+    private bool CheckPaymentDetail()
+    {
+        DataRow dr = null;
+        PaymentDAO dao = new PaymentDAO();
+        int purchaseOrderId = GlobalUtilities.ConvertToInt(txtpurchaseorderid.Text);
+        int expenseId = GlobalUtilities.ConvertToInt(txtexpensesid.Text);
+        if (purchaseOrderId > 0)
+            dr = dao.GetPurchaseOrderPaymentdetail(purchaseOrderId);
+        else if (expenseId > 0)
+            dr = dao.GetExpensePaymentdetail(expenseId);
+        double BalanceAmount = 0;
+        if (dr != null)
+        {
+            double TotalAmount = GlobalUtilities.ConvertToDouble(dr["TotalAmount"]);//totalamount
+            double dblnewpaidamount = GlobalUtilities.ConvertToDouble(txttotalamount.Text);//new amount 
+            if (dr["BalanceAmount"] != Convert.DBNull)
+            {
+                BalanceAmount = GlobalUtilities.ConvertToDouble(dr["BalanceAmount"]);//balance
+            }
+            else
+            {
+                BalanceAmount = TotalAmount;
+            }
+            if (Request.QueryString["id"] != null)//edit
+            {
+                BalanceAmount = (GlobalUtilities.ConvertToDouble(h_prevamoutpaid.Text)) + (BalanceAmount);
+            }
+
+            if (dblnewpaidamount > BalanceAmount)//new add
+            {
+                displayErrorMessage("Paid Amount Can not be greater than the Balance Amount, You Can Enter The Amount till:" + Convert.ToString(BalanceAmount));
+                return false;
+            }
+            BalanceAmount = BalanceAmount - dblnewpaidamount;
+            h_balanceamount.Text = Convert.ToString(BalanceAmount);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private void displayErrorMessage(string message)
+    {
+        lblMessage.Visible = true;
+        lblMessage.Text = message;
+    }
+    private void UpdateBalanceAmountForPurchaseOrderAsWellAsExpense()
+    {
+        int poid = GlobalUtilities.ConvertToInt(txtpurchaseorderid.Text);
+        int expenseId = GlobalUtilities.ConvertToInt(txtexpensesid.Text);
+        string query = "";
+        DataRow dr = null;
+        PaymentDAO dao = new PaymentDAO();
+        if (poid > 0)
+        {
+            dr = dao.UpdatePurchaseOrderForPayment(GlobalUtilities.ConvertToDouble(h_balanceamount.Text), poid);
+        }
+        else if (expenseId > 0)
+        {
+            dr = dao.UpdateExpenseForPayment(GlobalUtilities.ConvertToDouble(h_balanceamount.Text), expenseId);
+        }
+    }
+    
+	protected void btnthanksmail_Click(object sender, EventArgs e)
+	{
+	}
+}

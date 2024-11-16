@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Bankauditquestioncategory</title>
+		<module>bankauditquestioncategory</module>
+		<table>tbl_bankauditquestioncategory</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>bankauditquestioncategory_bankauditquestioncategoryid desc</defaultsort>
+		<columns>bankauditquestioncategory_category,bankauditquestiontype_questiontype</columns>
+		<columnlabels>Category,Question Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>bankauditquestioncategory_category</name><headertext>Category</headertext><width>50%</width><format></format></column><column><name>bankauditquestiontype_questiontype</name><headertext>Question Type</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>bankauditquestioncategory_bankauditquestioncategoryid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_bankauditquestioncategory
+
+ LEFT JOIN tbl_bankauditquestiontype ON bankauditquestiontype_bankauditquestiontypeid=bankauditquestioncategory_bankauditquestiontypeid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Category,Question Type</searchbylabels>
+		<searchbycolumns>bankauditquestioncategory_category,bankauditquestiontype_questiontype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

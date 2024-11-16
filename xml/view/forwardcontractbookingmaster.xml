@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Forwardcontractbookingmaster</title>
+		<module>forwardcontractbookingmaster</module>
+		<table>tbl_forwardcontractbookingmaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>forwardcontractbookingmaster_forwardcontractbookingmasterid desc</defaultsort>
+		<columns>forwardcontractbookingmaster_forwardcontractbooking</columns>
+		<columnlabels>Forward Contract Booking</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>forwardcontractbookingmaster_forwardcontractbooking</name><headertext>Forward Contract Booking</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>forwardcontractbookingmaster_forwardcontractbookingmasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_forwardcontractbookingmaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Forward Contract Booking</searchbylabels>
+		<searchbycolumns>forwardcontractbookingmaster_forwardcontractbooking</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

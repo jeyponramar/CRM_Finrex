@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Alertstatus</title>
+  <module>alertstatus</module>
+  <table>tbl_alertstatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>alertstatus_alertstatusid desc</defaultsort>
+  <columns>alertstatus_status,alertstatus_textcolor,alertstatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>alertstatus_status</name>
+      <headertext>Status</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alertstatus_textcolor</name>
+      <headertext>Text Color</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alertstatus_backgroundcolor</name>
+      <headertext>Background Color</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>alertstatus_alertstatusid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_alertstatus
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>alertstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

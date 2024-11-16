@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Querytopic</title>
+		<module>querytopic</module>
+		<table>tbl_querytopic</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>querytopic_querytopicid desc</defaultsort>
+		<columns>querytopic_topicname,querytype_querytype</columns>
+		<columnlabels>Topic Name,Query Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>querytopic_topicname</name><headertext>Topic Name</headertext><width>50%</width><format></format></column><column><name>querytype_querytype</name><headertext>Query Type</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>querytopic_querytopicid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_querytopic
+
+ LEFT JOIN tbl_querytype ON querytype_querytypeid=querytopic_querytypeid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Topic Name,Query Type</searchbylabels>
+		<searchbycolumns>querytopic_topicname,querytype_querytype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

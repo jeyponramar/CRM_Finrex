@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bombaymetalexchangerate</title>
+  <module>bombaymetalexchangerate</module>
+  <table>tbl_bombaymetalexchangerate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bombaymetalexchangerate_bombaymetalexchangerateid desc</defaultsort>
+  <columns>bombaymetalexchangerate_date,bombaymetalexchangerate_virginmetal,bombaymetalexchangerate_metalname,bombaymetalexchangerate_metaldescription,bombaymetalexchangerate_todayrate,bombaymetalexchangerate_prevdayrate,bombaymetalexchangerate_yearagorate,bombaymetalexchangerate_monthagorate,bombaymetalexchangerate_changepercentage,bombaymetalexchangerate_monthchangepercentage,bombaymetalexchangerate_yearchangepercentage</columns>
+  <columnlabels>Date,Virgin Metal,Metal Name,Metal Description,Today Rate,Prev Day Rate,Year Ago Rate,Month Ago Rate,Change Percentage,Month Change Percentage,Year Change Percentage</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bombaymetalexchangerate_date</name>
+      <headertext>Date</headertext>
+      <width>33%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>bombaymetalexchangerate_todayrate</name>
+      <headertext>Today Rate</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>bombaymetalexchangerate_metalname</name>
+      <headertext>Metal Name</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bombaymetalexchangerate_metaldescription</name>
+      <headertext>Metal Description</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bombaymetalexchangerate_bombaymetalexchangerateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bombaymetalexchangerate
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Metal Name,Metal Description</searchbylabels>
+  <searchbycolumns>bombaymetalexchangerate_metalname,bombaymetalexchangerate_metaldescription</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Goodstype</title>
+		<module>goodstype</module>
+		<table>tbl_goodstype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>goodstype_goodstypeid desc</defaultsort>
+		<columns>goodstype_goodstype</columns>
+		<columnlabels>Goods Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>goodstype_goodstype</name><headertext>Goods Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>goodstype_goodstypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_goodstype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Goods Type</searchbylabels>
+		<searchbycolumns>goodstype_goodstype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

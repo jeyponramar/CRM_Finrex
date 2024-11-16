@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>submenu</title>
+  <module>submenu</module>
+  <table>tbl_submenu</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>submenu_submenuid desc</defaultsort>
+  <columns>submenu_submenuname,menu_menuname,submenu_url,submenu_sequence,submenu_isnewwindow,submenu_menutype,submenu_isvisible</columns>
+  <columnlabels>Sub Menu Name,Menu,URL,Sequence,Is New Window,Menu Type,Is Visible</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>submenu_submenuname</name>
+      <headertext>Sub Menu Name</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>menu_menuname</name>
+      <headertext>Menu</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>submenu_url</name>
+      <headertext>URL</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>submenu_sequence</name>
+      <headertext>Sequence</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>submenu_isnewwindow</name>
+      <headertext>Is New Window</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>submenu_menutype</name>
+      <headertext>Menu Type</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>submenu_isvisible</name>
+      <headertext>Is Visible</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>submenu_submenuid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_submenu JOIN tbl_menu ON menu_menuid=submenu_menuid $Search$</query>
+  <where>menu_projectid=$SESSION_ProjectId$</where>
+  <searchbylabels>Sub Menu Name,Menu,Menu Type</searchbylabels>
+  <searchbycolumns>submenu_submenuname,menu_menuname,submenu_menutype</searchbycolumns>
+</setting>

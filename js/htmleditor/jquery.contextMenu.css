@@ -1,0 +1,109 @@
+/* Generic context menu styles */
+.contextMenu {
+	position: absolute;
+	width: 180px;
+	z-index: 99999;
+	border: solid 1px #CCC;
+	background-color: #EEE;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.contextMenu LI {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.contextMenu LI ul 
+{
+    background-color:#EEE;
+    position: absolute;
+	width: 180px;
+	z-index: 99999;
+	border: solid 1px #CCC;
+	
+	padding: 0px;
+	margin: -20px;
+	left:200px;
+}
+.contextMenu LI ul li
+{
+    list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.contextMenu .del
+{
+   background-image: -webkit-linear-gradient(top,#b60102,#8e0203);
+}
+.contextMenu .del a{color:#ffffff; }
+.contextMenu A {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	height: 20px;
+	
+	outline: none;
+	padding: 1px 5px;
+	padding-left: 28px;
+}
+
+.contextMenu LI.hover A {
+	color: #FFF;
+}
+.contextMenu LI.hover ul li a{
+	color: #000;
+}
+.contextMenu LI.hover {
+	background-color: #3399FF;
+}
+.contextMenu LI.disabled A {
+	color: #AAA;
+	cursor: default;
+}
+
+.contextMenu LI.hover.disabled A {
+	background-color: transparent;
+}
+
+.contextMenu LI.separator {
+	border-top: solid 1px #CCC;
+}
+.heditor-cell-border-all
+{
+    background-image:url(../../images/htmleditor/cell-border-all.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}
+.heditor-cell-border-left
+{
+    background-image:url(../../images/htmleditor/cell-border-left.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}
+.heditor-cell-border-top
+{
+    background-image:url(../../images/htmleditor/cell-border-top.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}
+.heditor-cell-border-right
+{
+    background-image:url(../../images/htmleditor/cell-border-right.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}
+.heditor-cell-border-bottom
+{
+    background-image:url(../../images/htmleditor/cell-border-bottom.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}
+.heditor-cell-border-no
+{
+    background-image:url(../../images/htmleditor/cell-border-no.png);
+    background-position:5px 5px;
+    background-repeat:no-repeat;
+}

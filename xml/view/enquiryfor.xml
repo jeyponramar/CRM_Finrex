@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>enquiryfor</title>
+		<module>enquiryfor</module>
+		<table>tbl_enquiryfor</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>enquiryfor_enquiryforid desc</defaultsort>
+		<columns>enquiryfor_enquiryfor</columns>
+		<columnlabels>Enquiry For</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>enquiryfor_enquiryfor</name><headertext>Enquiry For</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>enquiryfor_enquiryforid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_enquiryfor $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Enquiry For</searchbylabels>
+		<searchbycolumns>enquiryfor_enquiryfor</searchbycolumns>
+	</setting>

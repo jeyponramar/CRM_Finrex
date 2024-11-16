@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Metal</title>
+		<module>metal</module>
+		<table>tbl_metal</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>metal_metalid desc</defaultsort>
+		<columns>metal_metalname</columns>
+		<columnlabels>Metal Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>metal_metalname</name><headertext>Metal Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>metal_metalid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_metal
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Metal Name</searchbylabels>
+		<searchbycolumns>metal_metalname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

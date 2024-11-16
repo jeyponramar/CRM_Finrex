@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>sharecomment</title>
+  <module>sharecomment</module>
+  <table>tbl_sharecomment</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>sharecomment_sharecommentid desc</defaultsort>
+  <columns>sharecomment_comment,sharecomment_shareid</columns>
+  <columnlabels>Comment,Share Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>sharecomment_sharecommentid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_sharecomment $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

@@ -1,0 +1,72 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ExeMasterPage.master.cs" Inherits="exe_ExeMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Finstation - Exe Live Rate</title>
+    <link href="css/common.css?v=1.2" rel="stylesheet" type="text/css" />
+    <link href="../css/ionicons.min.css" rel="stylesheet" type="text/css" />  
+    <link href="../css/jquery-ui.css" rel="stylesheet" type="text/css" />  
+    
+    <script src="../js/jquery.min.js?v=<%=VersionNo %>" type="text/javascript"></script>   
+    <script src="js/exe.js?v=<%=VersionNo %>" type="text/javascript"></script>   
+    <script src="../js/jquery-ui.min.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/validate.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script>
+        
+        $(document).ready(function(){
+            $(document).keydown(function(e){
+                if(e.keyCode >= 112 && e.keyCode <= 123) 
+                {
+                    return false;
+                }
+            });
+            setWindowHeight();
+            $(".jq-mainheader").dblclick(function(){
+                if(window.location.href.indexOf("localhost") > 0) {
+                    window.location.href = window.location.href;
+                }
+            });
+            $(document).click(function(){
+                setWindowHeight();
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:TextBox ID="hsessionid" runat="server" CssClass="hidden jq-sessionid"></asp:TextBox>
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr id="trheader" runat="server">
+        <td style="color:#fff;background-color:#0251a0;padding-top:5px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="text-align:center;font-size:15px;font-weight:bold;" class="jq-mainheader">FinWatch
+                        <asp:TextBox ID="hdnsessionid" runat="server" CssClass="jq-hdnsessionid" style="display:none;"></asp:TextBox>
+                    </td>
+                   
+                    <td width="60">
+                        <div style="float:right;margin-left:5px;background-color:#000;border:solid 1px #fff;color:#fff;font-weight:bold;font-size:14px;width:18px;height:19px;text-align:center;border-radius:3px;margin-right:10px;cursor:default;" onclick="window.external.exit();">x</div>
+                        <div style="border:solid 1px #fff;border-radius:3px;width:20px;height:20px;float:right;" onclick="window.external.minimize();"><img src="images/minimize.png" /></div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        
+    </tr>
+    <tr>
+        <td style="border:solid 3px #0251a0;vertical-align:top;">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </td>
+    </tr>
+</table>
+    </form>
+</body>
+</html>

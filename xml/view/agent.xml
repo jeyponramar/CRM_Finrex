@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Agent</title>
+  <module>agent</module>
+  <table>tbl_agent</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>agent_agentid desc</defaultsort>
+  <columns>agent_agentname,onlinestatus_status,agent_lastupdate,agent_chatid</columns>
+  <columnlabels>Agent Name,Online Status,Last Update,Chat Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>agent_agentname</name>
+      <headertext>Agent Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>agent_agentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_agent
+
+ LEFT JOIN tbl_onlinestatus ON onlinestatus_onlinestatusid=agent_onlinestatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Agent Name</searchbylabels>
+  <searchbycolumns>agent_agentname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

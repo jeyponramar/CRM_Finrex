@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Pushnotificationapptype</title>
+		<module>pushnotificationapptype</module>
+		<table>tbl_pushnotificationapptype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>pushnotificationapptype_pushnotificationapptypeid desc</defaultsort>
+		<columns>pushnotificationapptype_apptype</columns>
+		<columnlabels>App Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>pushnotificationapptype_apptype</name><headertext>App Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>pushnotificationapptype_pushnotificationapptypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_pushnotificationapptype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>App Type</searchbylabels>
+		<searchbycolumns>pushnotificationapptype_apptype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Faqcategory</title>
+  <module>faqcategory</module>
+  <table>tbl_faqcategory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>faqcategory_faqcategoryid desc</defaultsort>
+  <columns>faqcategory_categoryname</columns>
+  <columnlabels>Category Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>faqcategory_categoryname</name>
+      <headertext>Category Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>faqcategory_faqcategoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_faqcategory
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Category Name</searchbylabels>
+  <searchbycolumns>faqcategory_categoryname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

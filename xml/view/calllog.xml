@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Calllog</title>
+  <module>calllog</module>
+  <table>tbl_calllog</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>calllog_calllogid DESC</defaultsort>
+  <columns>calllog_mobileno,calllog_emailid,subscription_subscriptioncode,client_customername,notificationtype_notificationtype,bulksmstemplate_templatename,bulkemailtemplate_templatename,calllog_subject,calllog_message,employee_employeename,calllog_sentdate,emailsmssentstatus_status,calllog_attachment,trial_trialcode</columns>
+  <columnlabels>Mobile No,Email Id,Subscription,Client,Notification Type,SMS Template,Email Template,Subject,Message,Sent By,Sent Date,Status,Attachment,Trial</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>notificationtype_notificationtype</name>
+      <headertext>Notification Type</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Sent By</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>calllog_sentdate</name>
+      <headertext>Sent Date</headertext>
+      <width>14%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_subscriptioncode</name>
+      <headertext>Subscription</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>trial_trialcode</name>
+      <headertext>Trial</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>calllog_calllogid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_calllog
+
+ LEFT JOIN tbl_subscription ON subscription_subscriptionid=calllog_subscriptionid
+ LEFT JOIN tbl_client ON client_clientid=calllog_clientid
+ LEFT JOIN tbl_notificationtype ON notificationtype_notificationtypeid=calllog_notificationtypeid
+ LEFT JOIN tbl_bulksmstemplate ON bulksmstemplate_bulksmstemplateid=calllog_bulksmstemplateid
+ LEFT JOIN tbl_bulkemailtemplate ON bulkemailtemplate_bulkemailtemplateid=calllog_bulkemailtemplateid
+ LEFT JOIN tbl_employee ON employee_employeeid=calllog_employeeid
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=calllog_emailsmssentstatusid
+ LEFT JOIN tbl_trial ON trial_trialid=calllog_trialid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Mobile No,Email Id,Subscription,Client,Notification Type,Sent By,Status,Trial</searchbylabels>
+  <searchbycolumns>calllog_mobileno,calllog_emailid,subscription_subscriptioncode,client_customername,notificationtype_notificationtype,employee_employeename,emailsmssentstatus_status,trial_trialcode</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>True</applyviewrights>
+</setting>

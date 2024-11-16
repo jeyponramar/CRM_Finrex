@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Fpiinvestment</title>
+		<module>fpiinvestment</module>
+		<table>tbl_fpiinvestment</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>fpiinvestment_fpiinvestmentid desc</defaultsort>
+		<columns>fpiinvestment_date,fpiinvestment_equity,fpiinvestment_debt,fpiinvestment_debtvrr,fpiinvestment_hybrid</columns>
+		<columnlabels>Date,Equity,Debt,Debt VRR,Hybrid</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>fpiinvestment_date</name><headertext>Date</headertext><width>20%</width><format>Date</format></column><column><name>fpiinvestment_equity</name><headertext>Equity</headertext><width>20%</width><format>Amount</format></column><column><name>fpiinvestment_debt</name><headertext>Debt</headertext><width>20%</width><format>Amount</format></column><column><name>fpiinvestment_debtvrr</name><headertext>Debt VRR</headertext><width>20%</width><format>Amount</format></column><column><name>fpiinvestment_hybrid</name><headertext>Hybrid</headertext><width>20%</width><format>Amount</format></column>
+		</gridcolumn>
+		<hiddencolumns>fpiinvestment_fpiinvestmentid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_fpiinvestment
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

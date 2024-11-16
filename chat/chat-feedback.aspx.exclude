@@ -1,0 +1,93 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="chat-feedback.aspx.cs" Inherits="chat_chat_feedback" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Finchat</title>
+    <link href="chat.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>  
+    <script>
+    var _totalTimeSpent = 0;
+    $(document).ready(function() {
+        $(".menu-myaccount").addClass("activemenu");
+        $(".roption").click(function() {
+            $(this).closest(".question-ans").css("border", "solid 1px #b4d2d7");
+        });
+        $(".submitans").click(function() {
+            var totalQuestions = $(".question").length;
+            var ansQuestions = 0;
+
+            $(".options").each(function() {
+                var isanswered = false;
+                $(this).find("input").each(function() {
+                    if ($(this).is(":checked")) {
+                        ansQuestions++;
+                        isanswered = true;
+                    }
+                });
+                if (!isanswered) {
+                    $(this).closest(".question-ans").css("border", "solid 1px #e00000");
+                }
+            });
+            if (totalQuestions == ansQuestions) {
+                return confirm("You have answered all the feedback questions!\n\nAre you sure you want to continue?");
+            }
+            else
+            {
+                return confirm("You have not answered all the feedback questions!\n\nAre you sure you want to continue?");
+            }
+        });
+        
+    });
+    
+</script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table cellpadding="0" cellspacing="0"  width="100%">
+    <tr>
+        <td style="padding:7px;background-color:#000;border-bottom:2px solid #d71921;">
+            <table width="100%">
+                <tr>
+                    <td><img src="images/logo.png" / height="35px"></td>
+                </tr>
+            </table>
+        
+        </td>
+    </tr>
+       <tr>
+            <td>
+                <table cellpadding="0" cellspacing="0" width="100%"> 
+                     <tr>
+                        <td style="background-color:#ccc;height:35px; 
+                            width:100%;text-align:center;color:#000; font-size:14px;">
+                            Welcome to Rplus Crm
+                        </td>
+                    </tr>
+                    <tr><td style="color:#0e6acd;font-size:15px;font-weight:bold;text-align:center;padding-top:10px;">Feedback Form</td></tr>
+                    <tr><td><asp:Label ID="lblMessage" runat="server" CssClass="error"></asp:Label></td></tr>
+                    <tr><td>
+                        <table width="100%" id="tblFeedback" runat="server">
+                            <tr>
+                                <td><asp:Literal ID="ltQuestions" runat="server"></asp:Literal></td>
+                            </tr>
+                            <tr><td class="label">Feedback / Suggestion</td></tr>
+                            <tr>
+                                <td><asp:TextBox runat="server" ID="txtfeedback" TextMode="MultiLine" CssClass="textarea" Width="350" MaxLength="500"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><asp:Button ID="btnSubmitAnswer" CssClass="button submitans" runat="server" Text="Submit Your Answer" OnClick="btnSubmitAnswer_Click" /></td>
+                            </tr>
+                            <tr><td style="height:30px">&nbsp;</td></tr>
+                        </table>
+                    </td></tr>
+                    
+                </table>
+            </td>
+       </tr>
+    </table>
+    </form>
+</body>
+</html>

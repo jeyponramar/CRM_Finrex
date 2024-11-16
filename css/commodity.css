@@ -1,0 +1,143 @@
+﻿.hidden{display:none;}
+.comm-stitle
+{
+	background-color:#32347e !important;
+	color:#fff;
+	padding:5px;
+	text-align:center;
+	font-size:12px;
+}
+.valign{vertical-align:top;}
+.grid-ui-header td
+{
+	min-width:auto !important;
+}
+.capitalize
+{
+	text-transform:capitalize;
+}
+.grid-ui
+{
+	border-color:#eee;
+}
+.grid-ui-row-alt td
+{
+	background-color:#fafafa;
+}
+.grid-ui tr td
+{
+	padding:6px;
+}
+.grid-ui-header
+{
+	background-color:#e7edf1 !important;
+}
+.stitle
+{
+	color: #32347e;
+    font-weight: bold;
+}
+.bigtext
+{
+	font-size: 20px;
+    color: #222;
+}
+.box
+{
+    border: solid 1px #cccccc;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 10px 12px rgb(100 100 100 / 25%);
+    padding: 15px;
+    background-color:#fafafa;
+}
+.box2
+{
+	background-color: #fafafa;
+    padding: 10px;
+    border: solid 1px #eee;
+}
+.button
+{
+	background-color:#f73666;
+	border:solid 1px #ea1546;
+}
+.datepicker
+{
+	height: 25px;
+    border: solid 1px #ccc;
+}
+.tabs
+{
+	background-color:#eee;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	height:40px;
+	width:auto;
+}
+.tabs div
+{
+	text-align:center;
+	height:30px;
+	padding-left:10px;padding-right:10px;
+	padding-top:10px;
+	float:left;
+	color:#444;
+	border-right:solid 1px #fff;
+	cursor:pointer;
+}
+.tabs div:last-child
+{
+	border-right:0px;
+}
+.tab-active
+{
+	border-bottom:solid 3px #f73666;
+}
+.rate-up
+{
+	background-color:#37d752;
+	color:#fff;
+	border-radius:3px;
+	font-size:12px;
+	padding:5px 5px 0px 5px;
+	height:20px;width:50px;
+	margin:auto;
+}
+.rate-mid
+{
+	background-color:#533233;
+	color:#fff;
+	border-radius:3px;
+	font-size:12px;
+	padding:5px 5px 0px 5px;
+	height:20px;width:50px;
+	margin:auto;
+}
+.rate-down
+{
+	background-color:#ff3b30;
+	color:#fff;
+	border-radius:3px;
+	font-size:12px;
+	padding:5px 5px 0px 5px;
+	height:20px;
+	width:50px;
+	margin:auto;
+}
+.rate
+{
+	padding:5px;
+	font-size:14px;
+}
+.title
+{
+	padding-left:5px !important;
+}
+.rate
+{
+	min-width:60px !important;
+}
+.jq-lme-settlement-more
+{
+	display:none;
+}

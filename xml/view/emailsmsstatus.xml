@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Emailsmsstatus</title>
+		<module>emailsmsstatus</module>
+		<table>tbl_emailsmsstatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>emailsmsstatus_emailsmsstatusid desc</defaultsort>
+		<columns>emailsmsstatus_status</columns>
+		<columnlabels>Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>emailsmsstatus_status</name><headertext>Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>emailsmsstatus_emailsmsstatusid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_emailsmsstatus $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Status</searchbylabels>
+		<searchbycolumns>emailsmsstatus_status</searchbycolumns>
+	</setting>

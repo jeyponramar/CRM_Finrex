@@ -1,0 +1,88 @@
+<html>
+<head> 
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src * 'unsafe-inline'; media-src *" />  
+    <!--<meta http-equiv="Content-Security-Policy" content="*"/>-->
+
+	<link rel="stylesheet" type="text/css" href="css/onsenui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/dark-onsen-css-components.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobile.css" />
+	 
+    <title>RPlusWatch</title>  
+    <script>      
+    var _RPLUS_API = "http://localhost:58845/CRM_Finrex";// "https://finstation.in";//
+    </script>  
+    <script type="text/javascript" src="cordova.js"></script> 
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/onsenui.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.min.js"></script> 
+     
+    <script type="text/javascript">
+        $.getScript(_RPLUS_API+"/mobile-phonegap/js/mobile.js?ts="+new Date().getTime());
+        app.initialize();  
+        
+    </script> 
+</head>
+     
+<body>  
+	
+    <svg class="progress-circular" style="top:50%;left:45%;position:absolute;">
+	  <circle class="progress-circular__background"/>  
+	  <circle class="progress-circular__secondary" style="stroke-dasharray: 140%, 251.32%"/>
+	  <circle class="progress-circular__primary" style="stroke-dasharray: 100%, 251.32%"/>
+	</svg>
+    <ons-page>
+    <ons-splitter>
+        <ons-splitter-side id="menu" side="left" style="display:none;" width="220px" swipe-target-width="150px" collapse swipeable>
+            <ons-page>
+                <div style="margin-left:0px;padding-top:10px;padding-bottom:10px;background-color:#fff;height:20px;">
+                    <div style="float:left;color:#32347e;font-size:20px;padding-left:10px;">FinIcon</div>
+                </div>
+                <div style="clear:both;"></div>
+                <ons-list>
+                    <ons-list-item tappable class="lnkmenu" url="dashboard.html">Spot Rate</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="forward.html">Forward Rate</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="indices.html">Indices</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="brokendatecalc.html">Broken Date Calculation</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="essentialreading.html">Essential Reading</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="setalert.html">Set Alert</ons-list-item>
+                    <ons-list-item tappable class="lnkmenu" url="logout.html">Logout</ons-list-item>
+                </ons-list>
+            </ons-page>
+            
+        </ons-splitter-side>
+        <ons-splitter-content id="content" page="homepage.html"></ons-splitter-content>
+    </ons-splitter>
+</ons-page>
+<ons-template id="homepage.html">
+  <ons-page id="homepage">
+    <ons-navigator id="myNavigator" page="login.html"></ons-navigator>
+  </ons-page>
+</ons-template>
+
+<template id="login.html">
+  <ons-page id="loginpage" style="display:none;">
+        <div style="background-color:#fff;width:100%;height:30px;padding:10px;">
+            <div style="float:left;color:#32347e;font-size:20px;">FinIcon</div>
+        </div>
+        <br />
+      <div class="login-form form">
+        
+        <input type="email" class="text-input--underbar" placeholder="User Name" value="" name="username" id="username"/>
+        <br/>
+        <input type="password" class="text-input--underbar" placeholder="Password" value="" name="password" id="password"/>
+        <br/><br/>
+        <ons-button modifier="large" class="login-button btnsubmit" action="login" m="login" id="btnlogin">Log In</ons-button>
+        <br/><br/>
+      </div>
+
+    </ons-page>
+</template>
+
+</body> 
+
+</html>

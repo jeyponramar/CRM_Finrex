@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Finstationdocumenttype</title>
+		<module>finstationdocumenttype</module>
+		<table>tbl_finstationdocumenttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>finstationdocumenttype_finstationdocumenttypeid desc</defaultsort>
+		<columns>finstationdocumenttype_documenttype</columns>
+		<columnlabels>Document Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>finstationdocumenttype_documenttype</name><headertext>Document Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>finstationdocumenttype_finstationdocumenttypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_finstationdocumenttype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Document Type</searchbylabels>
+		<searchbycolumns>finstationdocumenttype_documenttype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

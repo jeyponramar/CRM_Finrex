@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Bankbookingaccessmaster</title>
+		<module>bankbookingaccessmaster</module>
+		<table>tbl_bankbookingaccessmaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>bankbookingaccessmaster_bankbookingaccessmasterid desc</defaultsort>
+		<columns>bankbookingaccessmaster_bookingaccesstype</columns>
+		<columnlabels>Booking Access Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>bankbookingaccessmaster_bookingaccesstype</name><headertext>Booking Access Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>bankbookingaccessmaster_bankbookingaccessmasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_bankbookingaccessmaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Booking Access Type</searchbylabels>
+		<searchbycolumns>bankbookingaccessmaster_bookingaccesstype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

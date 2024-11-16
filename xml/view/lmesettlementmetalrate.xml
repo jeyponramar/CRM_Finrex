@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Lmesettlementmetalrate</title>
+		<module>lmesettlementmetalrate</module>
+		<table>tbl_lmesettlementmetalrate</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>lmesettlementmetalrate_lmesettlementmetalrateid desc</defaultsort>
+		<columns>lmesettlementmetalrate_date,metal_metalname,lmesettlementmetalrate_cashask,lmesettlementmetalrate_cashbid,lmesettlementmetalrate_threemonthsask,lmesettlementmetalrate_threemonthsbid,lmesettlementmetalrate_oneyearask,lmesettlementmetalrate_oneyearbid,lmesettlementmetalrate_twoyearsask,lmesettlementmetalrate_twoyearsbid,lmesettlementmetalrate_threeyearsask,lmesettlementmetalrate_threeyearsbid</columns>
+		<columnlabels>Date,Metal,Cash Ask,cashbid,threemonthsask,threemonthsbid,oneyearask,oneyearbid,twoyearsask,twoyearsbid,threeyearsask,threeyearsbid</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>lmesettlementmetalrate_date</name><headertext>Date</headertext><width>50%</width><format>DateTime</format></column><column><name>metal_metalname</name><headertext>Metal</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>lmesettlementmetalrate_lmesettlementmetalrateid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_lmesettlementmetalrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=lmesettlementmetalrate_metalid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Metal</searchbylabels>
+		<searchbycolumns>metal_metalname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

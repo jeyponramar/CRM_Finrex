@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Tradecredittype</title>
+		<module>tradecredittype</module>
+		<table>tbl_tradecredittype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>tradecredittype_tradecredittypeid desc</defaultsort>
+		<columns>tradecredittype_tradecredittype</columns>
+		<columnlabels>Trade Credit Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>tradecredittype_tradecredittype</name><headertext>Trade Credit Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>tradecredittype_tradecredittypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_tradecredittype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Trade Credit Type</searchbylabels>
+		<searchbycolumns>tradecredittype_tradecredittype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

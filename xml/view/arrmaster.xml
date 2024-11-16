@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Arrmaster</title>
+		<module>arrmaster</module>
+		<table>tbl_arrmaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>arrmaster_arrmasterid desc</defaultsort>
+		<columns>arrmaster_name</columns>
+		<columnlabels>Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>arrmaster_name</name><headertext>Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>arrmaster_arrmasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_arrmaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Name</searchbylabels>
+		<searchbycolumns>arrmaster_name</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

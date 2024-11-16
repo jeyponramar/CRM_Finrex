@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>communicationsource</title>
+		<module>communicationsource</module>
+		<table>tbl_communicationsource</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>communicationsource_communicationsourceid desc</defaultsort>
+		<columns>communicationsource_communicationsource</columns>
+		<columnlabels>Communication Source</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>communicationsource_communicationsource</name><headertext>Communication Source</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>communicationsource_communicationsourceid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_communicationsource $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Communication Source</searchbylabels>
+		<searchbycolumns>communicationsource_communicationsource</searchbycolumns>
+	</setting>

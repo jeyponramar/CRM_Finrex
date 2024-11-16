@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Invoice</title>
+  <module>Invoice</module>
+  <table>tbl_invoice</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>invoice_invoiceid DESC</defaultsort>
+  <columns>invoicefor_invoicefor,client_customername,invoice_referenceno,invoice_emailid,invoice_mobileno,invoice_contactperson,invoice_invoicedate,invoice_quotationid,invoice_amcid,invoice_salesid,setupfortermsandcondition_name,invoice_billingaddress,invoice_gotoreceipt,invoice_amountpaid,invoice_balanceamount,invoice_totalamount,invoice_serviceid,invoice_addexpenses,invoice_amcserviceid,invoice_complaintid,invoice_isupdatestatusforothermodule,invoice_ispaid</columns>
+  <columnlabels>Invoice for,Customer Name,Reference No,Email Id,Mobile No,Contact Person,Invoice Date,Quotation Id,Amc Id,Sales Id,Terms And Condition,Billing Address,Go to Receipt,Amount Paid,Balance Amount,Total Amount,Service Id,Add Expenses,Amc Service Id,Complaint Id,Is Update Status For Other Module,Is Paid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>invoice_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_invoicedate</name>
+      <headertext>Invoice Date</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>invoice_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>invoice_amountpaid</name>
+      <headertext>Amount Paid</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>invoice_balanceamount</name>
+      <headertext>Balance Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>invoicefor_invoicefor</name>
+      <headertext>Invoice for</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>invoice_invoiceid</hiddencolumns>
+  <query>SELECT * FROM tbl_invoice
+LEFT JOIN tbl_invoicefor ON invoice_invoiceforid=invoicefor_invoiceforid
+JOIN tbl_client ON invoice_clientid=client_clientid
+LEFT JOIN tbl_setupfortermsandcondition ON invoice_setupfortermsandconditionid=setupfortermsandcondition_setupfortermsandconditionid</query>
+  <where>(DATEDIFF(dd,invoice_invoicedate,getdate())&amp;gt;30 AND DATEDIFF(dd,invoice_invoicedate,getdate())&amp;lt;=60) AND invoice_balanceamount&amp;gt;0</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

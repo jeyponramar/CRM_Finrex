@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Currencytype</title>
+		<module>currencytype</module>
+		<table>tbl_currencytype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>currencytype_currencytypeid desc</defaultsort>
+		<columns>currencytype_type</columns>
+		<columnlabels>Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>currencytype_type</name><headertext>Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>currencytype_currencytypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_currencytype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Type</searchbylabels>
+		<searchbycolumns>currencytype_type</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

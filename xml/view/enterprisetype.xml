@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Enterprisetype</title>
+		<module>enterprisetype</module>
+		<table>tbl_enterprisetype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>enterprisetype_enterprisetypeid desc</defaultsort>
+		<columns>enterprisetype_enterprisetype</columns>
+		<columnlabels>Enterprise Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>enterprisetype_enterprisetype</name><headertext>Enterprise Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>enterprisetype_enterprisetypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_enterprisetype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Enterprise Type</searchbylabels>
+		<searchbycolumns>enterprisetype_enterprisetype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

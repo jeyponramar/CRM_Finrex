@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Business</title>
+		<module>business</module>
+		<table>tbl_business</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>business_businessid desc</defaultsort>
+		<columns>business_business</columns>
+		<columnlabels>Business</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>business_business</name><headertext>Business</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>business_businessid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_business $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Business</searchbylabels>
+		<searchbycolumns>business_business</searchbycolumns>
+	</setting>

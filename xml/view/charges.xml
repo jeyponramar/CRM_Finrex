@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>product</title>
+  <module>product</module>
+  <table>tbl_product</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>product_productid desc</defaultsort>
+  <columns>product_productname,product_ischarges,product_totalstockin,product_totalstockout,product_openingstock,product_totalstock,product_minimumstock,product_maximumstock</columns>
+  <columnlabels>Product Name,IsCharges,Total Stock In,Total Stock Out,Opening Stock,Total Stock,Minimum Stock,Maximum Stock</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>product_productname</name>
+      <headertext>Product Name</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>product_productid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_product where ISNULL(product_ischarges,0)=1 $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Charges</searchbylabels>
+  <searchbycolumns>product_productname</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

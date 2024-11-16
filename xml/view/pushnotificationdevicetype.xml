@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Pushnotificationdevicetype</title>
+		<module>pushnotificationdevicetype</module>
+		<table>tbl_pushnotificationdevicetype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>pushnotificationdevicetype_pushnotificationdevicetypeid desc</defaultsort>
+		<columns>pushnotificationdevicetype_devicetype</columns>
+		<columnlabels>Device Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>pushnotificationdevicetype_devicetype</name><headertext>Device Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>pushnotificationdevicetype_pushnotificationdevicetypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_pushnotificationdevicetype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Device Type</searchbylabels>
+		<searchbycolumns>pushnotificationdevicetype_devicetype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Subscription</title>
+  <module>subscription</module>
+  <table>tbl_subscription</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>subscription_subscriptionid DESC</defaultsort>
+  <columns>client_customername,subscription_startdate,subscription_enddate,subscription_subscriptionnotificationtype,subscription_subscriptioncurrency,subscription_subscriptionservices,employee_employeename,subscription_remarks,subscription_opportunityid,subscription_password,subscription_subscriptioncode,subscription_isrenew,subscription_isdecline,subscription_parentcode,subscription_subscriptionparentid,subscriptionstatus_status</columns>
+  <columnlabels>Customer Name,Start Date,End Date,Notification Type,Currency,Services,User Name,Remarks,Opportunity Id,password,Subscription Code,Is Renew,Is Decline,Parent Code,Subscription Parent Id,Subscription Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_startdate</name>
+      <headertext>Start Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscription_enddate</name>
+      <headertext>Software End Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscriptionstatus_status</name>
+      <headertext>Subscription Status</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+
+  <hiddencolumns>subscription_subscriptionid</hiddencolumns>
+  <query>
+    SELECT * FROM tbl_subscription
+    JOIN tbl_subscriptionstatus ON subscription_subscriptionstatusid=subscriptionstatus_subscriptionstatusid
+    JOIN tbl_client ON client_clientid=subscription_clientid
+    LEFT JOIN tbl_employee ON employee_employeeid=subscription_employeeid
+  </query>
+  <where>
+    ('$subscription_clientid$' = '0' OR subscription_clientid = '$subscription_clientid$') AND
+    ('$subscription_employeeid$' = '0' OR subscription_employeeid = '$subscription_employeeid$') AND
+    ('$subscription_subscriptionstatusid$' = '0' OR subscription_subscriptionstatusid = '$subscription_subscriptionstatusid$') AND
+    subscription_startdate BETWEEN '$subscription_startdate_from$' AND '$subscription_startdate_to$'
+    AND subscription_enddate BETWEEN '$subscription_enddate_from$' AND '$subscription_enddate_to$'
+    AND subscription_invoiceperiodfrom BETWEEN '$subscription_invoiceperiodfrom_from$' AND '$subscription_invoiceperiodfrom_to$'
+    AND subscription_invoiceperiodto BETWEEN '$subscription_invoiceperiodto_from$' AND '$subscription_invoiceperiodto_to$'
+    AND subscription_latestinvoicedate BETWEEN '$subscription_latestinvoicedate_from$' AND '$subscription_latestinvoicedate_to$'
+    AND subscription_enddate BETWEEN '$subscription_enddate_from$' AND '$subscription_enddate_to$'
+
+  </where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>True</applyviewrights>
+</setting>

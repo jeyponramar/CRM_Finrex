@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Emailreminder</title>
+  <module>emailreminder</module>
+  <table>tbl_emailreminder</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>emailreminder_emailreminderid desc</defaultsort>
+  <columns>emailreminder_subject,emailreminder_toemailid,emailreminder_emaildate,emailreminder_module,emailreminder_moduleid,emailreminder_statuscolumn,emailreminder_currentstatus,emailreminder_isemail,emailreminder_reminderday</columns>
+  <columnlabels>Subject,To Email Id,Email Date,Module,Module Id,Status Column,Current Status,Is Email,Reminder Day</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>emailreminder_subject</name>
+      <headertext>Subject</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailreminder_toemailid</name>
+      <headertext>To Email Id</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailreminder_emaildate</name>
+      <headertext>Email Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>emailreminder_emailreminderid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_emailreminder $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Subject,To Email Id</searchbylabels>
+  <searchbycolumns>emailreminder_subject,emailreminder_toemailid</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

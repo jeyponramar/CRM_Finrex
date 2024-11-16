@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Fundingtypemaster</title>
+		<module>fundingtypemaster</module>
+		<table>tbl_fundingtypemaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>fundingtypemaster_fundingtypemasterid desc</defaultsort>
+		<columns>fundingtypemaster_fundingtype</columns>
+		<columnlabels>Funding Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>fundingtypemaster_fundingtype</name><headertext>Funding Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>fundingtypemaster_fundingtypemasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_fundingtypemaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Funding Type</searchbylabels>
+		<searchbycolumns>fundingtypemaster_fundingtype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

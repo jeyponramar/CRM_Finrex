@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Hsn</title>
+		<module>hsn</module>
+		<table>tbl_hsn</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>hsn_hsnid desc</defaultsort>
+		<columns>hsn_hsn</columns>
+		<columnlabels>HSN</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>hsn_hsn</name><headertext>HSN</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>hsn_hsnid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_hsn
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>HSN</searchbylabels>
+		<searchbycolumns>hsn_hsn</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

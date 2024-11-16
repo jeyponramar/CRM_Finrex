@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fempcfcdetail</title>
+  <module>fempcfcdetail</module>
+  <table>tbl_fempcfcdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fempcfcdetail_fempcfcdetailid desc</defaultsort>
+  <columns>fempcfcdetail_pcfcno,fempcfcdetail_pcfcid,fempcfcdetail_clientid,fempcfcdetail_pcfcconversionrate,fempcfcdetail_liquidationamount,fempcfcdetail_liquidationdate,fempcfcdetail_spotrateonrepayment,fempcfcdetail_profitandlossonpcfc,fempcfcdetail_invoiceno,fempcfcdetail_exportorderno,fempcfcdetail_remark</columns>
+  <columnlabels>PCFC No,pcfcid,Client Id,PCFC Conversion Rate,Liquidation  Amount,Liquidation Date,Spot Rate on Repayment,Profit and Loss on PCFC,Invoice No,Export Order No,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>fempcfcdetail_pcfcno</name>
+      <headertext>PCFC No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>fempcfcdetail_pcfcconversionrate</name>
+      <headertext>PCFC Conversion Rate</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>fempcfcdetail_liquidationamount</name>
+      <headertext>Liquidation  Amount</headertext>
+      <width>33%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>fempcfcdetail_liquidationdate</name>
+      <headertext>Liquidation Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>fempcfcdetail_spotrateonrepayment</name>
+      <headertext>Spot Rate on Repayment</headertext>
+      <width>20%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>fempcfcdetail_profitandlossonpcfc</name>
+      <headertext>Profit and Loss on PCFC</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>fempcfcdetail_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>fempcfcdetail_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>fempcfcdetail_fempcfcdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fempcfcdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>industrytypes</title>
+  <module>industrytypes</module>
+  <table>tbl_industrytypes</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>industrytypes_industrytypesid desc</defaultsort>
+  <columns>industrytypes_industrytypes</columns>
+  <columnlabels>Industry Types</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>industrytypes_industrytypes</name>
+      <headertext>Industry Types</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>industrytypes_industrytypesid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_industrytypes $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>,Industry Types</searchbylabels>
+  <searchbycolumns>,industrytypes_industrytypes</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

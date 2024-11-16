@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Holiday</title>
+		<module>holiday</module>
+		<table>tbl_holiday</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>holiday_holidayid desc</defaultsort>
+		<columns>currency_currency,holiday_date,holiday_description</columns>
+		<columnlabels>Currency,Date,Description</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>currency_currency</name><headertext>Currency</headertext><width>33%</width><format></format></column><column><name>holiday_date</name><headertext>Date</headertext><width>33%</width><format>Date</format></column><column><name>holiday_description</name><headertext>Description</headertext><width>33%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>holiday_holidayid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_holiday
+
+ JOIN tbl_currency ON currency_currencyid=holiday_currencyid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Currency,Description</searchbylabels>
+		<searchbycolumns>currency_currency,holiday_description</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

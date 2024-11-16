@@ -1,0 +1,191 @@
+﻿/*
+* {
+  box-sizing: border-box;
+}
+body {font: normal 12px Arial,Helvetica,sans-serif !important;margin: 0px;background-color: #000;color: #fff;}
+.login-header{background-color: #fff;width: 100%;height: 40px;color: #32347e;font-size: 20px;}
+.login-form{padding-top:100px;}
+.input{width: 100%;background-color: #000;border:0px;border-bottom:solid 1px #222;color:#fff;height:30px;font-size:14px;}
+.button{width:100%;height:40px;border-radius:3px;background-color:#ffa101;border:0px;font-size:18px;color:#000;}
+.hidden{display:none;}
+.notification-modal{background-color:#fff;width:95%;color:#000;position:absolute;left:2.5%;top:100px;height:300px;border-radius:10px;padding:10px;}
+*/
+body
+{
+    font:normal 18px Arial,Helvetica,sans-serif !important;
+    margin:0px;
+    background-color:#e9e2da;
+    color:#000;
+}
+.page__background
+{
+	background-color:#000 !important;
+}
+.lr-header td
+{
+    background-color:#000;font-size:14px;padding:5px;color:#d76709;font-weight:bold;text-align:center;border-bottom:solid 1px #d76709;
+}
+.lr-title
+{
+	font-weight:bold;text-align:center;color:#fff;border-bottom:solid 1px #222;font-size:12px;
+}
+.lr-rate
+{
+    background-color:#000;padding:0px;text-align:center;font-size:14px;padding:10px 0px;font-weight:bold;
+    margin:auto;width:80%;
+}
+.jq-liverate td
+{
+	border-bottom:solid 1px #222;height:40px;
+}
+.rate-up
+{
+    background-color:#ff0000;
+    color:#fff;
+    padding:3px;border-radius:3px;
+}
+.rate-mid
+{
+    background-color:#533233;
+    color:#fff;
+    padding:3px;border-radius:3px;
+}
+.rate-down
+{
+    background-color:#00b050;
+    color:#fff;
+    padding:3px;border-radius:3px;
+}
+.btn
+{
+	background-color:#eee;
+	padding:5px 20px;
+	border:solid 1px #222;
+}
+.error{color:#ff0000;}
+.hidden{display:none;}
+/*Login Start*/
+.login-form {
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
+}
+
+input[type=email], input[type=password] {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  padding-top: 15px;
+  padding-bottom: 16px;
+}
+
+.login-button {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.forgot-password {
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
+}
+/*Login End*/
+.date
+{
+	font-size:12px;
+}
+.ons-datepicker
+{
+	color:#000;
+}
+.ons-datepicker:input
+{
+	color:#000;
+}
+.hdn{display:none;}
+.datepicker{width:80px;height:30px;}
+.ddl{width:90%;height:30px;background-color:#eee;}
+.button{min-width:50%;}
+.fade
+{
+    width:100%;
+    height:100%;
+    position:absolute;
+    background:#000;
+    opacity:0.6;
+    z-index:999;
+    display:none;
+}
+.alert-modal
+{
+	position:fixed;
+	width:90%;
+	height:150px;
+	left:5%;
+	bottom:20px;
+	background-color:#eee;
+	z-index:999;
+}
+.alert-modal-title
+{
+	background-color:#ddd;
+	font-weight:bold;
+	padding:10px;
+	color:#000;
+	font-size:14px;
+}
+.alert-modal-msg
+{
+	color:#222;
+	padding:10px;
+}
+.alert-modal-ok
+{
+	width:80%;
+	margin-left:10%;
+	margin-top:30px;
+}
+.alert-modal-ok input
+{
+	width:100%;
+	height:40px;
+}
+.addpage-content{padding:10px;}
+.notification-time{color:#888;float:right;font-size:14px;}
+.notification-row{border-bottom: solid 1px #222;display: table;padding-bottom: 10px;border: solid 1px #ddd;background-color: #fff;border-radius: 5px;width: 98%;margin-left: 1%;margin-right: 1%;margin-bottom:10px;}
+.notification-box{padding:10px;color:#222;}
+.notification-title{font-weight:bold;padding-bottom:10px;}
+/*customization start*/
+.toolbar{background: linear-gradient(0deg,#212121,#212121 100%);}
+.toolbar-button{color:#f8a200;}
+.page__content{background-color:#f5f1ec !important;color:#000 !important;}
+.button{background:linear-gradient(0deg,#175d54,#075d54 100%);}
+/*customization end*/
+.pushnoti-attach
+{
+	margin-top:10px;
+}
+.pushnoti-attach div
+{
+	padding-bottom:5px;
+}
+.htmleditor-img 
+{
+	margin:10px 0px;
+	max-width: 98%;
+    border: solid 1px #eee;
+    border-radius: 10px;
+    box-shadow: 6px 6px 8px #eee;
+}
+.tbl-editor-div
+{
+	padding:10px;
+	clear:both;
+	margin:10px 0px;
+}
+.tbl-edittor-header
+{
+	font-weight:bold;
+}
+.tbl-edittor-header td{text-align:center;}

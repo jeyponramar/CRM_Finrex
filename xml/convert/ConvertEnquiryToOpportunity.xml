@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertEnquiryToOpportunity'>
+		<fromtable>tbl_enquiry</fromtable>
+		<totable>tbl_opportunity</totable>
+		<frommoduleid>72</frommoduleid>
+		<tomoduleid>127</tomoduleid>
+		<statuscolumn>enquirystatusid</statuscolumn>
+		<statusvalue>4</statusvalue>
+		<mapping><name>opportunity_clientid</name><value>enquiry_clientid</value></mapping>
+		<mapping><name>opportunity_subject</name><value></value></mapping>
+		<mapping><name>opportunity_contactperson</name><value>enquiry_contactperson</value></mapping>
+		<mapping><name>opportunity_description</name><value></value></mapping>
+		<mapping><name>opportunity_priorityid</name><value>enquiry_priorityid</value></mapping>
+		<mapping><name>opportunity_opportunitystatusid</name><value>1</value></mapping>
+		<mapping><name>opportunity_remarks</name><value>enquiry_remarks</value></mapping>
+		<mapping><name>opportunity_opportunitydate</name><value>dbo.GetDate()</value></mapping>
+		<mapping><name>opportunity_emailid</name><value>enquiry_emailid</value></mapping>
+		<mapping><name>opportunity_mobileno</name><value>enquiry_mobileno</value></mapping>
+		<mapping><name>opportunity_landlineno</name><value>enquiry_landlineno</value></mapping>
+		<mapping><name>opportunity_areaid</name><value>enquiry_areaid</value></mapping>
+		<mapping><name>opportunity_enquiryid</name><value>enquiry_enquiryid</value></mapping>
+		<mapping><name>opportunity_address</name><value>enquiry_address</value></mapping>
+		<mapping><name>opportunity_employeeid</name><value>enquiry_employeeid</value></mapping>
+		<mapping><name>opportunity_stateid</name><value>enquiry_stateid</value></mapping>
+		<mapping><name>opportunity_opportunitystageid</name><value>1</value></mapping>
+	</setting>

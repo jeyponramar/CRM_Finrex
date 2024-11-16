@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Advisoryfrequencymaster</title>
+		<module>advisoryfrequencymaster</module>
+		<table>tbl_advisoryfrequencymaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>advisoryfrequencymaster_advisoryfrequencymasterid desc</defaultsort>
+		<columns>advisoryfrequencymaster_advisoryfrequency</columns>
+		<columnlabels>Advisory Frequency</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>advisoryfrequencymaster_advisoryfrequency</name><headertext>Advisory Frequency</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>advisoryfrequencymaster_advisoryfrequencymasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_advisoryfrequencymaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Advisory Frequency</searchbylabels>
+		<searchbycolumns>advisoryfrequencymaster_advisoryfrequency</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

@@ -1,0 +1,363 @@
+input[type="checkbox"]{width:15px;margin-top: -2px;}
+.left{float:left;}
+input,textarea,select,.uneditable-input
+{
+    display:inline-block;height:18px;padding:2px;margin-bottom:0px;
+    font-size:12px;line-height:18px;
+    color:#035081;border:1px solid #cccccc;min-height:25px;
+}
+input:focus,textarea:focus,select:focus
+{
+}
+.textbox
+{
+    width: 240px;
+    height: 27px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+.ddl
+{
+    padding: 3px;
+    width: 250px;
+    height:30px;
+    border-radius: 5px;
+}
+.button
+{
+    padding: 7px 20px;
+    background-color:#1b64ba;
+    border:0px;
+    color:#fff;
+    color: #fff;
+    border: solid 1px #388ebb;
+    border-radius: 5px;
+    margin-right: 5px;
+    height:33px;
+}
+.textarea,.textbox,.mbox
+{
+	border:solid 1px #ccc;
+	min-height:27px;
+	min-width:250px;
+	border-radius:5px;
+}
+.page-title2,.pagetitle
+{
+    padding: 10px;
+    background: #eee;
+    color: #222;
+    font-weight: bold;
+}
+.grid-status
+{
+    display: inline;
+    padding:5px 10px 5px 10px;
+    border-radius:3px;    
+}
+.page-stitle
+{
+	font-weight:bold;
+	color:#f0803D;
+}
+.audit-question-cat
+{
+	font-weight:bold;
+	background-color:#e0eaff;
+}
+.filediv
+{
+	overflow:unset !important;
+}
+.filediv input
+{
+	width:100px !important;height:30px !important;border:0px !important;
+}
+.bankaudit-comment-client
+{
+	background-color: #ffcece;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom:10px;
+    width:400px;
+}
+.bankaudit-comment-advisor
+{
+	background-color: #a1fcd9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom:10px;
+    margin-left:20px;
+    width:400px;
+}
+.curve-tab
+{
+	list-style: none;
+	background-color: #fff;
+	height: 33px;
+	padding: 3px 4px;
+	padding-bottom: 0px;
+	margin:0px;
+	border-bottom: solid 1px #f9ad81;
+}
+.curve-tab li
+{
+	float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding: 9px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.curve-tab-active
+{
+    border: solid 1px #f9ad81;
+    background-color: #fcf1ea;
+    border-bottom: solid 1px #fff;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.curve-tab-active a
+{
+    color:#f0803d !important;
+}
+.curve-tab li a
+{
+	text-decoration:none;
+}
+.mchkjs-selected-val
+{
+    float: left;
+    background-color: #fafafa;
+    padding: 5px 10px;
+    margin: 5px;
+    border: solid 1px #ddd;
+    margin-top: 0px;
+    border-radius: 3px;
+    margin-left: 0px;
+    margin-right: 10px;
+    position:relative;
+}
+.mchkjs-close
+{
+    position: absolute;
+    right: -7px;
+    top: -10px;
+    width: 14px;
+    height: 15px;
+    border: solid 1px #aaa;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    display:none;
+}
+.fade-page
+{
+    background-color:#000;
+    opacity:0.8;
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:0;display:none;
+}
+.dialog
+{
+    width:700px;height:400px;overflow:auto;display:none;position:fixed;
+    top:3px;left:20px;
+    z-index:9999;background-color:#fff;border:solid 1px #bbb;border-radius:5px;
+    box-shadow:2px 0 20px rgb(0 0 0 / 24%);color:#000;
+}
+.dialog-content
+{
+    overflow:auto;
+}
+.dialog-title
+{
+    background-color:#fafafa;
+    padding:10px;
+    font-weight:bold;
+    font-size:15px;
+    border-radius:3px;
+    border-bottom:solid 1px #eee;
+    color:#222;
+}
+.jq-addcustomlabel-header
+{
+	color:#888;font-size:16px;
+}
+.cursor{cursor:pointer;}
+.linktext
+{
+	text-decoration:underline;
+	color:#0B78C1;cursor:pointer;
+}
+.bankaudit-leftmenu
+{
+	list-style:none;
+	margin:0px;padding:0px;
+}
+.bankaudit-leftmenu li
+{
+	padding:8px 10px;
+	background-color:#eee;
+	margin-bottom:2px;
+	min-width:180px;
+}
+.bankaudit-leftmenu a
+{
+	text-decoration:none;
+	font-size:11px;font-weight:bold;
+}
+.bankaudit-leftmenu-completed
+{
+	background-color:#cbedcb !important;
+}
+.bankaudit-left-current 
+{
+	background-color:#ffe0ce !important;
+	border-left: solid 2px #0b5295;
+    padding-left: 6px !important;
+}
+.bankaudit-left-current a
+{
+}
+.bankaudit-leftmenu-srno
+{
+	width: 16px;
+    height: 13px;
+    background-color: #1F497C;
+    float: left;
+    text-align: center;
+    padding-top: 3px;
+    border-radius: 50%;
+    font-size: 9px;
+    margin-top: 0px;
+    margin-right: 5px;
+    color:#fff;
+}
+.top-msg
+{
+    position:fixed;
+    width:250px;
+    top:5px;
+    border-radius:3px;
+    font-weight:bold;
+    padding:10px;
+    left:40%;
+}
+.top-msg-err
+{
+    background-color:#fcf8e3;
+    border:solid 1px #FE6363;
+    color:#a94442;
+}
+.top-msg-success
+{
+    background-color:#dff0d8;
+    border:solid 1px #2FA859;
+    color:#3c763d;
+}
+.bankaudit-remarks
+{
+	color:#ff0000;
+}
+.line-tab
+{
+	list-style: none;
+    padding: 3px 4px;
+    padding-bottom: 0px;
+    margin:0px;
+}
+.line-tab li
+{
+	float: left;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding: 9px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.line-tab-active
+{
+    border-bottom: solid 2px #32347e;
+}
+.line-tab-active a
+{
+    color:#32347e !important;
+}
+.line-tab li a
+{
+	text-decoration:none;
+	color:#444;
+}
+.loader {
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #3498db;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  position:fixed;
+  top:200px;
+  left:50%;
+  z-index: 999999;
+  display:none;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.label
+{
+    width:150px;font-size:12px;
+    vertical-align:top;
+}
+.hdnac,.hdnqa,.hdn,.nodisplay,.hidden
+{display:none;}
+.ac-arrow
+{
+	background-image: url(../images/down-arrow.png);
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+.subtitle
+{
+    color:#636363;
+    font-weight:bold;
+    background-color:#eeeeee;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:5px;
+    width:100%;
+    width:auto;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    background-image:url(../images/up-arrow-white.png);background-repeat:no-repeat;background-position:90%;
+    cursor:pointer;
+}
+.list div
+{
+	float:left;
+	background-color: #fafafa;
+	padding: 5px 12px;
+	border:solid 1px #ddd;
+	border-radius:5px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+.rbtn input
+{
+	min-height:unset;
+}

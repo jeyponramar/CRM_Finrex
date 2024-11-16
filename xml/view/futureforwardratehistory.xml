@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Futureforwardratehistory</title>
+  <module>futureforwardratehistory</module>
+  <table>tbl_futureforwardratehistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>futureforwardratehistory_futureforwardratehistoryid desc</defaultsort>
+  <columns>futureforwardratehistory_date,futureforwardratehistory_uploaddate,futureforwardratehistory_monthendstartdate,futureforwardratehistory_monthendenddate</columns>
+  <columnlabels>Date,Upload Date,Month End Start Date,Monthend End Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>futureforwardratehistory_uploaddate</name>
+      <headertext>Upload Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>futureforwardratehistory_monthendstartdate</name>
+      <headertext>Month End Start Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>futureforwardratehistory_monthendenddate</name>
+      <headertext>Monthend End Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>futureforwardratehistory_futureforwardratehistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_futureforwardratehistory
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Upload Date</searchbylabels>
+  <searchbycolumns>futureforwardratehistory_uploaddate</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Liveratesection</title>
+  <module>liveratesection</module>
+  <table>tbl_liveratesection</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>liveratesection_liveratesectionid desc</defaultsort>
+  <columns>liveratesection_name,liveratesection_code,liveratesection_rows,liveratesection_columns,liveratesection_description,liveratesection_currentrate</columns>
+  <columnlabels>Name,Code,Rows,Columns,Description,Current Rate</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>liveratesection_name</name>
+      <headertext>Name</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratesection_rows</name>
+      <headertext>Rows</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratesection_columns</name>
+      <headertext>Columns</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>liveratesection_code</name>
+      <headertext>Code</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>liveratesection_liveratesectionid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_liveratesection
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Name</searchbylabels>
+  <searchbycolumns>liveratesection_name</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

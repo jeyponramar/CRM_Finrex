@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Log</title>
+		<module>log</module>
+		<table>tbl_log</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>log_logid desc</defaultsort>
+		<columns>log_module,log_userid,log_action,log_moduleid</columns>
+		<columnlabels>Module,User Id,Action,Module Id</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>log_module</name><headertext>Module</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>log_logid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_log $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Module</searchbylabels>
+		<searchbycolumns>log_module</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

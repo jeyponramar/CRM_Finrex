@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ExportPortalMasterPage.master.cs" Inherits="exportexposureportal_ExportPortalMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <script src="../js/constant.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <link href="../css/general.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../css/admin.css" rel="stylesheet" type="text/css" />
+    <link href="../css/popbox.css" rel="stylesheet" type="text/css" /> 
+    <link href="../css/print.css" media="print" rel="stylesheet" type="text/css" />
+    <link href="../css/jquery-ui.css" rel="stylesheet" type="text/css" />    
+    <link href="../css/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />    
+    <link href="../js/upload/jquery.fileupload-ui.css" rel="stylesheet" type="text/css" />    
+    <link href="../js/htmleditor/htmleditor.css" rel="stylesheet" type="text/css" />
+    <link href="../js/htmleditor/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    
+    <script src="../js/jquery.min.js?v=<%=VersionNo %>" type="text/javascript"></script>    
+    <script src="../js/jquery-ui.min.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/global.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/common.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/custom.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/tab.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/validate.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    <script src="../js/sgrid.js?v=<%=VersionNo %>" type="text/javascript"></script>
+    
+    <script src="../js/jquery.corner.js?v=<%=VersionNo %>" type="text/javascript"></script>    
+	<link rel="stylesheet" type="text/css" href="../css/jquery.autocomplete.css" />    
+	<script type="text/javascript" src="../js/jquery.autocomplete.js?v=<%=VersionNo %>"></script>
+	<script type="text/javascript" src="../js/jquery.datetimepicker.js?v=<%=VersionNo %>"></script>
+	
+	<script src="../js/htmleditor/htmleditor.js?v=<%=VersionNo %>"></script>
+	
+    <script src="../js/upload/jquery.fileupload.js?v=<%=VersionNo %>"></script>
+    <script src="../js/upload/jquery.fileupload-ui.js?v=<%=VersionNo %>"></script>
+    <script src="../js/upload/multifileupload.js?v=<%=VersionNo %>"></script>
+    
+    <script type="text/javascript" src="../js/jsapi.js?v=<%=VersionNo %>"></script>
+    <script src="../js/colResizable-1.3.min.js?v=<%=VersionNo %>"></script>
+
+    <link href="../css/colorpicker/colorpicker.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/colorpicker/colorpicker.js?v=<%=VersionNo %>"></script>
+    <script type="text/javascript" src="../js/colorpicker/eye.js?v=<%=VersionNo %>"></script>
+    <script type="text/javascript" src="../js/colorpicker/utils.js?v=<%=VersionNo %>"></script>
+    <script type="text/javascript" src="../js/colorpicker/layout.js?v=<%=VersionNo %>"></script>        <script type="text/javascript" src="../js/admin.js?v=<%=VersionNo %>"></script>    <script type="text/javascript"  src="../js/note.js?v=<%=VersionNo %>"></script>
+    <link href="../js/tour/joyride-2.1.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/tour/jquery.joyride-2.1.js?v=<%=VersionNo %>"></script>
+    <script language="javascript">
+        var _menuleft = 0;
+        var _menutop = 0;
+        var _addmenu;
+        var _targetQAddl = null;
+        var _viewmode;
+        $(document).ready(function() {
+            try { window.parent.hideLoader(); } catch (ex) { }
+        });
+    </script>
+    <style>
+    ::-webkit-scrollbar {
+    height: 20px;
+    overflow: visible;
+    width: 20px;
+    }
+    </style>
+
+</head>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+<body>
+    <form id="form1" runat="server">
+    <table width="100%">
+        <tr>
+            <td>
+                <table width="100%"><tr><td valign="top" style="height:500px;">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+                </asp:ContentPlaceHolder>
+                </td></tr></table>
+            </td>
+        </tr>
+        <tr><td style="height:100px;">&nbsp;</td></tr>
+        <tr><td><table><tr><td style="color:#444;">Powered By : </td><td style="color:#32347e;font-size:20px;">Finstation</td></tr></table></td></tr>
+        <tr><td style="height:20px;">&nbsp;</td></tr>
+    </table>
+    </form>
+</body>
+</html>

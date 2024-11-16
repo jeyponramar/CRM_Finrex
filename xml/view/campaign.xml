@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>campaign</title>
+  <module>campaign</module>
+  <table>tbl_campaign</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>campaign_campaignid desc</defaultsort>
+  <columns>campaign_campaignname,campaigntype_campaigntype,campaign_startdate,campaign_enddate,campaign_budjetcost,campaign_actualexpense,campaign_description,campaign_expectedrevenue,campaign_expectedresponse,campaign_participants,campaign_conductedby,campaign_venue,campaign_isactive</columns>
+  <columnlabels>Campaign Name,Type,Start Date,End Date,Budjet Cost,Actual Expense,Description,Expected Revenue,Expected Response,Participants,Conducted By,Venue,Is Active</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>campaign_campaignname</name>
+      <headertext>Campaign Name</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>campaigntype_campaigntype</name>
+      <headertext>Type</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>campaign_startdate</name>
+      <headertext>Start Date</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>campaign_enddate</name>
+      <headertext>End Date</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>campaign_expectedresponse</name>
+      <headertext>Expected Response</headertext>
+      <row>1</row>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>campaign_isactive</name>
+      <headertext>Is Active</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>campaign_campaignid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_campaign JOIN tbl_campaigntype ON campaigntype_campaigntypeid=campaign_campaigntypeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Campaign Name,Type</searchbylabels>
+  <searchbycolumns>campaign_campaignname,campaigntype_campaigntype</searchbycolumns>
+  <ismobile>True</ismobile>
+</setting>

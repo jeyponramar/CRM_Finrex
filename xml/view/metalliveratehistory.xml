@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Metalliveratehistory</title>
+  <module>metalliveratehistory</module>
+  <table>tbl_metalliveratehistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>metalliveratehistory_metalliveratehistoryid desc</defaultsort>
+  <columns>metal_metalname,metalliveratehistory_date,metalliveratehistory_bid,metalliveratehistory_ask,metalliveratehistory_open,metalliveratehistory_high,metalliveratehistory_low,metalliveratehistory_prevclose,metalliveratehistory_change,metalliveratehistory_changeper,metalliveratehistory_oneweekchangeper,metalliveratehistory_onemonthchangeper,metalliveratehistory_threemonthchangeper,metalliveratehistory_oneyearchangeper,metalliveratehistory_ctweekhigh,metalliveratehistory_ctmonthhigh,metalliveratehistory_ctmonthlow,metalliveratehistory_fiftytwoweekhigh,metalliveratehistory_fiftytwoweeklow,metalliveratehistory_cash,metalliveratehistory_threemonths,metalliveratehistory_oneyear,metalliveratehistory_close,metalliveratehistory_sterlingequivalent3months,metalliveratehistory_expirydate,metalliveratehistory_tradingvolume,metalliveratehistory_tradingvalue</columns>
+  <columnlabels>Metal Id,date,Bid,Ask,Open,High,Low,Prev Close,Change,Change Per,1 Week Change Per,1Month Change Per,3monthchangeper,1yearchangeper,ctweekhigh,ctmonthhigh,ctmonthlow,52weekhigh,52weeklow,cash,3months,1year,Close,Sterling Equivalent 3Months,ExpiryDate,Trading Volume,Trading Value</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>Metal Id</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>metalliveratehistory_ask</name>
+      <headertext>Ask</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>metalliveratehistory_metalliveratehistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_metalliveratehistory
+
+ LEFT JOIN tbl_metal ON metal_metalid=metalliveratehistory_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Metal Id</searchbylabels>
+  <searchbycolumns>metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

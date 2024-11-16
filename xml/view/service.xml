@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Service</title>
+		<module>service</module>
+		<table>tbl_service</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>service_serviceid desc</defaultsort>
+		<columns>service_service</columns>
+		<columnlabels>Service</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>service_service</name><headertext>Service</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>service_serviceid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_service $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Service</searchbylabels>
+		<searchbycolumns>service_service</searchbycolumns>
+	</setting>

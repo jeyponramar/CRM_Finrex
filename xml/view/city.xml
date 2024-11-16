@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View City</title>
+  <module>city</module>
+  <table>tbl_city</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>city_cityid desc</defaultsort>
+  <columns>city_cityname,state_state</columns>
+  <columnlabels>City Name,State Name</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>city_cityname</name>
+      <headertext>City Name</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>state_state</name>
+      <headertext>State Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>city_cityid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_city
+
+ LEFT JOIN tbl_state ON state_stateid=city_stateid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>City Name,State Name</searchbylabels>
+  <searchbycolumns>city_cityname,state_state</searchbycolumns>
+  <ismobile>True</ismobile>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

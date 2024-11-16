@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>ledgervoucher</title>
+  <module>ledgervoucher</module>
+  <table>tbl_ledgervoucher</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>ledgervoucher_ledgervoucherid desc</defaultsort>
+  <columns>ledgervoucher_voucherno,ledgervoucher_referenceno,ledgervoucher_voucherdate,ledgervoucher_totalamount,ledgervoucher_narration,ledger_ledgername,accountvouchertype_vouchertype,accountadjustmentmethod_adjustmentmethod,paymentmode_paymentmode,ledgervoucher_chequeno,ledgervoucher_amountpaid,ledgervoucher_balanceamount,ledgervoucher_dramount,ledgervoucher_cramount,ledgervoucher_module,ledgervoucher_moduleid</columns>
+  <columnlabels>Voucher No,Reference No,Voucher Date,Total Amount,Narration,Ledger,Voucher Type,Adjustment Method,Payment Mode,Cheque No,Amount Paid,Balance Amount,Dr Amount,Cr Amount,Module,Module Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>ledgervoucher_voucherno</name>
+      <headertext>Voucher No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_referenceno</name>
+      <headertext>Reference No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_voucherdate</name>
+      <headertext>Voucher Date</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>ledgervoucher_particulars</name>
+      <headertext>Particulars</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>accountvouchertype_vouchertype</name>
+      <headertext>Voucher Type</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledgervoucher_dramount</name>
+      <headertext>Dr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>ledgervoucher_cramount</name>
+      <headertext>Cr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>ledgervoucher_ledgervoucherid</hiddencolumns>
+  <query>
+    select * from
+    (
+    select ledgervoucher_ledgervoucherid,MIN(ledgervoucher_voucherno) as ledgervoucher_voucherno,
+    MIN(ledgervoucher_referenceno) as ledgervoucher_referenceno,
+    MIN(ledgervoucher_voucherdate) as ledgervoucher_voucherdate,MIN(accountvouchertype_vouchertype) as accountvouchertype_vouchertype,
+    dbo.GetDrByVoucher($FORM_txtledgerid$,ledgervoucher_ledgervoucherid) as ledgervoucher_dramount,
+    dbo.GetCrByVoucher($FORM_txtledgerid$,ledgervoucher_ledgervoucherid) as ledgervoucher_cramount,
+    CASE WHEN $FORM_txtledgerid$ = MIN(ledgervoucher_ledgerid)
+      THEN (SELECT ledger_ledgername FROM tbl_ledger l1
+      JOIN tbl_accountvoucherbreakup ON accountvoucherbreakup_ledgerid=l1.ledger_ledgerid
+      WHERE ISNULL(accountvoucherbreakup_isparent,0) = 1
+      AND accountvoucherbreakup_ledgervoucherid = MIN(ledgervoucher_ledgervoucherid))
+    ELSE
+      (SELECT ledger_ledgername FROM tbl_ledger l2
+      WHERE l2.ledger_ledgerid = MIN(ledgervoucher_ledgerid))
+    END as ledgervoucher_particulars
+    from tbl_accountvoucherbreakup
+    JOIN tbl_ledgervoucher ON accountvoucherbreakup_ledgervoucherid=ledgervoucher_ledgervoucherid
+    JOIN tbl_accountvouchertype ON accountvouchertype_accountvouchertypeid=ledgervoucher_accountvouchertypeid
+    WHERE accountvoucherbreakup_ledgerid=$FORM_txtledgerid$
+    DATEBETWEEN(ledgervoucher_voucherdate,$FORM_txtVoucherDate_From$,$FORM_txtVoucherDate_To$)
+    GROUP BY ledgervoucher_ledgervoucherid
+    )r1
+
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Voucher No,Reference No,Voucher Type,Adjustment Method</searchbylabels>
+  <searchbycolumns>ledgervoucher_voucherno,ledgervoucher_referenceno,accountvouchertype_vouchertype,accountadjustmentmethod_adjustmentmethod</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

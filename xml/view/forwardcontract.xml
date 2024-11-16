@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Forwardcontract</title>
+  <module>forwardcontract</module>
+  <table>tbl_forwardcontract</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>forwardcontract_forwardcontractid desc</defaultsort>
+  <columns>forwardcontract_exportorderno,bank_bankname,exposurecurrencymaster_currency,forwardcontract_bookingno,forwardcontract_bookingdate,forwardcontract_sold,forwardcontract_utilised,forwardcontract_cancellation,forwardcontract_balancesold,forwardcontract_rate,forwardcontract_from,forwardcontract_to,forwardcontract_spotratebooking,forwardcontract_spotrateonutilisationdate,forwardcontract_spotrateoncancellationdate,forwardcontract_utilisationrate,forwardcontract_spotratecancellation,forwardcontract_profitandlossonutilisation,forwardcontract_cancellationrate,forwardcontract_cancellationamount,forwardcontract_profitandlossoncancellation,forwardcontract_totalprofitandlossonforwardcontract,forwardcontract_soldamountinrs,forwardcontract_mtmrate,forwardcontract_profitandlossamount,forwardcontract_invoiceno,forwardcontract_utilizedate,forwardcontract_clientid,forwardcontract_remarks</columns>
+  <columnlabels>Export Order No,Bank,Currency,Bank Booking Ref No.,Booking Date,Forward Booking Amount,Utilisation Amount,Cancellation Amount,Forward  Balance Amount,Forward Booking Rate,From Date,To Date,Spot rate - Booking Date,Spot Rate on Utilisation Date,Spot Rate on  Cancellation Date,Utilisation Rate,Spot Rate Cancellation,Profit and Loss on Utilisation,Cancellation Rate,Cancellation Amount,Profit and Loss on Cancellation,Total Profit and Loss on Forward Contract,Amount in Rs,MTM Rate,MTM Amount,Invoice No,Utilize Date,Client Id,Remarks</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>forwardcontract_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bank_bankname</name>
+      <headertext>Bank</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>forwardcontract_bookingno</name>
+      <headertext>Booking No</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>forwardcontract_bookingdate</name>
+      <headertext>Booking Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>forwardcontract_sold</name>
+      <headertext>Sold</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>forwardcontract_utilised</name>
+      <headertext>Utilised</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>forwardcontract_balancesold</name>
+      <headertext>Balance Sold</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>forwardcontract_rate</name>
+      <headertext>Rate</headertext>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exposurecurrencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>forwardcontract_forwardcontractid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_forwardcontract
+
+ LEFT JOIN tbl_bank ON bank_bankid=forwardcontract_bankid
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=forwardcontract_exposurecurrencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Export Order No,Bank,Currency,Bank Booking Ref No.,Booking Date,Forward Booking Amount,Forward  Balance Amount,Forward Booking Rate,From Date,To Date,Total Profit and Loss on Forward Contract</searchbylabels>
+  <searchbycolumns>forwardcontract_exportorderno,bank_bankname,exposurecurrencymaster_currency,forwardcontract_bookingno,forwardcontract_bookingdate,forwardcontract_sold,forwardcontract_balancesold,forwardcontract_rate,forwardcontract_from,forwardcontract_to,forwardcontract_totalprofitandlossonforwardcontract</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

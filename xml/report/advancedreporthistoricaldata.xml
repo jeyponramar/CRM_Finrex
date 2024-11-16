@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Historicaldata</title>
+  <module>historicaldata</module>
+  <table>tbl_historicaldata</table>
+	<isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>historicaldata_historicaldataid DESC</defaultsort>
+  <columns>currency_currency,historicaldata_date,historicaldata_open,historicaldata_high,historicaldata_low,historicaldata_close,historicaldata_average,historicaldata_change,historicaldata_rbirefrate</columns>
+  <columnlabels>Currency,Date,Open,High,Low,Close,Average,Change,RBI Ref Rate</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currency_currency</name>
+      <headertext>Currency</headertext>
+      <width>17%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>historicaldata_date</name>
+      <headertext>Date</headertext>
+      <width>14%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>historicaldata_open</name>
+      <headertext>Open</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>historicaldata_high</name>
+      <headertext>High</headertext>
+      <width>13%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>historicaldata_low</name>
+      <headertext>Low</headertext>
+      <width>13%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>historicaldata_close</name>
+      <headertext>Close</headertext>
+      <width>10%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>historicaldata_average</name>
+      <headertext>Average</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>historicaldata_rbirefrate</name>
+      <headertext>RBI Ref Rate</headertext>
+      <width>10%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>historicaldata_historicaldataid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_historicaldata
+
+ LEFT JOIN tbl_currency ON currency_currencyid=historicaldata_currencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+	<where>
+		('$historicaldata_currencyid$' = '0' OR historicaldata_currencyid = '$historicaldata_currencyid$') AND
+		historicaldata_date BETWEEN '$historicaldata_date_from$' AND '$historicaldata_date_to$'
+	</where>
+  <searchbylabels>Currency</searchbylabels>
+  <searchbycolumns>currency_currency</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

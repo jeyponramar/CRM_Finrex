@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Bankauditquestiontype</title>
+		<module>bankauditquestiontype</module>
+		<table>tbl_bankauditquestiontype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>bankauditquestiontype_bankauditquestiontypeid desc</defaultsort>
+		<columns>bankauditquestiontype_questiontype</columns>
+		<columnlabels>Question Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>bankauditquestiontype_questiontype</name><headertext>Question Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>bankauditquestiontype_bankauditquestiontypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_bankauditquestiontype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Question Type</searchbylabels>
+		<searchbycolumns>bankauditquestiontype_questiontype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

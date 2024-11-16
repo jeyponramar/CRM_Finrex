@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Notificationtype</title>
+		<module>notificationtype</module>
+		<table>tbl_notificationtype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>notificationtype_notificationtypeid desc</defaultsort>
+		<columns>notificationtype_notificationtype</columns>
+		<columnlabels>Notification Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>notificationtype_notificationtype</name><headertext>Notification Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>notificationtype_notificationtypeid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_notificationtype $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Notification Type</searchbylabels>
+		<searchbycolumns>notificationtype_notificationtype</searchbycolumns>
+	</setting>

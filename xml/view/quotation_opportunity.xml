@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>quotation</title>
+		<module>quotation</module>
+		<table>tbl_quotation</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>quotation_quotationid desc</defaultsort>
+		<columns>quotation_quotationno,client_clientname,quotation_quotationdate,quotation_subject,quotation_remarks</columns>
+		<columnlabels>Quote Code,Client,Quotation Date,Subject,Remarks</columnlabels>
+		<gridtype>grid</gridtype>
+    <gridcolumn>
+      <column>
+        <name>quotation_quotationno</name>
+        <headertext>Quote Code</headertext>
+        <row>1</row>
+        <width>33%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>quotation_quotationdate</name>
+        <headertext>Quotation Date</headertext>
+        <row>1</row>
+        <width>33%</width>
+        <format>Date</format>
+      </column>
+      <column>
+        <name>quotation_quotationamount</name>
+        <headertext>Amount</headertext>
+        <row>1</row>
+        <width>33%</width>
+        <format></format>
+      </column>
+      <column>
+        <name>quotation_subject</name>
+        <headertext>Subject</headertext>
+        <row>1</row>
+        <width>33%</width>
+        <format></format>
+      </column>
+		</gridcolumn>
+		<hiddencolumns>quotation_quotationid</hiddencolumns>
+		<query>
+      select $COLUMNS$ from tbl_quotation
+      LEFT JOIN tbl_client ON client_clientid=quotation_clientid
+      WHERE quotation_opportunityid=$QUERYSTRING_id$ $Search$</query>
+		<searchbylabels>Quote Code</searchbylabels>
+		<searchbycolumns>quotation_quotecode</searchbycolumns>
+	</setting>

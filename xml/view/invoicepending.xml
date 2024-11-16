@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>invoicepending</title>
+  <module>invoicepending</module>
+  <table>tbl_invoicepending</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>invoicepending_invoicependingid DESC</defaultsort>
+  <columns>invoicepending_invoicefor,invoicepending_module,invoicepending_moduleid,invoicepending_referenceno,invoicepending_date,invoicepending_subject,client_customername</columns>
+  <columnlabels>Invoice For,Module,Module Id,Reference No,Date,Subject,Client</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>invoicepending_referenceno</name>
+      <headertext>Reference No</headertext>
+      <width>21%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoicepending_date</name>
+      <headertext>Date</headertext>
+      <width>19%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>invoicepending_subject</name>
+      <headertext>Subject</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoicepending_invoicefor</name>
+      <headertext>Invoice For</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>invoicepending_invoicependingid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_invoicepending JOIN tbl_client ON client_clientid=invoicepending_clientid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Invoice For,Module,Reference No,Subject,Client</searchbylabels>
+  <searchbycolumns>invoicepending_invoicefor,invoicepending_module,invoicepending_referenceno,invoicepending_subject,client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

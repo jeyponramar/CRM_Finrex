@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Pcfc</title>
+  <module>pcfc</module>
+  <table>tbl_pcfc</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>pcfc_pcfcid desc</defaultsort>
+  <columns>pcfc_exportorderno,bank_bankname,pcfc_clientid,exposurecurrencymaster_currency,pcfc_pcfcno,pcfc_pcfcdate,pcfc_days,pcfc_pcduedate,pcfc_fcamount,pcfc_repayment,pcfc_fcamountbalance,pcfc_spotrate,pcfc_interestrate,pcfc_pcfcinterestamount,pcfc_remarks,pcfc_spotrateonrepayment,pcfc_profitandlossonpcfc,pcfc_product,pcfc_mtmrate,pcfc_profitandlossamount</columns>
+  <columnlabels>Export Order No,Bank Name,Client Id,Currency,PCFC No,PCFC availed Date,Credit Period Days,PCFC Due Date,PCFC Amount,Liquidation Amount,PCFC Balance Amount,PCFC Conversion Rate,Interest Rate,PCFC Interest Amount in FC,Remarks,Spot Rate on Repayment,Profit and Loss on PCFC,Amount in Rs.,MTM Rate,MTM Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>pcfc_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bank_bankname</name>
+      <headertext>Bank Name</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pcfc_pcfcno</name>
+      <headertext>PCFC No</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pcfc_pcfcdate</name>
+      <headertext>PCFC Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>pcfc_days</name>
+      <headertext>Days</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pcfc_pcduedate</name>
+      <headertext>P C Due Date</headertext>
+      <width>14%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>pcfc_fcamount</name>
+      <headertext>F.C Amount</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_repayment</name>
+      <headertext>Repayment</headertext>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_fcamountbalance</name>
+      <headertext>F.C Amount Balance</headertext>
+      <width>10%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_product</name>
+      <headertext>Product</headertext>
+      <width>8%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_mtmrate</name>
+      <headertext>MTM Rate</headertext>
+      <width>7%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_profitandlossamount</name>
+      <headertext>Profit and Loss Amount</headertext>
+      <width>6%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>exposurecurrencymaster_currency</name>
+      <headertext>Currency</headertext>
+      <width>6%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>pcfc_spotrate</name>
+      <headertext>Spot Rate</headertext>
+      <width>7%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>pcfc_spotrateonrepayment</name>
+      <headertext>Spot Rate on Repayment</headertext>
+      <width>6%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>pcfc_pcfcid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_pcfc
+
+ LEFT JOIN tbl_bank ON bank_bankid=pcfc_bankid
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=pcfc_exposurecurrencymasterid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Export Order No,Currency,PCFC No</searchbylabels>
+  <searchbycolumns>pcfc_exportorderno,exposurecurrencymaster_currency,pcfc_pcfcno</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

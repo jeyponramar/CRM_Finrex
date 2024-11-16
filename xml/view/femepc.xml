@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Femepc</title>
+  <module>femepc</module>
+  <table>tbl_femepc</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>femepc_femepcid desc</defaultsort>
+  <columns>femepc_exportorderno,femepc_clientid,bank_bankname,femepc_epcno,femepc_epcavaileddate,femepc_creditperioddays,femepc_epcduedate,femepc_epcamountinrs,femepc_repaymentinrs,femepc_epcbalanceamountinrs,femepc_spotrateonepcavaileddate,femepc_forwardbookingamount,femepc_forwardbookingrate,femepc_bankbookingrefno,femepc_bookingdate,femepc_valueinrs,femepc_interestrate,femepc_epcinterestamount</columns>
+  <columnlabels>Export Order No,Client Id,Bank,EPC No.,EPC  Availed  Date,Credit Period Days,EPC Due Date,EPC Amount in Rs.,Repayment in Rs.,EPC Balance Amount in Rs.,Spot Rate on EPC availed date,Forward Booking Amount,Forward Booking Rate,Bank Booking Ref No.,Booking Date,Value in Rs.,Interest Rate,EPC Interest Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>femepc_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bank_bankname</name>
+      <headertext>Bank</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepc_epcno</name>
+      <headertext>EPC No.</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepc_epcavaileddate</name>
+      <headertext>EPC  Availed  Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femepc_creditperioddays</name>
+      <headertext>Credit Period Days</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepc_epcduedate</name>
+      <headertext>EPC Due Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femepc_epcamountinrs</name>
+      <headertext>EPC Amount in Rs.</headertext>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_repaymentinrs</name>
+      <headertext>Repayment in Rs.</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_epcbalanceamountinrs</name>
+      <headertext>EPC Balance Amount in Rs.</headertext>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_spotrateonepcavaileddate</name>
+      <headertext>Spot Rate on EPC availed date</headertext>
+      <width>10%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_forwardbookingamount</name>
+      <headertext>Forward Booking Amount</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_forwardbookingrate</name>
+      <headertext>Forward Booking Rate</headertext>
+      <width>8%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_bankbookingrefno</name>
+      <headertext>Bank Booking Ref No.</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepc_bookingdate</name>
+      <headertext>Booking Date</headertext>
+      <width>7%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femepc_valueinrs</name>
+      <headertext>Value in Rs.</headertext>
+      <width>6%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_interestrate</name>
+      <headertext>Interest Rate</headertext>
+      <width>6%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepc_epcinterestamount</name>
+      <headertext>EPC Interest Amount</headertext>
+      <width>5%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>femepc_femepcid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_femepc
+
+ LEFT JOIN tbl_bank ON bank_bankid=femepc_bankid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

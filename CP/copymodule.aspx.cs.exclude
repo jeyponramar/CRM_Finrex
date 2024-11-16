@@ -1,0 +1,421 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.Data.SqlClient;
+using System.IO;
+
+public partial class CP_copymodule : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnCopy_Click(object sender, EventArgs e)
+    {
+        lblMessage.Text = "";
+        string query = "SELECT * FROM tbl_module WHERE module_modulename='" + global.CheckData(txtCopyModule.Text) + "'";
+        DataTable dttblModule_Source = ExecuteSelect(query);
+        if (!GlobalUtilities.IsValidaTable(dttblModule_Source))
+        {
+            lblMessage.Text = "Module does not exists";
+            return;
+        }
+        ltStatus.Text = "";
+        DataTable dttbl_Dest = DbTable.ExecuteSelect(query);
+        int newModuleId = 0;
+        string moduleDelete = "delete from tbl_module where module_modulename='" + txtCopyModule.Text + "'";
+        if (GlobalUtilities.IsValidaTable(dttbl_Dest))
+        {
+            if (chkOverwrite.Checked)
+            {
+                newModuleId = MoveData(dttblModule_Source, "tbl_module", moduleDelete, null);
+                AddStatus("Table","tbl_module" , "Data already exists and overwritten");
+            }
+            else
+            {
+                AddStatus("Table", "tbl_module", "Data already exists");
+            }
+        }
+        else
+        {
+            newModuleId = MoveData(dttblModule_Source, "tbl_module", moduleDelete, null);
+            AddStatus("Table", "tbl_module", "Data copied");
+        }
+        if (newModuleId > 0)
+        {
+            DataTable dttblColumns_Source = ExecuteSelect("select tbl_columns.* from tbl_columns join tbl_module on module_moduleid=columns_moduleid where module_modulename='" + txtCopyModule.Text + "'");
+            Hashtable hstblExtraValues = new Hashtable();
+            hstblExtraValues.Add("columns_moduleid", newModuleId);
+
+            if (GlobalUtilities.IsValidaTable(dttbl_Dest))
+            {
+                if (chkOverwrite.Checked)
+                {
+                    MoveData(dttblColumns_Source, "tbl_columns", "delete from tbl_columns where columns_moduleid=(" + "select module_moduleid from tbl_module where module_modulename='" + txtCopyModule.Text + "')", hstblExtraValues);
+                    AddStatus("Table", "tbl_columns", "Data already exists and overwritten");
+
+                }
+                else
+                {
+                    AddStatus("Table", "tbl_columns", "Data already exists");
+                }
+            }
+            else
+            {
+                MoveData(dttblColumns_Source, "tbl_columns", "", hstblExtraValues);
+                AddStatus("Table", "tbl_columns", "Data copied");
+            }
+        }
+        string tableName = "tbl_" + txtCopyModule.Text;
+
+        query = "select * from sysobjects where name='" + tableName + "'";
+        DataTable dttblTable = DbTable.ExecuteSelect(query);
+        if (GlobalUtilities.IsValidaTable(dttblTable))
+        {
+            if (chkOverwrite.Checked)
+            {
+                CreateTable(tableName, newModuleId);
+                AddStatus("Table", tableName, "Table modified");
+            }
+            else
+            {
+                AddStatus("Table", tableName, "Table already exists");
+            }
+        }
+        else
+        {
+            CreateTable(tableName, newModuleId);
+            AddStatus("Table", tableName, "Table created");
+        }
+        string moduleName = txtCopyModule.Text;
+        MoveFolder(moduleName);
+
+        CopyDAO(txtCopyModule.Text + "DAO");
+
+        string viewXmlFile = "xml/view/" + txtCopyModule.Text + ".xml";
+        CopyFile(viewXmlFile);
+
+        CopyReports();
+
+        lblMessage.Text = "Module copied and see the status in detail below";
+        
+    }
+    private void CopyReports()
+    {
+        string query = "SELECT * FROM tbl_report WHERE report_moduleid=(select module_moduleid from tbl_module where module_modulename='" + txtCopyModule.Text + "')";
+        DataTable dttblReport_Source = ExecuteSelect(query);
+        if (!GlobalUtilities.IsValidaTable(dttblReport_Source))
+        {
+            AddStatus("Table", "Report", "No report available");
+            return;
+        }
+        for (int i = 0; i < dttblReport_Source.Rows.Count; i++)
+        {
+            string reportName = Convert.ToString(dttblReport_Source.Rows[i]["report_reportname"]);
+            CopyReport(reportName);
+        }
+    }
+    private void CopyReport(string reportName)
+    {
+        string query = "SELECT * FROM tbl_report WHERE report_reportname='" + reportName + "'";
+        DataTable dttblReport_Source = ExecuteSelect(query);
+        if (!GlobalUtilities.IsValidaTable(dttblReport_Source))
+        {
+            AddStatus("Table", "Report", "Report "+ reportName+" not available");
+            return;
+        }
+        string reportFileName = reportName.Replace(" ", "").ToLower();
+        CopyFile("report/" + reportFileName + ".aspx");
+        CopyFile("report/" + reportFileName + ".aspx.cs");
+        CopyFile("xml/report/" + reportFileName + ".xml");
+
+        DataTable dttbl_Dest = DbTable.ExecuteSelect(query);
+        int reportId = 0;
+        if (GlobalUtilities.IsValidaTable(dttbl_Dest))
+        {
+            if (chkOverwrite.Checked)
+            {
+                string deleteQuery = "delete from tbl_report where report_reportname='" + reportName + "'";
+                reportId = MoveData(dttblReport_Source, "tbl_report", "", null);
+                AddStatus("Table", "tbl_report - " + reportName, "Data already exists and overwritten");
+            }
+            else
+            {
+                AddStatus("Table", "tbl_report - " + reportName, "Data already exists");
+            }
+        }
+        else
+        {
+            reportId = MoveData(dttblReport_Source, "tbl_report", "", null);
+            AddStatus("Table", "tbl_report - " + reportName, "Data copied");
+        }
+        if (reportId > 0)
+        {
+            query = @"select * from tbl_reportdetail 
+                   join tbl_report on report_reportid=reportdetail_reportid 
+                   where report_reportname='" + reportName + "'";
+            DataTable dttblReportDetail_Source = ExecuteSelect(query);
+
+            string deleteQuery = @"delete tbl_reportdetail from tbl_reportdetail 
+                                   join tbl_report on report_reportid=reportdetail_reportid 
+                                   where report_reportname='" + reportName + "'";
+            query = @"select * from tbl_reportdetail 
+                   join tbl_report on report_reportid=reportdetail_reportid 
+                   where report_reportname='" + reportName + "'";
+            DataTable dttblReportDetail_Dest = DbTable.ExecuteSelect(query);
+
+            Hashtable hstblExtraValues = new Hashtable();
+            hstblExtraValues.Add("reportdetail_reportid", reportId);
+            if (GlobalUtilities.IsValidaTable(dttblReportDetail_Dest))
+            {
+                if (chkOverwrite.Checked)
+                {
+                    MoveData(dttblReport_Source, "tbl_reportdetail", deleteQuery, hstblExtraValues);
+                    AddStatus("Table", "tbl_report - " + reportName, "Data already exists and overwritten");
+                }
+                else
+                {
+                    AddStatus("Table", "tbl_report - " + reportName, "Data already exists");
+                }
+            }
+            else
+            {
+                MoveData(dttblReport_Source, "tbl_reportdetail", "", hstblExtraValues);
+                AddStatus("Table", "tbl_report - " + reportName, "Data copied");
+            }
+            
+        }
+    }
+    private void AddStatus(string strObject,string strName,string strStatus)
+    {
+        string style = "";
+        if ((strStatus.ToLower().Contains("already") || strStatus.ToLower().Contains("invalid") || strStatus.ToLower().Contains("does not"))
+            && !strStatus.Contains("overwritten"))
+        {
+            style = "background-color:#ff0000";
+        }
+        else
+        {
+            style = "background-color:#058c11";
+        }
+        ltStatus.Text = ltStatus.Text + "<tr style='" + style + "'><td>" + strObject + "</td><td>" + strName + "</td><td>" + strStatus + "</td></tr>";
+    }
+    private void CopyDAO(string DAOName)
+    {
+        string DAOPath = "App_Code/Component/DataAccess/" + DAOName + ".cs";
+        CopyFile(DAOPath);
+        DAOPath = Server.MapPath("~/"+DAOPath);
+        if(File.Exists(DAOPath))
+        {
+            string DaoCode = GlobalUtilities.ReadFile(DAOPath);
+            bool spExists = true;
+            int startIndex = 0;
+            int endIndex = 0;
+            while (spExists)
+            {
+                startIndex = DaoCode.IndexOf("\"usp_", startIndex, StringComparison.CurrentCultureIgnoreCase);
+                if (startIndex > 0)
+                {
+                    endIndex = DaoCode.IndexOf("\"", startIndex + 1, StringComparison.CurrentCultureIgnoreCase);
+                    string spName = DaoCode.Substring(startIndex + 1, endIndex - startIndex - 1);
+                    CopyStoredProcedure(spName);
+                }
+                else
+                {
+                    spExists = false;
+                }
+                startIndex = endIndex + 1;
+            }
+        }
+        
+    }
+    private void CopyStoredProcedure(string storedProcedure)
+    {
+        string query = "select * from sysobjects where name='" + storedProcedure + "'";
+        bool isStoredProcedure = false;
+        if (storedProcedure.ToLower().StartsWith("usp_")) isStoredProcedure = true;
+        DataTable dttbl = ExecuteSelect(query);
+        string spType = "Function";
+        if (isStoredProcedure)
+        {
+            spType = "Stored Procedure";
+        }
+        if (!GlobalUtilities.IsValidaTable(dttbl))
+        {
+            AddStatus(spType, storedProcedure, "Invalid");
+            return;
+        }
+
+        string query_script = "SELECT Routine_Definition FROM INFORMATION_SCHEMA.Routines where Specific_Name = '" + storedProcedure + "'";
+        DataTable dttblScript = ExecuteSelect(query_script);
+        string script = Convert.ToString(dttblScript.Rows[0][0]);
+        query = "select * from sysobjects where name='" + storedProcedure + "'";
+        DataTable dttblSp_Dest = DbTable.ExecuteSelect(query);
+        bool spExists = false;
+        if (GlobalUtilities.IsValidaTable(dttblSp_Dest)) spExists = true;
+        if (spExists)
+        {
+            if (chkOverwrite.Checked)
+            {
+                if (isStoredProcedure)
+                {
+                    script = GlobalUtilities.ReplaceString(script, "create procedure", "ALTER PROCEDURE");
+                }
+                else
+                {
+                    script = GlobalUtilities.ReplaceString(script, "create function", "ALTER FUNCTION");
+                }
+                DbTable.ExecuteQuery(script);
+                AddStatus(spType, storedProcedure, "Already exists and overwritten");
+            }
+            else
+            {
+                AddStatus(spType, storedProcedure, "Already exists");
+            }
+        }
+        else
+        {
+            DbTable.ExecuteQuery(script);
+            AddStatus(spType, storedProcedure, "Copied");
+        }
+        CopyDbFunction(script);
+    }
+    private void CopyDbFunction(string storedProcedureScript)
+    {
+        int startIndex = 0;
+        int endIndex = 0;
+        bool fnExists = true;
+        while (fnExists)
+        {
+            startIndex = storedProcedureScript.IndexOf("dbo.", startIndex, StringComparison.CurrentCultureIgnoreCase);
+            if (startIndex > 0)
+            {
+                endIndex = storedProcedureScript.IndexOf("(", startIndex + 1, StringComparison.CurrentCultureIgnoreCase);
+                string fnName = storedProcedureScript.Substring(startIndex + 4, endIndex - startIndex - 4);
+                CopyStoredProcedure(fnName);
+            }
+            else
+            {
+                fnExists = false;
+            }
+            startIndex = endIndex + 1;
+        }
+    }
+    private bool CopyFile(string fileName)
+    {
+        string file_souce = txtCopyProjectFolder.Text + "/" + txtCopyFromProject.Text + "/" + fileName;
+        string file_dest = Server.MapPath("~/" + fileName);
+        bool copied = false;
+        if (!File.Exists(file_souce))
+        {
+            AddStatus("File", fileName, "File does not exists");
+
+            return false;
+        }
+        if (File.Exists(file_dest))
+        {
+            if (chkOverwrite.Checked)
+            {
+                File.Copy(file_souce, file_dest, true);
+                copied = true;
+                AddStatus("File", fileName, "File already exists and overwritten");
+            }
+            else
+            {
+                AddStatus("File", fileName, "File already exists");
+            }
+        }
+        else
+        {
+            File.Copy(file_souce, file_dest, true);
+            copied = true;
+            AddStatus("File", fileName, "File copied");
+        }
+        return copied;
+    }
+    private void MoveFolder(string Folder)
+    {
+        string sourceFolder = txtCopyProjectFolder.Text + "/" + txtCopyFromProject.Text + "/" + Folder;
+        string destFolder = Server.MapPath("~/" + Folder);
+
+        if (!Directory.Exists(sourceFolder))
+        {
+            AddStatus("Folder", Folder, "Folder does not exists");
+            return;
+        }
+        if (Directory.Exists(destFolder))
+        {
+            if (chkOverwrite.Checked)
+            {
+                GlobalUtilities.CopyFolder(sourceFolder, destFolder);
+                AddStatus("Folder", Folder, "Folder already exists and overwritten");
+            }
+            else
+            {
+                AddStatus("Folder", Folder, "Folder already exists");
+            }
+        }
+        else
+        {
+            GlobalUtilities.CopyFolder(sourceFolder, destFolder);
+            AddStatus("Folder", Folder, "Folder copied");
+        }
+    }
+    private void CreateTable(string tableName,int moduleid)
+    {
+        CP.CheckAndCreateTable(tableName);
+        CP.CreateTableColumns(tableName, moduleid);
+        CP.AddCreatedDate(tableName);
+    }
+    private void CopyModule(string moduleName)
+    {
+    }
+    private DataTable ExecuteSelect(string query)
+    {
+        string connectionString = "Data Source=RSERVER;Initial Catalog=" + txtCopyFromProject.Text + ";Integrated Security=false; User Id=sa; Password=sa;";
+        SqlConnection con = new SqlConnection(connectionString);
+        SqlDataAdapter da = new SqlDataAdapter(query, con);
+        DataTable dttbl = new DataTable();
+        da.Fill(dttbl);
+        return dttbl;
+    }
+    private int MoveData(DataTable dttbl, string mainTable, string deleteQuery, Hashtable extraValues)
+    {
+        int newId = 0;
+        if (deleteQuery != "")
+        {
+            DbTable.ExecuteQuery(deleteQuery);
+        }
+        for (int i = 0; i < dttbl.Rows.Count; i++)
+        {
+            Hashtable hstbl = new Hashtable();
+            if (extraValues != null)
+            {
+                IDictionaryEnumerator enmCategoryDetails = extraValues.GetEnumerator();
+                while (enmCategoryDetails.MoveNext())
+                {
+                    string key = enmCategoryDetails.Key.ToString().ToLower();
+                    string val = Convert.ToString(enmCategoryDetails.Value);
+                    hstbl.Add(key, val);
+                }
+            }
+            string column = "";
+            string value = "";
+            for (int j = 1; j < dttbl.Columns.Count; j++)
+            {
+                column = dttbl.Columns[j].ColumnName;
+                value = Convert.ToString(dttbl.Rows[i][j]);
+                if (!hstbl.ContainsKey(column)) hstbl.Add(column, value);
+            }
+            InsertUpdate obj = new InsertUpdate();
+            newId = obj.InsertData(hstbl, mainTable, false);
+        }
+        return newId;
+    }
+}

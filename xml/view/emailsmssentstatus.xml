@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Emailsmssentstatus</title>
+		<module>emailsmssentstatus</module>
+		<table>tbl_emailsmssentstatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>emailsmssentstatus_emailsmssentstatusid desc</defaultsort>
+		<columns>emailsmssentstatus_status</columns>
+		<columnlabels>Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>emailsmssentstatus_status</name><headertext>Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>emailsmssentstatus_emailsmssentstatusid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_emailsmssentstatus $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Status</searchbylabels>
+		<searchbycolumns>emailsmssentstatus_status</searchbycolumns>
+	</setting>

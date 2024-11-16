@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <populateonadd>
+    <opportunity>
+      <querystringcolumn>opportunityid</querystringcolumn>
+      <query>SELECT * FROM tbl_opportunity 
+JOIN tbl_client ON client_clientid = opportunity_clientid</query>
+    </opportunity>
+  </populateonadd>
+  <populateonadd>
+		<trial>
+			<querystringcolumn>trialid</querystringcolumn>
+			<query>SELECT * FROM tbl_trial 
+JOIN tbl_client ON client_clientid = trial_clientid 
+LEFT JOIN tbl_employee ON employee_employeeid = trial_employeeid</query>
+		</trial>
+</populateonadd>
+</setting>

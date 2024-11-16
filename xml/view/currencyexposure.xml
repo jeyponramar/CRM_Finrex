@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Currencyexposure</title>
+  <module>currencyexposure</module>
+  <table>tbl_currencyexposure</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>currencyexposure_currencyexposureid desc</defaultsort>
+  <columns>currencyexposure_currencyexposure</columns>
+  <columnlabels>Currency Exposure</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currencyexposure_currencyexposure</name>
+      <headertext>Currency Exposure</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>currencyexposure_currencyexposureid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_currencyexposure $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency Exposure</searchbylabels>
+  <searchbycolumns>currencyexposure_currencyexposure</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

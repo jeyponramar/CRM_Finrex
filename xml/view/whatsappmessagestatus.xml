@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Whatsappmessagestatus</title>
+		<module>whatsappmessagestatus</module>
+		<table>tbl_whatsappmessagestatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>whatsappmessagestatus_whatsappmessagestatusid desc</defaultsort>
+		<columns>whatsappmessagestatus_status</columns>
+		<columnlabels>Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>whatsappmessagestatus_status</name><headertext>Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>whatsappmessagestatus_whatsappmessagestatusid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_whatsappmessagestatus
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Status</searchbylabels>
+		<searchbycolumns>whatsappmessagestatus_status</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

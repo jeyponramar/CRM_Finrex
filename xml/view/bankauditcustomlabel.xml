@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditcustomlabel</title>
+  <module>bankauditcustomlabel</module>
+  <table>tbl_bankauditcustomlabel</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditcustomlabel_bankauditcustomlabelid desc</defaultsort>
+  <columns>bankauditcustomlabel_type,bankauditcustomlabel_label,bankauditcustomlabel_bankauditid,bankauditcustomlabel_index</columns>
+  <columnlabels>Type,Label,Bank Audit Id,Index</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditcustomlabel_type</name>
+      <headertext>Type</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditcustomlabel_label</name>
+      <headertext>Label</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditcustomlabel_bankauditcustomlabelid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditcustomlabel
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Type,Label</searchbylabels>
+  <searchbycolumns>bankauditcustomlabel_type,bankauditcustomlabel_label</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

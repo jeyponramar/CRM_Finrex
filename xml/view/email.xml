@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Email</title>
+  <module>email</module>
+  <table>tbl_email</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>email_emailid DESC</defaultsort>
+  <columns>emailsmssentstatus_status,email_attachment,email_emailtype,email_fromemailid,email_toemailid,email_cc,email_bcc,email_subject,email_module,email_moduleid,email_isdraft</columns>
+  <columnlabels>Status,Attachment,Email Type,From Email Id,To Email Id,CC,BCC,Subject,Module,Module Id,Is Draft</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>email_emailtype</name>
+      <headertext>Email Type</headertext>
+      <width>21%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>email_fromemailid</name>
+      <headertext>From Email Id</headertext>
+      <width>19%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>email_toemailid</name>
+      <headertext>To Email Id</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>email_subject</name>
+      <headertext>Subject</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>email_emailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_email
+
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=email_emailsmssentstatusid
+ $Search$
+</query>
+  <searchbylabels>Status,Email Type,Subject</searchbylabels>
+  <searchbycolumns>emailsmssentstatus_status,email_emailtype,email_subject</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

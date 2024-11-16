@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Exposure</title>
+		<module>exposure</module>
+		<table>tbl_exposure</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>exposure_exposureid desc</defaultsort>
+		<columns>exposure_exposure</columns>
+		<columnlabels>Exposure</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>exposure_exposure</name><headertext>Exposure</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>exposure_exposureid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_exposure $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Exposure</searchbylabels>
+		<searchbycolumns>exposure_exposure</searchbycolumns>
+	</setting>

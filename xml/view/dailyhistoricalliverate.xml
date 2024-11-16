@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Dailyhistoricalliverate</title>
+		<module>dailyhistoricalliverate</module>
+		<table>tbl_dailyhistoricalliverate</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>dailyhistoricalliverate_dailyhistoricalliverateid desc</defaultsort>
+		<columns>dailyhistoricalliverate_liverateid,dailyhistoricalliverate_currentrate,dailyhistoricalliverate_date</columns>
+		<columnlabels>Liverate id,Current Rate,Date</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn>
+		</gridcolumn>
+		<hiddencolumns>dailyhistoricalliverate_dailyhistoricalliverateid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_dailyhistoricalliverate
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

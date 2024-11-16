@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Followups</title>
+  <module>Followups</module>
+  <table>tbl_followups</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>followups_followupsid DESC</defaultsort>
+  <columns>enquiry_enquiryno,Clientname,employee_employeename,Task1,Task2,Task3,Task4,Task5,enquirystatus_status,opportunity_contactperson,ContactNo,EmailId</columns>
+  <columnlabels>Enquiry No,Client Name,Sales Person,Task1,Task2,Task3,Task4,Task5,Status,Contact Person,Contact No,Email Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ClientName</name>
+      <headertext>Client Name</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ContactNo</name>
+      <headertext>Contact No</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>EmailId</name>
+      <headertext>Email Id</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Sales Person</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>Task1</name>
+      <headertext>Task1</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>Task2</name>
+      <headertext>Task2</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>Task3</name>
+      <headertext>Task3</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>Task4</name>
+      <headertext>Task4</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>Task5</name>
+      <headertext>Task5</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystatus_status</name>
+      <headertext>Status</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>followups_followupsid</hiddencolumns>
+  <query>SELECT *,[dbo].fn_getTask(enquiry_enquiryid,5) AS Task5,[dbo].fn_getTask(enquiry_enquiryid,4) AS Task4,
+    [dbo].fn_getTask(enquiry_enquiryid,3) AS Task3,[dbo].fn_getTask(enquiry_enquiryid,2) AS Task2,[dbo].fn_getTask(enquiry_enquiryid,1) AS Task1,
+    (CASE WHEN ISNULL(enquiry_clientid,0)&gt;0 THEN (SELECT client_customername FROM tbl_client WHERE client_clientid=enquiry_clientid)
+    ELSE (SELECT enquiry_companyname) END )AS Clientname,
+    (CASE WHEN ISNULL(enquiry_clientid,0)&gt;0 THEN (SELECT client_mobileno FROM tbl_client WHERE client_clientid=enquiry_clientid)
+    ELSE (SELECT enquiry_mobileno) END )AS ContactNo,
+    (CASE WHEN ISNULL(enquiry_clientid,0)&gt;0 THEN (SELECT client_emailid FROM tbl_client WHERE client_clientid=enquiry_clientid)
+    ELSE (SELECT enquiry_emailid) END )AS EmailId
+    FROM tbl_enquiry
+    LEFT JOIN tbl_opportunity on enquiry_enquiryid=opportunity_enquiryid
+    LEFT JOIN tbl_product ON opportunity_productid=product_productid
+    LEFT JOIN tbl_city ON opportunity_cityid=city_cityid
+    LEFT JOIN tbl_client ON enquiry_clientid=client_clientid
+    LEFT JOIN tbl_priority ON opportunity_priorityid=priority_priorityid
+    LEFT JOIN tbl_employee ON enquiry_employeeid=employee_employeeid
+    LEFT Join tbl_campaign ON campaign_campaignid=enquiry_campaignid
+    left Join tbl_followups On followups_mid=enquiry_enquiryid
+    LEFT JOIN tbl_enquirystatus ON enquirystatus_enquirystatusid=enquiry_enquirystatusid</query>
+  <where>('$followups_employeeid$' = '0' OR followups_employeeid = '$followups_employeeid$')</where>
+  <isbindonload>False</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

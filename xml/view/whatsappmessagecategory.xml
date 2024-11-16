@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Whatsappmessagecategory</title>
+		<module>whatsappmessagecategory</module>
+		<table>tbl_whatsappmessagecategory</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>whatsappmessagecategory_whatsappmessagecategoryid desc</defaultsort>
+		<columns>whatsappmessagecategory_categoryname</columns>
+		<columnlabels>Category Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>whatsappmessagecategory_categoryname</name><headertext>Category Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>whatsappmessagecategory_whatsappmessagecategoryid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_whatsappmessagecategory
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Category Name</searchbylabels>
+		<searchbycolumns>whatsappmessagecategory_categoryname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

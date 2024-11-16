@@ -1,0 +1,190 @@
+ <%@ Page Language="C#" MasterPageFile="~/InnerMaster.master" AutoEventWireup="true" 
+ CodeFile="add.aspx.cs" Inherits="Payment_add" EnableEventValidation="false" ValidateRequest="false"%>
+ <%@ Register Src="~/usercontrols/NextPrevDetail.ascx" TagName="NextPrevDetail" TagPrefix="uc" %>
+<%--CONTROLREGISTER_START--%><%--CONTROLREGISTER_END--%>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script>
+    $(document).ready(function() {
+        SetDetailPage('<%=Request.QueryString["id"]%>');
+        function CalculateTotalAmount() {
+            var Discount = ConvertToDouble($(".Discount").val());
+            var amountpaid = ConvertToDouble($(".amountpaid").val());
+            var totalamount = (Discount) + (amountpaid);
+            $(".totalamount").val(totalamount); //=totalamount;
+        }
+        $(".amountchange").blur(function() {
+            CalculateTotalAmount();
+        });
+        var poid = ConvertToInt('<%=Request.QueryString["purchaseorderid"]%>');
+        var expensesid = ConvertToInt('<%=Request.QueryString["expensesid"]%>');
+        if (poid > 0) {
+            PopulateDetailForPurchaseOrder();
+            $(".purchaseorderid").text(poid);
+        }
+        else if (expensesid > 0) {
+            PopulateDetailForPurchaseOrder();
+            $(".expensesid").text(expensesid);
+        }
+        function PopulateDetailForPurchaseOrder() {
+            var totalamount = 0;
+            var balanceamount = 0;
+            var data;
+            if (poid > 0) {
+                data = RequestData("../getdata.ashx?m=PurchaseOrder&poid=" + poid);
+            } else {
+                data = RequestData("../getdata.ashx?m=Expense&Expenseid=" + expensesid);
+            }
+            if (data == "" || data == null) return;
+            for (i = 0; i < data.length; i++) {
+                totalamount = data[i].TotalAmount;
+                balanceamount = data[i].BalanceAmount;
+                if (balanceamount == "") {
+                    balanceamount = totalamount;
+                }
+            }
+            $(".totamt").text(totalamount);
+            $(".balamt").text(balanceamount);
+            $(".totamt").closest("tr").show();
+        }
+    });
+</script>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<!--DESIGN_START-->
+    <asp:PlaceHolder ID="form" runat="server">
+    <table width="100%">
+         <tr>
+            <td class="title">
+                <asp:Label ID="lblPageTitle" runat="server"/>
+            </td>
+         </tr>
+         <tr>
+            <td>
+                <input type="button" value="Edit" class="edit button dpage"/>
+                <input type="button" value="Copy" class="copy button dpage"/>
+                <asp:TextBox ID="h_balanceamount" runat="server" CssClass="hidden" Text="0"></asp:TextBox>                
+                <asp:TextBox ID="h_prevamoutpaid" runat="server" CssClass="hidden" Text="0"></asp:TextBox>
+                <asp:TextBox ID="h_IsCopy" runat="server" CssClass="iscopy hidden" Text="0"></asp:TextBox>
+                <!--ACTION_START--><!--ACTION_END-->
+            </td>
+            <td align="right"> 
+                <uc:NextPrevDetail ID="NextPrevDetail" runat="server" />
+            </td>
+         </tr>
+         <tr>
+            <td class="form" colspan="2">
+                <table width="90%" cellpadding="0">
+                <tr>
+                    <td align="center"><asp:Label ID="lblMessage" runat="server" Visible="false" CssClass="error"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td>
+						    <table width="100%">
+						        <tr  style="display:none">
+						            <td></td><asp:Literal ID="ltbindbalanceamount" runat="server" Visible="false" ></asp:Literal>
+						            <td>Balance Amount: <b style="font-size:small"><asp:Label CssClass="error balamt" ID="lblbalanceamount" runat="server" ></asp:Label></b>&nbsp;&nbsp;
+						            Total Amount: <b style="font-size:small"><asp:Label ID="lblProformaInvoiceAmount" CssClass="error totamt" runat="server" ></asp:Label></b></td>
+						        </tr>
+						        
+						    </table>
+						</td>
+                </tr>
+				<!--CONTROLS_START-->
+					<table width='100%' cellpadding='0' cellspacing='0'>
+					<tr>
+						<td>
+							<table width='100%' cellpadding='3' cellspacing='5'>
+								<tr>
+									<td width='50%' class='valign'>
+										<table width='100%' cellpadding='3' cellspacing='5' class='tblform' tblindex="0">
+										<tr>
+											<td class="label">Bill No</td>
+											<td ti='0'><asp:TextBox ID="txtbillno"  Enabled="false"  search='true'  MaxLength="100" runat="server"  dcn="payment_billno" CssClass="textbox"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Payment Date <span class="error">*</span></td>
+											<td ti='1'><asp:TextBox ID="txtpaymentdate"  dcn="payment_paymentdate" runat="server" autocomplete="off" MaxLength="11" Format="Date" CssClass="textbox datepicker"></asp:TextBox>
+						<asp:RequiredFieldValidator ID="rfv1" SetFocusOnError="true" Display="Dynamic" runat="server" ErrorMessage="Required Payment Date" ValidationGroup="vg" ControlToValidate="txtpaymentdate"></asp:RequiredFieldValidator></td>
+										</tr>
+										<tr>
+											<td class="label">Payment For</td>
+											<td ti='2'><asp:TextBox ID="txtpaymentfor"  MaxLength="100" runat="server"  dcn="payment_paymentfor" CssClass="textbox"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Employee Name</td>
+											<td ti='3'><asp:TextBox ID="employee"  search='true'  dcn="employee_employeename" MaxLength="100" runat="server" m="employee" cn="employeename" CssClass="textbox ac txtac"></asp:TextBox><asp:TextBox id="txtemployeeid"  dcn="payment_employeeid"  Text="0" runat="server" class=" hdnac"/><img src="../images/down-arrow.png" class="epage"/></td>
+										</tr>
+										<tr>
+											<td class="label">Payment Mode <span class="error">*</span></td>
+											<td ti='4'><asp:DropDownList ID="ddlpaymentmodeid"  dcn="payment_paymentmodeid"  search='true' runat="server" m="paymentmode" cn="paymentmode" CssClass="ddl"></asp:DropDownList>
+						<asp:RequiredFieldValidator ID="rfv4" SetFocusOnError="true" Display="Dynamic" runat="server" ErrorMessage="Required Payment Mode" ValidationGroup="vg" ControlToValidate="ddlpaymentmodeid"  InitialValue="0"></asp:RequiredFieldValidator></td>
+										</tr>
+										<tr>
+											<td class="label">Discount</td>
+											<td ti='5'><asp:TextBox ID="txtdiscount"  dcn="payment_discount" runat="server" MaxLength="15" CssClass="mbox val-dbl amountchange Discount " Text="0"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Amount Paid</td>
+											<td ti='6'><asp:TextBox ID="txtamountpaid"  dcn="payment_amountpaid" runat="server" MaxLength="15" CssClass="mbox val-dbl amountchange amountpaid " Text="0"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Total Amount</td>
+											<td ti='7'><asp:TextBox ID="txttotalamount"  dcn="payment_totalamount"  Enabled="false" runat="server" MaxLength="15" CssClass="mbox val-dbl totalamount " Text="0"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Cheque No</td>
+											<td ti='8'><asp:TextBox ID="txtchequeno"  search='true'  MaxLength="10" runat="server"  dcn="payment_chequeno" CssClass="textbox"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Bank Name</td>
+											<td ti='9'><asp:TextBox ID="txtbankname"  search='true'  MaxLength="50" runat="server"  dcn="payment_bankname" CssClass="textbox"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Bank Branch</td>
+											<td ti='10'><asp:TextBox ID="txtbankbranch"  search='true'  MaxLength="100" runat="server"  dcn="payment_bankbranch" CssClass="textbox"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Comment</td>
+											<td ti='11'><asp:TextBox TextMode="MultiLine" ID="txtcomment"  dcn="payment_comment" ml="300" runat="server" CssClass="textarea"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td ti='12'><asp:TextBox ID="txtpurchaseorderid"  Text="0"  MaxLength="100" runat="server"  dcn="payment_purchaseorderid" CssClass="textbox hidden purchaseorderid "></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td ti='13'><asp:TextBox ID="txtexpensesid"  Text="0"  MaxLength="100" runat="server"  dcn="payment_expensesid" CssClass="textbox hidden expensesid "></asp:TextBox></td>
+										</tr>
+										</table>
+									</td>
+									<td width='50%' class='valign'>
+										<table width='100%' cellpadding='3' cellspacing='5' class='tblform' tblindex="1">
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					</table>
+					<!--CONTROLS_END-->
+                </table>
+            </td>
+         </tr>
+		 <tr>
+            <td align="center" colspan="2">
+				<!--SAVEBUTTON_START-->
+					<asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Save" CssClass="save button" ValidationGroup="vg"/>
+				<asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" CssClass="delete button" Visible="false"/>
+				<input type="button" class="close-page cancel" value="Cancel"/>
+				<asp:Button ID="btnSubmitAndView" runat="server" Visible="false"/>
+					<!--SAVEBUTTON_END-->
+            </td>
+        </tr>
+
+    </table>
+</asp:PlaceHolder>
+<!--DESIGN_END-->
+<!--JSCODE_START-->
+					
+					<!--JSCODE_END-->
+
+</asp:Content>

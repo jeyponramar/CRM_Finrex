@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Customerquery</title>
+  <module>customerquery</module>
+  <table>tbl_customerquery</table>
+  <isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>customerquery_customerqueryid desc</defaultsort>
+  <columns>querytopic_topicname,customerquery_subject,customerquery_date,customerquery_query,clientuser_name,customerquery_attachments,querystatus_status,user_name,customerquery_lastupdateddate,customerquery_iscustomervisited,customerquery_isadvisorvisited</columns>
+  <columnlabels>Query Topic,Subject,Date,Query,Client User,Attachments,Status,User,Last Updated Date,iscustomervisited,isadvisorvisited</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>querytopic_topicname</name>
+      <headertext>Query Topic</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>customerquery_subject</name>
+      <headertext>Subject</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>User</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>querystatus_status</name>
+      <headertext>Status</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>customerquery_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>customerquery_customerqueryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_customerquery
+
+ LEFT JOIN tbl_querytopic ON querytopic_querytopicid=customerquery_querytopicid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=customerquery_clientuserid
+ LEFT JOIN tbl_querystatus ON querystatus_querystatusid=customerquery_querystatusid
+ LEFT JOIN tbl_user ON user_userid=customerquery_userid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+	<where>
+		
+	</where>
+  <searchbylabels>Query Topic,Subject,Client User,Status</searchbylabels>
+  <searchbycolumns>querytopic_topicname,customerquery_subject,clientuser_name,querystatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

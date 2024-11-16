@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Proformainvoice</title>
+  <module>proformainvoice</module>
+  <table>tbl_proformainvoice</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>proformainvoice_proformainvoiceid DESC</defaultsort>
+  <columns>proformainvoice_proformainvoiceno,proformainvoice_date,client_customername,proformainvoice_gstin,proformainvoice_directorname,proformainvoice_directormobile,proformainvoice_directoremailid,proformainvoice_financename,proformainvoice_financemobile,proformainvoice_financeemailid,proformainvoice_officetelno,proformainvoice_officeemailid,proformainvoice_periodfrom,proformainvoice_periodto,subscription_subscriptioncode,proformainvoice_contactperson,proformainvoice_emailid,proformainvoice_mobileno,proformainvoice_billingaddress,state_state,proformainvoice_courieraddress,employee_employeename,employee_employeename2,employee_employeename3,employee_employeename4,employee_employeename5,setupfortermsandcondition_name,employee_employeename6,proformainvoice_remarks,salesstatus_status,proformainvoice_taxableamount,proformainvoice_cgst,proformainvoice_sgst,proformainvoice_igst,proformainvoice_gst,proformainvoice_totalamount</columns>
+  <columnlabels>Proforma Invoice No,Date,Customer Name,GSTIN,Director Name,Director Mobile,Director Email Id,Finance Name,Finance Mobile,Finance Email Id,Office Tel no,Office Email Id,Period From,Period To,Subscription Code,Contact Person,Email Id,Mobile No,Billing Address,State,Courier Address,Lead By,Advisory by,Meeting1,Meeting2,Closed By,Terms And Condition,Assigned To,Remarks,status,Taxable Amount,CGST,SGST,IGST,GST,Total Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>proformainvoice_proformainvoiceno</name>
+      <headertext>Proforma Invoice No</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>proformainvoice_date</name>
+      <headertext>Date</headertext>
+      <width>11%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>proformainvoice_taxableamount</name>
+      <headertext>Taxable Amount</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>salesstatus_status</name>
+      <headertext>status</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Lead By</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename2</name>
+      <headertext>Advisory by</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename3</name>
+      <headertext>Meeting1</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename5</name>
+      <headertext>Closed By</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>proformainvoice_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>proformainvoice_proformainvoiceid</hiddencolumns>
+  <query>select * from (
+select $COLUMNS$,
+(select employee_employeename from tbl_employee WHERE employee_employeeid=proformainvoice_advisorybyid) as employee_employeename2
+,
+(select employee_employeename from tbl_employee WHERE employee_employeeid=proformainvoice_meeting1id) as employee_employeename3
+,
+(select employee_employeename from tbl_employee WHERE employee_employeeid=proformainvoice_meeting2id) as employee_employeename4
+,
+(select employee_employeename from tbl_employee WHERE employee_employeeid=proformainvoice_closedbyid) as employee_employeename5
+,
+(select employee_employeename from tbl_employee WHERE employee_employeeid=proformainvoice_employeeid) as employee_employeename6
+ from tbl_proformainvoice
+
+ LEFT JOIN tbl_client ON client_clientid=proformainvoice_clientid
+ LEFT JOIN tbl_subscription ON subscription_subscriptionid=proformainvoice_subscriptionid
+ LEFT JOIN tbl_state ON state_stateid=proformainvoice_stateid
+ LEFT JOIN tbl_employee ON employee_employeeid=proformainvoice_leadbyid
+ LEFT JOIN tbl_setupfortermsandcondition ON setupfortermsandcondition_setupfortermsandconditionid=proformainvoice_setupfortermsandconditionid
+ LEFT JOIN tbl_salesstatus ON salesstatus_salesstatusid=proformainvoice_salesstatusid
+)mq1 $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Proforma Invoice No,Customer Name,status</searchbylabels>
+  <searchbycolumns>proformainvoice_proformainvoiceno,client_customername,salesstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

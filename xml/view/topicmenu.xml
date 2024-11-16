@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Topicmenu</title>
+		<module>topicmenu</module>
+		<table>tbl_topicmenu</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>topicmenu_topicmenuid desc</defaultsort>
+		<columns>topicmenu_menu</columns>
+		<columnlabels>Menu</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>topicmenu_menu</name><headertext>Menu</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>topicmenu_topicmenuid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_topicmenu
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Menu</searchbylabels>
+		<searchbycolumns>topicmenu_menu</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

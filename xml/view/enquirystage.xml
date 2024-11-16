@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>enquirystage</title>
+		<module>enquirystage</module>
+		<table>tbl_enquirystage</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>enquirystage_enquirystageid desc</defaultsort>
+		<columns>enquirystage_enquirystage</columns>
+		<columnlabels>Enquiry Stage</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>enquirystage_enquirystage</name><headertext>Enquiry Stage</headertext><row>1</row><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>enquirystage_enquirystageid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_enquirystage $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Enquiry Stage</searchbylabels>
+		<searchbycolumns>enquirystage_enquirystage</searchbycolumns>
+	</setting>

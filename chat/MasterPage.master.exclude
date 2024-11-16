@@ -1,0 +1,2386 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Finstation - Live Ticker</title>
+    <%--<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">--%>
+    <link href="css/home-common.css?v=2.1" rel="stylesheet" type="text/css" />
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />    
+    <script src="js/jquery.min.js" type="text/javascript"></script>    
+    <script src="js/home.js" type="text/javascript"></script>    
+    <script src="js/common.js" type="text/javascript"></script> 
+    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="js/validate.js?ver=2.0" type="text/javascript"></script> 
+    
+    <script src="js/liverate.js?v=1.1" type="text/javascript"></script>
+    <script src="js/tools.js?ver=2.1" type="text/javascript"></script>
+    
+    <style>
+        .ui-widget-content
+        {
+            background-color:#000;
+            border:solid 1px #222;
+            color:#ccc;
+        }
+        .ui-dialog .ui-dialog-titlebar
+        {
+            background-color:#222;
+            border:solid 1px #111;
+        }
+    </style> 
+    <script>
+        $(document).ready(function(){
+            $(".submenutools").find("a").click(function(){
+                return false;
+            });
+        });
+    </script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <%--Broadcast notification start--%>
+    <div class="jq-broadcast-panel">
+        <div class="jq-broadcast-panel-title">
+            <div class="broadcast-title">Notification</div>
+            <div class="right jq-close-broadcast"></div>
+        </div>
+        <div class="jq-broadcast-panel-content">
+            <div id="jq-task-notification-data">
+            </div>
+        </div>
+    </div>
+    <%--Broadcast notification end--%>
+    <table cellpadding="0" cellspacing="0" width="100%">
+        <tr id="trheader">
+            <td style="background-color:#fff;">
+                <table width="1024" align="center">
+                    <tr>
+                        <%--<td><img src="images/finrex.png" /></td>--%>
+                        <td style="color:#32347e;font-size:25px;font-weight:bold;">FinStation</td>
+                        <td style="color:#000;">
+                            <table width="100%">
+                                <tr>
+                                    <td><asp:Literal ID="ltMarque" runat="server"></asp:Literal></td>
+                                    <td align="right">
+                                        <table width="400">
+                                            <tr>
+                                                <td class="jq-currentdate" style="font-size:12px;padding-right:10px;width:150px;color:#000;"></td>
+                                                <td style="color:#222;font-size:13px;width:200px;" align="right">Welcome &nbsp;<asp:Label ID="lblUserName" runat="server" CssClass="loginuser" style="color:#000;font-weight:bold;"></asp:Label></td>
+                                                <td align="right" style="padding-left:5px;"><asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="lnkLogout_Click" CssClass="btnlogout"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="2">
+                                                    <asp:Literal ID="ltExpiryMessage" runat="server"></asp:Literal>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color:#201f1f;">
+                <table width="1024" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <table cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="i-mainmenu menu-home"><a href="index.aspx">Live Ticker</a></td>
+                                    <td class="i-mainmenu menu-crosscurrency"><a href="cross-currency.aspx">Cross Currency</a></td>
+                                    <td class="i-mainmenu mnu-brokendatecalc"><a href="#">Broken Date Calc</a></td>
+                                    <%--<td class="i-mainmenu"><a href="economic-calender.aspx">Economic Calender</a></td>--%>
+                                    
+                                    <td id="subsubmenu" class="submenutools">
+                                      <ul>
+                                      <li><a href="#">Tools</a>
+                                        <ul>
+                                          <li><a href="#">Exporter</a>
+                                            <ul>
+                                              <li><a href="#" target="calculator_rpc_usd" class="lnksubmenu">PCFC Vs RPC Calculator (USD)</a></li>
+                                              <li><a href="#" target="calculator_rpc_eur" class="lnksubmenu">PCFC Vs RPC Calculator (EUR)</a></li>
+                                              <li><a href="#" target="calculator_rpc_gbp" class="lnksubmenu">PCFC Vs RPC Calculator (GBP)</a></li>
+                                              <li><a href="#" target="calculator_rpc_jpy" class="lnksubmenu">PCFC Vs RPC Calculator (JPY)</a></li>
+                                              <li><a href="#" target="calculator_bills_discounting_interest" class="lnksubmenu" w="350" h="500">
+                                                        Bills Discounting Interest Calculation</a></li>
+                                            </ul>
+                                          </li>
+                                          <li><a href="#">Importer</a>
+                                                <ul>
+                                                    <li><a href="#" target="tblcalcbuyercredit-usd" class="lnksubmenu">Buyer Credit vs. CC Calculator (USD)</a></li>
+                                                    <li><a href="#" target="tblcalcbuyercredit-eur" class="lnksubmenu">Buyer Credit vs. CC Calculator (EUR)</a></li>
+                                                    <li><a href="#" target="tblcalcbuyercredit-gbp" class="lnksubmenu">Buyer Credit vs. CC Calculator (GBP)</a></li>
+                                                    <li><a href="#" target="tblcalcbuyercredit-jpy" class="lnksubmenu">Buyer Credit vs. CC Calculator (JPY)</a></li>
+                                                    
+                                                    <li><a href="#" target="calculator_buyer_supplier" class="lnksubmenu" w="500">Buyer Credit Vs Supplier Credit Cost Calculator</a></li>
+                                                    
+                                                    <li><a href="#" target="calculator_cc_fcnr_usd" class="lnksubmenu">CC loan Vs FCNR B Loan Calculator (USD)</a></li>
+                                                    <li><a href="#" target="calculator_cc_fcnr_eur" class="lnksubmenu">CC loan Vs FCNR B Loan Calculator (EUR)</a></li>
+                                                    <li><a href="#" target="calculator_cc_fcnr_gbp" class="lnksubmenu">CC loan Vs FCNR B Loan Calculator (GBP)</a></li>
+                                                    <li><a href="#" target="calculator_cc_fcnr_jpy" class="lnksubmenu">CC loan Vs FCNR B Loan Calculator (JPY)</a></li>
+                                                    
+                                                    <li><a href="#" target="calculator_bills_discounting_interest" class="lnksubmenu" w="350" h="500">Bills Discounting Interest Calculation</a></li>
+                                                    <li><a href="#" target="calculator_cc_interest" class="lnksubmenu" w="500" h="600">CC Interest calculation</a></li>
+                                                </ul>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      </ul>
+                                    </td>
+                                    
+                                    <td class="i-mainmenu"><a href="holiday.aspx">Holiday</a></td>
+                                    <td class="i-mainmenu menu-aboutus"><a href="change_password.aspx">Change Password</a></td>
+                                    <%--<td class="i-mainmenu menu-contactus"><a href="contact-us.aspx">Contact Us</a></td>--%>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                            
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="height:518px;vertical-align:top;">
+                <table width="1024" align="center">
+                <tr>
+                    <td style="border:solid 1px #222;height:500px;vertical-align:top;">
+                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                    </tr>
+                </table>
+            </td>
+        </tr> 
+        <%--<tr>
+            <td style="background-color:#201f1f;">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td style="text-align:left;padding:15px;">For Any Assistance> Contact No. :  022-26122369 and Email ID : info@finrex.in</td>
+                    </tr>
+               </table>
+            </td>
+         </tr> --%>    
+    </table>
+    
+    <%--Broken Date Calc START--%>
+    <div id="tblbrokendatecalc" title="Broken Date Calculation" class="hdn">
+    <table cellspacing="5">
+        <tr>
+            <td width="120">Spot Date</td>
+            <td id="broken-sportdate"></td>
+        </tr>
+        <tr>
+            <td>Conver Type</td>
+            <td>
+                <asp:RadioButtonList ID="rbtnConverType" runat="server" RepeatDirection="Horizontal" CssClass="broken-covertype">
+                    <asp:ListItem Text="Exports" Selected="True" Value="2"></asp:ListItem>
+                    <asp:ListItem Text="Imports" Value="1"></asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+        <tr>
+            <td>Select Date</td>
+            <td><input type="text" class="datepicker" id="broken-txtbdate" style="width:100px;"/></td>
+        </tr>
+        <tr>
+            <td>Select Currency</td>
+            <td>
+                <select id="broken-ddlcurrency" style="width:104px;height:25px;">
+                    <option value="1" selected="selected">USDINR</option>
+                    <option value="2">EURINR</option>
+                    <option value="3">GBPINR</option>
+                    <option value="4">JPYINR</option>
+                    <option value="5">EURUSD</option>
+                    <option value="6">GBPUSD</option>
+                    <option value="7">USDJPY</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td></td>
+            <td><input type="button" id="broken-btncalc" value="Calculate" style="padding:6px 10px 6px 10px;"/></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td colspan="2" style="font-size:14px;"><table><tr><td id="broken-result"></td></tr></table></td></tr>
+    </table>    
+    </div>
+    <%--Broken Date Calc END--%>
+        
+    <asp:Panel ID="pnlCalculate" runat="server">
+        <%--Spot Date and Rates START--%>
+        <table class="hidden">
+            <tr>
+                <td>USD INR Spot Date</td>
+                <td><asp:Label ID="lblUSDINRSpotDate" runat="server" CssClass="jq-usdinr-spotdate liverate" rid="1029"></asp:Label></td>
+                <td>USD INR Spot Rate Export</td>
+                <td><asp:Label ID="Label65" runat="server" CssClass="jq-usdinr-spotrate-bid liverate" rid="1"></asp:Label></td>
+                <td>USD INR Spot Import</td>
+                <td><asp:Label ID="Label66" runat="server" CssClass="jq-usdinr-spotrate-ask liverate" rid="2"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>EURINR Spot Date</td>
+                <td><asp:Label ID="Label67" runat="server" CssClass="jq-eurinr-spotdate liverate" rid="1032"></asp:Label></td>
+                <td>EURINR Spot Rate Export</td>
+                <td><asp:Label ID="Label68" runat="server" CssClass="jq-eurinr-spotrate-bid liverate" rid="10"></asp:Label></td>
+                <td>EURINR Spot Import</td>
+                <td><asp:Label ID="Label69" runat="server" CssClass="jq-eurinr-spotrate-ask liverate" rid="11"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>GBPINR Spot Date</td>
+                <td><asp:Label ID="Label70" runat="server" CssClass="jq-gbpinr-spotdate liverate" rid="1035"></asp:Label></td>
+                <td>GBPINR Spot Rate Export</td>
+                <td><asp:Label ID="Label71" runat="server" CssClass="jq-gbpinr-spotrate-bid liverate" rid="19" divideby1="100"></asp:Label></td>
+                <td>GBPINR Spot Import</td>
+                <td><asp:Label ID="Label72" runat="server" CssClass="jq-gbpinr-spotrate-ask liverate" rid="20" divideby1="100"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>JPYINR Spot Date</td>
+                <td><asp:Label ID="Label73" runat="server" CssClass="jq-jpyinr-spotdate liverate" rid="1038"></asp:Label></td>
+                <td>JPYINR Spot Rate Export</td>
+                <td><asp:Label ID="Label74" runat="server" CssClass="jq-jpyinr-spotrate-bid liverate" rid="28" divideby1="100"></asp:Label></td>
+                <td>JPYINR Spot Import</td>
+                <td><asp:Label ID="Label75" runat="server" CssClass="jq-jpyinr-spotrate-ask liverate" rid="29" divideby1="100"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>EURUSD Spot Date</td>
+                <td><asp:Label ID="Label76" runat="server" CssClass="jq-eurusd-spotdate liverate" rid="1041"></asp:Label></td>
+                <td>EURUSD Spot Rate Export</td>
+                <td><asp:Label ID="Label77" runat="server" CssClass="jq-eurusd-spotrate-bid liverate" rid="1039"></asp:Label></td>
+                <td>EURUSD Spot Import</td>
+                <td><asp:Label ID="Label78" runat="server" CssClass="jq-eurusd-spotrate-ask liverate" rid="1040"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>GBPUSD Spot Date</td>
+                <td><asp:Label ID="Label79" runat="server" CssClass="jq-gbpusd-spotdate liverate" rid="1044"></asp:Label></td>
+                <td>GBPUSD Spot Rate Export</td>
+                <td><asp:Label ID="Label80" runat="server" CssClass="jq-gbpusd-spotrate-bid liverate" rid="1042" divideby1="100"></asp:Label></td>
+                <td>GBPUSD Spot Import</td>
+                <td><asp:Label ID="Label81" runat="server" CssClass="jq-gbpusd-spotrate-ask liverate" rid="1043" divideby1="100"></asp:Label></td>
+            </tr>
+            <tr>
+                <td>USDJPY Spot Date</td>
+                <td><asp:Label ID="Label82" runat="server" CssClass="jq-usdjpy-spotdate liverate" rid="1054"></asp:Label></td>
+                <td>USDJPY Spot Rate Export</td>
+                <td><asp:Label ID="Label83" runat="server" CssClass="jq-usdjpy-spotrate-bid liverate" rid="1045" divideby1="100"></asp:Label></td>
+                <td>USDJPY Spot Import</td>
+                <td><asp:Label ID="Label84" runat="server" CssClass="jq-usdjpy-spotrate-ask liverate" rid="1046" divideby1="100"></asp:Label></td>
+            </tr>
+            
+        </table>
+        <%--Spot Date and Rates END--%>
+        
+        <%--Tools PCFC Vs RPC USD Start--%>
+        <div id="calculator_rpc_usd" title="PCFC Vs RPC Calculator - USD" class="hdn tblcalcforeignrupee">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Foreign Currency vs Rupee Finance
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        PCFC Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label5" runat="server" rc='47#5#1#5629#USD1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label6" runat="server" rc='47#5#1#5629#USD3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label7" runat="server" rc='47#5#1#5629#USD6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label8" runat="server" rc='47#5#1#5629#USD1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PCFC Costing
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_pcfccosting1"></td>
+                    <td class="lblcalc_pcfccosting2"></td>
+                    <td class="lblcalc_pcfccosting3"></td>
+                    <td class="lblcalc_pcfccosting4"></td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        RPC Interest rate
+                    </td>
+                    <td>
+                        Post subvention
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        E
+                    </td>
+                    <td>
+                        <asp:Label ID="Label1" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblcalcpremium1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblcalcpremium2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblcalcpremium3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label4" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblcalcpremium4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        RPC Costing
+                    </td>
+                    <td>
+                        F = D - E
+                    </td>
+                    <td class="lblcal_rfccosting1"></td>
+                    <td class="lblcal_rfccosting2"></td>
+                    <td class="lblcal_rfccosting3"></td>
+                    <td class="lblcal_rfccosting4"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        C <> F
+                    </td>
+                    <td class="lblcal_foreignrupee_result1"></td>
+                    <td class="lblcal_foreignrupee_result2"></td>
+                    <td class="lblcal_foreignrupee_result3"></td>
+                    <td class="lblcal_foreignrupee_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools PCFC Vs RPC USD End--%>
+        <%--Tools PCFC Vs RPC EUR Start--%>
+        <div id="calculator_rpc_eur" title="PCFC Vs RPC Calculator - EUR" class="hdn tblcalcforeignrupee">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Foreign Currency vs Rupee Finance
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        PCFC Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label9" runat="server" rc='47#5#1#5629#EUR1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label10" runat="server" rc='47#5#1#5629#EUR3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label11" runat="server" rc='47#5#1#5629#EUR6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label12" runat="server" rc='47#5#1#5629#EUR1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PCFC Costing
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_pcfccosting1"></td>
+                    <td class="lblcalc_pcfccosting2"></td>
+                    <td class="lblcalc_pcfccosting3"></td>
+                    <td class="lblcalc_pcfccosting4"></td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        RPC Interest rate
+                    </td>
+                    <td>
+                        Post subvention
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        E
+                    </td>
+                    <td>
+                        <asp:Label ID="Label13" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblcalcpremium1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label14" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblcalcpremium2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label15" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblcalcpremium3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label16" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblcalcpremium4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        RPC Costing
+                    </td>
+                    <td>
+                        F = D - E
+                    </td>
+                    <td class="lblcal_rfccosting1"></td>
+                    <td class="lblcal_rfccosting2"></td>
+                    <td class="lblcal_rfccosting3"></td>
+                    <td class="lblcal_rfccosting4"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        C <> F
+                    </td>
+                    <td class="lblcal_foreignrupee_result1"></td>
+                    <td class="lblcal_foreignrupee_result2"></td>
+                    <td class="lblcal_foreignrupee_result3"></td>
+                    <td class="lblcal_foreignrupee_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools PCFC Vs RPC EUR End--%>
+        <%--Tools PCFC Vs RPC GBP Start--%>
+        <div id="calculator_rpc_gbp" title="PCFC Vs RPC Calculator - GBP" class="hdn tblcalcforeignrupee">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Foreign Currency vs Rupee Finance
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        PCFC Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label17" runat="server" rc='47#5#1#5629#GBP1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label18" runat="server" rc='47#5#1#5629#GBP3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label19" runat="server" rc='47#5#1#5629#GBP6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label20" runat="server" rc='47#5#1#5629#GBP1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PCFC Costing
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_pcfccosting1"></td>
+                    <td class="lblcalc_pcfccosting2"></td>
+                    <td class="lblcalc_pcfccosting3"></td>
+                    <td class="lblcalc_pcfccosting4"></td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        RPC Interest rate
+                    </td>
+                    <td>
+                        Post subvention
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        E
+                    </td>
+                    <td>
+                        <asp:Label ID="Label21" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblcalcpremium1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label22" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%10'
+                            CssClass="liverate lblcalcpremium2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label23" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblcalcpremium3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label24" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblcalcpremium4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        RPC Costing
+                    </td>
+                    <td>
+                        F = D - E
+                    </td>
+                    <td class="lblcal_rfccosting1"></td>
+                    <td class="lblcal_rfccosting2"></td>
+                    <td class="lblcal_rfccosting3"></td>
+                    <td class="lblcal_rfccosting4"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        C <> F
+                    </td>
+                    <td class="lblcal_foreignrupee_result1"></td>
+                    <td class="lblcal_foreignrupee_result2"></td>
+                    <td class="lblcal_foreignrupee_result3"></td>
+                    <td class="lblcal_foreignrupee_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools PCFC Vs RPC GBP End--%>
+        <%--Tools PCFC Vs RPC GBP Start--%>
+        <div id="calculator_rpc_jpy" title="PCFC Vs RPC Calculator - JPY" class="hdn tblcalcforeignrupee">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Foreign Currency vs Rupee Finance
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        PCFC Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label25" runat="server" rc='47#5#1#5629#JPY1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label26" runat="server" rc='47#5#1#5629#JPY3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label27" runat="server" rc='47#5#1#5629#JPY6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label28" runat="server" rc='47#5#1#5629#JPY1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtspread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PCFC Costing
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_pcfccosting1"></td>
+                    <td class="lblcalc_pcfccosting2"></td>
+                    <td class="lblcalc_pcfccosting3"></td>
+                    <td class="lblcalc_pcfccosting4"></td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        RPC Interest rate
+                    </td>
+                    <td>
+                        Post subvention
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtsubvention4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        E
+                    </td>
+                    <td>
+                        <asp:Label ID="Label29" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblcalcpremium1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label30" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblcalcpremium2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label31" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblcalcpremium3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label32" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblcalcpremium4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        RPC Costing
+                    </td>
+                    <td>
+                        F = D - E
+                    </td>
+                    <td class="lblcal_rfccosting1"></td>
+                    <td class="lblcal_rfccosting2"></td>
+                    <td class="lblcal_rfccosting3"></td>
+                    <td class="lblcal_rfccosting4"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        C <> F
+                    </td>
+                    <td class="lblcal_foreignrupee_result1"></td>
+                    <td class="lblcal_foreignrupee_result2"></td>
+                    <td class="lblcal_foreignrupee_result3"></td>
+                    <td class="lblcal_foreignrupee_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools PCFC Vs RPC JPY End--%>
+        
+        <%--Tools CC loan Vs FCNR B Loan Calculator USD Start--%>
+        <div id="calculator_cc_fcnr_usd" title="CC loan Vs FCNR B Loan Calculator - USD" class="hdn jq-tblcalc_cc_fcnr">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        CC loan Vs FCNR B Loan Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        FCNR B Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label33" runat="server" rc='47#5#1#5629#USD1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label34" runat="server" rc='47#5#1#5629#USD3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label35" runat="server" rc='47#5#1#5629#USD6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label36" runat="server" rc='47#5#1#5629#USD1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_total1"></td>
+                    <td class="lblcalc_total2"></td>
+                    <td class="lblcalc_total3"></td>
+                    <td class="lblcalc_total4"></td>
+                </tr>
+               
+                <tr>
+                    <td rowspan="2">
+                        Hedging cost
+                    </td>
+                    <td>Forward Premium Annualized</td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <asp:Label ID="Label37" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblhedgingcost1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label38" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblhedgingcost2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label39" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblhedgingcost3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label40" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblhedgingcost4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total FCNR B Cost 
+                    </td>
+                    <td>
+                        E= C+D
+                    </td>
+                    <td class="lblcal_fcnrcost1"></td>
+                    <td class="lblcal_fcnrcost2"></td>
+                    <td class="lblcal_fcnrcost3"></td>
+                    <td class="lblcal_fcnrcost4"></td>
+                </tr>
+                <tr>
+                    <td>CC Interest rate</td><td></td>
+                    <td>F</td>
+                    <td><input type="text" class="txtccinterestrate1 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate2 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate3 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate4 txtcal val-dbl" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        E <> F
+                    </td>
+                    <td class="lblcal_result1"></td>
+                    <td class="lblcal_result2"></td>
+                    <td class="lblcal_result3"></td>
+                    <td class="lblcal_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools CC loan Vs FCNR B Loan Calculator USD End--%>
+        
+        <%--Tools CC loan Vs FCNR B Loan Calculator EUR Start--%>
+        <div id="calculator_cc_fcnr_eur" title="CC loan Vs FCNR B Loan Calculator - EUR" class="hdn jq-tblcalc_cc_fcnr">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        CC loan Vs FCNR B Loan Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        FCNR B Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>                                            
+                        <asp:Label ID="Label41" runat="server" rc='47#5#1#5629#EUR1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label42" runat="server" rc='47#5#1#5629#EUR3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label43" runat="server" rc='47#5#1#5629#EUR6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label44" runat="server" rc='47#5#1#5629#EUR1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_total1"></td>
+                    <td class="lblcalc_total2"></td>
+                    <td class="lblcalc_total3"></td>
+                    <td class="lblcalc_total4"></td>
+                </tr>
+               
+                <tr>
+                    <td rowspan="2">
+                        Hedging cost
+                    </td>
+                    <td>Forward Premium Annualized</td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <asp:Label ID="Label45" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblhedgingcost1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label46" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblhedgingcost2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label47" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblhedgingcost3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label48" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblhedgingcost4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total FCNR B Cost 
+                    </td>
+                    <td>
+                        E= C+D
+                    </td>
+                    <td class="lblcal_fcnrcost1"></td>
+                    <td class="lblcal_fcnrcost2"></td>
+                    <td class="lblcal_fcnrcost3"></td>
+                    <td class="lblcal_fcnrcost4"></td>
+                </tr>
+                <tr>
+                    <td>CC Interest rate</td><td></td>
+                    <td>F</td>
+                    <td><input type="text" class="txtccinterestrate1 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate2 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate3 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate4 txtcal val-dbl" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        E <> F
+                    </td>
+                    <td class="lblcal_result1"></td>
+                    <td class="lblcal_result2"></td>
+                    <td class="lblcal_result3"></td>
+                    <td class="lblcal_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools CC loan Vs FCNR B Loan Calculator EUR End--%>
+        
+        <%--Tools CC loan Vs FCNR B Loan Calculator GBP Start--%>
+        <div id="calculator_cc_fcnr_gbp" title="CC loan Vs FCNR B Loan Calculator - GBP" class="hdn jq-tblcalc_cc_fcnr">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        CC loan Vs FCNR B Loan Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        FCNR B Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label49" runat="server" rc='47#5#1#5629#GBP1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label50" runat="server" rc='47#5#1#5629#GBP3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label51" runat="server" rc='47#5#1#5629#GBP6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label52" runat="server" rc='47#5#1#5629#GBP1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_total1"></td>
+                    <td class="lblcalc_total2"></td>
+                    <td class="lblcalc_total3"></td>
+                    <td class="lblcalc_total4"></td>
+                </tr>
+               
+                <tr>
+                    <td rowspan="2">
+                        Hedging cost
+                    </td>
+                    <td>Forward Premium Annualized</td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <asp:Label ID="Label53" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblhedgingcost1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label54" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblhedgingcost2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label55" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblhedgingcost3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label56" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblhedgingcost4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total FCNR B Cost 
+                    </td>
+                    <td>
+                        E = C+D
+                    </td>
+                    <td class="lblcal_fcnrcost1"></td>
+                    <td class="lblcal_fcnrcost2"></td>
+                    <td class="lblcal_fcnrcost3"></td>
+                    <td class="lblcal_fcnrcost4"></td>
+                </tr>
+                <tr>
+                    <td>CC Interest rate</td><td></td>
+                    <td>F</td>
+                    <td><input type="text" class="txtccinterestrate1 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate2 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate3 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate4 txtcal val-dbl" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        E <> F
+                    </td>
+                    <td class="lblcal_result1"></td>
+                    <td class="lblcal_result2"></td>
+                    <td class="lblcal_result3"></td>
+                    <td class="lblcal_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools CC loan Vs FCNR B Loan Calculator GBP End--%>
+        
+        <%--Tools CC loan Vs FCNR B Loan Calculator JPY Start--%>
+        <div id="calculator_cc_fcnr_jpy" title="CC loan Vs FCNR B Loan Calculator - JPY" class="hdn jq-tblcalc_cc_fcnr">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        CC loan Vs FCNR B Loan Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="3">
+                        FCNR B Interest rate
+                    </td>
+                    <td>
+                        Libor
+                    </td>
+                    <td width="80">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label57" runat="server" rc='47#5#1#5629#JPY1M.LIBOR#LTP' CssClass="liverate lblcalclibor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label58" runat="server" rc='47#5#1#5629#JPY3M.LIBOR#LTP' CssClass="liverate lblcalclibor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label59" runat="server" rc='47#5#1#5629#JPY6M.LIBOR#LTP' CssClass="liverate lblcalclibor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label60" runat="server" rc='47#5#1#5629#JPY1Y.LIBOR#LTP' CssClass="liverate lblcalclibor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtfcnr_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>
+                        C = A + B
+                    </td>
+                    <td class="lblcalc_total1"></td>
+                    <td class="lblcalc_total2"></td>
+                    <td class="lblcalc_total3"></td>
+                    <td class="lblcalc_total4"></td>
+                </tr>
+               
+                <tr>
+                    <td rowspan="2">
+                        Hedging cost
+                    </td>
+                    <td>Forward Premium Annualized</td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <asp:Label ID="Label61" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%7'
+                            CssClass="liverate lblhedgingcost1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label62" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%9'
+                            CssClass="liverate lblhedgingcost2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label63" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%12'
+                            CssClass="liverate lblhedgingcost3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label64" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%18'
+                            CssClass="liverate lblhedgingcost4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total FCNR B Cost 
+                    </td>
+                    <td>
+                        E = C+D
+                    </td>
+                    <td class="lblcal_fcnrcost1"></td>
+                    <td class="lblcal_fcnrcost2"></td>
+                    <td class="lblcal_fcnrcost3"></td>
+                    <td class="lblcal_fcnrcost4"></td>
+                </tr>
+                <tr>
+                    <td>CC Interest rate</td><td></td>
+                    <td>F</td>
+                    <td><input type="text" class="txtccinterestrate1 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate2 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate3 txtcal val-dbl" /></td>
+                    <td><input type="text" class="txtccinterestrate4 txtcal val-dbl" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Remark
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        E <> F
+                    </td>
+                    <td class="lblcal_result1"></td>
+                    <td class="lblcal_result2"></td>
+                    <td class="lblcal_result3"></td>
+                    <td class="lblcal_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <%--Tools CC loan Vs FCNR B Loan Calculator JPY End--%>
+        
+        <%--Tools Buyer Credit Vs Supplier Credit Cost Calculator Start--%>
+        <div id="calculator_buyer_supplier" title="Buyer Credit Vs Supplier Credit Cost Calculator" class="hdn jq-calculator_buyer_supplier">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td>
+                        <table border="1" cellpadding="3" class="tbl">
+                            <tr class="bold">
+                                <td>Cost</td><td>Buyer’s Credit</td><td>Supplier Credit</td>
+                            </tr>
+                            <tr>
+                                <td>LC Issued</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>LC Confirmation</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>LC Advising</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>LC Negotiation cost </td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Interest cost</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>LOU Issue cost</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Hedging cost</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Arrangement Fees</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Withholding Cost</td>
+                                <td><input class="val-dbl txtcalc txtbuyercredit" />%</td>
+                                <td><input class="val-dbl txtcalc txtsuppliercredit" />%</td>
+                            </tr>
+                            <tr class="bold">
+                                <td>Total</td>
+                                <td><span id="totalbuyer-credit"></span><span>%</span></td>
+                                <td><span id="totalsupplier-credit"></span><span>%</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <%--Tools Buyer Credit Vs Supplier Credit Cost Calculator End--%>
+        
+        <%--Tools Bills Discounting Interest Calculation Start--%>
+        <div id="calculator_bills_discounting_interest" title="Bills Discounting Interest Calculation" class="hdn">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;
+                border-color: #888;">
+                <tr>
+                    <td>
+                        <table border="1" cellpadding="3">
+                            <tr>
+                                <td>BILL AMOUNT</td>
+                                <td>$ <input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-billamount"/></td>
+                            </tr>
+                            <tr>
+                                <td>Margin kept</td>
+                                <td><input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-margin"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>Discounted Amount</td>
+                                <td>$ <span id="lblbd-discountamount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Tenor</td>
+                                <td><input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-tenor"/></td>
+                            </tr>
+                            <tr>
+                                <td>Invoice Date</td>
+                                <td><input class="txtcalc datepicker txtcalbilldisc" id="txtbd-invoicedate"/></td>
+                            </tr>
+                            <tr>
+                                <td>B/L Date</td>
+                                <td><input class="txtcalc datepicker txtcalbilldisc" id="txtbd-bldate"/></td>
+                            </tr>
+                            <tr>
+                                <td>Due date</td>
+                                <td><input class="txtcalc datepicker txtcalbilldisc" id="txtbd-duedate"/></td>
+                            </tr>
+                            <tr><td class="bold" colspan="2" style="text-align:center;">Interest Amount</td></tr>
+                            <tr>
+                                <td>Discounted Amount</td>
+                                <td>$ <span id="lblbd-discountamount2"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Conversion rate</td>
+                                <td><input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-conversionrate"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>INR <span id="lblbd-interestamount"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Interest Rate</td>
+                                <td><input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-interestrate"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>Bill Presentation date</td>
+                                <td><input class="txtcalc datepicker txtcalbilldisc" id="txtbd-billdate"/></td>
+                            </tr>
+                            <tr>
+                                <td>Credit Period</td>
+                                <td id="lblbd-creditperiod"></td>
+                            </tr>
+                            <tr>
+                                <td>Interest Amount</td>
+                                <td>INR <span id="lblbd-interestamount2"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="bold" colspan="2" style="text-align:center;">Overdue Interest</td>
+                            </tr>
+                            <tr>
+                                <td>Remittance received</td>
+                                <td><input class="txtcalc datepicker txtcalbilldisc" id="txtbd-remittance"/></td>
+                            </tr>
+                            <tr>
+                                <td>Overdue days</td>
+                                <td id="lblbd-overduedays"></td>
+                            </tr>
+                            <tr>
+                                <td>Overdue Interest rate</td>
+                                <td><input class="val-dbl txtcalc txtcalbilldisc" id="txtbd-overdueinterestrate"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>Overdue Interest Amount</td>
+                                <td>INR <span id="lblbd-overdueinterestamount"></span></td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <%--Tools Bills Discounting Interest Calculation End--%>
+        
+        <%--Tools CC Interest calculation Calculation Start--%>
+        <div id="calculator_cc_interest" title="CC Interest calculation" class="hdn">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td>
+                        <table border="0" cellpadding="3" width="100%">
+                            <tr>
+                                <td>Days in Month</td>
+                                <td><asp:DropDownList ID="ddlDaysinMonth" CssClass="ddl ddldaysinmonth" runat="server" Width="50">
+                                    <asp:ListItem Text="28" Value="28"></asp:ListItem>
+                                    <asp:ListItem Text="29" Value="29"></asp:ListItem>
+                                    <asp:ListItem Text="30" Value="30"></asp:ListItem>
+                                    <asp:ListItem Text="31" Value="31"></asp:ListItem>
+                                </asp:DropDownList></td>
+                                <td>&nbsp;</td>
+                                <td>Interest amount</td>
+                                <td id="lblcctotalinterest" style="background-color:#226;font-weight:bold;padding-left:3px;"></td>
+                            </tr>
+                            <tr>
+                                <td>Rate of interest</td>
+                                <td><input type="text" class="txtcalc val-dbl txtccinterest" id="txtrateofinterest" />%</td>
+                            </tr>
+                            <tr>
+                                <td>Opening Balance</td>
+                                <td><input type="text" class="txtcalc txtccinterest val-dbl" id="txtccopeningbal" /></td>
+                            </tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr>
+                                <td colspan="5">
+                                    
+                                    <table width="100%" border="1">
+                                        <tr class="bold">
+                                            <td width="19%">Day</td><td width="19%">Withdrwal</td><td width="19%">Deposit</td><td width="19%">Balance</td><td width="24%">Interest</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Opening Balance</td>
+                                            <td id="lblopeningbalance" align="right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">    
+                                                <div style="width:100%;height:350px;overflow:auto;">
+                                                <table width="100%" border="1" id="tblccinterest">
+                                                </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+             </table>
+         </div>
+        <%--Tools CC Interest calculation Calculation END--%>
+        
+        <%--Tools Buyer Credit vs. CC Calculator Start--%>
+        <div id="tblcalcbuyercredit-usd" title="Buyer Credit vs. CC Calculator - USD" class="hdn tblcalcbuyercredit">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Buyer Credit vs. CC Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="5">
+                        Buyer Credit Interest rate
+                    </td>
+                    <td width="100">
+                        Libor
+                    </td>
+                    <td width="130">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label85" runat="server" rc='47#5#1#5629#USD1M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label86" runat="server" rc='47#5#1#5629#USD3M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label87" runat="server" rc='47#5#1#5629#USD6M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label88" runat="server" rc='47#5#1#5629#USD1Y.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        LOU Cost
+                    </td>
+                    <td>
+                        C
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Other Cost
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Cost
+                    </td>
+                    <td>
+                        E = A + B + C + D
+                    </td>
+                    <td class="lblbci_totalcost1"></td>
+                    <td class="lblbci_totalcost2"></td>
+                    <td class="lblbci_totalcost3"></td>
+                    <td class="lblbci_totalcost4"></td>
+                </tr>
+                <tr><td colspan="7">&nbsp;</td></tr>
+                <tr>
+                    <td class="bold">
+                        Hedging cost
+                    </td>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        F
+                    </td>
+                    <td>
+                        <asp:Label ID="Label93" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%7' CssClass="liverate lblcalc-bci-hedging1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label94" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%9' CssClass="liverate lblcalc-bci-hedging2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label95" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%12' CssClass="liverate lblcalc-bci-hedging3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label96" runat="server" rc='FWRC1#USDINR#Month Wise Rates#1#Bid%18' CssClass="liverate lblcalc-bci-hedging4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td>
+                        G = E + F
+                    </td>
+                    <td class="lblcal_bcitothedging1"></td>
+                    <td class="lblcal_bcitothedging2"></td>
+                    <td class="lblcal_bcitothedging3"></td>
+                    <td class="lblcal_bcitothedging4"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        CC Interest rate
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Remark
+                    </td>
+                    <td class="lblcal_bci_result1"></td>
+                    <td class="lblcal_bci_result2"></td>
+                    <td class="lblcal_bci_result3"></td>
+                    <td class="lblcal_bci_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="tblcalcbuyercredit-eur" title="Buyer Credit vs. CC Calculator - EUR" class="hdn tblcalcbuyercredit">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Buyer Credit vs. CC Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="5">
+                        Buyer Credit Interest rate
+                    </td>
+                    <td width="100">
+                        Libor
+                    </td>
+                    <td width="130">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label89" runat="server" rc='47#5#1#5629#EUR1M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label90" runat="server" rc='47#5#1#5629#EUR3M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label91" runat="server" rc='47#5#1#5629#EUR6M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label92" runat="server" rc='47#5#1#5629#EUR1Y.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        LOU Cost
+                    </td>
+                    <td>
+                        C
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Other Cost
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Cost
+                    </td>
+                    <td>
+                        E = A + B + C + D
+                    </td>
+                    <td class="lblbci_totalcost1"></td>
+                    <td class="lblbci_totalcost2"></td>
+                    <td class="lblbci_totalcost3"></td>
+                    <td class="lblbci_totalcost4"></td>
+                </tr>
+                <tr><td colspan="7">&nbsp;</td></tr>
+                <tr>
+                    <td class="bold">
+                        Hedging cost
+                    </td>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        F
+                    </td>
+                    <td>
+                        <asp:Label ID="Label97" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%7' CssClass="liverate lblcalc-bci-hedging1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label98" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%9' CssClass="liverate lblcalc-bci-hedging2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label99" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%12' CssClass="liverate lblcalc-bci-hedging3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label100" runat="server" rc='FWRC1#EURINR#Month Wise Rates#1#Bid%18' CssClass="liverate lblcalc-bci-hedging4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td>
+                        G = E + F
+                    </td>
+                    <td class="lblcal_bcitothedging1"></td>
+                    <td class="lblcal_bcitothedging2"></td>
+                    <td class="lblcal_bcitothedging3"></td>
+                    <td class="lblcal_bcitothedging4"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        CC Interest rate
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Remark
+                    </td>
+                    <td class="lblcal_bci_result1"></td>
+                    <td class="lblcal_bci_result2"></td>
+                    <td class="lblcal_bci_result3"></td>
+                    <td class="lblcal_bci_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="tblcalcbuyercredit-gbp" title="Buyer Credit vs. CC Calculator - GBP" class="hdn tblcalcbuyercredit">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Buyer Credit vs. CC Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="5">
+                        Buyer Credit Interest rate
+                    </td>
+                    <td width="100">
+                        Libor
+                    </td>
+                    <td width="130">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label101" runat="server" rc='47#5#1#5629#GBP1M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label102" runat="server" rc='47#5#1#5629#GBP3M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label103" runat="server" rc='47#5#1#5629#GBP6M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label104" runat="server" rc='47#5#1#5629#GBP1Y.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        LOU Cost
+                    </td>
+                    <td>
+                        C
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Other Cost
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Cost
+                    </td>
+                    <td>
+                        E = A + B + C + D
+                    </td>
+                    <td class="lblbci_totalcost1"></td>
+                    <td class="lblbci_totalcost2"></td>
+                    <td class="lblbci_totalcost3"></td>
+                    <td class="lblbci_totalcost4"></td>
+                </tr>
+                <tr><td colspan="7">&nbsp;</td></tr>
+                <tr>
+                    <td class="bold">
+                        Hedging cost
+                    </td>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        F
+                    </td>
+                    <td>
+                        <asp:Label ID="Label105" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%7' CssClass="liverate lblcalc-bci-hedging1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label106" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%10' CssClass="liverate lblcalc-bci-hedging2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label107" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%12' CssClass="liverate lblcalc-bci-hedging3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label108" runat="server" rc='FWRC1#GBPINR#Month Wise Rates#1#Bid%18' CssClass="liverate lblcalc-bci-hedging4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td>
+                        G = E + F
+                    </td>
+                    <td class="lblcal_bcitothedging1"></td>
+                    <td class="lblcal_bcitothedging2"></td>
+                    <td class="lblcal_bcitothedging3"></td>
+                    <td class="lblcal_bcitothedging4"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        CC Interest rate
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Remark
+                    </td>
+                    <td class="lblcal_bci_result1"></td>
+                    <td class="lblcal_bci_result2"></td>
+                    <td class="lblcal_bci_result3"></td>
+                    <td class="lblcal_bci_result4"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="tblcalcbuyercredit-jpy" title="Buyer Credit vs. CC Calculator - JPY" class="hdn tblcalcbuyercredit">
+            <table border="1" cellspacing="0" cellpadding="5" width="100%" height="400" style="border-collapse: collapse;border-color: #888;">
+                <tr>
+                    <td colspan="3">
+                        Buyer Credit vs. CC Calculator
+                    </td>
+                    <td width="60">
+                        1 Month
+                    </td>
+                    <td width="60">
+                        3 Months
+                    </td>
+                    <td width="60">
+                        6 Months
+                    </td>
+                    <td width="68">
+                        12 Months
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold" rowspan="5">
+                        Buyer Credit Interest rate
+                    </td>
+                    <td width="100">
+                        Libor
+                    </td>
+                    <td width="130">
+                        A
+                    </td>
+                    <td>
+                        <asp:Label ID="Label109" runat="server" rc='47#5#1#5629#JPY1M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label110" runat="server" rc='47#5#1#5629#JPY3M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label111" runat="server" rc='47#5#1#5629#JPY6M.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label112" runat="server" rc='47#5#1#5629#JPY1Y.LIBOR#LTP' CssClass="liverate lblcalc-bci-libor4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Spread
+                    </td>
+                    <td>
+                        B
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_spread4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        LOU Cost
+                    </td>
+                    <td>
+                        C
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_lou4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Other Cost
+                    </td>
+                    <td>
+                        D
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_other4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Total Cost
+                    </td>
+                    <td>
+                        E = A + B + C + D
+                    </td>
+                    <td class="lblbci_totalcost1"></td>
+                    <td class="lblbci_totalcost2"></td>
+                    <td class="lblbci_totalcost3"></td>
+                    <td class="lblbci_totalcost4"></td>
+                </tr>
+                <tr><td colspan="7">&nbsp;</td></tr>
+                <tr>
+                    <td class="bold">
+                        Hedging cost
+                    </td>
+                    <td>
+                        Forward Premium Annualized
+                    </td>
+                    <td>
+                        F
+                    </td>
+                    <td>
+                        <asp:Label ID="Label113" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%8' CssClass="liverate lblcalc-bci-hedging1"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label114" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%9' CssClass="liverate lblcalc-bci-hedging2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label115" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%12' CssClass="liverate lblcalc-bci-hedging3"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label116" runat="server" rc='FWRC1#JPYINR#Month Wise Rates#1#Bid%18' CssClass="liverate lblcalc-bci-hedging4"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td>
+                        G = E + F
+                    </td>
+                    <td class="lblcal_bcitothedging1"></td>
+                    <td class="lblcal_bcitothedging2"></td>
+                    <td class="lblcal_bcitothedging3"></td>
+                    <td class="lblcal_bcitothedging4"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        CC Interest rate
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate1 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate2 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate3 txtcal val-dbl" />
+                    </td>
+                    <td>
+                        <input type="text" class="txtbci_interestrate4 txtcal val-dbl" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Remark
+                    </td>
+                    <td class="lblcal_bci_result1"></td>
+                    <td class="lblcal_bci_result2"></td>
+                    <td class="lblcal_bci_result3"></td>
+                    <td class="lblcal_bci_result4"></td>
+                </tr>
+            </table>
+        </div>
+        
+        <%--Tools Buyer Credit vs. CC Calculator END--%>
+        
+    </asp:Panel> 
+     
+    </form>
+    <script src="chat/js/chat.js?v=2.1" type="text/javascript"></script> 
+</body>
+</html>

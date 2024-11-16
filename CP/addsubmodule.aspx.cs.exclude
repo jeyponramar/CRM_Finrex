@@ -1,0 +1,369 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Collections;
+using System.Data;
+using System.IO;
+
+public partial class configure_Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        lblTitle.Text = CustomSession.Session("S_ProjectName") + " - Configure Page";
+        if (!IsPostBack)
+        {
+            BindColumns();
+        }
+    }
+    private void BindColumns()
+    {
+        string html = "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                    "<tr>" +
+                        "<td width=\"50%\" class=\"left-column\">" +
+                            "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                "<tr><td class=\"drop last\" style=\"height:100px\">&nbsp;</td><td class=\"drop last\">&nbsp;</td></tr>" +
+                            "</table>" +
+                        "</td>" +
+                        "<td width=\"50%\" class=\"right-column\">" +
+                            "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                "<tr><td class=\"drop last\" style=\"height:100px\">&nbsp;</td><td class=\"drop last\">&nbsp;</td></tr>" +
+                            "</table>" +
+                        "</td>" +
+                    "</tr>" +
+                "</table>";
+        if (Request.QueryString["id"] == null)
+        {
+            ltContainer.Text = html;
+        }
+        else
+        {
+            html = "";
+            StringBuilder lefthtml = new StringBuilder();
+            StringBuilder righthtml = new StringBuilder();
+            GlobalData gbl = new GlobalData("tbl_module");
+            gbl.PopulateForm(pmodule);
+            
+            DataTable dttbl = new DataTable();
+            int moduleid = Convert.ToInt32(Request.QueryString["id"]);
+            string query = "select * from tbl_columns where columns_moduleid=" + moduleid + " order by columns_columnsid";
+            InsertUpdate obj = new InsertUpdate();
+            dttbl = obj.ExecuteSelect(query);
+            for (int i = 0; i < dttbl.Rows.Count; i++)
+            {
+                int columnid = Convert.ToInt32(dttbl.Rows[i]["columns_columnsid"]);
+                string columnname = Convert.ToString(dttbl.Rows[i]["columns_columnname"]);
+                string label = Convert.ToString(dttbl.Rows[i]["columns_lbl"]);
+                string control = Convert.ToString(dttbl.Rows[i]["columns_control"]);
+                bool isleftcolumn = Convert.ToBoolean(dttbl.Rows[i]["columns_isleftcolumn"]);
+                string strtr = "<tr><td class='label drop'>" + label + "</td><td class=\"ctrl drop\">";
+                string uid = " uid=" + columnid + " ";
+                if (control == "Dropdown")
+                {
+                    strtr += "<select" + uid + "><option>Dropdown</option></select>";
+                }
+                else if (control == "Multi Line")
+                {
+                    strtr += "<textarea" + uid + ">Multi Line</textarea>";
+                }
+                else if (control == "Checkbox" + uid + "")
+                {
+                    strtr += "<input type=\"checkbox\"" + uid + ">";
+                }
+                else if (control == "File Upload" || control == "Image Upload")
+                {
+                    strtr += "<input type=\"file\"" + uid + ">";
+                }
+                else//text box
+                {
+                    strtr += "<input type=\"text\" value=\"Text Box\"" + uid + ">";
+                }
+                strtr += "</td></tr>";
+                if (isleftcolumn)
+                {
+                    righthtml.Append(strtr);
+                }
+                else
+                {
+                    lefthtml.Append(strtr); 
+                }
+            }
+            if (chkIsSingle.Checked)
+            {
+                html = "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                    "<tr>" +
+                                        "<td>" +
+                                            "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">"+
+                                            lefthtml.ToString()+
+                                "<tr><td class=\"drop last\" style=\"height:100px\">&nbsp;</td><td class=\"drop last\">&nbsp;</td></tr>" +
+                            "</table>" +
+                        "</td>" +
+                    "</tr>" +
+                "</table>";
+            }
+            else
+            {
+                html = "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                    "<tr>" +
+                                        "<td width=\"50%\">" +
+                                            "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                                lefthtml.ToString() +
+                                                "<tr><td class=\"drop last\" style=\"height:100px\">&nbsp;</td><td class=\"drop last\">&nbsp;</td></tr>" +
+                                            "</table>" +
+                                        "</td>" +
+                                        "<td width=\"50%\">" +
+                                            "<table width=\"100%\" class=\"container\" cellpadding=\"0\" cellspacing=\"0\">" +
+                                                righthtml.ToString() +
+                                                "<tr><td class=\"drop last\" style=\"height:100px\">&nbsp;</td><td class=\"drop last\">&nbsp;</td></tr>" +
+                                            "</table>" +
+                                        "</td>" +
+                                    "</tr>" +
+                                "</table>";
+            }
+            
+            ltContainer.Text = html;
+        }
+    }
+   
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        int moduleid = 10;
+        InsertUpdate obj = new InsertUpdate();
+        string query = "select * from tbl_module where module_moduleid=" + moduleid;
+        DataRow dr = obj.ExecuteSelectRow(query);
+        string moduleName = Convert.ToString(dr["module_modulename"]);
+        string tableName = Convert.ToString(dr["module_tablename"]);
+        GenerateAddDesignPage(dr, moduleid);
+        GenerateAddCodePage(dr, moduleid);
+        CheckAndCreateTable(tableName);
+        CreateTableColumns(tableName, moduleid);
+        AddCreatedDate(tableName);
+    }
+    private DataTable GetColumns(int moduleid)
+    {
+        InsertUpdate obj1 = new InsertUpdate();
+        string query = "select * from tbl_columns where columns_moduleid=" + moduleid + " order by columns_columnsid";
+        DataTable dttbl = obj1.ExecuteSelect(query);
+        return dttbl;
+    }
+    private void GenerateAddDesignPage(DataRow dr, int moduleid)
+    {
+        string projectPath = @"E:\Ram\Projects\Websites\Erp_demo1";
+        string masterDesignPath = Server.MapPath("template/design/add.aspx");
+        string designHtml = GlobalUtilities.ReadFile(masterDesignPath);
+        string moduleName = Convert.ToString(dr["module_modulename"]);
+        string tableName = Convert.ToString(dr["module_tablename"]);
+        string issingle = Convert.ToString(dr["module_issingle"]);
+        string addtitle = Convert.ToString(dr["module_addtitle"]);
+        designHtml = designHtml.Replace("$ModuleName$", moduleName);
+        string destDesignFolderPath = projectPath + "/" + moduleName.ToLower().Replace(" ", "");
+        string destDesignPath = destDesignFolderPath + "/add.aspx";
+        if (!Directory.Exists(destDesignFolderPath))
+        {
+            Directory.CreateDirectory(destDesignFolderPath);
+        }
+        File.Copy(masterDesignPath, destDesignPath, true);
+        DataTable dttbl = GetColumns(moduleid);
+        StringBuilder controls = new StringBuilder();
+        for (int i = 0; i < dttbl.Rows.Count; i++)
+        {
+            string columnName = Convert.ToString(dttbl.Rows[i]["columns_columnname"]);
+            string control = Convert.ToString(dttbl.Rows[i]["columns_control"]);
+            string label = Convert.ToString(dttbl.Rows[i]["columns_lbl"]);
+            int size = Convert.ToInt32(dttbl.Rows[i]["columns_size"]);
+            string tooltip = Convert.ToString(dttbl.Rows[i]["columns_tooltip"]);
+            bool isrequired = Convert.ToBoolean(dttbl.Rows[i]["columns_isrequired"]);
+            bool isquickadd = Convert.ToBoolean(dttbl.Rows[i]["columns_isquickadd"]);
+            bool isunique = Convert.ToBoolean(dttbl.Rows[i]["columns_isunique"]);
+            bool isautocomplete = Convert.ToBoolean(dttbl.Rows[i]["columns_isautocomplete"]);
+            bool isnamefield = Convert.ToBoolean(dttbl.Rows[i]["columns_isnamefield"]);
+            bool ispassword = Convert.ToBoolean(dttbl.Rows[i]["columns_ispassword"]);
+            string required = "";
+            if(isrequired)
+            {
+                required = " <span class=\"error\">*</span>";
+            }
+            string serverControl = "";
+            string validator = "";
+            string ctrlId = "";
+            if (control == "Text Box")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox\"></asp:TextBox>";
+            }
+            else if (control == "Multi Line")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox TextMode=\"MultiLine\" ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textarea\"></asp:TextBox>";
+            }
+            else if (control == "Password")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox TextMode=\"Password\" ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox\"></asp:TextBox>";
+            }
+            else if (control == "Email Id")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox\"></asp:TextBox>";
+            }
+            else if (control == "Phone No")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox val-ph\"></asp:TextBox>";
+            }
+            else if (control == "Amount")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox val-dbl\"></asp:TextBox>";
+            }
+            else if (control == "Number")
+            {
+                ctrlId = "txt" + columnName;
+                serverControl = "<asp:TextBox ID=\"" + ctrlId + "\" runat=\"server\" CssClass=\"textbox val-i\"></asp:TextBox>";
+            }
+            if (isrequired)
+            {
+                validator = "<asp:RequiredFieldValidator ID=\"rfv" + (i + 1) + "\" runat=\"server\" ErrorMessage=\"Required " + label + "\" ValidationGroup=\"vg\" ControlToValidate=\"" + ctrlId + "\"></asp:RequiredFieldValidator>";
+            }
+            controls.Append("\n\t\t\t\t\t<tr>");
+            controls.Append("\n\t\t\t\t\t\t<td class=\"label\">" + label + required + "</td>");
+            controls.Append("\n\t\t\t\t\t\t<td>" + serverControl + validator + "</td>");
+            controls.Append("\n\t\t\t\t\t</tr>");
+        }
+        designHtml = designHtml.Replace("$CONTROLS$", controls.ToString());
+        GlobalUtilities.WriteFile(destDesignPath, designHtml);
+    }
+    private void GenerateAddCodePage(DataRow dr, int moduleid)
+    {
+        string projectPath = @"E:\Ram\Projects\Websites\Erp_demo1";
+        string masterCodeAddPath = Server.MapPath("template/design/add.aspx.cs");
+        string sourceCode = GlobalUtilities.ReadFile(masterCodeAddPath);
+
+        string moduleName = Convert.ToString(dr["module_modulename"]);
+        string tableName = Convert.ToString(dr["module_tablename"]);
+        string addtitle = Convert.ToString(dr["module_addtitle"]);
+        string edittitle = Convert.ToString(dr["module_edittitle"]);
+        sourceCode = sourceCode.Replace("$ModuleName$", moduleName);
+        sourceCode = sourceCode.Replace("$TableName$", tableName);
+        sourceCode = sourceCode.Replace("$AddTitle$", addtitle);
+        sourceCode = sourceCode.Replace("$EditTitle$", edittitle);
+        string destDesignFolderPath = projectPath + "/" + moduleName.ToLower().Replace(" ", "");
+        string addCodePath = destDesignFolderPath + "/add.aspx.cs";
+        if (!Directory.Exists(destDesignFolderPath))
+        {
+            Directory.CreateDirectory(destDesignFolderPath);
+        }
+        File.Copy(masterCodeAddPath, addCodePath, true);
+        string fillDropdown = "";
+        string IdentityColumn = tableName.Replace("tbl_", "") + "id";
+
+        sourceCode = sourceCode.Replace("$IdentityColumn$", IdentityColumn);
+        sourceCode = sourceCode.Replace("$FillDropDown$", fillDropdown);
+        
+        GlobalUtilities.WriteFile(addCodePath, sourceCode);
+    }
+    private void CreateTableColumns(string tableName, int moduleid)
+    {
+        DataTable dttblColumns = GetColumns(moduleid);
+        InsertUpdate obj = new InsertUpdate();
+        DataTable dttblTableColumns = obj.ExecuteSelect("select * from "+tableName+" where 1=2");
+        string script = "";
+        for (int i = 0; i < dttblColumns.Rows.Count; i++)
+        {
+            string columnName = Convert.ToString(dttblColumns.Rows[i]["columns_columnname"]);
+            string control = Convert.ToString(dttblColumns.Rows[i]["columns_control"]);
+            int size = Convert.ToInt32(dttblColumns.Rows[i]["columns_size"]);
+            bool isrequired = Convert.ToBoolean(dttblColumns.Rows[i]["columns_isrequired"]);
+            bool isunique = Convert.ToBoolean(dttblColumns.Rows[i]["columns_isunique"]);
+            string datatype = "";
+            string isnull = "NULL";
+            if (isrequired)
+            {
+                isnull = "NOT NULL";
+            }
+            if (control == "Text Box" || control == "Email Id" || control == "Phone No"
+                || control == "Amount" || control == "Multi Line")
+            {
+                datatype = " VARCHAR(" + size + ") ";
+                datatype = datatype + isnull;
+            }
+            else if (control == "Date")
+            {
+                datatype = " DATETIME ";
+            }
+            else if (control == "Checkbox")
+            {
+                datatype = " BIT ";
+            }
+            else if (control == "Number")
+            {
+                datatype = " INT ";
+            }
+            bool columnExists = false;
+            for (int j = 0; j < dttblTableColumns.Columns.Count; j++)
+            {
+                if (dttblTableColumns.Columns[j].ColumnName.ToLower() == columnName.ToLower())
+                {
+                    columnExists = true;
+                    break;
+                }
+            }
+            if (columnExists)
+            {
+                script = "ALTER TABLE " + tableName + " ALTER COLUMN " + columnName + datatype;
+            }
+            else
+            {
+                script = "ALTER TABLE " + tableName + " ADD " + columnName + datatype;
+            }
+            if (!isunique)
+            {
+                RemoveUniqueConstraint(tableName, columnName);
+            }
+            if (isunique)
+            {
+                AddUniqueConstraint(tableName, columnName);
+            }
+            InsertUpdate obj2 = new InsertUpdate();
+            obj2.ExecuteQuery(script);
+        }
+        
+    }
+    private void AddUniqueConstraint(string tableName, string colName)
+    {
+        InsertUpdate obj = new InsertUpdate();
+        string query = "alter table " + tableName + " add constraint unique_" + colName + " unique(" + colName + ")";
+        obj.ExecuteQuery(query);
+    }
+    private void RemoveUniqueConstraint(string tableName, string colName)
+    {
+        InsertUpdate obj = new InsertUpdate();
+        string query = "alter table " + tableName + " drop constraint unique_" + colName;
+        obj.ExecuteQuery(query);
+    }
+    private void CheckAndCreateTable(string tableName)
+    {
+        string query = "select * from " + tableName + " where 1=2";
+        InsertUpdate obj = new InsertUpdate();
+        DataTable dttblcheck = obj.ExecuteSelect(query);
+        if (obj._error != "")
+        {
+            string colprefix = tableName.Replace("tbl_", "");
+            string idcolumn = colprefix + "_" + colprefix + "id";
+
+            string script = "CREATE TABLE " + tableName + "(" + idcolumn + " INT IDENTITY(1,1) primary key)";
+            InsertUpdate obj1 = new InsertUpdate();
+            obj1.ExecuteQuery(script);
+        }
+    }
+    private void AddCreatedDate(string tableName)
+    {
+        string colprefix = tableName.Replace("tbl_", "");
+        string script = "ALTER TABLE " + tableName + " ADD " + colprefix + "_createddate datetime," + colprefix + "_createdby int, " + colprefix + "_modifieddate datetime," + colprefix + "_modifiedby int";
+        InsertUpdate obj1 = new InsertUpdate();
+        obj1.ExecuteQuery(script);
+    }
+}

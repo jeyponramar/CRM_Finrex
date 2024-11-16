@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Interestratetype</title>
+		<module>interestratetype</module>
+		<table>tbl_interestratetype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>interestratetype_interestratetypeid desc</defaultsort>
+		<columns>interestratetype_type</columns>
+		<columnlabels>Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>interestratetype_type</name><headertext>Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>interestratetype_interestratetypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_interestratetype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Type</searchbylabels>
+		<searchbycolumns>interestratetype_type</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

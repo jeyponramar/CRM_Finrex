@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Enquiry</title>
+  <module>Enquiry</module>
+  <table>tbl_enquiry</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>enquiry_enquiryid DESC</defaultsort>
+  <columns>enquiry_enquirydate,client_customername,enquiry_companyname,campaign_campaignname,enquiry_subject,enquiry_contactperson,designation_designation,product_productname,enquiry_landlineno,enquiry_mobileno,enquiry_description,enquiry_otherinfo,enquiry_remarks,enquiry_address,enquiry_annualrevenue,enquiry_website,enquiry_emailid,enquiry_skypeid,enquiry_employeestrength,city_cityname,area_areaname,marketingperson_maketingpersonname,communicationsource_communicationsource,enquirystatus_status,enquiryfor_enquiryfor,enquiry_won,enquiry_reject,enquiry_cancel,enquiry_opportunity,enquiry_cold,enquiry_hot,enquiry_hold,enquiry_followupsdate,enquiry_time,enquiry_ampm,enquiry_lastactivity,enquiry_telecallingid</columns>
+  <columnlabels>Enquiry Date,Existing Customer,Company Name,Campaign,Subject,Contact Person,Designation,Product,Landline No,Mobile No,Description,Other Info,Remarks,Address,Annual Revenue,Website,Email Id,Skype Id,Employee Strength,City,Area,Assigned To,Communication Source,Enquiry Status,Enquiry For,Won,Reject,Cancel,Opportunity,Cold,Hot,Hold,Followups Date,Time,Am Pm,Last Activity,Tele Calling Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>enquiry_enquiryno</name>
+      <headertext>Enquiry No</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>enquiry_enquirydate</name>
+      <headertext>Enquiry Date</headertext>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true">
+      <name>enquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_followupsdate</name>
+      <headertext>Followups Date</headertext>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystatus_status</name>
+      <headertext>Status</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquiry_enquiryid</hiddencolumns>
+  <query>SELECT * FROM tbl_enquiry
+JOIN tbl_client ON enquiry_clientid=client_clientid
+LEFT JOIN tbl_employee ON enquiry_employeeid=employee_employeeid
+JOIN tbl_enquirystatus ON enquiry_enquirystatusid=enquirystatus_enquirystatusid
+</query>
+  <where>$SESSION_Login_RoleId$ = 1 OR enquiry_employeeid= $SESSION_Login_EmployeeId$</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>False</applyviewrights>
+</setting>

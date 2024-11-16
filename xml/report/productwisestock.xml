@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Product</title>
+  <module>Product</module>
+  <table>tbl_product</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>product_productid desc</defaultsort>
+  <columns>product_ischarges,product_totalstockin,product_totalstockout,product_openingstock,product_totalstock,product_minimumstock,product_maximumstock</columns>
+  <columnlabels>IsCharges,Total Stock In,Total Stock Out,Opening Stock,Total Stock,Minimum Stock,Maximum Stock</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_openingstock</name>
+      <headertext>Opening Stock</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_totalstock</name>
+      <headertext>Total Stock</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_minimumstock</name>
+      <headertext>Minimum Stock</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_maximumstock</name>
+      <headertext>Maximum Stock</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>product_productid</hiddencolumns>
+  <query>SELECT * FROM tbl_product </query>
+  <where>ISNULL(product_ischarges,0)=0 AND ('$product_productid$' = '0' OR product_productid = '$product_productid$')</where>
+</setting>

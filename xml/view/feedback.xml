@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Feedback</title>
+  <module>feedback</module>
+  <table>tbl_feedback</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>feedback_feedbackid DESC</defaultsort>
+  <columns>client_customername,feedback_date,employee_employeename,feedbackrating_rating,feedback_remarks,followupstatus_status</columns>
+  <columnlabels>Client,Date,Feedback Taken By,Feedback Rating,Remarks,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>feedback_date</name>
+      <headertext>Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>feedbackrating_rating</name>
+      <headertext>Feedback Rating</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followupstatus_status</name>
+      <headertext>Status</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>feedback_feedbackid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_feedback JOIN tbl_client ON client_clientid=feedback_clientid JOIN tbl_employee ON employee_employeeid=feedback_employeeid JOIN tbl_feedbackrating ON feedbackrating_feedbackratingid=feedback_feedbackratingid LEFT JOIN tbl_followupstatus ON followupstatus_followupstatusid=feedback_followupstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,Feedback Rating</searchbylabels>
+  <searchbycolumns>client_customername,feedbackrating_rating</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Tax</title>
+  <module>tax</module>
+  <table>tbl_tax</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>tax_taxid DESC</defaultsort>
+  <columns>tax_tax,tax_percentage,taxtype_taxtype,gsttype_gsttype</columns>
+  <columnlabels>Tax,Percentage,Tax Type,GST Type</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>tax_tax</name>
+      <headertext>Tax</headertext>
+      <width>34%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>taxtype_taxtype</name>
+      <headertext>Tax Type</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>tax_percentage</name>
+      <headertext>Percentage</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>gsttype_gsttype</name>
+      <headertext>GST Type</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>tax_taxid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_tax
+
+ LEFT JOIN tbl_taxtype ON taxtype_taxtypeid=tax_taxtypeid
+ LEFT JOIN tbl_gsttype ON gsttype_gsttypeid=tax_gsttypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Tax,Percentage,Tax Type,GST Type</searchbylabels>
+  <searchbycolumns>tax_tax,tax_percentage,taxtype_taxtype,gsttype_gsttype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

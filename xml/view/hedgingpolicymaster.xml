@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Hedgingpolicymaster</title>
+		<module>hedgingpolicymaster</module>
+		<table>tbl_hedgingpolicymaster</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>hedgingpolicymaster_hedgingpolicymasterid desc</defaultsort>
+		<columns>hedgingpolicymaster_hedgingpolicy</columns>
+		<columnlabels>Hedging Policy</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>hedgingpolicymaster_hedgingpolicy</name><headertext>Hedging Policy</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>hedgingpolicymaster_hedgingpolicymasterid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_hedgingpolicymaster
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Hedging Policy</searchbylabels>
+		<searchbycolumns>hedgingpolicymaster_hedgingpolicy</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

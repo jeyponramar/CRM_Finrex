@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertSalesToInvoice_child'>
+		<fromtable>tbl_salesdetail</fromtable>
+		<totable>tbl_invoicedetail</totable>
+		<frommoduleid>64</frommoduleid>
+		<tomoduleid>154</tomoduleid>
+		<mapping><name>invoicedetail_productid</name><value>salesdetail_productid</value></mapping>
+		<mapping><name>invoicedetail_quantity</name><value>salesdetail_quantity</value></mapping>
+		<mapping><name>invoicedetail_rate</name><value>salesdetail_rate</value></mapping>
+		<mapping><name>invoicedetail_amount</name><value>salesdetail_amount</value></mapping>
+		<mapping><name>invoicedetail_istax</name><value>salesdetail_istax</value></mapping>
+	</setting>

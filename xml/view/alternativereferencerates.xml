@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Alternativereferencerates</title>
+  <module>alternativereferencerates</module>
+  <table>tbl_alternativereferencerates</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>alternativereferencerates_alternativereferenceratesid desc</defaultsort>
+  <columns>currency_currency,alternativereferencerates_arr,alternativereferencerates_date,alternativereferencerates_on,alternativereferencerates_1week,alternativereferencerates_1monthtermaverage,alternativereferencerates_3monthtermaverage,alternativereferencerates_6monthtermaverage,alternativereferencerates_12monthtermaverage</columns>
+  <columnlabels>Currency,ARR,Date,O/n,1 Week,1-month TERM  / Average,3-month TERM  / Average,6-month TERM  / Average,12-month TERM  / Average</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>currency_currency</name>
+      <headertext>Currency</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerates_date</name>
+      <headertext>Date</headertext>
+      <width>25%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>alternativereferencerates_on</name>
+      <headertext>O/n</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerates_1week</name>
+      <headertext>1 Week</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>alternativereferencerates_arr</name>
+      <headertext>ARR</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>alternativereferencerates_alternativereferenceratesid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_alternativereferencerates
+
+ LEFT JOIN tbl_currency ON currency_currencyid=alternativereferencerates_currencyid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency,ARR</searchbylabels>
+  <searchbycolumns>currency_currency,alternativereferencerates_arr</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

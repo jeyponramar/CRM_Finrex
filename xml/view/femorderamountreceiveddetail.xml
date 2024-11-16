@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Femorderamountreceiveddetail</title>
+  <module>femorderamountreceiveddetail</module>
+  <table>tbl_femorderamountreceiveddetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>femorderamountreceiveddetail_femorderamountreceiveddetailid desc</defaultsort>
+  <columns>exportorder_exportorderno,femorderamountreceiveddetail_clientid,femorderamountreceiveddetail_amountreceived,femorderamountreceiveddetail_conversionrate,femorderamountreceiveddetail_profitlossfromcosting,femorderamountreceiveddetail_spotrate,femorderamountreceiveddetail_profitlossfromspotrate,femorderamountreceiveddetail_invoiceno,femorderamountreceiveddetail_invoiceduedate,femorderamountreceiveddetail_remittancereceiveddate,femorderamountreceiveddetail_bankbookingrefno,femorderamountreceiveddetail_remark</columns>
+  <columnlabels>Export Order No,Client Id,Amount Received,Conversion Rate,Profit/ Loss from Costing,Spot Rate on Remittance Received,Profit/ Loss from Spot rate on Remittance Received,Invoice No,Invoice Due date,Remittance Received Date,Bank Booking Ref No.,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>femorderamountreceiveddetail_amountreceived</name>
+      <headertext>Amount Received</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_conversionrate</name>
+      <headertext>Conversion Rate</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_spotrate</name>
+      <headertext>Spot Rate on Remittance Received</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_profitlossfromspotrate</name>
+      <headertext>Profit/ Loss from Spot rate on Remittance Received</headertext>
+      <width>9%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_invoiceduedate</name>
+      <headertext>Invoice Due date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_remittancereceiveddate</name>
+      <headertext>Remittance Received Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_bankbookingrefno</name>
+      <headertext>Bank Booking Ref No.</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_remark</name>
+      <headertext>Remark</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femorderamountreceiveddetail_profitlossfromcosting</name>
+      <headertext>Profit/ Loss from Costing</headertext>
+      <width>10%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>femorderamountreceiveddetail_femorderamountreceiveddetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_femorderamountreceiveddetail
+
+ LEFT JOIN tbl_exportorder ON exportorder_exportorderid=femorderamountreceiveddetail_exportorderid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

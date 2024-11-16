@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Currency</title>
+		<module>currency</module>
+		<table>tbl_currency</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>currency_currencyid desc</defaultsort>
+		<columns>currency_currency,currency_country</columns>
+		<columnlabels>Currency,Country</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>currency_currency</name><headertext>Currency</headertext><width>50%</width><format></format></column><column><name>currency_country</name><headertext>Country</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>currency_currencyid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_currency $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Currency,Country</searchbylabels>
+		<searchbycolumns>currency_currency,currency_country</searchbycolumns>
+	</setting>

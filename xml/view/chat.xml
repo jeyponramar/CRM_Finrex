@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Chat</title>
+  <module>chat</module>
+  <table>tbl_chat</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>chat_chatid desc</defaultsort>
+  <columns>chatclient_name,chat_date,chat_city,chat_country,chat_longitude,chat_latitude,chat_ip,chat_clientname,chat_isactive,chatstatus_status,agent_agentname,chat_agentname,chat_companyname,client_customername,clientuser_name,chat_feedback,chat_rating</columns>
+  <columnlabels>Chat Client,Date,City,Country,Longitude,Latitude,IP,Client Name,Is Active,Chat Status,Agent,Agent Name,Company Name,Client Id,Client User Id,Feedback,Rating</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>chat_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>chat_city</name>
+      <headertext>City</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>chat_country</name>
+      <headertext>Country</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>chat_ip</name>
+      <headertext>IP</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>chat_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>chatstatus_status</name>
+      <headertext>Chat Status</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>chat_companyname</name>
+      <headertext>Company Name</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client Id</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>chat_chatid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_chat
+
+ JOIN tbl_chatclient ON chatclient_chatclientid=chat_chatclientid
+ LEFT JOIN tbl_chatstatus ON chatstatus_chatstatusid=chat_chatstatusid
+ LEFT JOIN tbl_agent ON agent_agentid=chat_agentid
+ JOIN tbl_client ON client_clientid=chat_clientid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=chat_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>City,IP,Is Active,Chat Status,Company Name,Client Id</searchbylabels>
+  <searchbycolumns>chat_city,chat_ip,chat_isactive,chatstatus_status,chat_companyname,client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

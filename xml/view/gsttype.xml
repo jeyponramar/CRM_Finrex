@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Gsttype</title>
+		<module>gsttype</module>
+		<table>tbl_gsttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>gsttype_gsttypeid desc</defaultsort>
+		<columns>gsttype_gsttype</columns>
+		<columnlabels>GST Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>gsttype_gsttype</name><headertext>GST Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>gsttype_gsttypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_gsttype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>GST Type</searchbylabels>
+		<searchbycolumns>gsttype_gsttype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

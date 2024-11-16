@@ -1,0 +1,148 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using WebComponent;
+using System.Text;
+
+public partial class chat_chat_feedback : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            CloseChat();
+            BindQuestions();
+        }
+    }
+    private void CloseChat()
+    {
+        int chatId = GlobalUtilities.ConvertToInt(Session["S_ChatId"]);
+        string query = "update tbl_chat set chat_chatstatusid=3 where chat_chatid=" + chatId;
+        DbTable.ExecuteQuery(query);
+    }
+    private void BindQuestions()
+    {
+        StringBuilder html = new StringBuilder();
+        string query = "select * from tbl_feedbackquestions";
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        if (GlobalUtilities.IsValidaTable(dttbl))
+        {
+            html.Append("<table width='100%' class='questions'>");
+            StringBuilder questionAnswer = new StringBuilder();
+
+            for (int i = 0; i < dttbl.Rows.Count; i++)
+            {
+                int questionType = GlobalUtilities.ConvertToInt(dttbl.Rows[i]["feedbackquestions_questiontypeid"]);
+                string question = GlobalUtilities.ConvertToString(dttbl.Rows[i]["feedbackquestions_question"]);
+                int feedbackquestionsId = GlobalUtilities.ConvertToInt(dttbl.Rows[i]["feedbackquestions_feedbackquestionsid"]);
+                string ctrlId = "";
+                string ctrlName = "option_" + feedbackquestionsId;
+                html.Append("<tr><td class='question-ans'>");
+                html.Append("<table cellpadding=5>");
+                html.Append("<tr><td class='question' colspan=2>Question [" + (i + 1) + "] : " + question + "</td><tr>");
+                html.Append("<tr><td class='options'><table width='100%'>");
+                if (questionType == Convert.ToInt32(QuestionType.OptionType))
+                {
+                    query = "select * from tbl_feedbackansweroptions WHERE feedbackansweroptions_feedbackquestionsid = " + feedbackquestionsId;
+                    DataTable dttblOptions = DbTable.ExecuteSelect(query);
+                    for (int j = 0; j < dttblOptions.Rows.Count; j++)
+                    {
+                        string option = GlobalUtilities.ConvertToString(dttblOptions.Rows[j]["feedbackansweroptions_option"]);
+                        int optionId = GlobalUtilities.ConvertToInt(dttblOptions.Rows[j]["feedbackansweroptions_feedbackansweroptionsid"]);
+                        ctrlId = "option_" + optionId;
+                        html.Append("<tr><td class='answer' width=10 style='padding:0px;'><input type='radio' name='" + ctrlName + "' id='" + ctrlId + "' class='roption' value='" + optionId + "' /></td>" +
+                                    "<td style='padding-top:12px;'><label for='" + ctrlId + "'>" + option + "</label></td></tr>");
+
+                    }
+                }
+                else
+                {
+                    ctrlId = "option_" + feedbackquestionsId + "_yes";
+                    html.Append("<tr><td class='answer' width=10><input type='radio' name='" + ctrlName + "' id='" + ctrlId + "' class='roption' value='Yes'/></td><td style='padding-top:12px;'><label for='" + ctrlId + "'>Yes</label></td></tr>");
+                    ctrlId = "option_" + feedbackquestionsId + "_no";
+                    html.Append("<tr><td class='answer' width=10><input type='radio' name='" + ctrlName + "' id='" + ctrlId + "' class='roption' value='No'/></td><td style='padding-top:12px;'><label for='" + ctrlId + "'>No</label></td></tr>");
+                }
+                html.Append("</table></td></tr>");
+                html.Append("</table>");
+                html.Append("</td></tr>");
+                //html.Append("<tr><td>&nbsp;</tr>");
+            }
+            html.Append("</table>");
+            ltQuestions.Text = html.ToString();
+        }
+        else
+        {
+            btnSubmitAnswer.Visible = false;
+        }
+    }
+    protected void btnSubmitAnswer_Click(object sender, EventArgs e)
+    {
+        int chatId = GlobalUtilities.ConvertToInt(Session["S_ChatId"]);
+        int clientId = GlobalUtilities.ConvertToInt(Session["S_ChatClientId"]);
+        int agentId = 0;
+        string feedback = txtfeedback.Text;
+        string query = "select * from tbl_chat where chat_chatid=" + chatId;
+        DataRow drChat = DbTable.ExecuteSelectRow(query);
+        if (drChat != null)
+        {
+            agentId = GlobalUtilities.ConvertToInt(drChat["chat_agentid"]);
+        }
+        Hashtable hstblResult = new Hashtable();
+
+        hstblResult.Add("chatid", chatId);
+        hstblResult.Add("agentid", agentId);
+        hstblResult.Add("chatclientid", clientId);
+        hstblResult.Add("feedback", feedback);
+        hstblResult.Add("date", "dbo.getdate()");
+
+        InsertUpdate obj = new InsertUpdate();
+        int feedbackResultId = obj.InsertData(hstblResult, "tbl_feedbackresult");
+        if (feedbackResultId == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < Request.Form.Keys.Count; i++)
+        {
+            string key = Request.Form.Keys[i];
+            if (key.StartsWith("option_"))
+            {
+                string answerOptionId = Request.Form[key];
+                Array arr = key.Split('_');
+                string val = Request.Form[key];
+                int questionId = Convert.ToInt32(arr.GetValue(1));
+                int optionId = 0;
+                if (val == "Yes")
+                {
+                    optionId = -1;
+                }
+                else if (val == "No")
+                {
+                    optionId = -2;
+                }
+                else
+                {
+                    optionId = Convert.ToInt32(val);
+                }
+                Hashtable hstbl = new Hashtable();
+                hstbl.Add("feedbackresultid", feedbackResultId);
+                hstbl.Add("feedbackquestionsid", questionId);
+                hstbl.Add("feedbackansweroptionsid", optionId);
+                InsertUpdate obj1 = new InsertUpdate();
+                obj1.InsertData(hstbl, "tbl_feedbackresultdetail", false);
+
+            }
+        }
+        lblMessage.Text = "<div class='error'>Thanks for your feedback!</div>";
+        ltQuestions.Text = "";
+        tblFeedback.Visible = false;
+    }
+}

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditstatus</title>
+  <module>bankauditstatus</module>
+  <table>tbl_bankauditstatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditstatus_bankauditstatusid desc</defaultsort>
+  <columns>bankauditstatus_status,bankauditstatus_backgroundcolor,bankauditstatus_textcolor</columns>
+  <columnlabels>Status,Background Color,Text Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditstatus_status</name>
+      <headertext>Status</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditstatus_bankauditstatusid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditstatus
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>bankauditstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

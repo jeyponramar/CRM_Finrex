@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>ledger</title>
+  <module>ledger</module>
+  <table>tbl_ledger</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <isreport>False</isreport>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>ledger_balance desc</defaultsort>
+  <columns>ledgervoucher_voucherno,ledgervoucher_referenceno,ledgervoucher_voucherdate,ledgervoucher_totalamount,ledgervoucher_narration,ledger_ledgername,accountvouchertype_vouchertype,accountadjustmentmethod_adjustmentmethod,paymentmode_paymentmode,ledgervoucher_chequeno,ledgervoucher_amountpaid,ledgervoucher_balanceamount,ledgervoucher_dramount,ledgervoucher_cramount,ledgervoucher_module,ledgervoucher_moduleid</columns>
+  <columnlabels>Voucher No,Reference No,Voucher Date,Total Amount,Narration,Ledger,Voucher Type,Adjustment Method,Payment Mode,Cheque No,Amount Paid,Balance Amount,Dr Amount,Cr Amount,Module,Module Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>ledger_ledgername</name>
+      <headertext>Ledger</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledger_billingname</name>
+      <headertext>Billing Name</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledger_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format></format>
+    </column>
+    <column>
+      <name>ledger_landlineno</name>
+      <headertext>Landline No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ledger_dramount</name>
+      <headertext>Dr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>ledger_cramount</name>
+      <headertext>Cr Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>ledger_balance</name>
+      <headertext>Balance Amount</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>ledger_ledgerid</hiddencolumns>
+  <query>
+    select *,(-1) * balance as ledger_balance from
+    (
+    select ledger_ledgerid,ledger_ledgername,ledger_billingname,ledger_mobileno,ledger_landlineno,
+    dbo.fn_GetDr(ledger_ledgerid) as ledger_dramount,
+    dbo.fn_GetCr(ledger_ledgerid) as ledger_cramount,
+    dbo.fn_GetAccountBalance(ledger_ledgerid) as balance
+    from tbl_ledger
+    where ledger_ledgergroupid IN(2,3)
+    )r
+    where balance &lt; 0
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Ledger Name,Billing Name</searchbylabels>
+  <searchbycolumns>ledger_ledgername,ledger_billingname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

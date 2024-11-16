@@ -1,0 +1,407 @@
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Data;
+using System.Collections;
+using System.Data.SqlClient;
+using System.Web.UI.HtmlControls;
+using System.Text;
+
+public partial class PushNotification_add : System.Web.UI.Page
+{
+    GlobalData gblData = new GlobalData("tbl_pushnotification", "pushnotificationid");
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            //FillDropDown_START
+			
+			EnableControlsOnEdit();
+			//FillDropDown_END
+            if (Request.QueryString["id"] == null)
+            {
+       			//PopulateAcOnAdd_START
+			
+			//PopulateAcOnAdd_END
+				//PopulateOnAdd_START
+				DataRow drpop = CommonPage.PopulateOnAdd(form);//pop=true&popm=&popjoin=&popid=
+				//PopulateOnAdd_END
+                //SetDefault_START//SetDefault_END
+            }
+            else
+            {
+                //Populate_START
+                gblData.PopulateForm(form, GetId());
+                //Populate_END
+                //btnSubmit.Visible = false;
+                btnDelete.Visible = false;
+                btnSubmit.Visible = false;
+                SetClientNames(GlobalUtilities.ConvertToString(gblData._CurrentRow["pushnotification_clientids"]));
+            }
+            //CallPopulateSubGrid_START
+			
+			//CallPopulateSubGrid_END
+            trclientgroups.Visible = true;
+        }
+        //PageTitle_START
+        if (Request.QueryString["id"] == null)
+        {
+            lblPageTitle.Text = "Add Push Notification";
+        }
+        else
+        {
+            lblPageTitle.Text = "Edit Push Notification";
+        }
+        ClientScript.RegisterClientScriptBlock(typeof(Page), "title", "<script>setTitle('" + lblPageTitle.Text + "')</script>");
+        //PageTitle_END
+    }
+    private void SetClientNames(string clientIds)
+    {
+        if (clientIds == "") return;
+        string query = "select * from tbl_client where client_clientid in("+clientIds+")";
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        StringBuilder clientNames = new StringBuilder();
+        for (int i = 0; i < dttbl.Rows.Count; i++)
+        {
+            string clientName = GlobalUtilities.ConvertToString(dttbl.Rows[i]["client_customername"]);
+            if (i == 0)
+            {
+                clientNames.Append(clientName);
+            }
+            else
+            {
+                clientNames.Append("|" + clientName);
+            }
+        }
+        clientids.Text = clientNames.ToString();
+    }
+    //PopulateSubGrid_START
+			
+			//PopulateSubGrid_END
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        SaveData(true);
+    }
+    private int SaveData(bool isclose)
+    {
+        lblMessage.Visible = false;
+        if (txtmessage.Text.Trim() == "")
+        {
+            lblMessage.Text = "Please enter message";
+            lblMessage.Visible = true;
+            return 0;
+        }
+        //SetCode_START//SetCode_END
+        //ExtraValues_START//ExtraValues_END
+        int id = 0;
+        //string shortMessage = txtmessage.Text;
+        //if (shortMessage.Length > 300) shortMessage = shortMessage.Substring(0, 300);
+        gblData.AddExtraValues("date", "getdate()");
+        gblData.AddExtraValues("userid", Common.UserId);
+        //gblData.AddExtraValues("shortmessage", shortMessage);
+//        string query = @"select * from tbl_clientuser
+//                         join tbl_client on client_clientid=clientuser_clientid ";
+//        int groupId = GlobalUtilities.ConvertToInt(ddlclientgroupid.SelectedValue);
+//        int statusId = 0;
+//        if (groupId == 1 || groupId == 4 || groupId == 5)
+//        {
+//            query += "JOIN tbl_subscription ON subscription_clientid=client_clientid ";
+//        }
+//        else
+//        {
+//            query += "JOIN tbl_trial ON trial_clientid=client_clientid ";
+//        }
+//        if (groupId == 5)//competitor
+//        {
+//            query += " where ISNULL(client_subscriptionid,0) IN(0,3,4) AND client_clientid IN(select clientcompetitor_clientid from tbl_clientcompetitor)";
+//        }
+//        else
+//        {
+//            if (groupId == 1)
+//            {
+//                statusId = 2;
+//            }
+//            else if (groupId == 2)
+//            {
+//                statusId = 1;
+//            }
+//            else if (groupId == 3)
+//            {
+//                statusId = 3;
+//            }
+//            else if (groupId == 4)
+//            {
+//                statusId = 4;
+//            }
+//            if (statusId > 0)
+//            {
+//                query += " where client_subscriptionstatusid=" + statusId;
+//            }
+//        }
+
+        string query = "";
+        StringBuilder ids = new StringBuilder();
+        for (int i = 0; i < Request.Form.Keys.Count; i++)
+        {
+            string key = Request.Form.Keys[i];
+            if (key.StartsWith("chclientgroup_"))
+            {
+                Array arr = key.Split('_');
+                int newid = GlobalUtilities.ConvertToInt(arr.GetValue(1));
+                if (ids.ToString() == "")
+                {
+                    ids.Append(newid);
+                }
+                else
+                {
+                    ids.Append("," + newid);
+                }
+            }
+        }
+        string groupIds = mcpushnotificationclientgroups.GetSelectedIds();
+        string extraWhere = "";
+        string businessintoIds = mcpushnotificationbusinessinto.GetSelectedIds();
+        string industryIds = mcpushnotificationindustrytype.GetSelectedIds();
+        extraWhere = AddExtraCommaSepWhere(extraWhere, businessintoIds, "client_businessintoids");
+        if (industryIds != "" && industryIds != "0" && GlobalUtilities.IsValidCommaSepValues(industryIds))
+        {
+            extraWhere += " and client_industrytypesid in(" + industryIds + ")";
+        }
+        Enum_Role role = (Enum_Role)Common.RoleId;
+        if (role == Enum_Role.Administrator || role == Enum_Role.Research)
+        {
+        }
+        else
+        {
+            extraWhere += " and client_employeeid=" + Common.EmployeeId;
+        }
+        if (groupIds != "")
+        {
+            Array arrIds = groupIds.Split(',');
+            for (int i = 0; i < arrIds.Length; i++)
+            {
+                int groupId = Convert.ToInt32(arrIds.GetValue(i));
+                int statusId = 0;
+                if (i > 0)
+                {
+                    query += Environment.NewLine + " union " + Environment.NewLine;
+                }
+                query += Environment.NewLine +
+                         @" select tbl_clientuser.* from tbl_clientuser
+                     join tbl_client on client_clientid=clientuser_clientid ";
+                if (groupId == 1 || groupId == 4 || groupId == 5)
+                {
+                    query += "JOIN tbl_subscription ON subscription_clientid=client_clientid ";
+                }
+                else
+                {
+                    query += "JOIN tbl_trial ON trial_clientid=client_clientid ";
+                }
+                query += " where 1=1 ";
+                if (groupId == 5)//competitor
+                {
+                    query += " AND ISNULL(subscription_subscriptionstatusid,0) IN(0,3,4) AND client_clientid IN(select clientcompetitor_clientid from tbl_clientcompetitor)";
+                }
+                else
+                {
+                    if (groupId == 1)
+                    {
+                        statusId = 2;
+                    }
+                    else if (groupId == 2)
+                    {
+                        statusId = 1;
+                    }
+                    else if (groupId == 3)
+                    {
+                        statusId = 3;
+                    }
+                    else if (groupId == 4)
+                    {
+                        statusId = 4;
+                    }
+                    if (statusId > 0)
+                    {
+                        query += " AND client_subscriptionstatusid=" + statusId;
+                    }
+                    //query += @" AND clientuser_isfinmessenger=1 and (isnull(clientuser_onesignalid,'')<>'' OR isnull(clientuser_androidonesignalid,'')<>'' OR isnull(clientuser_iosonesignalid,'')<>'')";
+                    //query += @" AND (isnull(clientuser_onesignalid,'')<>'' OR isnull(clientuser_androidonesignalid,'')<>'' OR isnull(clientuser_iosonesignalid,'')<>'')";
+                }
+                query += extraWhere;
+            }
+        }
+        else 
+        {
+            string clientIds = txtclientids.Text;
+            if (!GlobalUtilities.IsValidCommaSepValues(clientIds)) clientIds = "";
+
+            query += @" select tbl_clientuser.* from tbl_clientuser
+                 join tbl_client on client_clientid=clientuser_clientid where 1=1";
+            if (clientIds != "" && clientIds != "0") query += " and client_clientid in(" + clientIds + ")";
+            query += extraWhere;
+        }
+        
+        
+        //if (query.Contains(" where "))
+        //{
+        //    query += " and ";
+        //}
+        //else
+        //{
+        //    query += " where ";
+        //}
+        //query += @" clientuser_isfinmessenger=1 and (isnull(clientuser_onesignalid,'')<>'' OR isnull(clientuser_androidonesignalid,'')<>'' OR isnull(clientuser_iosonesignalid,'')<>'')";
+        //Response.Write(query);
+        //Response.End();
+        string selectQuery = query;
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        StringBuilder oneSignalIds = new StringBuilder();
+        int totalUsersNotified = dttbl.Rows.Count;
+        int totalDevicesNotified = 0;
+        int totalBrowserNotified = 0;
+        int totalAndroidNotified = 0;
+        int totalIOSNotified = 0;
+        for (int i = 0; i < dttbl.Rows.Count; i++)
+        {
+            string onesignalId = GlobalUtilities.ConvertToString(dttbl.Rows[i]["clientuser_onesignalid"]);
+            if (onesignalId != "")
+            {
+                oneSignalIds.Append("," + onesignalId);
+                totalBrowserNotified++;
+            }
+            onesignalId = GlobalUtilities.ConvertToString(dttbl.Rows[i]["clientuser_androidonesignalid"]);
+            if (onesignalId != "")
+            {
+                oneSignalIds.Append("," + onesignalId);
+                totalAndroidNotified++;
+            }
+            onesignalId = GlobalUtilities.ConvertToString(dttbl.Rows[i]["clientuser_iosonesignalid"]);
+            if (onesignalId != "")
+            {
+                oneSignalIds.Append("," + onesignalId);
+                totalIOSNotified++;
+            }
+        }
+        totalDevicesNotified = totalBrowserNotified + totalAndroidNotified + totalIOSNotified;
+        if (oneSignalIds.ToString() != "")
+        {
+            gblData.AddExtraValues("totalUsersNotified", totalUsersNotified);
+            gblData.AddExtraValues("totalDevicesNotified", totalDevicesNotified);
+            gblData.AddExtraValues("totalBrowserNotified", totalBrowserNotified);
+            gblData.AddExtraValues("totalAndroidNotified", totalAndroidNotified);
+            gblData.AddExtraValues("totalIOSNotified", totalIOSNotified);
+        }
+        id = gblData.SaveForm(form, GetId());
+
+        if (id > 0)
+        {
+            
+            //SaveSubTable_START
+			
+			mcpushnotificationclientgroups.Save(id);
+			mcpushnotificationbusinessinto.Save(id);
+			mcpushnotificationindustrytype.Save(id);
+			mcpushnotificationserviceplan.Save(id);
+			mcpushnotificationapplication.Save(id);
+			//SaveSubTable_END
+            //SaveFile_START
+			mfuattachment.Save(id);
+			//SaveFile_END
+            //ParentCountUpdate_START
+			
+			//ParentCountUpdate_END
+
+            query = @"update tbl_pushnotification set 
+                        pushnotification_clientids=case when pushnotification_clientids='0' then '' else pushnotification_clientids end 
+                        where pushnotification_pushnotificationid=" + id;
+            DbTable.ExecuteQuery(query);
+
+            string selectCols = @" " + id + "," + Common.UserId + @",client_clientid,clientuser_clientuserid,clientuser_onesignalid,clientuser_androidonesignalid,
+                                    clientuser_iosonesignalid," + Common.UserId + ",getdate() ";
+
+            string bulkInsertQuery = selectQuery.Replace("tbl_clientuser.*", selectCols);
+            bulkInsertQuery = @"insert into tbl_pushnotificationhistory(pushnotificationhistory_pushnotificationid,
+                                pushnotificationhistory_userid,pushnotificationhistory_clientid,
+                                pushnotificationhistory_clientuserid,pushnotificationhistory_onesignalid,
+                                pushnotificationhistory_androidonesignalid,pushnotificationhistory_iosonesignalid,
+                                pushnotificationhistory_createdby,pushnotificationhistory_createddate)" + bulkInsertQuery;
+            DbTable.ExecuteQuery(bulkInsertQuery);
+
+            string strOneSignalIds = "";
+            string responseMessage = "";
+            if (oneSignalIds.ToString() != "")
+            {
+                strOneSignalIds = oneSignalIds.ToString().Substring(1);
+                string title = "Notification";
+                if (txttitle.Text != "") title = txttitle.Text;
+                OneSignalPushNotification obj = new OneSignalPushNotification();
+                //obj.SendNotification("03177337-1140-4238-ba7e-2db86d5115ab", strOneSignalIds, title, txtshortmessage.Text, "", "");//"https://finstation.in/mobile/img/icon.png");
+                responseMessage = obj.SendNotification(strOneSignalIds, title, txtshortmessage.Text, "https://finstation.in/view-pushnotification.aspx", "");//"https://finstation.in/mobile/img/icon.png");
+            }
+            if (Request.QueryString["debug"] == "true")
+            {
+                responseMessage = "<br/>responseMessage=" + responseMessage;
+                strOneSignalIds = "<br/>ids=" + strOneSignalIds;
+            }
+            else
+            {
+                responseMessage = "";
+                strOneSignalIds = "";
+            }
+            lblMessage.Text = "Push notification sent to " + totalUsersNotified + " users successfully!"+
+                                responseMessage + strOneSignalIds;
+            lblMessage.Visible = true;
+            CommonPage.CloseQuickAddEditWindow(Page, form, id);
+        }
+        else if (id == -1)
+        {
+            lblMessage.Text = "Data already exists, duplicate entry not allowed!";
+            lblMessage.Visible = true;
+        }
+        else
+        {
+            lblMessage.Text = "Error occurred while saving data</br>Error : " + gblData._error;
+            lblMessage.Visible = true;
+        }
+        return id;
+    }
+    private string AddExtraCommaSepWhere(string where, string commaSepIds, string columnName)
+    {
+        if (commaSepIds == "") return where;
+        Array arr = commaSepIds.Split(',');
+        where += " and (";
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (i > 0) where += " OR ";
+            where += "','+" + columnName + "+',' like '," + arr.GetValue(i).ToString() + ",'";
+        }
+        where += ")";
+        return where;
+    }
+    //EnableControlsOnEdit_START
+	private void EnableControlsOnEdit()
+	{
+		if (Request.QueryString["id"] == null) return;
+		btnDelete.Visible = true;
+	}//EnableControlsOnEdit_END
+    private int GetId()
+    {
+        if (h_IsCopy.Text == "1")
+        {
+            return 0;
+        }
+        else
+        {
+            return GlobalUtilities.ConvertToInt(Request.QueryString["id"]);
+        }
+    }
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        Common.Delete();
+    }  
+    
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Stage</title>
+		<module>stage</module>
+		<table>tbl_stage</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>stage_stageid desc</defaultsort>
+		<columns>stage_stage</columns>
+		<columnlabels>Stage</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>stage_stage</name><headertext>Stage</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>stage_stageid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_stage $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Stage</searchbylabels>
+		<searchbycolumns>stage_stage</searchbycolumns>
+	</setting>

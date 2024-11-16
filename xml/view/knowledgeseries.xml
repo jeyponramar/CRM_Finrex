@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Knowledgeseries</title>
+  <module>knowledgeseries</module>
+  <table>tbl_knowledgeseries</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>knowledgeseries_knowledgeseriesid desc</defaultsort>
+  <columns>knowledgeseries_topic,knowledgeseries_document</columns>
+  <columnlabels>Topic,Document</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>knowledgeseries_topic</name>
+      <headertext>Topic</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>knowledgeseries_document</name>
+      <headertext>Document</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>knowledgeseries_knowledgeseriesid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_knowledgeseries
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Topic</searchbylabels>
+  <searchbycolumns>knowledgeseries_topic</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

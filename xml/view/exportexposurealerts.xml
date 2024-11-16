@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Exportexposurealerts</title>
+  <module>exportexposurealerts</module>
+  <table>tbl_exportexposurealerts</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>exportexposurealerts_exportexposurealertsid desc</defaultsort>
+  <columns>exportexposurealerts_clientid,exportexposurealerts_emailid,exportexposurealerts_senddailydashboard,exportexposurealerts_sendforwardcontractdue,exportexposurealerts_sendpcfcdue,exportexposurealerts_sendexportorderdue,exportexposurealerts_hedginglimit,exportexposurealerts_dashboardsentdate,exportexposurealerts_nextdayduedate,exportexposurealerts_fivedaydue,exportexposurealerts_duesentdate</columns>
+  <columnlabels>Client Id,Email Id,Send Daily Dashboard,Send Forward Contract Due,SendPcfcDue,Send Export Order Due,Hedging Limit,Dashboard Sent Date,Next Day Due Date,FiveDayDue,Due Sent Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>exportexposurealerts_exportexposurealertsid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_exportexposurealerts
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

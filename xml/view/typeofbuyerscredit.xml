@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Typeofbuyerscredit</title>
+		<module>typeofbuyerscredit</module>
+		<table>tbl_typeofbuyerscredit</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>typeofbuyerscredit_typeofbuyerscreditid desc</defaultsort>
+		<columns>typeofbuyerscredit_typeofbuyerscredit</columns>
+		<columnlabels>Type of Buyers Credit</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>typeofbuyerscredit_typeofbuyerscredit</name><headertext>Type of Buyers Credit</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>typeofbuyerscredit_typeofbuyerscreditid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_typeofbuyerscredit
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Type of Buyers Credit</searchbylabels>
+		<searchbycolumns>typeofbuyerscredit_typeofbuyerscredit</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

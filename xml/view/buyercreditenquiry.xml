@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Buyercreditenquiry</title>
+  <module>buyercreditenquiry</module>
+  <table>tbl_buyercreditenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>buyercreditenquiry_buyercreditenquiryid desc</defaultsort>
+  <columns>buyercreditenquiry_importerfirmname,buyercreditenquiry_contactperson,buyercreditenquiry_email,buyercreditenquiry_mobilenumber,buyercreditenquiry_beneficiarynamesupplier,buyercreditenquiry_importercountry,buyercreditenquiry_sblcbank,goodstype_goodstype,buyercreditenquiry_descriptionofunderlyinggoods,typeofbuyerscredit_typeofbuyerscredit,enquirymodeofpayment_modeofpayment,buyercreditenquiry_duedateoftransaction,buyercreditenquiry_transactionamountwithcurrency,buyercreditenquiry_tenureoffinancecreditindays,buyercreditenquiry_countryoforigin,buyercreditenquiry_billofladingdate,buyercreditenquiry_portofloading,buyercreditenquiry_lcnoifapplicable,buyercreditenquiry_remarks,buyercreditenquiry_uploaddocuments</columns>
+  <columnlabels>Importer Firm Name,Contact Person,Email,Mobile Number,Beneficiary Name (Supplier),Importer Country,SBLC Bank,Goods Type,Description of Underlying Goods,Type of Buyers Credit,Mode of Payment,Due date of Transaction,Transaction Amount with Currency,Tenure of Finance/ Credit in Days,Country of Origin,Bill of Lading Date,Port of Loading,LC No (If applicable),Remarks,Upload Documents</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>buyercreditenquiry_importerfirmname</name>
+      <headertext>Importer Firm Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buyercreditenquiry_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buyercreditenquiry_email</name>
+      <headertext>Email</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buyercreditenquiry_mobilenumber</name>
+      <headertext>Mobile Number</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>buyercreditenquiry_buyercreditenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_buyercreditenquiry
+
+ LEFT JOIN tbl_goodstype ON goodstype_goodstypeid=buyercreditenquiry_goodstypeid
+ LEFT JOIN tbl_typeofbuyerscredit ON typeofbuyerscredit_typeofbuyerscreditid=buyercreditenquiry_typeofbuyerscreditid
+ LEFT JOIN tbl_enquirymodeofpayment ON enquirymodeofpayment_enquirymodeofpaymentid=buyercreditenquiry_enquirymodeofpaymentid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Importer Firm Name,Contact Person,Mobile Number</searchbylabels>
+  <searchbycolumns>buyercreditenquiry_importerfirmname,buyercreditenquiry_contactperson,buyercreditenquiry_mobilenumber</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

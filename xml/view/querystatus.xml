@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Querystatus</title>
+		<module>querystatus</module>
+		<table>tbl_querystatus</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>querystatus_querystatusid desc</defaultsort>
+		<columns>querystatus_status</columns>
+		<columnlabels>Status</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>querystatus_status</name><headertext>Status</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>querystatus_querystatusid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_querystatus
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Status</searchbylabels>
+		<searchbycolumns>querystatus_status</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

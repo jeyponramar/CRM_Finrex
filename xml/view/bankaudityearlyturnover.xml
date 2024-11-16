@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankaudityearlyturnover</title>
+  <module>bankaudityearlyturnover</module>
+  <table>tbl_bankaudityearlyturnover</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankaudityearlyturnover_bankaudityearlyturnoverid desc</defaultsort>
+  <columns>bankaudityearlyturnover_name,bankaudityearlyturnover_title,bankaudityearlyturnover_yearlyturnoveramount1,bankaudityearlyturnover_yearlyturnoveramount2,bankaudityearlyturnover_yearlyturnoveramount3,bankaudityearlyturnover_bankauditid,bankaudityearlyturnover_clientid,bankaudityearlyturnover_clientuserid</columns>
+  <columnlabels>Name,Title,YearlyTurnoverAmount1,YearlyTurnoverAmount2,YearlyTurnoverAmount3,Bank Audit Id,Client Id,Client User Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankaudityearlyturnover_title</name>
+      <headertext>Title</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankaudityearlyturnover_yearlyturnoveramount1</name>
+      <headertext>YearlyTurnoverAmount1</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankaudityearlyturnover_bankaudityearlyturnoverid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankaudityearlyturnover
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Title</searchbylabels>
+  <searchbycolumns>bankaudityearlyturnover_title</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

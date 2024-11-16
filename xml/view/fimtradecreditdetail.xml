@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Fimtradecreditdetail</title>
+  <module>fimtradecreditdetail</module>
+  <table>tbl_fimtradecreditdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>fimtradecreditdetail_fimtradecreditdetailid desc</defaultsort>
+  <columns>fimtradecreditdetail_amountpaid,fimtradecreditdetail_conversionrate,fimtradecreditdetail_costingorder,fimtradecreditdetail_profitlossfromcosting,fimtradecreditdetail_spotontradecreditavailed,fimtradecreditdetail_profitlossfromspotontradecredit,fimtradecreditdetail_invoiceno,fimtradecreditdetail_paymentdate,fimtradecreditdetail_bankbookingrefno,fimtradecreditdetail_remark,fimtradecreditdetail_clientid,fimtradecreditdetail_fimtradecreditid</columns>
+  <columnlabels>Amount Paid,Conversion  Rate,Costing order,Profit/ Loss from Costing,Spot on Trade Credit availed,Profit/ Loss from Spot on Trade Credit,Invoice No.,Payment  Date,Bank Booking Ref No.,Remark,Client Id,fimtradecreditid</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+  </gridcolumn>
+  <hiddencolumns>fimtradecreditdetail_fimtradecreditdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_fimtradecreditdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

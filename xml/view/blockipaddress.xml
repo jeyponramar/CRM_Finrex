@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>blockipaddress</title>
+		<module>blockipaddress</module>
+		<table>tbl_blockipaddress</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>blockipaddress_blockipaddressid desc</defaultsort>
+		<columns>blockipaddress_ipaddress</columns>
+		<columnlabels>IP Address</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>blockipaddress_ipaddress</name><headertext>IP Address</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>blockipaddress_blockipaddressid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_blockipaddress $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>IP Address</searchbylabels>
+		<searchbycolumns>blockipaddress_ipaddress</searchbycolumns>
+	</setting>

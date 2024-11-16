@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulksms</title>
+  <module>bulksms</module>
+  <table>tbl_bulksms</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulksms_bulksmsid DESC</defaultsort>
+  <columns>bulksms_date,clientgroup_groupname,bulksmstemplate_templatename,bulksms_clientgroupsvalues,bulksms_message,bulksms_totalsms,bulksms_totalsent,bulksms_totalfailed,bulksms_balance,emailsmsstatus_status,bulksms_bulksmsid</columns>
+  <columnlabels>Date,Client Group,Template Name,Client Group,Message,Total SMS,Total Sent,Total Failed,Balance,Status,Bulk SMS Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bulksms_date</name>
+      <headertext>Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>bulksmstemplate_templatename</name>
+      <headertext>Template Name</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksms_totalsms</name>
+      <headertext>Total SMS</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksms_totalsent</name>
+      <headertext>Total Sent</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksms_totalfailed</name>
+      <headertext>Total Failed</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksms_balance</name>
+      <headertext>Balance</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmsstatus_status</name>
+      <headertext>Status</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulksms_clientgroupsvalues</name>
+      <headertext>Client Group</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulksms_bulksmsid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bulksms
+
+ LEFT JOIN tbl_clientgroup ON clientgroup_clientgroupid=bulksms_clientgroupid
+ LEFT JOIN tbl_bulksmstemplate ON bulksmstemplate_bulksmstemplateid=bulksms_bulksmstemplateid
+ LEFT JOIN tbl_emailsmsstatus ON emailsmsstatus_emailsmsstatusid=bulksms_emailsmsstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Template Name,Client Group,Message,Status</searchbylabels>
+  <searchbycolumns>bulksmstemplate_templatename,bulksms_clientgroupsvalues,bulksms_message,emailsmsstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

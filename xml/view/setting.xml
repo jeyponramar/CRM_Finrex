@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>setting</title>
+  <module>setting</module>
+  <table>tbl_setting</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>false</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>setting_settingid DESC</defaultsort>
+  <columns>setting_settingname,type_type,setting_settingvalue</columns>
+  <columnlabels>Setting Name,Type,Setting Value</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>setting_settingname</name>
+      <headertext>Setting Name</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>setting_settingvalue</name>
+      <headertext>Setting Value</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>setting_settingid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_setting LEFT JOIN tbl_type ON type_typeid=setting_typeid $Search$</query>
+  <searchbylabels>Setting Name</searchbylabels>
+  <searchbycolumns>setting_settingname</searchbycolumns>
+</setting>

@@ -1,0 +1,401 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using WebComponent;
+using System.Collections;
+using System.Data;
+using System.IO;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
+
+public partial class configure_project : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            PopulateProject();
+        }
+    }
+    protected void ddlProject_Changed(object sender,EventArgs e)
+    {
+        if (ddlProject.SelectedValue == "0")
+        {
+            txtConnectionString.Text = "";
+            txtProject.Text = "";
+            return;
+        }
+        InsertUpdate_Refux obj = new InsertUpdate_Refux();
+        DataTable dttbl = new DataTable();
+        string query = "select * from tbl_project where project_projectid='" + ddlProject.SelectedValue + "'";
+        dttbl = obj.ExecuteSelect(query);
+        txtProject.Text = Convert.ToString(dttbl.Rows[0]["project_projectname"]);
+        txtConnectionString.Text = Convert.ToString(dttbl.Rows[0]["project_connectionstring"]);
+    }
+    private void PopulateProject()
+    {
+        DataTable dttbl = new DataTable();
+        InsertUpdate_Refux obj = new InsertUpdate_Refux();
+        dttbl = obj.ExecuteSelect("select * from tbl_project");
+        if (dttbl != null && dttbl.Rows.Count > 0)
+        {
+            ddlProject.DataSource = dttbl;
+            ddlProject.DataTextField = dttbl.Columns[1].ColumnName;
+            ddlProject.DataValueField = dttbl.Columns[0].ColumnName;
+            ddlProject.DataBind();
+        }
+        ddlProject.Items.Insert(0, new ListItem("Select", "0"));
+    }
+    private bool IsProjectExists(string name)
+    {
+        InsertUpdate_Refux obj = new InsertUpdate_Refux();
+        string query = "select * from tbl_project where project_projectname='" + txtProject.Text + "'";
+        DataTable dttbl = obj.ExecuteSelect(query);
+        if (dttbl.Rows.Count > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    private int CreateProjectName()
+    {
+        int projectId = 0;
+        Hashtable hstbl = new Hashtable();
+        hstbl.Add("projectname", txtProject.Text.Trim());
+        hstbl.Add("connectionstring", txtConnectionString.Text);
+        InsertUpdate_Refux obj1 = new InsertUpdate_Refux();
+        projectId = obj1.InsertData(hstbl, "tbl_project");
+        return projectId;
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        int projectId = 0;
+        string projectName = "";
+        CustomSession.Session("S_ConnectionString", txtConnectionString.Text);
+        if (ddlProject.SelectedIndex > 0)
+        {
+            projectId = Convert.ToInt32(ddlProject.SelectedValue);
+            if (txtProject.Text.Trim() != "" && txtConnectionString.Text.Trim() != "")
+            {
+                //edit project
+                projectName = txtProject.Text;
+                Hashtable hstbl = new Hashtable();
+                hstbl.Add("projectname", txtProject.Text.Trim());
+                hstbl.Add("connectionstring", txtConnectionString.Text);
+                InsertUpdate_Refux obj = new InsertUpdate_Refux();
+                obj.UpdateData(hstbl, "tbl_project", projectId);
+            }
+        }
+        else
+        {
+            if (txtProject.Text.Trim() == "" || txtConnectionString.Text.Trim() == "")
+            {
+                lblMessage.Text = "Please select project OR add new one";
+                return;
+            }
+            if(IsProjectExists(txtProject.Text))
+            {
+                lblMessage.Text = "Project already exists";
+            }
+            else
+            {
+                projectId = CreateProjectName();
+                projectName = txtProject.Text.Trim();
+                CreateProject();
+            }
+        }
+        if (projectId > 0)
+        {
+            CustomSession.Session("S_ProjectId", projectId);
+            
+            CustomSession.Session("S_ProjectName", projectName);
+            Response.Redirect("create-module.aspx");
+        }
+    }
+    protected void btnCopyProject_Click(object sender, EventArgs e)
+    {
+        if (ddlProject.SelectedValue == "0")
+        {
+            lblMessage.Text = "Please select a project";
+            return;
+        }
+        if (IsProjectExists(txtProject.Text))
+        {
+            lblMessage.Text = "Project already exists";
+            return;
+        }
+        CreateProjectName();
+        CopyProject();
+        Response.Redirect("create-module.aspx");
+    }
+    private void CopyProject()
+    {
+        string query = "select * from tbl_project where project_projectid="+ddlProject.SelectedValue;
+        InsertUpdate_Refux obj = new InsertUpdate_Refux();
+        DataRow dr = obj.ExecuteSelectRow(query);
+        string ProjectPath = AppConstants.ProjectPath;
+        string sourceProjectName = Convert.ToString(dr["project_projectname"]);
+        string sourcePath = ProjectPath + "/" + sourceProjectName;
+        string destPath = ProjectPath + "/" + txtProject.Text.Trim();
+        string sourceConnectionString = Convert.ToString(dr["project_connectionstring"]);
+        GlobalUtilities.CopyFolder(sourcePath, destPath);
+        //ChangeConnectionString(sourceConnectionString);
+        string configPath = AppConstants.ProjectPath + "/" + txtProject.Text + "/web.config";
+        string data = GlobalUtilities.ReadFile(configPath);
+        data = data.Replace(sourceProjectName, txtProject.Text);
+        GlobalUtilities.WriteFile(configPath, data);
+
+        CopyDatabase(sourceConnectionString, txtConnectionString.Text); 
+    }
+    private void CreateProject()
+    {
+        string ProjectPath = AppConstants.ProjectPath;
+        string sourcePath = Server.MapPath("Template/Website");
+        string destPath = ProjectPath + "/" + txtProject.Text.Trim();
+        GlobalUtilities.CopyFolder(sourcePath, destPath);
+        ChangeConnectionString("$ConnectionString$");
+        //CopyDatabase(MasterConnectionString,txtConnectionString.Text);
+        ExecuteCreateScript();
+        ExecuteInsertScript();
+    }
+    private string MasterConnectionString
+    {
+        get
+        {
+            return System.Configuration.ConfigurationManager.ConnectionStrings["MasterConnectionString"].ConnectionString;
+        }
+    }
+    private void ExecuteInsertScript()
+    {
+        string scriptPath = Server.MapPath("Template/script/insert.sql");
+        string script = GlobalUtilities.ReadFile(scriptPath);
+        //string[] arrscript = script.Split(new string[] { "GO\r\n" }, StringSplitOptions.None);
+        string[] arrscript = script.Split(new string[] { ";" }, StringSplitOptions.None);
+        for (int i = 0; i < arrscript.Length; i++)
+        {
+            string query = arrscript.GetValue(i).ToString();
+            if (!query.ToLower().Trim().StartsWith("set ") && query.Trim()!="")
+            {
+                InsertUpdate obj = new InsertUpdate();
+                obj.ExecuteQuery(query);
+            }
+        }
+    }
+    private void ExecuteCreateScript()
+    {
+        string scriptPath = Server.MapPath("Template/script/create.sql");
+        string script = GlobalUtilities.ReadFile(scriptPath);
+        string[] arrscript = script.Split(new string[] { "GO\r\n" }, StringSplitOptions.None);
+        //string[] arrscript = script.Split(new string[] { ";" }, StringSplitOptions.None);
+        for (int i = 0; i < arrscript.Length; i++)
+        {
+            string query = arrscript.GetValue(i).ToString();
+            if (!query.ToLower().Trim().StartsWith("set ") && query.Trim() != "")
+            {
+                InsertUpdate obj = new InsertUpdate();
+                obj.ExecuteQuery(query);
+            }
+        }
+    }
+    protected void txtProject_Changed(object sender, EventArgs e)
+    {
+        string masterConnection = AppConstants.MasterConnection;
+        //txtConnectionString.Text = masterConnection.Replace("REFUX_CP", txtProject.Text);
+        masterConnection = masterConnection.Replace("erpmain", txtProject.Text);
+        txtConnectionString.Text = masterConnection.Replace("erpusers", txtProject.Text);
+    }
+    private void ChangeConnectionString(string replaceString)
+    {
+        string configPath = AppConstants.ProjectPath + "/" + txtProject.Text + "/web.config";
+        string data = GlobalUtilities.ReadFile(configPath);
+        data = data.Replace(replaceString, txtConnectionString.Text);
+        
+        GlobalUtilities.WriteFile(configPath, data);
+    }
+    
+    
+    private void CopyAllStoredProcedures(string fromDbConnectionString, string toDbConnectionString)
+    {
+        string query = "SELECT Routine_Definition FROM INFORMATION_SCHEMA.Routines";
+        DataTable dttblProcedures = GlobalUtilities.ExecuteSelectQueryByConnection(query, fromDbConnectionString);
+        for (int i = 0; i < dttblProcedures.Rows.Count; i++)
+        {
+            query = Convert.ToString(dttblProcedures.Rows[i][0]);
+            GlobalUtilities.ExecuteQueryByConnection(query, toDbConnectionString);
+        }
+    }
+    private void CopyDatabase(string fromDbConnectionString, string toDbConnectionString)
+    {
+        DataTable dttblTableInfo = new DataTable();
+        DataTable dttbltable = GlobalUtilities.ExecuteSelectQueryByConnection("SELECT * FROM sysobjects WHERE name<>'sysdiagrams' AND xtype='u'", fromDbConnectionString);
+        for (int i = 0; i < dttbltable.Rows.Count; i++)
+        {
+            InsertUpdate_Master objcols = new InsertUpdate_Master();
+            string strTableName = Convert.ToString(dttbltable.Rows[i]["name"]);
+            dttblTableInfo = GlobalUtilities.ExecuteSelectQueryByConnection("SELECT * FROM syscolumns WHERE id='" + Convert.ToString(dttbltable.Rows[i]["id"]) + "' ORDER BY colid", fromDbConnectionString);
+            string strQuery = "";
+            bool idcolexists = false;
+            for (int j = 0; j < dttblTableInfo.Rows.Count; j++)
+            {
+                string strColumnName = Convert.ToString(dttblTableInfo.Rows[j]["name"]);
+                int intDataType = Convert.ToInt32(dttblTableInfo.Rows[j]["xtype"]);
+                bool blnIsNullable = Convert.ToBoolean(dttblTableInfo.Rows[j]["isnullable"]);
+                int defaultValue = Convert.ToInt32(dttblTableInfo.Rows[j]["cdefault"]);
+                bool IsDefault = false;
+                if (defaultValue > 0)
+                {
+                    IsDefault = true;
+                }
+                int intLength = 0;
+                {
+                    intLength = Convert.ToInt32(dttblTableInfo.Rows[j]["length"]);
+                }
+
+                //if (strTableName.ToLower() == "tbl_session")
+                //{
+                //    strTableName = strTableName;
+                //}
+
+                if (j == 0)
+                {
+                    if (intDataType == 56)
+                    {
+                        idcolexists = true;
+                    }
+                    strQuery = "IF OBJECT_ID('" + strTableName + "') IS NOT NULL DROP TABLE " + strTableName + ";";
+                    if (idcolexists)
+                    {
+                        strQuery += "CREATE TABLE " + strTableName + " (" + strColumnName + " INT IDENTITY(1,1) PRIMARY KEY,";
+                    }
+                    else
+                    {
+                        strQuery += "CREATE TABLE " + strTableName + " (";
+                    }
+                }
+                if(j>0 || (j==0 && !idcolexists))
+                {
+                    string strDataType = "";
+                    switch (intDataType)
+                    {
+                        case 56:
+                            if (IsDefault)
+                            {
+                                strDataType = "INT DEFAULT 0";
+                            }
+                            else
+                            {
+                                strDataType = "INT";
+                            }
+                            break;
+                        case 167:
+                            if (intLength < 0)
+                            {
+                                strDataType = "VARCHAR(MAX)";
+                            }
+                            else
+                            {
+                                strDataType = "VARCHAR(" + intLength + ")";
+                            }
+                            break;
+                        case 231:
+                            strDataType = "NVARCHAR(" + intLength + ")";
+                            break;
+                        case 175:
+                            strDataType = "CHAR(" + intLength + ")";
+                            break;
+                        case 104:
+                            strDataType = "BIT";
+                            break;
+                        case 35:
+                            strDataType = "TEXT";
+                            break;
+
+                        case 61:
+                            if (IsDefault)
+                            {
+                                strDataType = "DATETIME DEFAULT GETDATE()";
+                            }
+                            else
+                            {
+                                strDataType = "DATETIME";
+                            }
+                            break;
+                        case 108:
+                            strDataType = "NUMERIC(19,2)";
+                            break;
+
+                    }
+                    if (!blnIsNullable)
+                    {
+                        strDataType += " NOT NULL";
+                    }
+                    if (j == dttblTableInfo.Rows.Count - 1)
+                    {
+                        strQuery += strColumnName + " " + strDataType + ")";
+                        GlobalUtilities.ExecuteQueryByConnection(strQuery, toDbConnectionString);
+                    }
+                    else
+                    {
+                        strQuery += strColumnName + " " + strDataType + ",";
+                    }
+                }
+
+            }
+
+            //if (chkTransferData.Checked)
+            //{
+            //    DataTable dttblData = new DataTable();
+            //    string strSelectQuery = "SELECT * FROM " + strTableName;
+            //    dttblData = ExecuteSelectQuery(strSelectQuery, true);
+            //    for (int iRowCount = 0; iRowCount < dttblData.Rows.Count; iRowCount++)
+            //    {
+            //        string strTruncateQuery = "TRUNCATE TABLE " + strTableName;
+            //        //ExecuteSQLScript(strTruncateQuery, true);
+            //        string strInsertQuery = "INSERT INTO " + strTableName + " VALUES(";
+            //        for (int iColCount = 1; iColCount < dttblData.Columns.Count; iColCount++)
+            //        {
+            //            string strData = Convert.ToString(dttblData.Rows[iRowCount][dttblData.Columns[iColCount]]);
+            //            //if ((strData.Contains(" AM") || strData.Contains(" PM")) && strData.Length < 25)
+            //            //{
+            //            //    //datetime
+            //            //    Array arr = strData.Split('/');
+            //            //    strData = Convert.ToString(arr.GetValue(1)) + "-" + Convert.ToString(arr.GetValue(0)) + "-" + Convert.ToString(arr.GetValue(2));
+            //            //}
+            //            //strData = strData.Replace("True", "1").Replace("False", "0");
+            //            if (iColCount == dttblData.Columns.Count - 1)
+            //            {
+
+            //                if (dttblData.Rows[iRowCount][dttblData.Columns[iColCount]] == DBNull.Value)
+            //                {
+            //                    strInsertQuery += "NULL)";
+            //                }
+            //                else
+            //                {
+            //                    strInsertQuery += "'" + strData + "')";
+            //                }
+            //                ExecuteSQLScript(strInsertQuery, false);
+            //            }
+            //            else
+            //            {
+            //                if (dttblData.Rows[iRowCount][dttblData.Columns[iColCount]] == DBNull.Value)
+            //                {
+            //                    strInsertQuery += "NULL,";
+            //                }
+            //                else
+            //                {
+            //                    strInsertQuery += "'" + strData + "',";
+            //                }
+
+            //            }
+            //        }
+
+            //    }
+
+            //}
+        }
+        CopyAllStoredProcedures(fromDbConnectionString, toDbConnectionString);
+
+    }
+}

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>enquirystatus</title>
+  <module>enquirystatus</module>
+  <table>tbl_enquirystatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>enquirystatus_enquirystatusid desc</defaultsort>
+  <columns>enquirystatus_status,enquirystatus_textcolor,enquirystatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>enquirystatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystatus_textcolor</name>
+      <headertext>Text Color</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystatus_backgroundcolor</name>
+      <headertext>Background Color</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquirystatus_enquirystatusid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_enquirystatus $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status</searchbylabels>
+  <searchbycolumns>enquirystatus_status</searchbycolumns>
+</setting>

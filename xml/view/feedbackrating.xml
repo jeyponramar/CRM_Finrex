@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Feedbackrating</title>
+		<module>feedbackrating</module>
+		<table>tbl_feedbackrating</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>feedbackrating_feedbackratingid desc</defaultsort>
+		<columns>feedbackrating_rating</columns>
+		<columnlabels>Rating</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>feedbackrating_rating</name><headertext>Rating</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>feedbackrating_feedbackratingid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_feedbackrating $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Rating</searchbylabels>
+		<searchbycolumns>feedbackrating_rating</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

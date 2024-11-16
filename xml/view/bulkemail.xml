@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulkemail</title>
+  <module>bulkemail</module>
+  <table>tbl_bulkemail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulkemail_bulkemailid desc</defaultsort>
+  <columns>bulkemail_date,bulkemail_clientgroupsvalues,clientgroup_groupname,bulkemailtemplate_templatename,bulkemail_attachment,emailsmssentstatus_status,bulkemail_subject</columns>
+  <columnlabels>Date ,Client Group,Client Group,Template Name,Attachment,Status,Subject</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bulkemail_date</name>
+      <headertext>Date </headertext>
+      <width>10%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>bulkemailtemplate_templatename</name>
+      <headertext>Template Name</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmssentstatus_status</name>
+      <headertext>Status</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkemail_clientgroupsvalues</name>
+      <headertext>Client Group</headertext>
+      <width>60%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulkemail_bulkemailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bulkemail
+
+ LEFT JOIN tbl_clientgroup ON clientgroup_clientgroupid=bulkemail_clientgroupid
+ LEFT JOIN tbl_bulkemailtemplate ON bulkemailtemplate_bulkemailtemplateid=bulkemail_bulkemailtemplateid
+ LEFT JOIN tbl_emailsmssentstatus ON emailsmssentstatus_emailsmssentstatusid=bulkemail_emailsmssentstatusid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client Group,Status</searchbylabels>
+  <searchbycolumns>bulkemail_clientgroupsvalues,emailsmssentstatus_status</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditdocumentcategory</title>
+  <module>bankauditdocumentcategory</module>
+  <table>tbl_bankauditdocumentcategory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditdocumentcategory_bankauditdocumentcategoryid desc</defaultsort>
+  <columns>bankauditdocumentcategory_categoryname,bankauditdocumentcategory_isbankletter</columns>
+  <columnlabels>Category Name,Is Bank Letter</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditdocumentcategory_categoryname</name>
+      <headertext>Category Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditdocumentcategory_isbankletter</name>
+      <headertext>Is Bank Letter</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditdocumentcategory_bankauditdocumentcategoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditdocumentcategory
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Category Name</searchbylabels>
+  <searchbycolumns>bankauditdocumentcategory_categoryname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

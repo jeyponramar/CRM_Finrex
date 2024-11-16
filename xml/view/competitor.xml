@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Competitor</title>
+  <module>competitor</module>
+  <table>tbl_competitor</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>competitor_competitorid desc</defaultsort>
+  <columns>competitor_competitorname,industrytypes_industrytypes,competitor_marketshare,exposure_exposure,competitor_comments</columns>
+  <columnlabels>Competitor Name,Industry,Market Share,Turnover,Comments</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>competitor_competitorname</name>
+      <headertext>Competitor Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>industrytypes_industrytypes</name>
+      <headertext>Industry</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>competitor_marketshare</name>
+      <headertext>Market Share</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>competitor_competitorid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_competitor LEFT JOIN tbl_industrytypes ON industrytypes_industrytypesid=competitor_industrytypesid LEFT JOIN tbl_exposure ON exposure_exposureid=competitor_exposureid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Competitor Name,Market Share,Turnover</searchbylabels>
+  <searchbycolumns>competitor_competitorname,competitor_marketshare,exposure_exposure</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

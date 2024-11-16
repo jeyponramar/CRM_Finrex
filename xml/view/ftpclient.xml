@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Ftpclient</title>
+  <module>ftpclient</module>
+  <table>tbl_ftpclient</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>ftpclient_ftpclientid desc</defaultsort>
+  <columns>ftpclient_ftpusername,client_customername,ftpclient_isactive,ftpclient_scheduletime</columns>
+  <columnlabels>FTP User Name,Client,Is Active,Schedule Time</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>ftpclient_ftpusername</name>
+      <headertext>FTP User Name</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ftpclient_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ftpclient_scheduletime</name>
+      <headertext>Schedule Time</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>ftpclient_ftpclientid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_ftpclient
+
+ LEFT JOIN tbl_client ON client_clientid=ftpclient_clientid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>FTP User Name,Client</searchbylabels>
+  <searchbycolumns>ftpclient_ftpusername,client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

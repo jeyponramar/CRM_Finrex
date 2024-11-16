@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Requireddocument</title>
+		<module>requireddocument</module>
+		<table>tbl_requireddocument</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>requireddocument_requireddocumentid desc</defaultsort>
+		<columns>requireddocument_requireddocument</columns>
+		<columnlabels>Required Document</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>requireddocument_requireddocument</name><headertext>Required Document</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>requireddocument_requireddocumentid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_requireddocument $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Required Document</searchbylabels>
+		<searchbycolumns>requireddocument_requireddocument</searchbycolumns>
+	</setting>

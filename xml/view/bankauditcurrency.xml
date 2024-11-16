@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bankauditcurrency</title>
+  <module>bankauditcurrency</module>
+  <table>tbl_bankauditcurrency</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bankauditcurrency_bankauditcurrencyid desc</defaultsort>
+  <columns>bankauditcurrency_currency,bankauditcurrency_symbol,bankauditcurrency_paisa</columns>
+  <columnlabels>Currency,Symbol,Paisa</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>bankauditcurrency_currency</name>
+      <headertext>Currency</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bankauditcurrency_symbol</name>
+      <headertext>Symbol</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bankauditcurrency_bankauditcurrencyid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_bankauditcurrency
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Currency,Symbol</searchbylabels>
+  <searchbycolumns>bankauditcurrency_currency,bankauditcurrency_symbol</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

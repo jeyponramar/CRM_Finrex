@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Bulkemaildetail</title>
+  <module>bulkemaildetail</module>
+  <table>tbl_bulkemaildetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>bulkemaildetail_bulkemaildetailid desc</defaultsort>
+  <columns>client_customername,bulkemaildetail_emailid,bulkemaildetail_subject,emailsmsstatus_status,bulkemaildetail_date,bulkemaildetail_bulkemailid,bulkemaildetail_issuccess,bulkemaildetail_isfailed</columns>
+  <columnlabels>Client Name,Email Id,Subject,Status,Date,Bulk Email Id,Issuccess,Isfailed</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkemaildetail_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkemaildetail_subject</name>
+      <headertext>Subject</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>emailsmsstatus_status</name>
+      <headertext>Status</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>bulkemaildetail_date</name>
+      <headertext>Date</headertext>
+      <width>20%</width>
+      <format>Date</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>bulkemaildetail_bulkemaildetailid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_bulkemaildetail JOIN tbl_client ON client_clientid=bulkemaildetail_clientid LEFT JOIN tbl_emailsmsstatus ON emailsmsstatus_emailsmsstatusid=bulkemaildetail_emailsmsstatusid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client Name,Email Id</searchbylabels>
+  <searchbycolumns>client_customername,bulkemaildetail_emailid</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

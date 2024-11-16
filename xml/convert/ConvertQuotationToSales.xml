@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertQuotationToSales'>
+		<fromtable>tbl_quotation</fromtable>
+		<totable>tbl_sales</totable>
+		<frommoduleid>5</frommoduleid>
+		<tomoduleid>10</tomoduleid>
+		<statuscolumn>quotationstatusid</statuscolumn>
+		<statusvalue>2</statusvalue>
+		<mapping><name>sales_billno</name><value>Code=SO-</value></mapping>
+		<mapping><name>sales_date</name><value>dbo.GetDate()</value></mapping>
+		<mapping><name>sales_totalamount</name><value>quotation_totalamount</value></mapping>
+		<mapping><name>sales_clientid</name><value>quotation_clientid</value></mapping>
+		<mapping><name>sales_contactperson</name><value>quotation_contactperson</value></mapping>
+		<mapping><name>sales_mobileno</name><value>quotation_mobileno</value></mapping>
+		<mapping><name>sales_emailid</name><value>quotation_emailid</value></mapping>
+		<mapping><name>sales_billingaddress</name><value>quotation_billingaddress</value></mapping>
+		<mapping><name>sales_remarks</name><value></value></mapping>
+		<mapping><name>sales_quotationid</name><value>quotation_quotationid</value></mapping>
+		<mapping><name>sales_salesstatusid</name><value>1</value></mapping>
+		<mapping><name>sales_isnullvalueupdated</name><value>0</value></mapping>
+		<mapping><name>sales_isenquirystatusupdate</name><value>0</value></mapping>
+		<mapping><name>sales_amcid</name><value>0</value></mapping>
+		<mapping><name>sales_isrenewed</name><value>0</value></mapping>
+		<mapping><name>sales_totalsalesquantity</name><value>0</value></mapping>
+	</setting>

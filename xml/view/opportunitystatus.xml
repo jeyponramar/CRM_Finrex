@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>opportunitystatus</title>
+  <module>opportunitystatus</module>
+  <table>tbl_opportunitystatus</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>opportunitystatus_opportunitystatusid desc</defaultsort>
+  <columns>opportunitystatus_status,opportunitystatus_textcolor,opportunitystatus_backgroundcolor</columns>
+  <columnlabels>Status,Text Color,Background Color</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>opportunitystatus_status</name>
+      <headertext>Status</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunitystatus_textcolor</name>
+      <headertext>Text Color</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>opportunitystatus_backgroundcolor</name>
+      <headertext>Background Color</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>opportunitystatus_opportunitystatusid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_opportunitystatus $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Status,Background Color</searchbylabels>
+  <searchbycolumns>opportunitystatus_status,opportunitystatus_backgroundcolor</searchbycolumns>
+  <isrightreport>False</isrightreport>
+</setting>

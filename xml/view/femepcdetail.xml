@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Femepcdetail</title>
+  <module>femepcdetail</module>
+  <table>tbl_femepcdetail</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>femepcdetail_femepcdetailid desc</defaultsort>
+  <columns>femepcdetail_epcno,femepcdetail_femepcid,femepcdetail_clientid,femepcdetail_liquidationamountinrs,femepcdetail_liquidationdate,femepcdetail_spotrateonrepayment,femepcdetail_profitandlossonpcfc,femepcdetail_invoiceno,femepcdetail_exportorderno,femepcdetail_remark</columns>
+  <columnlabels>EPC No,femepcid,Client Id,Liquidation  Amount in Rs,Liquidation Date,Spot Rate on Repayment,Profit and Loss on PCFC,Invoice No,Export Order No,Remark</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>femepcdetail_epcno</name>
+      <headertext>EPC No</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepcdetail_liquidationamountinrs</name>
+      <headertext>Liquidation  Amount in Rs</headertext>
+      <width>50%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepcdetail_liquidationdate</name>
+      <headertext>Liquidation Date</headertext>
+      <width>33%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>femepcdetail_spotrateonrepayment</name>
+      <headertext>Spot Rate on Repayment</headertext>
+      <width>25%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepcdetail_profitandlossonpcfc</name>
+      <headertext>Profit and Loss on PCFC</headertext>
+      <width>20%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>femepcdetail_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>femepcdetail_exportorderno</name>
+      <headertext>Export Order No</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>femepcdetail_femepcdetailid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_femepcdetail
+
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>
+  </searchbylabels>
+  <searchbycolumns>
+  </searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

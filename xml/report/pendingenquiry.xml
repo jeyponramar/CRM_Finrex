@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Enquiry</title>
+  <module>Enquiry</module>
+  <table>tbl_enquiry</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>enquiry_enquiryid desc</defaultsort>
+  <columns>enquiry_enquirydate,client_customername,enquiry_companyname,campaign_campaignname,enquiry_subject,enquiry_contactperson,designation_designation,product_productname,enquiry_landlineno,enquiry_mobileno,enquiry_description,enquiry_remarks,enquiry_address,enquiry_annualrevenue,enquiry_website,enquiry_emailid,enquiry_skypeid,enquiry_employeestrength,city_cityname,area_areaname,employee_employeename,communicationsource_communicationsource,enquirystatus_status,enquiryfor_enquiryfor,enquiry_won,enquiry_canceled,enquiry_opportunity,enquiry_hold,enquiry_followupsdate,enquiry_time,enquiry_ampm,enquiry_lastactivity,enquiry_telecallingid,industrytypes_industrytypes,priority_priority,enquiry_messageidoutlook,tag_tagname,enquirystage_enquirystage</columns>
+  <columnlabels>Enquiry Date,Existing Customer,Company Name,Campaign,Subject,Contact Person,Designation,Product,Landline No,Mobile No,Description,Remarks,Address,Annual Revenue,Website,Email Id,Skype Id,Employee Strength,City,Area,Assigned To,Communication Source,Enquiry Status,Enquiry For,Won,Canceled,Opportunity,Hold,Followups Date,Time,Am Pm,Last Activity,Tele Calling Id,Industry Type,Priority,Message Id Outlook,Tag,Enquiry Stage</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>enquiry_enquirydate</name>
+      <headertext>Enquiry Date</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>enquiry_subject</name>
+      <headertext>Subject</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiry_lastactivity</name>
+      <headertext>Last Activity</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>campaign_campaignname</name>
+      <headertext>Campaign Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>product_productname</name>
+      <headertext>Product Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>area_areaname</name>
+      <headertext>Area Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assigned To</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>communicationsource_communicationsource</name>
+      <headertext>Communication Source</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquiryfor_enquiryfor</name>
+      <headertext>Enquiry For</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>industrytypes_industrytypes</name>
+      <headertext>Industry Types</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>priority_priority</name>
+      <headertext>Priority</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>enquirystage_enquirystage</name>
+      <headertext>Enquiry Stage</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>enquiry_enquiryid</hiddencolumns>
+  <query>SELECT * FROM tbl_enquiry
+JOIN tbl_client ON enquiry_clientid=client_clientid
+LEFT JOIN tbl_campaign ON enquiry_campaignid=campaign_campaignid
+LEFT JOIN tbl_designation ON enquiry_designationid=designation_designationid
+LEFT JOIN tbl_product ON enquiry_productid=product_productid
+LEFT JOIN tbl_city ON enquiry_cityid=city_cityid
+LEFT JOIN tbl_area ON enquiry_areaid=area_areaid
+LEFT JOIN tbl_employee ON enquiry_employeeid=employee_employeeid
+LEFT JOIN tbl_communicationsource ON enquiry_communicationsourceid=communicationsource_communicationsourceid
+JOIN tbl_enquirystatus ON enquiry_enquirystatusid=enquirystatus_enquirystatusid
+JOIN tbl_enquiryfor ON enquiry_enquiryforid=enquiryfor_enquiryforid
+LEFT JOIN tbl_industrytypes ON enquiry_industrytypesid=industrytypes_industrytypesid
+LEFT JOIN tbl_priority ON enquiry_priorityid=priority_priorityid
+
+LEFT JOIN tbl_enquirystage ON enquiry_enquirystageid=enquirystage_enquirystageid</query>
+  <where>enquiry_enquirystatusid NOt In (3,4,5) AND
+($SESSION_Login_RoleId$='1' OR $SESSION_Login_EmployeeId$=enquiry_employeeid)</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+</setting>

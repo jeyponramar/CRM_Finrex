@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Contacts</title>
+  <module>contacts</module>
+  <table>tbl_contacts</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>contacts_contactsid DESC</defaultsort>
+  <columns>client_customername,contacts_contactperson,designation_designation,contacts_mobileno,contacts_landlineno,contacts_emailid,contacts_isemailcommunication,contacts_issmscommunication,contacts_iswhatsappcommunication,contacts_dateofbirth,contacts_anniversarydate,contacts_ismaincontact,contacts_birthdayemaildate,contacts_birthdaysmsdate,contacts_anniversaryemaildate,contacts_anniversarysmsdate,contacts_iswebuser,contacts_isexeuser,contacts_ismobileuser,contacts_isfinmessenger,contacts_isactive</columns>
+  <columnlabels>Customer Name,Contact Person,Designation,Mobile No,Landline No,Email Id,Is Email Communication,Is SMS Communication,Is Whatsapp Communication,Date of Birth,Anniversary Date,Is Main Contact,Birthday Email Date,Birthday SMS Date,Anniversary Email Date,Anniversary SMS Date,Finstation,Finwatch,FinIcon,FinFulse,Is Active</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>contacts_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>designation_designation</name>
+      <headertext>Designation</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>contacts_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_iswhatsappcommunication</name>
+      <headertext>Is Whatsapp Communication</headertext>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_issmscommunication</name>
+      <headertext>Is SMS Communication</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_isemailcommunication</name>
+      <headertext>Is Email Communication</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_iswebuser</name>
+      <headertext>Finstation</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_isexeuser</name>
+      <headertext>Finwatch</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_ismobileuser</name>
+      <headertext>FinIcon</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_isfinmessenger</name>
+      <headertext>FinFulse</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>contacts_isactive</name>
+      <headertext>Is Active</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>contacts_contactsid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_contacts
+
+ LEFT JOIN tbl_client ON client_clientid=contacts_clientid
+ LEFT JOIN tbl_designation ON designation_designationid=contacts_designationid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Name,Contact Person,Designation,Mobile No,Email Id</searchbylabels>
+  <searchbycolumns>client_customername,contacts_contactperson,designation_designation,contacts_mobileno,contacts_emailid</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <ismobile>True</ismobile>
+  <applyviewrights>False</applyviewrights>
+</setting>

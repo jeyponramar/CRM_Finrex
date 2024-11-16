@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Mcxfuturerate</title>
+  <module>mcxfuturerate</module>
+  <table>tbl_mcxfuturerate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>mcxfuturerate_mcxfuturerateid desc</defaultsort>
+  <columns>mcxfuturerate_commodityname,metal_metalname,mcxfuturerate_date,mcxfuturerate_pricequoteunit,mcxfuturerate_symbol,mcxfuturerate_expirydate,mcxfuturerate_bidprice,mcxfuturerate_askprice,mcxfuturerate_ltp,mcxfuturerate_netchange,mcxfuturerate_changepercentage,mcxfuturerate_open,mcxfuturerate_high,mcxfuturerate_low,mcxfuturerate_close,mcxfuturerate_volume,mcxfuturerate_value,mcxfuturerate_tpilcode,mcxfuturerate_openinterest</columns>
+  <columnlabels>Commodity Name,Metal,Date,Price Quote Unit,Symbol,Expiry date,Bid Price,Ask Price,LTP,Net Change,Change Percentage,Open,High,Low,Close,Volume,Value,TPIL Code,Open Interest</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>Metal</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>mcxfuturerate_date</name>
+      <headertext>Date</headertext>
+      <width>33%</width>
+      <format>DateTime</format>
+    </column>
+    <column>
+      <name>mcxfuturerate_symbol</name>
+      <headertext>Symbol</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>mcxfuturerate_commodityname</name>
+      <headertext>Commodity Name</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>mcxfuturerate_mcxfuturerateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_mcxfuturerate
+
+ LEFT JOIN tbl_metal ON metal_metalid=mcxfuturerate_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Commodity Name,Metal,Symbol</searchbylabels>
+  <searchbycolumns>mcxfuturerate_commodityname,metal_metalname,mcxfuturerate_symbol</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

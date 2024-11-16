@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Clientcompetitor</title>
+		<module>clientcompetitor</module>
+		<table>tbl_clientcompetitor</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>clientcompetitor_clientcompetitorid desc</defaultsort>
+		<columns>client_customername,competitor_competitorname,clientcompetitor_expirydate</columns>
+		<columnlabels>Client,Competitor,Expiry Date</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>client_customername</name><headertext>Client</headertext><width>33%</width><format></format></column><column><name>competitor_competitorname</name><headertext>Competitor</headertext><width>33%</width><format></format></column><column><name>clientcompetitor_expirydate</name><headertext>Expiry Date</headertext><width>33%</width><format>Date</format></column>
+		</gridcolumn>
+		<hiddencolumns>clientcompetitor_clientcompetitorid</hiddencolumns>
+		<query>select $COLUMNS$ from tbl_clientcompetitor JOIN tbl_client ON client_clientid=clientcompetitor_clientid JOIN tbl_competitor ON competitor_competitorid=clientcompetitor_competitorid $Search$</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Client,Competitor</searchbylabels>
+		<searchbycolumns>client_customername,competitor_competitorname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

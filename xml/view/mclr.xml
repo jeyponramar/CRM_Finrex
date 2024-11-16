@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Mclr</title>
+  <module>mclr</module>
+  <table>tbl_mclr</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>mclr_mclrid DESC</defaultsort>
+  <columns>mclrbank_bankname,mclr_on,mclr_1month,mclr_3months,mclr_6months,mclr_1year,mclr_effectivedate,mclr_baserate</columns>
+  <columnlabels>Bank,MCLR_O/N,1 Month,3 Months,6 Months,1 Year,Effective Date,Base Rate</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>mclrbank_bankname</name>
+      <headertext>Bank</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>mclr_on</name>
+      <headertext>MCLR_O/N</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>mclr_1month</name>
+      <headertext>1 Month</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>mclr_3months</name>
+      <headertext>3 Months</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>mclr_6months</name>
+      <headertext>6 Months</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>mclr_1year</name>
+      <headertext>1 Year</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>mclr_effectivedate</name>
+      <headertext>Effective Date</headertext>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>mclr_baserate</name>
+      <headertext>Base Rate</headertext>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>mclr_mclrid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_mclr
+
+ LEFT JOIN tbl_mclrbank ON mclrbank_mclrbankid=mclr_mclrbankid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Bank</searchbylabels>
+  <searchbycolumns>mclrbank_bankname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

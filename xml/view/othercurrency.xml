@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Othercurrency</title>
+		<module>othercurrency</module>
+		<table>tbl_othercurrency</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>othercurrency_othercurrencyid desc</defaultsort>
+		<columns>othercurrency_currency</columns>
+		<columnlabels>Currency</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>othercurrency_currency</name><headertext>Currency</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>othercurrency_othercurrencyid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_othercurrency
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Currency</searchbylabels>
+		<searchbycolumns>othercurrency_currency</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

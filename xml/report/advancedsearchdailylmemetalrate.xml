@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Dailylmemetalrate</title>
+  <module>dailylmemetalrate</module>
+  <table>tbl_dailylmemetalrate</table>
+  <isreport>true</isreport>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>dailylmemetalrate_dailylmemetalrateid desc</defaultsort>
+  <columns>metal_metalname,dailylmemetalrate_date,dailylmemetalrate_open,dailylmemetalrate_high,dailylmemetalrate_low,dailylmemetalrate_close,dailylmemetalrate_cash,dailylmemetalrate_threemonths,dailylmemetalrate_oneyear,dailylmemetalrate_cashoffer,dailylmemetalrate_threemonthsoffer,dailylmemetalrate_oneyearoffer,dailylmemetalrate_usdinrclose,dailylmemetalrate_usdinrrbirefrate,dailylmemetalrate_openingstock,dailylmemetalrate_livewarrants,dailylmemetalrate_cancelledwarrants,dailylmemetalrate_prevdayopeningstock,dailylmemetalrate_asianrate,dailylmemetalrate_asiancontract,dailylmemetalrate_bid,dailylmemetalrate_ask,dailylmemetalrate_prevclose,dailylmemetalrate_change,dailylmemetalrate_changeper,dailylmemetalrate_ctweekhigh,dailylmemetalrate_ctmonthhigh,dailylmemetalrate_ctmonthlow,dailylmemetalrate_ctweeklow,dailylmemetalrate_oneweekchangeper,dailylmemetalrate_onemonthchangeper,dailylmemetalrate_threemonthchangeper,dailylmemetalrate_oneyearchangeper,dailylmemetalrate_fiftytwoweekhigh,dailylmemetalrate_fiftytwoweeklow,dailylmemetalrate_isactive</columns>
+  <columnlabels>Metal,Date,Open,High,Low,Close,Cash,3months,1year,CashOffer,3monthsoffer,1yearoffer,USD INR Close,USD INR RBI refrate,Opening stock,Live Warrants,Cancelled Warrants,Prevday Opening Stock,Asian rate,Asian contract,bid,ask,Prev Close,Change,Change Per,ct week high,ct month high,ct month low,ct week low,one week change per,one month change per,three month change per,one year change per,fifty two week high,fifty two week low,IsActive</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>Metal</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>dailylmemetalrate_date</name>
+      <headertext>Date</headertext>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>dailylmemetalrate_open</name>
+      <headertext>Open</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>dailylmemetalrate_high</name>
+      <headertext>High</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>dailylmemetalrate_low</name>
+      <headertext>Low</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>dailylmemetalrate_close</name>
+      <headertext>Close</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>dailylmemetalrate_dailylmemetalrateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_dailylmemetalrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=dailylmemetalrate_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+    ('$dailylmemetalrate_metalid$' = '0' OR dailylmemetalrate_metalid = '$dailylmemetalrate_metalid$') AND
+    dailylmemetalrate_date BETWEEN '$dailylmemetalrate_date_from$' AND '$dailylmemetalrate_date_to$'
+  </where>
+  <searchbylabels>Metal</searchbylabels>
+  <searchbycolumns>metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

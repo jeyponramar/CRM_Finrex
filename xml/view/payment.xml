@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Payment</title>
+  <module>payment</module>
+  <table>tbl_payment</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>payment_paymentid DESC</defaultsort>
+  <columns>payment_billno,payment_paymentdate,payment_paymentfor,employee_employeename,paymentmode_paymentmode,payment_discount,payment_amountpaid,payment_totalamount,payment_chequeno,payment_bankname,payment_bankbranch,payment_comment,payment_purchaseorderid,payment_expensesid,payment_balanceamount</columns>
+  <columnlabels>Bill No,Payment Date,Payment For,Employee Name,Payment Mode,Discount,Amount Paid,Total Amount,Cheque No,Bank Name,Bank Branch,Comment,Purchase Order Id,Expenses Id,Balance Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true">
+      <name>payment_billno</name>
+      <headertext>Bill No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>payment_paymentdate</name>
+      <headertext>Payment Date</headertext>
+      <row>1</row>
+      <width>50%</width>
+      <format>Date</format>
+    </column>
+    <column ismobile="true">
+      <name>payment_paymentfor</name>
+      <headertext>Payment For</headertext>
+      <row>1</row>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>paymentmode_paymentmode</name>
+      <headertext>Payment Mode</headertext>
+      <row>1</row>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>payment_discount</name>
+      <headertext>Discount</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>payment_amountpaid</name>
+      <headertext>Amount Paid</headertext>
+      <row>1</row>
+      <width>14%</width>
+      <format>Amount</format>
+    </column>
+    <column ismobile="true">
+      <name>payment_totalamount</name>
+      <headertext>Total Amount</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>payment_chequeno</name>
+      <headertext>Cheque No</headertext>
+      <row>1</row>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>payment_bankname</name>
+      <headertext>Bank Name</headertext>
+      <row>1</row>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>payment_bankbranch</name>
+      <headertext>Bank Branch</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>employee_employeename</name>
+      <headertext>Employee Name</headertext>
+      <row>1</row>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>payment_paymentid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_payment LEFT JOIN tbl_employee ON employee_employeeid=payment_employeeid JOIN tbl_paymentmode ON paymentmode_paymentmodeid=payment_paymentmodeid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Bill No,Employee Name,Payment Mode,Cheque No,Bank Name,Bank Branch</searchbylabels>
+  <searchbycolumns>payment_billno,employee_employeename,paymentmode_paymentmode,payment_chequeno,payment_bankname,payment_bankbranch</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <ismobile>True</ismobile>
+  <applyviewrights>False</applyviewrights>
+</setting>

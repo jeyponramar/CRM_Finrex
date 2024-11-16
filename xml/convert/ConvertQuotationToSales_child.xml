@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting name='ConvertQuotationToSales_child'>
+		<fromtable>tbl_quotationdetails</fromtable>
+		<totable>tbl_salesdetail</totable>
+		<frommoduleid>45</frommoduleid>
+		<tomoduleid>64</tomoduleid>
+		<mapping><name>salesdetail_productid</name><value>quotationdetails_productid</value></mapping>
+    <mapping>
+      <name>salesdetail_productmodelid</name>
+      <value>quotationdetails_productmodelid</value>
+    </mapping>
+		<mapping><name>salesdetail_quantity</name><value>quotationdetails_quantity</value></mapping>
+		<mapping><name>salesdetail_amount</name><value>quotationdetails_amount</value></mapping>
+		<mapping><name>salesdetail_istax</name><value>quotationdetails_istax</value></mapping>
+		<mapping><name>salesdetail_rate</name><value>quotationdetails_rate</value></mapping>
+		<mapping><name>salesdetail_serialno</name><value></value></mapping>
+	</setting>

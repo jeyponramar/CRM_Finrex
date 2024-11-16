@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Customercurrency</title>
+		<module>customercurrency</module>
+		<table>tbl_customercurrency</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>customercurrency_customercurrencyid desc</defaultsort>
+		<columns>client_clientname,exposurecurrencymaster_currency</columns>
+		<columnlabels>Customer,Currency</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>client_clientname</name><headertext>Customer</headertext><width>50%</width><format></format></column><column><name>exposurecurrencymaster_currency</name><headertext>Currency</headertext><width>50%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>customercurrency_customercurrencyid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_customercurrency
+
+ LEFT JOIN tbl_client ON client_clientid=customercurrency_clientid
+ LEFT JOIN tbl_exposurecurrencymaster ON exposurecurrencymaster_exposurecurrencymasterid=customercurrency_exposurecurrencymasterid
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels></searchbylabels>
+		<searchbycolumns></searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

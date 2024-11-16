@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Finstationnotificationtype</title>
+		<module>finstationnotificationtype</module>
+		<table>tbl_finstationnotificationtype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>finstationnotificationtype_finstationnotificationtypeid desc</defaultsort>
+		<columns>finstationnotificationtype_type</columns>
+		<columnlabels>Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>finstationnotificationtype_type</name><headertext>Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>finstationnotificationtype_finstationnotificationtypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_finstationnotificationtype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Type</searchbylabels>
+		<searchbycolumns>finstationnotificationtype_type</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

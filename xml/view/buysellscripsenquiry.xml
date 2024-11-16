@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Buysellscripsenquiry</title>
+  <module>buysellscripsenquiry</module>
+  <table>tbl_buysellscripsenquiry</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>buysellscripsenquiry_buysellscripsenquiryid desc</defaultsort>
+  <columns>client_customername,buysellscripsenquiry_personname,buysellscripsenquiry_emailid,buysellscripsenquiry_mobileno,buysellscripsenquiry_ieccode,buysellscripsenquiry_city,buysellscripsenquiry_isexporter,buysellscripsenquiry_isbuy,buysellscripttype_scriptname,buysellscripsenquiry_scriptamount,buysellscripsenquiry_scriptnumber,buysellscripsenquiry_scriptdate,buysellscripsenquiry_portcode,clientuser_name</columns>
+  <columnlabels>Company Name,Person Name,Email Id,Mobile No,IEC Code,City,Is Exporter,Is Buy,Script Type,Script  Amount,Script Number,Script Date,Port Code,User</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>buysellscripsenquiry_personname</name>
+      <headertext>Person Name</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buysellscripsenquiry_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buysellscripsenquiry_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buysellscripsenquiry_city</name>
+      <headertext>City</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>buysellscripsenquiry_scriptamount</name>
+      <headertext>Script  Amount</headertext>
+      <width>16%</width>
+      <format>Amount</format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Company Name</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>buysellscripsenquiry_buysellscripsenquiryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_buysellscripsenquiry
+
+ LEFT JOIN tbl_client ON client_clientid=buysellscripsenquiry_clientid
+ LEFT JOIN tbl_buysellscripttype ON buysellscripttype_buysellscripttypeid=buysellscripsenquiry_buysellscripttypeid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=buysellscripsenquiry_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Company Name,Person Name,Mobile No,IEC Code,City,Script Type</searchbylabels>
+  <searchbycolumns>client_customername,buysellscripsenquiry_personname,buysellscripsenquiry_mobileno,buysellscripsenquiry_ieccode,buysellscripsenquiry_city,buysellscripttype_scriptname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

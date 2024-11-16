@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Topicsubmenu</title>
+  <module>topicsubmenu</module>
+  <table>tbl_topicsubmenu</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>topicsubmenu_topicsubmenuid desc</defaultsort>
+  <columns>topicmenu_menu,topicsubmenu_submenu</columns>
+  <columnlabels>Menu,Sub Menu</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>topicsubmenu_submenu</name>
+      <headertext>Sub Menu</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>topicmenu_menu</name>
+      <headertext>Menu</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>topicsubmenu_topicsubmenuid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_topicsubmenu
+
+ LEFT JOIN tbl_topicmenu ON topicmenu_topicmenuid=topicsubmenu_topicmenuid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Menu,Sub Menu</searchbylabels>
+  <searchbycolumns>topicmenu_menu,topicsubmenu_submenu</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

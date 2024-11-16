@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View User</title>
+  <module>user</module>
+  <table>tbl_user</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>user_userid DESC</defaultsort>
+  <columns>user_username,user_emailid,user_mobileno,user_password,user_fullname,role_rolename,user_isuseridassigned,employee_employeename,agent_agentname,user_photo</columns>
+  <columnlabels>User Name,Email Id,Mobile No,Password,Full Name,Role,Is User Id Assigned,Employee Name,Agent,Photo</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>user_photo</name>
+      <headertext>Photo</headertext>
+      <row>1</row>
+      <width>26%</width>
+      <format imgpath="upload/user">Image</format>
+    </column>
+    <column ismobile="true" class="bold">
+      <name>user_username</name>
+      <headertext>User Name</headertext>
+      <row>1</row>
+      <width>24%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>user_fullname</name>
+      <headertext>Full Name</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>role_rolename</name>
+      <headertext>Role</headertext>
+      <row>1</row>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column ismobile="true">
+      <name>employee_employeename</name>
+      <headertext>Employee Name</headertext>
+      <row>1</row>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>user_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>agent_agentname</name>
+      <headertext>Agent</headertext>
+      <width>14%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>user_userid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_user
+
+ LEFT JOIN tbl_role ON role_roleid=user_roleid
+ LEFT JOIN tbl_employee ON employee_employeeid=user_employeeid
+ LEFT JOIN tbl_agent ON agent_agentid=user_agentid
+ $Search$
+</query>
+  <searchbylabels>Email Id,Full Name,Role,Employee Name</searchbylabels>
+  <searchbycolumns>user_emailid,user_fullname,role_rolename,employee_employeename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <ismobile>True</ismobile>
+  <applyviewrights>False</applyviewrights>
+</setting>

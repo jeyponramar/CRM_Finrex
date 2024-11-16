@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Subscription</title>
+  <module>subscription</module>
+  <table>tbl_subscription</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>subscription_subscriptionid DESC</defaultsort>
+  <columns>subscription_subscriptioncode,client_customername,subscription_startdate,subscription_enddate,subscription_whatsappenddate,subscription_totalexeusers,subscription_showterms,subscription_remarks,subscription_isdecline,subscription_attachment,subscriptionstatus_status,subscription_opportunityid,subscription_password,subscription_isrenew,subscription_parentcode,subscription_subscriptionparentid,subscription_lastcalllogsent,subscription_isfirstlogin,trial_trialcode,enquiry_enquiryno,employee_employeename,subscription_trialemailsentstatusid,client_contactperson,client_mobileno,client_emailid</columns>
+  <columnlabels>Subscription Code,Customer Name,Start Date,Software End Date,Whatsapp End Date,Total Exe Users,Show Terms,Remarks,Is Decline,Attachment,Subscription Status,Opportunity Id,password,Is Renew,Parent Code,Subscription Parent Id,Last Call Log Sent,Is First Login,Trial Code,Enquiry No,Assign To,Trial Email Sent Status Id,Contact Person,Mobile No,Email Id</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column ismobile="true" colspan="2" class="bold">
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_subscriptioncode</name>
+      <headertext>Code</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_startdate</name>
+      <headertext>Start Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>subscription_enddate</name>
+      <headertext>Software End Date</headertext>
+      <width>9%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Assign To</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscriptionstatus_status</name>
+      <headertext>Subscription Status</headertext>
+      <width>9%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>subscription_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>8%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_contactperson</name>
+      <headertext>Contact Person</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_mobileno</name>
+      <headertext>Mobile No</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_emailid</name>
+      <headertext>Email Id</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>subscription_subscriptionid</hiddencolumns>
+  <query>
+    select $COLUMNS$ from tbl_subscription
+
+    LEFT JOIN tbl_client ON client_clientid=subscription_clientid
+    LEFT JOIN tbl_subscriptionstatus ON subscriptionstatus_subscriptionstatusid=subscription_subscriptionstatusid
+    LEFT JOIN tbl_trial ON trial_trialid=subscription_trialid
+    LEFT JOIN tbl_enquiry ON enquiry_enquiryid=subscription_enquiryid
+    LEFT JOIN tbl_employee ON employee_employeeid=subscription_employeeid
+    $Search$
+  </query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Customer Name,Subscription Status,Assign To</searchbylabels>
+  <searchbycolumns>client_customername,subscriptionstatus_status,employee_employeename</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>True</applyviewrights>
+</setting>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Bankauditbank</title>
+		<module>bankauditbank</module>
+		<table>tbl_bankauditbank</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>bankauditbank_bankauditbankid desc</defaultsort>
+		<columns>bankauditbank_bankname</columns>
+		<columnlabels>Bank Name</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>bankauditbank_bankname</name><headertext>Bank Name</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>bankauditbank_bankauditbankid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_bankauditbank
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>Bank Name</searchbylabels>
+		<searchbycolumns>bankauditbank_bankname</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>

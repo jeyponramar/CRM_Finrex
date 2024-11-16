@@ -1,0 +1,13 @@
+﻿<%@ Page Title="View Module" Language="C#" MasterPageFile="~/CP/ConfigureMaster.master" AutoEventWireup="true" CodeFile="viewmodule.aspx.cs" Inherits="viewmodule" %>
+<%@ Register Src="~/GridData.ascx" TagName="GridData" TagPrefix="uc" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table width="100%">
+    <tr><td class="page-title"><asp:Label id="lblTitle" runat="server"></asp:Label></td></tr>
+    <tr><td>
+        <uc:GridData ID="gridData" runat="server"  Module="module" EnablePaging="true" EnableSorting="true"/>
+    </td></tr>
+</table>
+</asp:Content>
+

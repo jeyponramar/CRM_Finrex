@@ -1,0 +1,1854 @@
+﻿<%@ WebHandler Language="C#" Class="bagridexportexposure" %>
+
+using System;
+using System.Web;
+using WebComponent;
+using System.Data;
+using System.Collections;
+
+public class bagridexportexposure : IHttpHandler, System.Web.SessionState.IRequiresSessionState
+{
+    DataRow _drPrev = null;
+    DataRow _drNew = null;
+    string m = "";
+    public void ProcessRequest (HttpContext context) {
+        context.Response.ContentType = "text/plain";
+        //try
+        {
+            string query = "";
+            if (CustomSession.Session("Login_ClientId") == null)
+            {
+                context.Response.Write("Session Expired");
+                return;
+            }
+            int clientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
+            string m = Common.GetQueryString("m");
+            if (context.Request.QueryString["a"] == "d")
+            {
+                DeleteData(m, clientId);
+                return;
+            }
+            else if (context.Request.QueryString["a"] == "sum")
+            {
+                ExportExposurePortal objPortal = new ExportExposurePortal(clientId);
+                context.Response.Write(objPortal.GetSummaryData(m, Common.GetQueryString("ew")));
+                return;
+            }
+            else if (context.Request.QueryString["a"] == "pop")
+            {
+                Populate(m, clientId);
+                return;
+            }
+            int id = GlobalUtilities.ConvertToInt(context.Request.Form["txtba_hdnid"]);
+            if (!IsValid(m, id, clientId)) return;
+            if (id == 0)
+            {
+                _drPrev = null;
+            }
+            else
+            {
+                query = "select * from tbl_" + m + " where " + m + "_" + m + "id=" + id;
+                _drPrev = DbTable.ExecuteSelectRow(query);
+            }
+            Hashtable hstbl = new Hashtable();
+            AddCalculatedColumns(hstbl, clientId);
+            
+            for (int i = 0; i < context.Request.Form.Keys.Count; i++)
+            {
+                string key = context.Request.Form.Keys[i];
+                if (key.StartsWith("txtba_") && key != "txtba_hdnid")
+                {
+                    string columnName = key.Replace("txtba_", "");
+                    string val = global.CheckInputData(context.Request.Form[key]);
+                    if (columnName.EndsWith("-dbl"))
+                    {
+                        columnName = columnName.Replace("-dbl", "");
+                        val = GlobalUtilities.ConvertToDouble(val).ToString();
+                    }
+                    else if (columnName.EndsWith("-i"))
+                    {
+                        columnName = columnName.Replace("-i", "");
+                        val = GlobalUtilities.ConvertToInt(val).ToString();
+                    }
+                    else if (columnName.EndsWith("-dt"))
+                    {
+                        columnName = columnName.Replace("-dt", "");
+                        //if (val != "")
+                        //{
+                        //    val = GlobalUtilities.ConvertMMDateToDD(val);
+                        //}
+                    }
+                    if (!hstbl.Contains(columnName))
+                    {
+                        hstbl.Add(columnName, val);
+                    }
+                }
+            }
+            hstbl.Add("clientid", clientId);
+            InsertUpdate obj = new InsertUpdate();
+            int newid = 0;
+            if (id == 0)
+            {
+                newid = obj.InsertData(hstbl, "tbl_" + m);
+            }
+            else
+            {
+                newid = obj.UpdateData(hstbl, "tbl_" + m, id);
+            }
+            //
+            if (newid > 0)
+            {
+                m = Common.GetQueryString("m");
+                DataRow dr = GetDataRow(m, newid);
+                _drNew = dr;
+                
+                string orderNo = HttpContext.Current.Request.Form["txtba_exportorderno"];
+                int parentId = Common.GetQueryStringValue("pid");
+                string parentModule = Common.GetQueryString("pm");
+                int orderId = 0;
+                if (m == "femorderdetail")
+                {
+                    orderId = Common.GetQueryStringValue("pid");
+                }
+                if (orderId > 0)
+                {
+                    orderNo = GetOrderNo(orderId);
+                }
+                CalculateAfterSave(clientId, m, newid);
+                if (!m.StartsWith("fim"))
+                {
+                    UpdateExportOrder(orderNo);
+                }
+                
+                ExportExposurePortal objPortal = new ExportExposurePortal(clientId);
+                //dr.Table.Columns.Add("SummaryDetail");
+                //dr["SummaryDetail"] = objPortal.GetSummaryData(Common.GetQueryString("m"));
+                if (parentId > 0)
+                {
+                    _drNew = GetDataRow(parentModule, parentId);
+                    CalculateAfterSave(clientId, parentModule, parentId);
+                    dr = GetDataRow(m, newid);
+                    dr.Table.Columns.Add("ParentDetail");
+                    //dr.Table.Columns.Add("ParentSummaryDetail");
+                    DataRow drParentDetail = GetDataRow(parentModule, parentId);
+                    string orderDetailJSON = JSON.ConvertAmountComma(drParentDetail, "", true);
+                    dr["ParentDetail"] = orderDetailJSON;
+                    //dr["ParentSummaryDetail"] = objPortal.GetSummaryData(Common.GetQueryString("pm"));
+                }
+                else
+                {
+                    dr = GetDataRow(m, newid);
+                }
+                string data = JSON.ConvertAmountComma(dr, "", true);
+                context.Response.Write(data);
+            }
+            else
+            {
+                context.Response.Write("Error");
+            }
+        }
+        //catch (Exception ex)
+        {
+            //context.Response.Write("Error : " + ex.Message);
+        }
+    }
+    private int ClientId
+    {
+        get
+        {
+            return GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId")); 
+        }
+    }
+    private void Populate(string m, int clientId)
+    {
+        int id = Common.GetQueryStringValue("id");
+        string popm = Common.GetQueryString("popm");
+        string query = "";
+        DataRow dr = null;
+        if (m == "fimtradecredit")
+        {
+            query = "select fimimportorder_tradecredit from tbl_fimimportorder where fimimportorder_fimimportorderid=" + id 
+                    + " and fimimportorder_clientid=" + clientId;
+        }
+        dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null)
+        {
+            HttpContext.Current.Response.Write("");
+            return;
+        }
+        string json = JSON.Convert(dr, "", true);
+        HttpContext.Current.Response.Write(json);
+    }
+    private string GetOrderNo(int orderId)
+    {
+        string orderNo = "";
+        if (orderId > 0)
+        {
+            string query = "select * from tbl_exportorder where exportorder_exportorderid=" + orderId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            orderNo = GlobalUtilities.ConvertToString(drorder["exportorder_exportorderno"]);
+        }
+        return orderNo;
+    }
+    private DataRow GetDataRow(string m, int id)
+    {
+        string query = "select " + m + "_" + m + "id as id,* from tbl_" + m + " where " + m + "_" + m + "id=" + id;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        for (int i = 0; i < dr.Table.Columns.Count; i++)
+        {
+            if (dr.Table.Columns[i].DataType == typeof(System.Decimal))
+            {
+                string val = GlobalUtilities.ConvertToString(dr[i]);
+                if (val == "")
+                {
+                    dr[i] = "0.00";
+                }
+                else
+                {
+                    dr[i] = Common.FormatAmountComma(val);
+                }
+            }
+        }
+        return dr;
+    }
+    private void DeleteData(string m, int clientId)
+    {
+        try
+        {
+            string query = "";
+            int id = Common.GetQueryStringValue("id");
+            query = "select * from tbl_" + m + " where " + m + "_" + m + "id=" + id;
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr == null) return;
+
+            query = "delete from tbl_" + m + " where " + m + "_" + m + "id=" + id + " AND " + m + "_clientid=" + clientId;
+            DbTable.ExecuteQuery(query);
+            int parentId = Common.GetQueryStringValue("pid");
+
+            string parentModule = Common.GetQueryString("pm");
+            if (parentModule == "")
+            {
+                HttpContext.Current.Response.Write("Ok");
+                return;
+            }
+            if (m == "exportorder")
+            {
+            }
+            else
+            {
+                CalculateAfterSave(clientId, m, 0);
+                string orderNo = "";
+                if (m == "femorderdetail")
+                {
+                    orderNo = GetOrderNo(parentId);
+                    UpdateExportOrder(orderNo);
+                }
+            }
+            
+            if (parentModule != "")
+            {
+                //update the parent window detail
+                CalculateAfterSave(clientId, parentModule, parentId);
+                
+                DataRow drParentDetail = GetDataRow(Common.GetQueryString("pm"), Common.GetQueryStringValue("pid"));
+                string orderDetailJSON = JSON.ConvertAmountComma(drParentDetail, "", true);
+                HttpContext.Current.Response.Write(orderDetailJSON);
+            }
+            else
+            {
+                HttpContext.Current.Response.Write("Ok");
+            }
+        }
+        catch (Exception ex)
+        {
+            HttpContext.Current.Response.Write("Error");
+        }
+    }
+    private bool IsValid(string m, int id, int clientId)
+    {
+        string query = "";
+        int pid = Common.GetQueryStringValue("pid");
+        if (m == "exportorder")
+        {
+            string orderNo = HttpContext.Current.Request.Form["txtba_exportorderno"];
+            query = "select * from tbl_exportorder WHERE exportorder_exportorderno='" + orderNo + "' AND exportorder_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " AND exportorder_exportorderid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr != null)
+            {
+                HttpContext.Current.Response.Write("Error : Order number already exists!");
+                return false;
+            }
+        }
+        else if (m == "forwardcontract")
+        {
+            string bookingNo = HttpContext.Current.Request.Form["txtba_bookingno"].Trim();
+            if (bookingNo == "") return true;
+            query = "select * from tbl_forwardcontract WHERE forwardcontract_bookingno='" + bookingNo + "' AND forwardcontract_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " AND forwardcontract_forwardcontractid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr != null)
+            {
+                HttpContext.Current.Response.Write("Error : Booking number already exists!");
+                return false;
+            }
+        }
+        else if (m == "pcfc")
+        {
+            string pcfcNo = HttpContext.Current.Request.Form["txtba_pcfcno"].Trim();
+            if (pcfcNo == "")
+            {
+                //HttpContext.Current.Response.Write("Error : Booking number already exists!");
+                return true;
+            }
+            query = "select * from tbl_pcfc WHERE pcfc_pcfcno='" + pcfcNo + "' AND pcfc_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " AND pcfc_pcfcid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr != null)
+            {
+                HttpContext.Current.Response.Write("Error : PCFC number already exists!");
+                return false;
+            }
+        }
+        else if (m == "femepc")
+        {
+            string femepcNo = HttpContext.Current.Request.Form["txtba_epcno"].Trim();
+            if (femepcNo == "")
+            {
+                //HttpContext.Current.Response.Write("Error : Booking number already exists!");
+                return true;
+            }
+            query = "select * from tbl_femepc WHERE femepc_epcno='" + femepcNo + "' AND femepc_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " AND femepc_femepcid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr != null)
+            {
+                HttpContext.Current.Response.Write("Error : EPC number already exists!");
+                return false;
+            }
+        }
+        else if (m == "femorderdetail")
+        {
+            int orderId = Common.GetQueryStringValue("pid");
+            query = "select * from tbl_exportorder where exportorder_exportorderid=" + orderId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double exportOrderAmount = GlobalUtilities.ConvertToDouble(drorder["exportorder_exportorderamount"]);
+            query = "select sum(femorderdetail_amountreceived) as total from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId;
+            if (id > 0)
+            {
+                query += " and femorderdetail_femorderdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double dblAmountReceived = GlobalUtilities.ConvertToDouble(dr["total"]);
+            dblAmountReceived += GetFormData_dbl("txtba_amountreceived-dbl");
+            if (dblAmountReceived > exportOrderAmount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Received Amount can not exceed Export Order Amount!");
+                return false;
+            }
+        }
+        else if (m == "femfowardutilizationdetail")
+        {
+            int forwardcontractId = Common.GetQueryStringValue("pid");
+            query = "select * from tbl_forwardcontract where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double forwardBookingAmount = GlobalUtilities.ConvertToDouble(drorder["forwardcontract_sold"]);
+            query = "select sum(femfowardutilizationdetail_utilisationamount) as total from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId;
+            if (id > 0)
+            {
+                query += " and femfowardutilizationdetail_femfowardutilizationdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double dblUtilisationAmount = GlobalUtilities.ConvertToDouble(dr["total"]);
+            dblUtilisationAmount += GetFormData_dbl("txtba_utilisationamount-dbl");
+            if (dblUtilisationAmount > forwardBookingAmount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Utilisation Amount can not exceed Forward Booking Amount!");
+                return false;
+            }
+            query = @"select sum(femfowardcancellationdetail_cancellationamount) as total from tbl_femfowardcancellationdetail 
+                    where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId;
+            DataRow drCancellation = DbTable.ExecuteSelectRow(query);
+            double dblCancellationAmount = 0;
+            if (drCancellation != null) dblCancellationAmount = GlobalUtilities.ConvertToDouble(drCancellation["total"]);
+            double balance = forwardBookingAmount - dblUtilisationAmount - dblCancellationAmount;
+            if (balance < 0)
+            {
+                HttpContext.Current.Response.Write("Error : Forward  Balance Amount can not be negative!");
+                return false;
+            }
+        }
+        else if (m == "femfowardcancellationdetail")
+        {
+            int forwardcontractId = Common.GetQueryStringValue("pid");
+            query = "select * from tbl_forwardcontract where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double forwardBookingAmount = GlobalUtilities.ConvertToDouble(drorder["forwardcontract_sold"]);
+            query = "select sum(femfowardcancellationdetail_cancellationamount) as total from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId;
+            if (id > 0)
+            {
+                query += " and femfowardcancellationdetail_femfowardcancellationdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double dblcancellationAmount = GlobalUtilities.ConvertToDouble(dr["total"]);
+            dblcancellationAmount += GetFormData_dbl("txtba_cancellationamount-dbl");
+            if (dblcancellationAmount > forwardBookingAmount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Cancellation Amount can not exceed Forward Booking Amount!");
+                return false;
+            }
+            query = @"select sum(femfowardutilizationdetail_utilisationamount) as total from tbl_femfowardutilizationdetail
+                    where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId;
+            DataRow drUtilitzed = DbTable.ExecuteSelectRow(query);
+            double dblUtilisationAmount = 0;
+            if (drUtilitzed != null) dblUtilisationAmount = GlobalUtilities.ConvertToDouble(drUtilitzed["total"]);
+            double balance = forwardBookingAmount - dblUtilisationAmount - dblcancellationAmount;
+            if (balance < 0)
+            {
+                HttpContext.Current.Response.Write("Error : Forward  Balance Amount can not be negative!");
+                return false;
+            }
+        }
+        else if (m == "fempcfcdetail")
+        {
+            int pcfcId = Common.GetQueryStringValue("pid");
+            query = "select * from tbl_pcfc where pcfc_pcfcid=" + pcfcId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double forwardBookingAmount = GlobalUtilities.ConvertToDouble(drorder["pcfc_fcamount"]);
+            query = "select sum(fempcfcdetail_liquidationamount) as total from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId;
+            if (id > 0)
+            {
+                query += " and fempcfcdetail_fempcfcdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double dblcancellationAmount = GlobalUtilities.ConvertToDouble(dr["total"]);
+            dblcancellationAmount += GetFormData_dbl("txtba_liquidationamount-dbl");
+            if (dblcancellationAmount > forwardBookingAmount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Liquidation Amount can not exceed PCFC Amount!");
+                return false;
+            }
+        }
+        else if (m == "femepcdetail")
+        {
+            int epcId = Common.GetQueryStringValue("pid");
+            query = "select * from tbl_femepc where femepc_femepcid=" + epcId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double epcamountinrs = GlobalUtilities.ConvertToDouble(drorder["femepc_epcamountinrs"]);
+            query = "select sum(femepcdetail_liquidationamountinrs) as total from tbl_femepcdetail where femepcdetail_femepcid=" + epcId;
+            if (id > 0)
+            {
+                query += " and femepcdetail_femepcdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double dblRepayment = GlobalUtilities.ConvertToDouble(dr["total"]);
+            dblRepayment += GetFormData_dbl("txtba_liquidationamountinrs-dbl");
+            if (dblRepayment > epcamountinrs)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Liquidation Amount can not exceed EPC Amount!");
+                return false;
+            }
+        }
+        else if (m == "fimimportorder")
+        {
+            //importorderinvoiceno
+            string orderNo = global.CheckInputData(HttpContext.Current.Request.Form["txtba_importorderinvoiceno"]);
+            query = "select * from tbl_fimimportorder WHERE fimimportorder_importorderinvoiceno='" + orderNo + "' AND fimimportorder_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " AND fimimportorder_fimimportorderid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            if (dr != null)
+            {
+                HttpContext.Current.Response.Write("Error : Import Order/Invoice No. number already exists!");
+                return false;
+            }
+            if (id > 0)
+            {
+                query = "select * from tbl_fimimportorder WHERE fimimportorder_fimimportorderid=" + id;
+                DataRow drimportorder = DbTable.ExecuteSelectRow(query);
+                double importorderinvoicelcamount = GlobalUtilities.ConvertToDouble(drimportorder["fimimportorder_importorderinvoicelcamount"]);
+                double invoiceamountpaid = GlobalUtilities.ConvertToDouble(drimportorder["fimimportorder_invoiceamountpaid"]);
+                double advancepaid = GlobalUtilities.ConvertToDouble(drimportorder["fimimportorder_advancepaid"]);
+                double tradecredit = GetFormData_dbl("txtba_tradecredit-dbl");
+                double netimportorderamountpayable = importorderinvoicelcamount - invoiceamountpaid - advancepaid - tradecredit;
+                if (netimportorderamountpayable < 0)
+                {
+                    HttpContext.Current.Response.Write("Error : Net Import Order Amount Payable can not be negative!");
+                    return false;
+                }
+            }
+            
+        }
+        else if (m == "fimorderinvoice")
+        {
+            DataRow drorder = GetRow("fimimportorder", pid, clientId);
+            double fimimportorder_tradecredit = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_tradecredit"]);
+            double fimimportorder_importorderinvoicelcamount = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_importorderinvoicelcamount"]);
+            double fimimportorder_advancepaid = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_advancepaid"]);
+            query = @"select sum(isnull(fimorderinvoice_invoiceamount,0)) as total_invoiceamount,
+                    sum(isnull(fimorderinvoice_invoiceamountpaid,0)) as total_invoiceamountpaid
+                    from tbl_fimorderinvoice where fimorderinvoice_fimimportorderid=" + pid + " and fimorderinvoice_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " and fimorderinvoice_fimorderinvoiceid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double total_invoiceamount = GlobalUtilities.ConvertToDouble(dr["total_invoiceamount"]);
+            double total_invoiceamountpaid = GlobalUtilities.ConvertToDouble(dr["total_invoiceamountpaid"]);
+            double invoiceamount = GetFormData_dbl("txtba_invoiceamount-dbl");
+            double invoiceamountpaid = GetFormData_dbl("txtba_invoiceamountpaid-dbl");
+            double advancepaidadjustedagainstinv = GetFormData_dbl("txtba_advancepaidadjustedagainstinv-dbl");
+            total_invoiceamount += GetFormData_dbl("txtba_invoiceamount-dbl");
+            total_invoiceamountpaid += GetFormData_dbl("txtba_invoiceamountpaid-dbl");
+
+            if (advancepaidadjustedagainstinv > invoiceamount)
+            {
+                HttpContext.Current.Response.Write("Error : Advance Paid Adjusted Against Inv. can not be more than Invoice Amount!");
+                return false;
+            }
+            
+            if (total_invoiceamount > fimimportorder_importorderinvoicelcamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Invoice Amount can not exceed Import Order/LC Amount!");
+                return false;
+            }
+            if (total_invoiceamountpaid > fimimportorder_importorderinvoicelcamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Invoice Amount Paid can not exceed Import Order/LC Amount!");
+                return false;
+            }
+            if (invoiceamount - advancepaidadjustedagainstinv - invoiceamountpaid < 0)
+            {
+                HttpContext.Current.Response.Write("Error : Invoice Amount Balance can not be negative!");
+                return false;
+            }
+            double fimimportorder_netimportorderamountpayable = total_invoiceamount - total_invoiceamountpaid
+                                        - fimimportorder_advancepaid - fimimportorder_tradecredit;
+            if (fimimportorder_netimportorderamountpayable < 0)
+            {
+                HttpContext.Current.Response.Write("Error : Net Import Order Amount Payable in Import Order can not be negative!");
+                    //"fimimportorder_importorderinvoicelcamount=" + fimimportorder_importorderinvoicelcamount+";"+
+                    //"total_invoiceamountpaid=" + total_invoiceamountpaid+";"+
+                    //"total_advancepaid=" + fimimportorder_advancepaid + ";" +
+                    //"fimimportorder_tradecredit=" + fimimportorder_tradecredit+";"+
+                    //"fimimportorder_netimportorderamountpayable=" + fimimportorder_netimportorderamountpayable+";"
+                    
+                    //);
+                return false;
+            }
+            
+        }
+        else if (m == "fimtradecreditdetail")
+        {
+            DataRow drtradecredit = GetRow("fimtradecredit", pid, clientId);
+            double fimtradecredit_totalpayableamount = GlobalUtilities.ConvertToDouble(drtradecredit["fimtradecredit_totalpayableamount"]);
+            query = @"select sum(isnull(fimtradecreditdetail_amountpaid,0)) as total_amountpaid from tbl_fimtradecreditdetail 
+                    where fimtradecreditdetail_fimtradecreditid=" + pid + " and fimtradecreditdetail_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " and fimtradecreditdetail_fimtradecreditdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double total_amountpaid = GlobalUtilities.ConvertToDouble(dr["total_amountpaid"]);
+            total_amountpaid += GetFormData_dbl("txtba_amountpaid-dbl");
+            if (total_amountpaid > fimtradecredit_totalpayableamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Amount Paid can not exceed Total Payable Amount!");
+                return false;
+            }
+        }
+        else if (m == "fimforwardcontract")
+        {
+            double utilisationamount = GetFormData_dbl("txtba_utilisationamount-dbl");
+            double forwardbookingamount = GetFormData_dbl("txtba_forwardbookingamount-dbl");
+            double cancellationamount = GetFormData_dbl("txtba_cancellationamount-dbl");
+            if (utilisationamount + cancellationamount > forwardbookingamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Utilisation Amount and Cancellation Amount can not exceed Forward Booking Amount!");
+                return false;
+            }
+        }
+        else if (m == "fimforwardutilitsationdetail")
+        {
+            query = "select sum(isnull(fimforwardutilitsationdetail_utilisationamount,0)) as total from tbl_fimforwardutilitsationdetail "+
+                    "where fimforwardutilitsationdetail_clientid=" + clientId + " and fimforwardutilitsationdetail_fimforwardcontractid=" + pid;
+            if (id > 0)
+            {
+                query += " and fimforwardutilitsationdetail_fimforwardutilitsationdetailid<>"+id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double utilisationamount = GlobalUtilities.ConvertToDouble(dr["total"]);
+            utilisationamount += GetFormData_dbl("txtba_utilisationamount-dbl");
+            query = "select * from tbl_fimforwardcontract where fimforwardcontract_clientid=" + clientId + " and fimforwardcontract_fimforwardcontractid=" + pid;
+            DataRow drforwardcontract = DbTable.ExecuteSelectRow(query);
+            double cancellationamount = GlobalUtilities.ConvertToDouble(drforwardcontract["fimforwardcontract_cancellationamount"]);
+            double forwardbookingamount = GlobalUtilities.ConvertToDouble(drforwardcontract["fimforwardcontract_forwardbookingamount"]);
+            if (utilisationamount + cancellationamount > forwardbookingamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Utilisation Amount and Cancellation Amount can not exceed Forward Booking Amount!");
+                return false;
+            }
+        }
+        else if (m == "fimforwardcancellationdetail")
+        {
+            query = "select sum(isnull(fimforwardcancellationdetail_cancellationamount,0)) as total from tbl_fimforwardcancellationdetail " +
+                    "where fimforwardcancellationdetail_clientid=" + clientId + " and fimforwardcancellationdetail_fimforwardcontractid=" + pid;
+            if (id > 0)
+            {
+                query += " and fimforwardcancellationdetail_fimforwardcancellationdetailid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double cancellationamount = GlobalUtilities.ConvertToDouble(dr["total"]);
+            cancellationamount += GetFormData_dbl("txtba_cancellationamount-dbl");
+            query = "select * from tbl_fimforwardcontract where fimforwardcontract_clientid=" + clientId + " and fimforwardcontract_fimforwardcontractid=" + pid;
+            DataRow drforwardcontract = DbTable.ExecuteSelectRow(query);
+            double utilisationamount = GlobalUtilities.ConvertToDouble(drforwardcontract["fimforwardcontract_utilisationamount"]);
+            double forwardbookingamount = GlobalUtilities.ConvertToDouble(drforwardcontract["fimforwardcontract_forwardbookingamount"]);
+            if (utilisationamount + cancellationamount > forwardbookingamount)
+            {
+                HttpContext.Current.Response.Write("Error : Sum of Utilisation Amount and Cancellation Amount can not exceed Forward Booking Amount!");
+                return false;
+            }
+        }
+        else if (m == "fimorderadvancepaid")
+        {
+            query = @"select sum(isnull(fimorderadvancepaid_advancepaid,0)) as total from tbl_fimorderadvancepaid 
+                      where fimorderadvancepaid_fimimportorderid=" + pid + " and fimorderadvancepaid_clientid=" + clientId;
+            if (id > 0)
+            {
+                query += " and fimorderadvancepaid_fimorderadvancepaidid<>" + id;
+            }
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            double advancePaid = GlobalUtilities.ConvertToDouble(dr["total"]);
+            advancePaid += GetFormData_dbl("txtba_advancepaid-dbl");
+            DataRow drorder = GetRow("fimimportorder", pid, clientId);
+            double importorderamount = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_importorderinvoicelcamount"]);
+            if (advancePaid > importorderamount)
+            {
+                HttpContext.Current.Response.Write("Error : Total Advance Amount can not exceed Import Order Amount!");
+                return false;
+            }
+            double fimimportorder_importorderinvoicelcamount = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_importorderinvoicelcamount"]);
+            double fimimportorder_invoiceamountpaid = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_invoiceamountpaid"]);
+            double fimimportorder_tradecredit = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_tradecredit"]);
+
+            double fimimportorder_netimportorderamountpayable = fimimportorder_importorderinvoicelcamount - fimimportorder_invoiceamountpaid
+                                        - advancePaid - fimimportorder_tradecredit;
+            if (fimimportorder_netimportorderamountpayable < 0)
+            {
+                HttpContext.Current.Response.Write("Error : Net Import Order Amount Payable in Import Order can not be negative!");
+                return false;
+            }
+        }
+        return true;
+        //end
+    }
+    private DataRow GetRow(string m, int id, int clientId)
+    {
+        string query = "select * from tbl_" + m + " where " + m + "_" + m + "id=" + id + " and "+m+"_clientid=" + clientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        return dr;
+    }
+    private void CalculateAfterSave(int clientId, string m, int id)
+    {
+        string query = "";
+        int pid = Common.GetQueryStringValue("pid");
+        if (m == "forwardcontract")
+        {
+            query = "update tbl_forwardcontract set forwardcontract_balancesold=isnull(forwardcontract_sold,0) - isnull(forwardcontract_utilised,0) - isnull(forwardcontract_cancellation,0)" +
+                    " where forwardcontract_forwardcontractid=" + id;
+            DbTable.ExecuteQuery(query);
+            query = "update tbl_forwardcontract set forwardcontract_soldamountinrs=isnull(forwardcontract_balancesold,0) * isnull(forwardcontract_rate,0)" +
+                    " where forwardcontract_forwardcontractid=" + id;
+            DbTable.ExecuteQuery(query);
+            
+            query = "select * from tbl_forwardcontract where forwardcontract_forwardcontractid=" + id;
+            DataRow dr = DbTable.ExecuteSelectRow(query);
+            DateTime todate = Convert.ToDateTime(dr["forwardcontract_to"]);
+            //get spot date
+            int currency = GlobalUtilities.ConvertToInt(dr["forwardcontract_exposurecurrencymasterid"]);
+            int liverateId = 0;
+            int spotrateLiveRateId = 0;
+            if (currency == 1)
+            {
+                liverateId = 194; spotrateLiveRateId = 1;
+            }
+            else if (currency == 2)
+            {
+                liverateId = 304; spotrateLiveRateId = 10;
+            }
+            else if (currency == 3)
+            {
+                liverateId = 409; spotrateLiveRateId = 19;
+            }
+            else if (currency == 4)
+            {
+                liverateId = 513; spotrateLiveRateId = 28;
+            }
+            query = "select * from tbl_liverate where liverate_liverateid=" + liverateId;
+            DataRow drliverate = DbTable.ExecuteSelectRow(query);
+            DateTime spotDate = todate;
+            if (drliverate != null)
+            {
+                spotDate = Convert.ToDateTime(drliverate["liverate_currentrate"]);
+            }
+            TimeSpan sp = spotDate - todate;
+            int daydiff = sp.Days;
+            double mtmrate = 0;
+            double spotrate = 0;
+            double PandLamount = 0;
+            //get spotrate
+            query = "select * from tbl_liverate where liverate_liverateid=" + spotrateLiveRateId;
+            DataRow drliverate_spotrate = DbTable.ExecuteSelectRow(query);
+            if (drliverate_spotrate != null)
+            {
+                spotrate = GlobalUtilities.ConvertToDouble(drliverate_spotrate["liverate_currentrate"]);
+            }
+            double dblPremium = FindPremiumRate(spotDate, todate, currency, true);
+            if (daydiff > 0)
+            {
+                mtmrate = (spotrate + dblPremium) / 100;
+            }
+            if (mtmrate > 0)
+            {
+                double balanceSold = GlobalUtilities.ConvertToDouble(dr["forwardcontract_balancesold"]);
+                double rate = GlobalUtilities.ConvertToDouble(dr["forwardcontract_rate"]);
+                PandLamount = balanceSold * (rate * mtmrate);
+            }
+            query = "update tbl_forwardcontract set forwardcontract_mtmrate=" + mtmrate + ",forwardcontract_profitandlossamount="+PandLamount+
+                    " where forwardcontract_forwardcontractid=" + id;
+            DbTable.ExecuteQuery(query);
+            
+        }
+        else if (m == "femorderdetail")
+        {
+            int orderId = Common.GetQueryStringValue("pid");
+            query = @"update tbl_exportorder set exportorder_amountreceived=(select sum(femorderdetail_amountreceived) 
+                            from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @"),
+                            
+                            exportorder_conversionrate=case when (select sum(femorderdetail_amountreceived) 
+                            from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @")> 0 then
+                            (
+                                (select SUM(femorderdetail_amountreceived*femorderdetail_conversionrate) from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @")/
+                                (select SUM(femorderdetail_amountreceived) from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @")                                
+                            )
+                            else 0 END,
+
+                            exportorder_profitlossfromcosting=(select sum(femorderdetail_profitlossfromcosting) 
+                            from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @"),
+                            
+                            exportorder_profitlossfromspotrateonremittancereceived=(select sum(femorderdetail_profitlossfromspotrate) 
+                            from tbl_femorderdetail where femorderdetail_exportorderid=" + orderId + @")                                                       
+                      where exportorder_exportorderid=" + orderId;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "femfowardutilizationdetail")
+        {
+            int forwardcontractId = Common.GetQueryStringValue("pid");
+            //query = "select * from tbl_forwardcontract where forwardcontract_forwardcontractid="+forwardcontractId;
+            //DataRow drforwardcontract = DbTable.ExecuteSelectRow(query);
+            //double forwardBookingRate = GlobalUtilities.ConvertToDouble(drforwardcontract["forwardcontract_rate"]);
+            query = @"update tbl_forwardcontract set 
+                            forwardcontract_utilised=(select SUM(femfowardutilizationdetail_utilisationamount) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @"),
+                            forwardcontract_spotrateonutilisationdate=case when (select sum(femfowardutilizationdetail_utilisationamount) 
+                            from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")> 0 then
+                            (
+                                (select SUM(femfowardutilizationdetail_utilisationamount*femfowardutilizationdetail_spotrateonutilisationdate) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")/
+                                (select SUM(femfowardutilizationdetail_utilisationamount) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")                                
+                            )
+                            else 0 END,
+                            forwardcontract_utilisationrate=case when (select sum(femfowardutilizationdetail_utilisationamount) 
+                            from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")> 0 then
+                            (
+                                (select SUM(femfowardutilizationdetail_utilisationamount*femfowardutilizationdetail_utilizationrate) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")/
+                                (select SUM(femfowardutilizationdetail_utilisationamount) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")                                
+                            )
+                            else 0 END,                            
+                            forwardcontract_profitandlossonutilisation=(select SUM(femfowardutilizationdetail_profitandlossonutilisation) from tbl_femfowardutilizationdetail where femfowardutilizationdetail_forwardcontractid=" + forwardcontractId + @")
+                            
+                      where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_forwardcontract set 
+                            forwardcontract_totalprofitandlossonforwardcontract=isnull(forwardcontract_profitandlossonutilisation,0)+isnull(forwardcontract_profitandlossoncancellation,0)
+                      where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "femfowardcancellationdetail") 
+        {
+            int forwardcontractId = Common.GetQueryStringValue("pid");
+            query = @"update tbl_forwardcontract set 
+                            forwardcontract_cancellation=(select SUM(femfowardcancellationdetail_cancellationamount) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @"),
+                            forwardcontract_spotrateoncancellationdate=case when (select sum(femfowardcancellationdetail_cancellationamount) 
+                            from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")> 0 then
+                            (
+                                (select SUM(femfowardcancellationdetail_cancellationamount*femfowardcancellationdetail_spotrateoncancellationdate) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")/
+                                (select SUM(femfowardcancellationdetail_cancellationamount) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")                                
+                            )
+                            else 0 END,
+                            forwardcontract_cancellationrate = case when (select sum(femfowardcancellationdetail_cancellationamount) 
+                            from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")> 0 then
+                            (
+                                (select SUM(femfowardcancellationdetail_cancellationamount*femfowardcancellationdetail_cancellationrate) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")/
+                                (select SUM(femfowardcancellationdetail_cancellationamount) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")                                
+                            )
+                            else 0 END,
+                            forwardcontract_profitandlossoncancellation=(select SUM(femfowardcancellationdetail_profitandlossoncancellation) from tbl_femfowardcancellationdetail where femfowardcancellationdetail_forwardcontractid=" + forwardcontractId + @")
+                      where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_forwardcontract set 
+                            forwardcontract_totalprofitandlossonforwardcontract=isnull(forwardcontract_profitandlossonutilisation,0)+isnull(forwardcontract_profitandlossoncancellation,0)
+                      where forwardcontract_forwardcontractid=" + forwardcontractId;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "fempcfcdetail")
+        {
+            int pcfcId = Common.GetQueryStringValue("pid");
+            query = @"update tbl_pcfc set 
+                        
+                        pcfc_repayment=(select sum(fempcfcdetail_liquidationamount) from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId + @"),
+                        pcfc_spotrateonrepayment=case when (select sum(fempcfcdetail_liquidationamount) 
+                            from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId + @")> 0 then
+                            (
+                                (select SUM(fempcfcdetail_liquidationamount*fempcfcdetail_spotrateonrepayment) from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId + @")/
+                                (select SUM(fempcfcdetail_liquidationamount) from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId + @")                                
+                            )
+                            else 0 END,
+                        pcfc_profitandlossonpcfc=(select sum(fempcfcdetail_profitandlossonpcfc) from tbl_fempcfcdetail where fempcfcdetail_pcfcid=" + pcfcId + @")
+                      where pcfc_pcfcid=" + pcfcId;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "femepcdetail")
+        {
+            int femepcId = Common.GetQueryStringValue("pid");
+            query = @"update tbl_femepc set femepc_repaymentinrs=(select sum(femepcdetail_liquidationamountinrs) from tbl_femepcdetail
+                                                    where femepcdetail_femepcid=" + femepcId + @")
+                      where femepc_femepcid=" + femepcId;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_femepc set femepc_epcbalanceamountinrs = isnull(femepc_epcamountinrs,0) - isnull(femepc_repaymentinrs,0)
+                      where femepc_femepcid=" + femepcId;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "pcfc")
+        {
+            query = "update tbl_pcfc set pcfc_fcamountbalance=isnull(pcfc_fcamount,0)-isnull(pcfc_repayment,0) where pcfc_pcfcid=" + id;
+            DbTable.ExecuteQuery(query);
+            //HttpContext.Current.Response.Write(query);
+//            query = @"update tbl_femepc set femepc_epcbalanceamountinrs = femepc_epcamountinrs - femepc_repaymentinrs
+//                      where femepc_femepcid=" + id;
+//            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "femepc")
+        {
+            query = "update tbl_femepc set femepc_epcbalanceamountinrs = isnull(femepc_epcamountinrs,0) - isnull(femepc_repaymentinrs,0) where femepc_femepcid=" + id;
+            DbTable.ExecuteQuery(query);
+        }
+        else if (m == "fimimportorder")
+        {
+            UpdatImportOrder(id, clientId);
+
+            if (Common.GetQueryString("m") == "fimimportorder")
+            {
+                double costing = GlobalUtilities.ConvertToInt(_drNew["fimimportorder_costing"]);
+                if (_drPrev != null && GlobalUtilities.ConvertToInt(_drPrev["fimimportorder_costing"]) != costing)
+                {
+                    query = @"select * from tbl_fimtradecredit
+                        where fimtradecredit_fimimportorderid=" + id + " and fimtradecredit_clientid=" + clientId;
+                    DataTable dttbltradecredit = DbTable.ExecuteSelect(query);
+                    for (int i = 0; i < dttbltradecredit.Rows.Count; i++)
+                    {
+                        int tradecreditid = GlobalUtilities.ConvertToInt(dttbltradecredit.Rows[i]["fimtradecredit_fimtradecreditid"]);
+                        query = @"update tbl_fimtradecreditdetail set 
+                                  fimtradecreditdetail_costingorder=" + costing + @"                    
+                                  where fimtradecreditdetail_fimtradecreditid in
+                                    (select fimtradecredit_fimtradecreditid from tbl_fimtradecredit where fimtradecredit_fimimportorderid=" + id + ")";
+                        DbTable.ExecuteQuery(query);
+                        UpdateTradeCreditDetail("fimtradecredit", tradecreditid, clientId);
+                        UpdatTradeCredit("fimtradecredit", tradecreditid, clientId);
+                    }
+                }
+            }
+        }
+        else if (m == "fimorderinvoice")
+        {
+            query = @"update tbl_fimorderinvoice set 
+                        fimorderinvoice_costing=(select fimimportorder_costing from tbl_fimimportorder where fimimportorder_fimimportorderid=" + pid + @")
+                        where fimorderinvoice_fimorderinvoiceid=" + id;
+            DbTable.ExecuteQuery(query);
+
+            query = @"update tbl_fimorderinvoice set 
+                        fimorderinvoice_profitlossfromcosting=case when isnull(fimorderinvoice_conversionrate,0)=0 then 0
+                                else (isnull(fimorderinvoice_costing,0)-isnull(fimorderinvoice_conversionrate,0))*isnull(fimorderinvoice_invoiceamountpaid,0) end,
+                        fimorderinvoice_profitlossfromspotrateonpaymentdate=case when isnull(fimorderinvoice_spotrateonpaymentdate,0)=0 then 0
+                                else (isnull(fimorderinvoice_spotrateonpaymentdate,0)-isnull(fimorderinvoice_conversionrate,0))*isnull(fimorderinvoice_invoiceamountpaid,0) end
+                        where fimorderinvoice_fimorderinvoiceid=" + id;
+            DbTable.ExecuteQuery(query);
+            UpdatImportOrder(pid, clientId);
+        }
+        else if (m == "fimorderadvancepaid")
+        {
+            query = @"select * from tbl_fimimportorder where fimimportorder_fimimportorderid=" + pid + " and fimimportorder_clientid=" + clientId;
+            DataRow drorder = DbTable.ExecuteSelectRow(query);
+            double costing = GlobalUtilities.ConvertToDouble(drorder["fimimportorder_costing"]);
+            query = @"update tbl_fimorderadvancepaid set 
+                    fimorderadvancepaid_profitlossfromcosting=case when isnull(fimorderadvancepaid_conversionrate,0)=0 then 0 else (" + costing + @"-isnull(fimorderadvancepaid_conversionrate,0))*isnull(fimorderadvancepaid_advancepaid,0)end,
+                    fimorderadvancepaid_profitlossfromspotrateonremittancereceived=case when isnull(fimorderadvancepaid_spotrateonremittancereceived,0)=0 then 0 else (isnull(fimorderadvancepaid_spotrateonremittancereceived,0)-isnull(fimorderadvancepaid_conversionrate,0))*isnull(fimorderadvancepaid_advancepaid,0) end            
+                    where fimorderadvancepaid_fimorderadvancepaidid=" + id + " and fimorderadvancepaid_clientid=" + clientId;
+            DbTable.ExecuteQuery(query);
+            UpdatImportOrder(pid, clientId);
+        }
+        else if (m == "fimtradecredit")
+        {
+            double tradecreditavailed = GlobalUtilities.ConvertToDouble(_drNew["fimtradecredit_spotontradecreditavailed"]);
+            query = @"update tbl_fimtradecreditdetail set 
+                     fimtradecreditdetail_spotontradecreditavailed=" + tradecreditavailed + @"         
+                     where fimtradecreditdetail_clientid=" + clientId + @" and fimtradecreditdetail_fimtradecreditid=" + id;
+            DbTable.ExecuteQuery(query);
+            UpdatTradeCredit(m, id, clientId);
+            UpdateTradeCreditDetail(m, pid, clientId);
+        }
+        else if (m == "fimtradecreditdetail")
+        {
+            query = @"update tbl_fimtradecreditdetail set 
+                      fimtradecreditdetail_costingorder=(select top 1 fimimportorder_costing from tbl_fimimportorder
+                                    join tbl_fimtradecredit on fimtradecredit_fimimportorderid=fimimportorder_fimimportorderid
+                                    where fimtradecredit_fimtradecreditid=" + pid + @" and fimtradecredit_clientid=" + clientId + @"                                                    
+                                    ),
+                      fimtradecreditdetail_spotontradecreditavailed=(select fimtradecredit_spotontradecreditavailed from tbl_fimtradecredit where fimtradecredit_fimtradecreditid=" + pid + @")                      
+                      where fimtradecreditdetail_clientid=" + clientId + @" and fimtradecreditdetail_fimtradecreditdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            UpdateTradeCreditDetail(m, id, clientId);
+            UpdatTradeCredit(m, pid, clientId);
+        }
+        else if (m == "fimforwardutilitsationdetail")
+        {
+            query = @"update tbl_fimforwardutilitsationdetail set
+                    fimforwardutilitsationdetail_forwardbookingrate=(select fimforwardcontract_forwardbookingrate from tbl_fimforwardcontract where fimforwardcontract_fimforwardcontractid=" + pid + @")
+                    where fimforwardutilitsationdetail_clientid=" + clientId + " and fimforwardutilitsationdetail_fimforwardutilitsationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_fimforwardutilitsationdetail set
+                    fimforwardutilitsationdetail_utilizationrate=isnull(fimforwardutilitsationdetail_forwardbookingrate,0)-isnull(fimforwardutilitsationdetail_premium,0)                    
+                    where fimforwardutilitsationdetail_clientid=" + clientId + " and fimforwardutilitsationdetail_fimforwardutilitsationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_fimforwardutilitsationdetail set
+                    fimforwardutilitsationdetail_profitandlossonutilisation=case when isnull(fimforwardutilitsationdetail_spotrateonutilisationdate,0)=0 then 0 
+                                    else (isnull(fimforwardutilitsationdetail_spotrateonutilisationdate,0)-isnull(fimforwardutilitsationdetail_utilizationrate,0))*fimforwardutilitsationdetail_utilisationamount end
+                    where fimforwardutilitsationdetail_clientid=" + clientId + " and fimforwardutilitsationdetail_fimforwardutilitsationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            UpdateForwardContract(pid, clientId);
+        }
+        else if (m == "fimforwardcancellationdetail")
+        {
+            query = @"update tbl_fimforwardcancellationdetail set
+                    fimforwardcancellationdetail_forwardbookingrate=(select fimforwardcontract_forwardbookingrate from tbl_fimforwardcontract where fimforwardcontract_fimforwardcontractid=" + pid + @")
+                    where fimforwardcancellationdetail_clientid=" + clientId + " and fimforwardcancellationdetail_fimforwardcancellationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_fimforwardcancellationdetail set
+                    fimforwardcancellationdetail_cancellationrate=isnull(fimforwardcancellationdetail_forwardbookingrate,0)-isnull(fimforwardcancellationdetail_premium,0)                    
+                    where fimforwardcancellationdetail_clientid=" + clientId + " and fimforwardcancellationdetail_fimforwardcancellationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            query = @"update tbl_fimforwardcancellationdetail set
+                    fimforwardcancellationdetail_profitandlossoncancellation=(isnull(fimforwardcancellationdetail_spotrateoncancellationdate,0)-isnull(fimforwardcancellationdetail_cancellationrate,0))*fimforwardcancellationdetail_cancellationamount
+                    where fimforwardcancellationdetail_clientid=" + clientId + " and fimforwardcancellationdetail_fimforwardcancellationdetailid=" + id;
+            DbTable.ExecuteQuery(query);
+            UpdateForwardContract(pid, clientId);
+        }
+        else if (m == "fimforwardcontract")
+        {
+            UpdateForwardContract(id, clientId);
+        }
+        
+        //end
+    }
+    private void UpdateTradeCreditDetail(string m, int id, int clientId)
+    {
+        string query = "";
+        string whereColumn = "fimtradecreditdetail_fimtradecreditdetailid";
+        if (m == "fimtradecredit") whereColumn = "fimtradecreditdetail_fimtradecreditid";
+        query = @"update tbl_fimtradecreditdetail set 
+                      fimtradecreditdetail_profitlossfromcosting=(isnull(fimtradecreditdetail_costingorder,0)-isnull(fimtradecreditdetail_conversionrate,0))*isnull(fimtradecreditdetail_amountpaid,0)
+                      where fimtradecreditdetail_clientid=" + clientId + @" and " + whereColumn + "=" + id;
+        DbTable.ExecuteQuery(query);
+        query = @"update tbl_fimtradecreditdetail set 
+                      fimtradecreditdetail_profitlossfromspotontradecredit=(isnull(fimtradecreditdetail_spotontradecreditavailed,0)-isnull(fimtradecreditdetail_conversionrate,0))*isnull(fimtradecreditdetail_amountpaid,0)
+                      where fimtradecreditdetail_clientid=" + clientId + @" and " + whereColumn + "=" + id;
+        DbTable.ExecuteQuery(query);
+    }
+    private void UpdateForwardContract(int id, int clientId)
+    {
+        string query = "";
+        query = @"select sum(isnull(fimforwardutilitsationdetail_utilisationamount,0)) as total_utilisationamount,
+                sum(isnull(fimforwardutilitsationdetail_utilizationrate,0)*fimforwardutilitsationdetail_utilisationamount) as total_utilisationrate,
+                sum(isnull(fimforwardutilitsationdetail_spotrateonutilisationdate,0)*fimforwardutilitsationdetail_utilisationamount) as total_spotrateonutilisationdate,
+                sum(isnull(fimforwardutilitsationdetail_profitandlossonutilisation,0)) as total_profitandlossonutilisation                
+                from tbl_fimforwardutilitsationdetail
+                where fimforwardutilitsationdetail_clientid=" + clientId + " and fimforwardutilitsationdetail_fimforwardcontractid=" + id;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        double total_utilisationamount = GlobalUtilities.ConvertToDouble(dr["total_utilisationamount"]);
+        double total_utilisationrate = GlobalUtilities.ConvertToDouble(dr["total_utilisationrate"]);
+        if (total_utilisationamount == 0)
+        {
+            total_utilisationrate = 0;
+        }
+        else
+        {
+            total_utilisationrate = total_utilisationrate / total_utilisationamount;
+        }
+        double total_spotrateonutilisationdate = GlobalUtilities.ConvertToDouble(dr["total_spotrateonutilisationdate"]);
+        if (total_utilisationamount == 0)
+        {
+            total_spotrateonutilisationdate = 0;
+        }
+        else
+        {
+            total_spotrateonutilisationdate = total_spotrateonutilisationdate / total_utilisationamount;
+        }
+        double total_profitandlossonutilisation = GlobalUtilities.ConvertToDouble(dr["total_profitandlossonutilisation"]);
+        query = @"select sum(isnull(fimforwardcancellationdetail_cancellationamount,0)) as total_cancellationamount,
+                sum(isnull(fimforwardcancellationdetail_cancellationrate,0)*fimforwardcancellationdetail_cancellationamount) as total_cancellationrate,
+                sum(isnull(fimforwardcancellationdetail_spotrateoncancellationdate,0)*fimforwardcancellationdetail_cancellationamount) as total_spotrateoncancellationdate,
+                sum(isnull(fimforwardcancellationdetail_profitandlossoncancellation,0)) as total_profitandlossoncancellation
+                from tbl_fimforwardcancellationdetail
+                where fimforwardcancellationdetail_clientid=" + clientId + " and fimforwardcancellationdetail_fimforwardcontractid=" + id;
+        dr = DbTable.ExecuteSelectRow(query);
+        double total_cancellationamount = GlobalUtilities.ConvertToDouble(dr["total_cancellationamount"]);
+        double total_cancellationrate = GlobalUtilities.ConvertToDouble(dr["total_cancellationrate"]);
+        if (total_cancellationamount == 0)
+        {
+            total_cancellationrate = 0;
+        }
+        else
+        {
+            total_cancellationrate = total_cancellationrate / total_cancellationamount;
+        }
+        double total_spotrateoncancellationdate = GlobalUtilities.ConvertToDouble(dr["total_spotrateoncancellationdate"]);
+        if (total_cancellationamount == 0)
+        {
+            total_spotrateoncancellationdate = 0;
+        }
+        else
+        {
+            total_spotrateoncancellationdate = total_spotrateoncancellationdate / total_cancellationamount;
+        }
+        double total_profitandlossoncancellation = GlobalUtilities.ConvertToDouble(dr["total_profitandlossoncancellation"]);
+        double total_totalprofitandlossonforwardcontract = total_profitandlossonutilisation + total_profitandlossoncancellation;
+        query = @"update tbl_fimforwardcontract set
+                fimforwardcontract_utilisationamount=" + total_utilisationamount + @",
+                fimforwardcontract_cancellationamount=" + total_cancellationamount + @",
+                fimforwardcontract_spotrateonutilisationdate=" + total_spotrateonutilisationdate + @",
+                fimforwardcontract_spotrateoncancellationdate="+total_spotrateoncancellationdate+ @",  
+                fimforwardcontract_utilisationrate="+total_utilisationrate+ @",  
+                fimforwardcontract_profitandlossonutilisation="+ total_profitandlossonutilisation+ @",
+                fimforwardcontract_cancellationrate="+total_cancellationrate+ @",
+                fimforwardcontract_profitandlossoncancellation="+total_profitandlossoncancellation+ @",
+                fimforwardcontract_totalprofitandlossonforwardcontract="+total_totalprofitandlossonforwardcontract+ @",
+                fimforwardcontract_forwardbalanceamount=isnull(fimforwardcontract_forwardbookingamount,0)-isnull(fimforwardcontract_utilisationamount,0)-isnull(fimforwardcontract_cancellationamount,0)              
+                where fimforwardcontract_fimforwardcontractid=" + id;
+        DbTable.ExecuteQuery(query);
+        query = "select * from tbl_fimforwardcontract where fimforwardcontract_fimforwardcontractid="+id+" and fimforwardcontract_clientid="+clientId;
+        DataRow drforwardcontract = DbTable.ExecuteSelectRow(query);
+        int fimimportorderid = GlobalUtilities.ConvertToInt(drforwardcontract["fimforwardcontract_fimimportorderid"]);
+        UpdatImportOrderForForwardContract(fimimportorderid, clientId);
+        string m = Common.GetQueryString("m");
+        if (m == "fimforwardcontract")
+        {
+            int fimimportorderid_prev = _drPrev == null ? 0 : GlobalUtilities.ConvertToInt(_drPrev["fimforwardcontract_fimimportorderid"]);
+            if (fimimportorderid_prev > 0 && fimimportorderid_prev != fimimportorderid)
+            {
+                UpdatImportOrderForForwardContract(fimimportorderid_prev, clientId);
+            }
+        }
+//        query = @"select sum(isnull(fimforwardcontract_forwardbalanceamount,0)) as total_forwardbalanceamount,
+//                sum(isnull(fimforwardcontract_forwardbalanceamount,0) * isnull(fimforwardcontract_forwardbookingrate,0)) as total_forwardbookingrate
+//                from tbl_fimforwardcontract
+//                where fimforwardcontract_clientid=" + clientId + " and fimforwardcontract_fimimportorderid=" + fimimportorderid;
+//        DataRow drfowardcontract = DbTable.ExecuteSelectRow(query);
+//        double total_forwardbalanceamount = GlobalUtilities.ConvertToDouble(drfowardcontract["total_forwardbalanceamount"]);
+//        double total_forwardbookingrate = GlobalUtilities.ConvertToDouble(drfowardcontract["total_forwardbookingrate"]);
+//        if (total_forwardbalanceamount == 0)
+//        {
+//            total_forwardbookingrate = 0; 
+//        }
+//        else
+//        {
+//            total_forwardbookingrate = total_forwardbookingrate / total_forwardbalanceamount;
+//        }
+//        query = @"update tbl_fimimportorder set
+//                fimimportorder_forwardbookingamount=" + total_forwardbalanceamount + @",
+//                fimimportorder_forwardbookingrate=" + total_forwardbookingrate + @"                                
+//                where fimimportorder_fimimportorderid=" + fimimportorderid;
+//        DbTable.ExecuteQuery(query);
+//        query = "select * from tbl_fimtradecredit where fimtradecredit_fimimportorderid=" + fimimportorderid + " and fimtradecredit_clientid=" + clientId;
+//        DataRow drtradecredit = DbTable.ExecuteSelectRow(query);
+//        if (drtradecredit != null)
+//        {
+//            query = @"update tbl_fimtradecredit set 
+//                    fimtradecredit_forwardbookingamount=" + total_forwardbalanceamount + @",
+//                    fimtradecredit_forwardbookingrate=" + total_forwardbookingrate + @",
+//                    fimtradecredit_unhedgedamount=isnull(fimtradecredit_outstandingtradecreditamount,0)-" + total_forwardbalanceamount + @"                                    
+//                    where fimtradecredit_fimimportorderid=" + fimimportorderid + " and fimtradecredit_clientid=" + clientId;
+//            DbTable.ExecuteQuery(query);      
+//        }
+    }
+    private void UpdatImportOrderForForwardContract(int fimimportorderid, int clientId)
+    {
+        string query = "";
+        query = @"select sum(isnull(fimforwardcontract_forwardbalanceamount,0)) as total_forwardbalanceamount,
+                sum(isnull(fimforwardcontract_forwardbalanceamount,0) * isnull(fimforwardcontract_forwardbookingrate,0)) as total_forwardbookingrate
+                from tbl_fimforwardcontract
+                where fimforwardcontract_clientid=" + clientId + " and fimforwardcontract_fimimportorderid=" + fimimportorderid;
+        DataRow drfowardcontract = DbTable.ExecuteSelectRow(query);
+        double total_forwardbalanceamount = GlobalUtilities.ConvertToDouble(drfowardcontract["total_forwardbalanceamount"]);
+        double total_forwardbookingrate = GlobalUtilities.ConvertToDouble(drfowardcontract["total_forwardbookingrate"]);
+        if (total_forwardbalanceamount == 0)
+        {
+            total_forwardbookingrate = 0;
+        }
+        else
+        {
+            total_forwardbookingrate = total_forwardbookingrate / total_forwardbalanceamount;
+        }
+        query = @"update tbl_fimimportorder set
+                fimimportorder_unhedgedamount=isnull(fimimportorder_netimportorderamountpayable,0)-" + total_forwardbalanceamount + @",        
+                fimimportorder_forwardbookingamount=" + total_forwardbalanceamount + @",
+                fimimportorder_forwardbookingrate=" + total_forwardbookingrate + @"                                
+                where fimimportorder_fimimportorderid=" + fimimportorderid;
+        DbTable.ExecuteQuery(query);
+        query = "select * from tbl_fimtradecredit where fimtradecredit_fimimportorderid=" + fimimportorderid + " and fimtradecredit_clientid=" + clientId;
+        DataRow drtradecredit = DbTable.ExecuteSelectRow(query);
+        if (drtradecredit != null)
+        {
+            query = @"update tbl_fimtradecredit set 
+                    fimtradecredit_forwardbookingamount=" + total_forwardbalanceamount + @",
+                    fimtradecredit_forwardbookingrate=" + total_forwardbookingrate + @",
+                    fimtradecredit_unhedgedamount=isnull(fimtradecredit_outstandingtradecreditamount,0)-" + total_forwardbalanceamount + @"                                    
+                    where fimtradecredit_fimimportorderid=" + fimimportorderid + " and fimtradecredit_clientid=" + clientId;
+            DbTable.ExecuteQuery(query);
+        }
+    }
+    private void UpdatImportOrder(int id, int clientId)
+    {
+        string query = "";
+        string m = Common.GetQueryString("m");
+        query = @"select sum(isnull(fimorderinvoice_invoiceamount,0)) as total_invoiceamount,
+                sum(isnull(fimorderinvoice_advancepaidadjustedagainstinv,0)) as total_advancepaidadjustedagainstinv,        
+                sum(isnull(fimorderinvoice_invoiceamountpaid,0)) as total_invoiceamountpaid, 
+                sum(isnull(fimorderinvoice_invoiceamountpaid,0) * isnull(fimorderinvoice_conversionrate,0)) as total_conversionrate, 
+                sum(isnull(fimorderinvoice_profitlossfromcosting,0)) as total_profitlossfromcosting,
+                sum(isnull(fimorderinvoice_profitlossfromspotrateonpaymentdate,0)) as total_profitlossfromspotrateonpaymentdate                                
+                from tbl_fimorderinvoice where fimorderinvoice_clientid=" + clientId + " and fimorderinvoice_fimimportorderid=" + id;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        query = @"select sum(isnull(fimorderadvancepaid_advancepaid,0)) as total_advancepaid from tbl_fimorderadvancepaid 
+                where fimorderadvancepaid_fimimportorderid=" + id + " and fimorderadvancepaid_clientid=" + clientId;
+        DataRow dradvancepaid = DbTable.ExecuteSelectRow(query);
+        double total_advancepaid = GlobalUtilities.ConvertToDouble(dradvancepaid["total_advancepaid"]);
+        double total_invoiceamount = GlobalUtilities.ConvertToDouble(dr["total_invoiceamount"]);
+        double total_invoiceamountpaid = GlobalUtilities.ConvertToDouble(dr["total_invoiceamountpaid"]);
+        double total_conversionrate = GlobalUtilities.ConvertToDouble(dr["total_conversionrate"]);
+        double total_profitlossfromcosting = GlobalUtilities.ConvertToDouble(dr["total_profitlossfromcosting"]);
+        double total_profitlossfromspotrateonpaymentdate = GlobalUtilities.ConvertToDouble(dr["total_profitlossfromspotrateonpaymentdate"]);
+        if (total_invoiceamountpaid == 0)
+        {
+            total_conversionrate = 0;
+        }
+        else
+        {
+            total_conversionrate = total_conversionrate / total_invoiceamountpaid;
+        }
+        query = @"update tbl_fimimportorder set
+                fimimportorder_netimportorderamountpayable=isnull(fimimportorder_importorderinvoicelcamount,0)-isnull(fimimportorder_invoiceamountpaid,0)-isnull(fimimportorder_advancepaid,0)-isnull(fimimportorder_tradecredit,0),
+                fimimportorder_advancepaid=" + total_advancepaid + @", 
+                fimimportorder_invoiceraisedamount=" + total_invoiceamount + @",                 
+                fimimportorder_invoiceamountpaid=" + total_invoiceamountpaid + @",
+                fimimportorder_conversionrate=" + total_conversionrate + @",
+                fimimportorder_profitlossfromcosting=" + total_profitlossfromcosting + @",
+                fimimportorder_profitlossfromspotrateonremittancereceived=" + total_profitlossfromspotrateonpaymentdate + @"                                                      
+                where fimimportorder_fimimportorderid=" + id;
+        DbTable.ExecuteQuery(query);
+        query = @"update tbl_fimimportorder set
+                fimimportorder_unhedgedamount=isnull(fimimportorder_netimportorderamountpayable,0)-isnull(fimimportorder_forwardbookingamount,0)
+                where fimimportorder_fimimportorderid=" + id;
+        DbTable.ExecuteQuery(query);
+        bool istradecreditchanged = true;
+        if (m == "fimimportorder" && _drPrev != null
+            && GlobalUtilities.ConvertToDouble(_drPrev["fimimportorder_tradecredit"]) == GlobalUtilities.ConvertToDouble(_drNew["fimimportorder_tradecredit"]))
+        {
+            istradecreditchanged = false;
+        }
+        if (istradecreditchanged)
+        {
+            query = "select * from tbl_fimtradecredit where fimtradecredit_fimimportorderid=" + id + " and fimtradecredit_clientid=" + clientId;
+            DataTable dttbltradecredit = DbTable.ExecuteSelect(query);
+            if(GlobalUtilities.IsValidaTable(dttbltradecredit))
+            {
+                for (int i = 0; i < dttbltradecredit.Rows.Count; i++)
+                {
+                    int fimtradecreditId = GlobalUtilities.ConvertToInt(dttbltradecredit.Rows[i]["fimtradecredit_fimtradecreditid"]);
+                    UpdatTradeCredit(m, fimtradecreditId, clientId);
+                }
+            }
+        }
+    }
+    private void UpdatTradeCredit(string m, int id, int clientId)
+    {
+        string query = "";
+        query = "select * from tbl_fimtradecredit where fimtradecredit_fimtradecreditid=" + id;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        int fimimportorderId = GlobalUtilities.ConvertToInt(dr["fimtradecredit_fimimportorderid"]);
+        query = "select * from tbl_fimimportorder where fimimportorder_fimimportorderid=" + fimimportorderId;
+        dr = DbTable.ExecuteSelectRow(query);
+        double fimimportorder_tradecredit = GlobalUtilities.ConvertToDouble(dr["fimimportorder_tradecredit"]);
+        query = @"select sum(isnull(fimtradecreditdetail_amountpaid,0)) as totalpaid,sum(isnull(fimtradecreditdetail_amountpaid,0)*isnull(fimtradecreditdetail_conversionrate,0)) as totalconversionrate
+                    from tbl_fimtradecreditdetail where fimtradecreditdetail_clientid=" + clientId + " and fimtradecreditdetail_fimtradecreditid=" + id;
+        dr = DbTable.ExecuteSelectRow(query);
+        double totalPaid = GlobalUtilities.ConvertToDouble(dr["totalpaid"]);
+        double totalConversionRate = GlobalUtilities.ConvertToDouble(dr["totalconversionrate"]);
+        double weigtageAvgRate = 0;
+        if (totalPaid > 0) weigtageAvgRate = totalConversionRate / totalPaid;
+        query = @"update tbl_fimtradecredit set 
+                        fimtradecredit_tradecreditamount="+fimimportorder_tradecredit+ @",
+                        fimtradecredit_totalpayableamount=" + fimimportorder_tradecredit + @"+isnull(fimtradecredit_totalinterestamount,0),
+                        fimtradecredit_tradecreditamountpaid=(select sum(isnull(fimtradecreditdetail_amountpaid,0)) from tbl_fimtradecreditdetail where fimtradecreditdetail_fimtradecreditid=" + id + @"),
+                        fimtradecredit_conversionrate=(select sum(isnull(fimtradecreditdetail_conversionrate,0)) from tbl_fimtradecreditdetail where fimtradecreditdetail_fimtradecreditid=" + id + @"),
+                        fimtradecredit_profitlossfromcosting=(select sum(isnull(fimtradecreditdetail_profitlossfromcosting,0)) from tbl_fimtradecreditdetail where fimtradecreditdetail_fimtradecreditid=" + id + @"),
+                        fimtradecredit_profitlossfromspotontradecredit=(select sum(isnull(fimtradecreditdetail_profitlossfromspotontradecredit,0)) from tbl_fimtradecreditdetail where fimtradecreditdetail_fimtradecreditid=" + id + @")                                                                       
+                        where fimtradecredit_clientid=" + clientId + " and fimtradecredit_fimtradecreditid=" + id;
+        DbTable.ExecuteQuery(query);
+        query = @"update tbl_fimtradecredit set 
+                        fimtradecredit_outstandingtradecreditamount=isnull(fimtradecredit_totalpayableamount,0)-isnull(fimtradecredit_tradecreditamountpaid,0),
+                        fimtradecredit_unhedgedamount=isnull(fimtradecredit_outstandingtradecreditamount,0)-isnull(fimtradecredit_forwardbookingamount,0),                        
+                        fimtradecredit_conversionrate=" + weigtageAvgRate + @"
+                        where fimtradecredit_clientid=" + clientId + " and fimtradecredit_fimtradecreditid=" + id;
+        DbTable.ExecuteQuery(query); 
+    }
+    private void UpdateExportOrder(string orderNo)
+    {
+        if (orderNo == "") return;
+        Hashtable hstbl = new Hashtable();
+        string query = "";
+        int clientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
+        query = "select * from tbl_exportorder where exportorder_exportorderno='" + orderNo + "' AND exportorder_clientid=" + clientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null) return;
+        
+        double netamount = 0;
+        int orderId = GlobalUtilities.ConvertToInt(dr["exportorder_exportorderid"]);
+        double amountReceived = GlobalUtilities.ConvertToDouble(dr["exportorder_amountreceived"]);
+        double exportOrderAmount = GlobalUtilities.ConvertToDouble(dr["exportorder_exportorderamount"]);
+        if (amountReceived <= exportOrderAmount)
+        {
+            netamount = exportOrderAmount - amountReceived;
+        }
+        hstbl.Add("netamount", netamount);
+
+        //value
+        double value = 0;
+        double costing = GlobalUtilities.ConvertToDouble(dr["exportorder_costing"]);
+        value = costing * netamount;
+        hstbl.Add("value", value);
+
+        //forwardbooking
+        //string orderNo = GlobalUtilities.ConvertToString(dr["exportorder_exportorderno"]);
+        double forwardBookingAmount = 0;
+        query = "select * from tbl_forwardcontract where forwardcontract_exportorderno='" + orderNo + "' AND forwardcontract_clientid=" + clientId;
+        DataTable dttblForward = DbTable.ExecuteSelect(query);
+        double sumSold = 0;
+        double sumMulSold = 0;
+        double forwardBookingRate = 0;
+        if (GlobalUtilities.IsValidaTable(dttblForward))
+        {
+            for (int i = 0; i < dttblForward.Rows.Count; i++)
+            {
+                double balanceSold = GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_balancesold"]);
+                forwardBookingAmount += balanceSold;
+                //double sold = GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_sold"]);
+                double rate = GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_rate"]);
+                sumMulSold += balanceSold * rate;
+                sumSold += balanceSold;
+            }
+            if (sumSold > 0)
+            {
+                forwardBookingRate = sumMulSold / sumSold;
+            }
+        }
+        hstbl.Add("forwardbookingamount", forwardBookingAmount);
+        hstbl.Add("forwardbookingrate", forwardBookingRate);
+        //pcfc
+        query = "select * from tbl_pcfc where pcfc_exportorderno='" + orderNo + "' AND pcfc_clientid=" + clientId;
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        double pcfcAmount = 0;
+        double sumMulSold_pcfc = 0;
+        double pcfcRate = 0;
+        //calculate on pcfc
+        if (GlobalUtilities.IsValidaTable(dttbl))
+        {
+            for (int i = 0; i < dttbl.Rows.Count; i++)
+            {
+                double fcamountbalance = GlobalUtilities.ConvertToDouble(dttbl.Rows[i]["pcfc_fcamountbalance"]);
+                pcfcAmount += fcamountbalance;
+                double rate = GlobalUtilities.ConvertToDouble(dttbl.Rows[i]["pcfc_spotrate"]);
+                sumMulSold_pcfc += fcamountbalance * rate;
+            }
+            if (pcfcAmount > 0)
+            {
+                pcfcRate = sumMulSold_pcfc / pcfcAmount;
+            }
+        }
+        hstbl.Add("pcfcamount", pcfcAmount);
+        hstbl.Add("pcfcrate", pcfcRate);
+
+        //unhedged amount
+        double unhedgedamount = 0;
+        unhedgedamount = netamount - forwardBookingAmount - pcfcAmount;
+        hstbl.Add("unhedgedamount", unhedgedamount);
+
+        //effective rate
+        double effectiveRate = 0;
+        double div = forwardBookingAmount + pcfcAmount;
+        if (div > 0)
+        {
+            effectiveRate = (forwardBookingAmount * forwardBookingRate + pcfcAmount * pcfcRate) / div;
+        }
+        hstbl.Add("effectiverate", effectiveRate);
+        InsertUpdate obj = new InsertUpdate();
+        int id = obj.UpdateData(hstbl, "tbl_exportorder", orderId);
+    }
+    private void AddCalculatedColumns(Hashtable hstbl, int clientId)
+    {
+        string m = Common.GetQueryString("m");
+        if (m == "pcfc")
+        {
+            //pfc due date
+            string pcfcdate = HttpContext.Current.Request.Form["txtba_pcfcdate-dt"];
+            int days = GlobalUtilities.ConvertToInt(HttpContext.Current.Request.Form["txtba_days-i"]);
+            if (pcfcdate.Trim() != "")
+            {
+                Array arr = pcfcdate.Split('-');
+                int day = Convert.ToInt32(arr.GetValue(0));
+                int month = Convert.ToInt32(arr.GetValue(1));
+                int year = Convert.ToInt32(arr.GetValue(2));
+                DateTime dtpcdueDate = new DateTime(year, month, day);
+                
+                dtpcdueDate = dtpcdueDate.AddDays(days);
+                day = dtpcdueDate.Day;
+                month = dtpcdueDate.Month;
+                year = dtpcdueDate.Year;
+                string strday = day.ToString();
+                string strmonth = month.ToString();
+                if (strday.Length == 1) strday = "0" + strday;
+                if (strmonth.Length == 1) strmonth = "0" + strmonth;
+                string duedate = strday + "-" + strmonth + "-" + year;
+                hstbl.Add("pcduedate", duedate);
+            }
+            //fc balance amount
+            double fcamount = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_fcamount-dbl"]);
+            double repayment = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_repayment-dbl"]);
+            double fcamountbal = fcamount - repayment;
+            hstbl.Add("fcamountbalance", fcamountbal);
+            
+            //product
+            double product = 0;
+            double spotrate = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_spotrate-dbl"]);
+            product = fcamountbal * spotrate;
+            hstbl.Add("product", product);
+            
+            //pcfc interest amount
+            double pcfcinterestamount = 0;
+            double interestrate = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_interestrate-dbl"]);
+            pcfcinterestamount = interestrate * fcamount * days / 360.0;
+            pcfcinterestamount = pcfcinterestamount / 100.0;
+            hstbl.Add("pcfcinterestamount", pcfcinterestamount);
+        }
+        else if (m == "forwardcontract")
+        {
+            /*
+            //balance sold
+            double balancesold = 0;
+            double sold = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_sold-dbl"]);
+            double utilised = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_utilised-dbl"]);
+            double cancellation = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_cancellation-dbl"]);
+            if (utilised <= sold)
+            {
+                balancesold = sold - utilised - cancellation;
+            }
+            hstbl.Add("balancesold", balancesold);
+            
+            //sold amount in rs
+            double soldAmountInRs = 0;
+            double rate = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_rate-dbl"]);
+            soldAmountInRs = rate * balancesold;
+            hstbl.Add("soldamountinrs", soldAmountInRs);
+            */
+            
+            //profit loss utilisation
+            //double spotRateUtilized = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_spotrateutilisedcancel-dbl"]);
+            //double PLUtilisation = utilised * (rate - spotRateUtilized);
+            //hstbl.Add("profitandlossonutilisation", PLUtilisation);//REMOVED WITH NEW CALC
+            
+            //profit loss on utilization cancel
+            //double cancelationAmount = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_cancellationamount-dbl"]);
+            //double spotRateCancel = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_spotratecancellation-dbl"]);
+            //double PLOnCancel = cancelationAmount * (rate - utilizedcancel);
+            //double PLOnCancel = cancellation * (rate - spotRateCancel);
+            //hstbl.Add("profitandlossoncancellation", PLOnCancel);//REMOVED WITH NEW CALC
+            
+        }
+        else if (m == "exportorder")
+        {
+            double netamount = 0;
+            double amountReceived = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_amountreceived-dbl"]);
+            double exportOrderAmount = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_exportorderamount-dbl"]);
+            if (amountReceived <= exportOrderAmount)
+            {
+                netamount = exportOrderAmount - amountReceived;
+            }
+            hstbl.Add("netamount", netamount);
+            
+            //value
+            double value = 0;
+            double costing = GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form["txtba_costing-dbl"]);
+            value = costing * netamount;
+            hstbl.Add("value", value);
+
+            //forwardbooking
+            string orderNo = HttpContext.Current.Request.Form["txtba_exportorderno"];
+            double forwardBookingAmount = 0;
+            string query = "select * from tbl_forwardcontract where forwardcontract_exportorderno='" + orderNo + "' AND forwardcontract_clientid="+clientId;
+            DataTable dttblForward = DbTable.ExecuteSelect(query);
+            double sumSold = 0;
+            double sumMulSold = 0;
+            double forwardBookingRate = 0;
+            if (GlobalUtilities.IsValidaTable(dttblForward))
+            {
+                for (int i = 0; i < dttblForward.Rows.Count; i++)
+                {
+                    forwardBookingAmount += GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_balancesold"]);
+                    double sold = GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_sold"]);
+                    double rate = GlobalUtilities.ConvertToDouble(dttblForward.Rows[i]["forwardcontract_rate"]);
+                    sumMulSold += sold * rate;
+                    sumSold += sold;
+                }
+                if (sumSold > 0)
+                {
+                    forwardBookingRate = sumMulSold / sumSold;
+                }
+            }
+            hstbl.Add("forwardbookingamount", forwardBookingAmount);
+            hstbl.Add("forwardbookingrate", forwardBookingRate);
+            //pcfc
+            query = "select * from tbl_pcfc where pcfc_exportorderno='" + orderNo + "' AND pcfc_clientid="+clientId;
+            DataTable dttbl = DbTable.ExecuteSelect(query);
+            double pcfcAmount = 0;
+            double sumMulSold_pcfc = 0;
+            double pcfcRate = 0;
+            //calculate on pcfc
+            if (GlobalUtilities.IsValidaTable(dttbl))
+            {
+                for (int i = 0; i < dttbl.Rows.Count; i++)
+                {
+                    double fcamountbalance = GlobalUtilities.ConvertToDouble(dttbl.Rows[i]["pcfc_fcamountbalance"]);
+                    pcfcAmount += fcamountbalance;
+                    double rate = GlobalUtilities.ConvertToDouble(dttbl.Rows[i]["pcfc_spotrate"]);
+                    sumMulSold_pcfc += fcamountbalance * rate;
+                }
+                if (pcfcAmount > 0)
+                {
+                    pcfcRate = sumMulSold_pcfc / pcfcAmount;
+                }
+            }
+            hstbl.Add("pcfcamount", pcfcAmount);
+            hstbl.Add("pcfcrate", pcfcRate);
+            
+            //unhedged amount
+            double unhedgedamount = 0;
+            unhedgedamount = netamount - forwardBookingAmount - pcfcAmount;
+            hstbl.Add("unhedgedamount", unhedgedamount);
+            
+            //effective rate
+            double effectiveRate = 0;
+            double div = forwardBookingAmount + pcfcAmount;
+            if (div > 0)
+            {
+                effectiveRate = (forwardBookingAmount * forwardBookingRate + pcfcAmount * pcfcRate)/div;
+            }
+            hstbl.Add("effectiverate", effectiveRate);
+        }
+        else if (m == "femorderdetail")
+        {
+            double profitlossFromCosting = 0; double profitlossFromSpotRate = 0;
+            double conversionRate = GetFormData_dbl("txtba_conversionrate-dbl");
+            double amountReceived = GetFormData_dbl("txtba_amountreceived-dbl");
+            double spotRate = GetFormData_dbl("txtba_spotrate-dbl");
+            int orderId = Common.GetQueryStringValue("pid");
+            DataRow drOrder = DbTable.GetOneRow("tbl_exportorder", orderId);
+            double costing = GlobalUtilities.ConvertToDouble(drOrder["exportorder_costing"]);
+            profitlossFromCosting = (conversionRate - costing) * amountReceived;
+
+            profitlossFromSpotRate = (conversionRate - spotRate) * amountReceived;
+            if (conversionRate == 0) profitlossFromCosting = 0;//NO CALC
+            if (spotRate == 0) profitlossFromSpotRate = 0;//NO CALC
+            hstbl.Add("profitlossfromcosting", profitlossFromCosting);
+            hstbl.Add("profitlossfromspotrate", profitlossFromSpotRate);
+        }
+        else if (m == "femfowardutilizationdetail")
+        {
+            int forwardContractId = Common.GetQueryStringValue("pid");
+            DataRow drForwardContract = DbTable.GetOneRow("tbl_forwardcontract", forwardContractId);
+            double forwardBookingRate = GlobalUtilities.ConvertToDouble(drForwardContract["forwardcontract_rate"]);
+            double premium = GetFormData_dbl("txtba_premium-dbl");
+            double utilizationrate = forwardBookingRate - premium;
+            hstbl.Add("utilizationrate", utilizationrate);
+            
+            double spotrateonutilisationdate = GetFormData_dbl("txtba_spotrateonutilisationdate-dbl");
+            double utilizationamount = GetFormData_dbl("txtba_utilisationamount-dbl");
+            double profitandlossonutilisation = (utilizationrate - spotrateonutilisationdate) * utilizationamount;
+            if (spotrateonutilisationdate == 0) profitandlossonutilisation = 0;//NO CALC
+            hstbl.Add("profitandlossonutilisation", profitandlossonutilisation);
+        }
+        else if (m == "femfowardcancellationdetail")
+        {
+            int forwardContractId = Common.GetQueryStringValue("pid");
+            DataRow drForwardContract = DbTable.GetOneRow("tbl_forwardcontract", forwardContractId);
+            double forwardBookingRate = GlobalUtilities.ConvertToDouble(drForwardContract["forwardcontract_rate"]);
+            double premium = GetFormData_dbl("txtba_premium-dbl");
+            double spotrateoncancellationdate = GetFormData_dbl("txtba_spotrateoncancellationdate-dbl");
+            double cancellationrate = spotrateoncancellationdate + premium;
+            hstbl.Add("cancellationrate", cancellationrate);
+            
+            double spotrateonutilisationdate = GetFormData_dbl("txtba_spotrateonutilisationdate-dbl");
+            double cancellationamount = GetFormData_dbl("txtba_cancellationamount-dbl");
+            double profitandlossoncancellation = (forwardBookingRate - cancellationrate) * cancellationamount;
+            if (spotrateoncancellationdate == 0) profitandlossoncancellation = 0;//NO CALC
+            hstbl.Add("profitandlossoncancellation", profitandlossoncancellation);
+        }
+        else if (m == "fempcfcdetail")
+        {
+            int pcfcId = Common.GetQueryStringValue("pid");
+            DataRow drPcFc = DbTable.GetOneRow("tbl_pcfc", pcfcId);
+            double pcfcConversionRate = GlobalUtilities.ConvertToDouble(drPcFc["pcfc_spotrate"]);
+            double spotrateonrepayment = GetFormData_dbl("txtba_spotrateonrepayment-dbl");
+            double liquidationamount=GetFormData_dbl("txtba_liquidationamount-dbl");
+            double profitandlossonpcfc = (pcfcConversionRate-spotrateonrepayment) * liquidationamount;
+            if (spotrateonrepayment == 0) profitandlossonpcfc = 0;//NO CALC
+            hstbl.Add("profitandlossonpcfc", profitandlossonpcfc);
+        }
+        //else if (m == "femepc")
+        //{
+        //    int id = Common.GetQueryStringValue("id");
+        //    DataRow drEPC = DbTable.GetOneRow("tbl_femepc", id);
+        //    string epcdate = GetFormData("txtba_epcavaileddate-dt");
+        //    string epdduedate = "";
+        //    int creditPeriodDays = GetFormData_int("txtba_creditperioddays-i");
+        //    if (epcdate != "")
+        //    {
+        //        DateTime dt = GlobalUtilities.ConvertToDateFromTextBox(epcdate);
+        //        dt = dt.AddDays(creditPeriodDays);
+        //        epdduedate = GlobalUtilities.ConvertToDate(dt);
+        //    }
+        //    hstbl.Add("epcduedate", epdduedate);
+        //    double epcamountinrs = GetFormData_dbl("txtba_epcamountinrs-dbl");
+        //    double repayment = GlobalUtilities.ConvertToDouble(drEPC["femepc_repaymentinrs"]);
+        //    double epcbalanceamountinrs = epcamountinrs - repayment;
+        //    hstbl.Add("epcbalanceamountinrs", epcbalanceamountinrs);
+        //    double forwardbookingamount = GetFormData_dbl("txtba_forwardbookingamount-dbl");
+        //    double forwardbookingrate = GetFormData_dbl("txtba_forwardbookingrate-dbl");
+        //    double valueinrs = forwardbookingamount * forwardbookingrate;
+        //    hstbl.Add("valueinrs", valueinrs);
+
+        //    double interestrate = GetFormData_dbl("txtba_interestrate-dbl");
+        //    double epcinterestamount = epcamountinrs * interestrate * creditPeriodDays / 365.0 / 100.0;
+        //    hstbl.Add("epcinterestamount", epcinterestamount);
+        //}
+        else if (m == "femepc")
+        {
+            string epcdate = GetFormData("txtba_epcavaileddate-dt");
+            string epdduedate = "";
+            int creditPeriodDays = GetFormData_int("txtba_creditperioddays-i");
+            if (epcdate != "")
+            {
+                DateTime dt = GlobalUtilities.ConvertToDateFromTextBox(epcdate);
+                dt = dt.AddDays(creditPeriodDays);
+                epdduedate = GlobalUtilities.ConvertToDate(dt);
+            }
+            hstbl.Add("epcduedate", epdduedate);
+            double epcamountinrs = GetFormData_dbl("txtba_epcamountinrs-dbl");
+            double forwardbookingamount = GetFormData_dbl("txtba_forwardbookingamount-dbl");
+            double forwardbookingrate = GetFormData_dbl("txtba_forwardbookingrate-dbl");
+            double valueinrs = forwardbookingamount * forwardbookingrate;
+            hstbl.Add("valueinrs", valueinrs);
+
+            double interestrate = GetFormData_dbl("txtba_interestrate-dbl");
+            double epcinterestamount = epcamountinrs * interestrate * creditPeriodDays / 365.0 / 100.0;
+            hstbl.Add("epcinterestamount", epcinterestamount);
+        }
+        else if (m == "femepcdetail")
+        {
+            double spotrateonrepayment = GetFormData_dbl("txtba_spotrateonrepayment-dbl");
+            double liquidationamountinrs=GetFormData_dbl("txtba_liquidationamountinrs-dbl");
+            double profitandlossonpcfc = (0 - spotrateonrepayment) * liquidationamountinrs;
+            if (spotrateonrepayment == 0) profitandlossonpcfc = 0;//NO CALC
+            hstbl.Add("profitandlossonpcfc", profitandlossonpcfc);
+        }
+        else if (m == "fimimportorder")
+        {
+            string expectedShipmentDate = GetFormData("txtba_expectedshipmentdate-dt");
+            string expectedduedate = "";
+            int usanceperiodDays = GetFormData_int("txtba_usanceperiod-i");
+            if (expectedShipmentDate != "")
+            {
+                DateTime dt = GlobalUtilities.ConvertToDateFromTextBox(expectedShipmentDate);
+                dt = dt.AddDays(usanceperiodDays);
+                expectedduedate = GlobalUtilities.ConvertToDate(dt);
+            }
+            hstbl.Add("expectedduedate", expectedduedate);
+        }
+        else if (m == "fimorderinvoice")
+        {
+            double invoiceamount = GetFormData_dbl("txtba_invoiceamount-dbl");
+            double advancepaidadjustedagainstinv = GetFormData_dbl("txtba_advancepaidadjustedagainstinv-dbl");
+            double invoiceamountpaid = GetFormData_dbl("txtba_invoiceamountpaid-dbl");
+            double invoiceamountbalance = invoiceamount - advancepaidadjustedagainstinv - invoiceamountpaid;
+            hstbl.Add("invoiceamountbalance", invoiceamountbalance);
+            
+        }
+        else if (m == "fimtradecredit")
+        {
+            string tradecreditdate = GetFormData("txtba_tradecreditdate-dt");
+            string tradecreditduedate = "";
+            int totalcreditperioddays = GetFormData_int("txtba_totalcreditperioddays-i");
+            if (tradecreditdate != "")
+            {
+                DateTime dt = GlobalUtilities.ConvertToDateFromTextBox(tradecreditdate);
+                dt = dt.AddDays(totalcreditperioddays);
+                tradecreditduedate = GlobalUtilities.ConvertToDate(dt);
+            }
+            hstbl.Add("tradecreditduedate", tradecreditduedate);
+        }
+        
+        //add extra values
+        if (Common.GetQueryString("pm") != "")
+        {
+            hstbl.Add(Common.GetQueryString("pm") + "id", Common.GetQueryStringValue("pid"));
+        }
+        //end
+    }
+    private double GetChildTotal(string m, string column, int id)
+    {
+        if (id == 0) return 0;
+        string query = "";
+        column = m + "_" + column;
+        query = "select sum(isnull(" + column + ",0)) as s from tbl_" + m + " where " + m + "_clientid=" + ClientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        return GlobalUtilities.ConvertToDouble(dr[0]);
+    }
+    private DataRow GetOrderDetail(int orderId)
+    {
+        DataRow drOrder = DbTable.GetOneRow("tbl_exportorder", orderId);
+        return drOrder;
+    }
+    private double GetFormData_dbl(string key)
+    {
+        return GlobalUtilities.ConvertToDouble(HttpContext.Current.Request.Form[key]);
+    }
+    private int GetFormData_int(string key)
+    {
+        return GlobalUtilities.ConvertToInt(HttpContext.Current.Request.Form[key]);
+    }
+    private string GetFormData(string key)
+    {
+        return GlobalUtilities.ConvertToString(HttpContext.Current.Request.Form[key]);
+    }
+    private double FindPremiumRate(DateTime spotDate, DateTime dtBrokenDate, int currency, bool isExport)
+    {
+        int endDateRateId_Start = 0;
+        int endDateRateId_End = 0;
+        int rateId_Start = 0;
+        int rateId_End = 0;
+        double dblDivisionFactor = 0;
+        double dblForwardRateDivFactor = 1;
+
+        //try
+        {
+            //validate the date first
+            //if (!IsValidDate(dtBrokenDate, currency))
+            //{
+            //    return;
+            //}
+
+            if (currency == 1)//USDINR
+            {
+                endDateRateId_Start = 195;
+                if (isExport)
+                {
+                    rateId_Start = 208;
+                }
+                else
+                {
+                    rateId_Start = 221;
+                }
+                dblDivisionFactor = 100;
+            }
+            else if (currency == 2)//EURINR
+            {
+                endDateRateId_Start = 305;
+                if (isExport)
+                {
+                    rateId_Start = 318;
+                }
+                else
+                {
+                    rateId_Start = 331;
+                }
+                dblDivisionFactor = 100;
+            }
+            else if (currency == 3)//GBPINR
+            {
+                endDateRateId_Start = 410;
+                if (isExport)
+                {
+                    rateId_Start = 423;
+                }
+                else
+                {
+                    rateId_Start = 436;
+                }
+                dblDivisionFactor = 100;
+                dblForwardRateDivFactor = 100;
+            }
+            else if (currency == 4)//JPYINR
+            {
+                endDateRateId_Start = 514;
+                if (isExport)
+                {
+                    rateId_Start = 527;
+                }
+                else
+                {
+                    rateId_Start = 540;
+                }
+                dblDivisionFactor = 100;
+                dblForwardRateDivFactor = 100;
+            }
+            else if (currency == 5)//EURUSD
+            {
+                endDateRateId_Start = 618;
+                if (isExport)
+                {
+                    rateId_Start = 631;
+                }
+                else
+                {
+                    rateId_Start = 644;
+                }
+                dblDivisionFactor = 10000;
+            }
+            else if (currency == 6)//GBPUSD
+            {
+                endDateRateId_Start = 722;
+                if (isExport)
+                {
+                    rateId_Start = 735;
+                }
+                else
+                {
+                    rateId_Start = 748;
+                }
+                dblDivisionFactor = 10000;
+                dblForwardRateDivFactor = 10;
+            }
+            else if (currency == 7)//USDJPY
+            {
+                endDateRateId_Start = 826;
+                if (isExport)
+                {
+                    rateId_Start = 839;
+                }
+                else
+                {
+                    rateId_Start = 852;
+                }
+                dblDivisionFactor = 0;
+                dblForwardRateDivFactor = 100;
+            }
+            rateId_End = rateId_Start + 11;
+
+            DataTable dttblMonthEndDate = GetLiveRatesBetween(endDateRateId_Start, endDateRateId_Start + 11);
+
+            //find forward date
+            int brokenDateMonth = dtBrokenDate.Month;
+            int brokenDateYear = dtBrokenDate.Year;
+            int forwardDateIndex = -1;
+            DateTime dtForwardDate = DateTime.MinValue;
+
+            for (int i = 0; i < dttblMonthEndDate.Rows.Count; i++)
+            {
+                try
+                {
+                    DateTime dt = Convert.ToDateTime(dttblMonthEndDate.Rows[i]["liverate_currentrate"]);
+                    TimeSpan sp1 = dt - dtBrokenDate;
+                    if (sp1.Days >= 0)
+                    {
+                        forwardDateIndex = i;
+                        dtForwardDate = dt;
+                        break;
+                    }
+                }
+                catch { }
+            }
+            if (forwardDateIndex < 0)
+            {
+                return 0;
+            }
+            //find liverate import/export value which is near to broken date
+            DataTable dttblRates = GetLiveRatesBetween(rateId_Start, rateId_End);
+            double forwardRate = GlobalUtilities.ConvertToDouble(dttblRates.Rows[forwardDateIndex]["liverate_currentrate"]);
+
+            forwardRate = forwardRate / dblForwardRateDivFactor;
+
+            //find days = Forward Date - Spot Date
+            TimeSpan sp = dtBrokenDate - spotDate;
+            int days = sp.Days;
+
+            //find premium = SpotRate * (SpotRate / (Broken Date - Spot Date))
+            //first find the Broken Date - Spot Date
+            sp = dtForwardDate - spotDate;
+            int brokenDateDiff = sp.Days;
+
+            //per day
+            double dblPerday = forwardRate / brokenDateDiff;
+
+            double dblPremium = dblPerday * days;
+
+            return dblPremium;
+        }
+        //catch (Exception ex)
+        {
+            //return 0;
+        }
+    }
+    private DataTable GetLiveRatesBetween(int start, int end)
+    {
+        string query = "select * from tbl_liverate where liverate_liverateid between " + start + " and " + end + " order by liverate_liverateid";
+        DataTable dttbl = DbTable.ExecuteSelect(query);
+        return dttbl;
+    }
+    public bool IsReusable {
+        get {
+            return false;
+        }
+    }
+
+}

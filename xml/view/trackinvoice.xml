@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>invoice</title>
+  <module>invoice</module>
+  <table>tbl_invoice</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>10</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>false</enablesearch>
+  <defaultsort>invoice_invoiceid DESC</defaultsort>
+  <columns>invoice_invoiceno,invoice_invoicedate,client_customername,invoice_balanceamount</columns>
+  <columnlabels>Invoice No,Invoice Date,Customer Name,Balance Amount</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>invoice_balanceamount</name>
+      <headertext>Balance Amount</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_invoiceno</name>
+      <headertext>Invoice No</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>invoice_invoicedate</name>
+      <headertext>Invoice Date</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Customer Name</headertext>
+      <row>1</row>
+      <width>12%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>invoice_invoiceid</hiddencolumns>
+  <query>
+    select * from tbl_invoice
+    join tbl_client On client_clientid=invoice_clientid
+  </query>
+</setting>

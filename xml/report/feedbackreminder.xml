@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>Feedback</title>
+  <module>Feedback</module>
+  <table>tbl_feedback</table>
+  <isreport>true</isreport>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>feedback_feedbackid desc</defaultsort>
+  <columns>client_customername,feedback_date,employee_employeename,feedbackrating_rating,feedback_remarks,followupstatus_status</columns>
+  <columnlabels>Client,Date,Feedback Taken By,Feedback Rating,Remarks,Status</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>feedback_date</name>
+      <headertext>Date</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>employee_employeename</name>
+      <headertext>Feedback Taken By</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>feedbackrating_rating</name>
+      <headertext>Feedback Rating</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>feedback_remarks</name>
+      <headertext>Remarks</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>followupstatus_status</name>
+      <headertext>Status</headertext>
+      <row>1</row>
+      <width>16%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>feedback_feedbackid</hiddencolumns>
+  <query>SELECT * FROM tbl_feedback
+LEFT JOIN tbl_employee ON feedback_employeeid=employee_employeeid
+LEFT JOIN tbl_feedbackrating ON feedback_feedbackratingid=feedbackrating_feedbackratingid
+JOIN tbl_followupstatus ON feedback_followupstatusid=followupstatus_followupstatusid
+JOIN tbl_client ON client_clientid=feedback_clientid</query>
+  <where>DATEDIFF(day,getdate()+30,feedback_date) &lt;= 7 AND feedback_followupstatusid=1</where>
+  <isbindonload>True</isbindonload>
+  <isdisplaychartbelowgrid>False</isdisplaychartbelowgrid>
+  <charttype>0</charttype>
+  <chartheadercolumns>
+  </chartheadercolumns>
+  <chartcolumns>
+  </chartcolumns>
+  <chartcolors>
+  </chartcolors>
+  <chartattributes>
+  </chartattributes>
+  <applyviewrights>True</applyviewrights>
+</setting>

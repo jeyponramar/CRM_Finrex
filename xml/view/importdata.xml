@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>importdata</title>
+  <module>importdata</module>
+  <table>tbl_importdata</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>importdata_importdataid desc</defaultsort>
+  <columns>importdatamodule_modulename,importdata_uploadexcelfilexlsxxls,importdata_downloadtemplate</columns>
+  <columnlabels>Module Name,Upload Excel File (.xlsx,.xls),Download Template</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>importdatamodule_modulename</name>
+      <headertext>Module Name</headertext>
+      <row>1</row>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>importdata_importdataid</hiddencolumns>
+  <query>select $COLUMNS$ from tbl_importdata JOIN tbl_importdatamodule ON importdatamodule_importdatamoduleid=importdata_importdatamoduleid $Search$</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Module Name</searchbylabels>
+  <searchbycolumns>importdatamodule_modulename</searchbycolumns>
+</setting>

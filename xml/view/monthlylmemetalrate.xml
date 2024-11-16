@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Monthlylmemetalrate</title>
+  <module>monthlylmemetalrate</module>
+  <table>tbl_monthlylmemetalrate</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>monthlylmemetalrate_monthlylmemetalrateid desc</defaultsort>
+  <columns>metal_metalname,monthlylmemetalrate_date,monthlylmemetalrate_cash,monthlylmemetalrate_threemonths,monthlylmemetalrate_usdinrclose,monthlylmemetalrate_usdinrrbirefrate</columns>
+  <columnlabels>metalid,date,cash,3months,usdinrclose,usdinrrbirefrate</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>metal_metalname</name>
+      <headertext>metalid</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>monthlylmemetalrate_monthlylmemetalrateid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_monthlylmemetalrate
+
+ LEFT JOIN tbl_metal ON metal_metalid=monthlylmemetalrate_metalid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>metalid</searchbylabels>
+  <searchbycolumns>metal_metalname</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>
