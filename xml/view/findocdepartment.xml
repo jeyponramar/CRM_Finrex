@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Findocdepartment</title>
+  <module>findocdepartment</module>
+  <table>tbl_findocdepartment</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>findocdepartment_findocdepartmentid desc</defaultsort>
+  <columns>findocdepartment_departmentname,client_customername,clientuser_name</columns>
+  <columnlabels>Department Name,Client,Client User</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>findocdepartment_departmentname</name>
+      <headertext>Department Name</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>Client User</headertext>
+      <width>33%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>findocdepartment_findocdepartmentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_findocdepartment
+
+ LEFT JOIN tbl_client ON client_clientid=findocdepartment_clientid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=findocdepartment_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Department Name,Client,Client User</searchbylabels>
+  <searchbycolumns>findocdepartment_departmentname,client_customername,clientuser_name</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

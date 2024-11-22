@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Findocdocument</title>
+  <module>findocdocument</module>
+  <table>tbl_findocdocument</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>findocdocument_findocdocumentid desc</defaultsort>
+  <columns>findocdepartment_departmentname,findoccategory_categoryname,findocsubcategory_subcategoryname,findocdocumenttype_documenttype,client_customername,clientuser_name,findocdocument_subject,findocdocument_uploaddate,findocdocument_remarks</columns>
+  <columnlabels>FinDoc Department,FinDoc Category,FinDoc Sub Category,FinDoc Document Type,Client,Client User,Subject,Upload Date,Remarks</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>findocdepartment_departmentname</name>
+      <headertext>FinDoc Department</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>findoccategory_categoryname</name>
+      <headertext>FinDoc Category</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>findocdocumenttype_documenttype</name>
+      <headertext>FinDoc Document Type</headertext>
+      <width>25%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>20%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>findocdocument_uploaddate</name>
+      <headertext>Upload Date</headertext>
+      <width>14%</width>
+      <format>Date</format>
+    </column>
+    <column>
+      <name>findocdocument_remarks</name>
+      <headertext>Remarks</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>findocdocument_subject</name>
+      <headertext>Subject</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>clientuser_name</name>
+      <headertext>Client User</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>findocsubcategory_subcategoryname</name>
+      <headertext>FinDoc Sub Category</headertext>
+      <width>11%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>findocdocument_findocdocumentid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_findocdocument
+
+ LEFT JOIN tbl_findocdepartment ON findocdepartment_findocdepartmentid=findocdocument_findocdepartmentid
+ LEFT JOIN tbl_findoccategory ON findoccategory_findoccategoryid=findocdocument_findoccategoryid
+ LEFT JOIN tbl_findocsubcategory ON findocsubcategory_findocsubcategoryid=findocdocument_findocsubcategoryid
+ LEFT JOIN tbl_findocdocumenttype ON findocdocumenttype_findocdocumenttypeid=findocdocument_findocdocumenttypeid
+ LEFT JOIN tbl_client ON client_clientid=findocdocument_clientid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=findocdocument_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>FinDoc Department,FinDoc Category,FinDoc Sub Category,FinDoc Document Type,Client,Client User</searchbylabels>
+  <searchbycolumns>findocdepartment_departmentname,findoccategory_categoryname,findocsubcategory_subcategoryname,findocdocumenttype_documenttype,client_customername,clientuser_name</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>
