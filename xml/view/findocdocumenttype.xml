@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Findocdocumenttype</title>
+  <module>findocdocumenttype</module>
+  <table>tbl_findocdocumenttype</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>findocdocumenttype_findocdocumenttypeid desc</defaultsort>
+  <columns>findocdocumenttype_documenttype,client_customername,clientuser_name</columns>
+  <columnlabels>Document Type,Client,Client User</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>findocdocumenttype_documenttype</name>
+      <headertext>Document Type</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>findocdocumenttype_findocdocumenttypeid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_findocdocumenttype
+
+ LEFT JOIN tbl_client ON client_clientid=findocdocumenttype_clientid
+ LEFT JOIN tbl_clientuser ON clientuser_clientuserid=findocdocumenttype_clientuserid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Document Type,Client</searchbylabels>
+  <searchbycolumns>findocdocumenttype_documenttype,client_customername</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>
