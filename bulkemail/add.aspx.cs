@@ -232,12 +232,7 @@ public partial class BulkEmail_add : System.Web.UI.Page
                 }
             }
         }
-        if (Request.Url.ToString().ToLower().Contains("localhost"))
-        {
-            emailIds = new StringBuilder();
-            emailIds.Append("jeyponramar@gmail.com,jeyponramar@gmail.com,nadarmuthulaxmi1985@gmail.com,dana.refux@gmail.com");
-            string toEmailIds = "";
-        }
+        
         DataRow drBulkMail = DbTable.GetOneRow("tbl_bulkemail", id);
         string attachment = GlobalUtilities.ConvertToString(drBulkMail["bulkemail_attachment"]);
         string strAttachment = "";

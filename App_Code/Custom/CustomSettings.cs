@@ -18,9 +18,8 @@ public class CustomSettings : ICustomSettings
     public static int m_TotalSMS = 500000;
     public static int SMS_WarningAfter_Count = 500000;
     public static bool IsSMSPackageEnable = true;
-    //public static string SMS_URL = "http://smslane.com/vendorsms/pushsms.aspx?user=jeyponramar@gmail.com&password=jeyapaul&msisdn=MobileNo&sid=REFUXS&msg=Message&fl=0&gwid=2";
     public static string SMS_URL = "http://sms6.rmlconnect.net:8080/bulksms/bulksms?username=finrextra&password=Fin@1234&type=0&dlr=1&destination=MobileNo&source=FINREX&message=Message";
-    public static string RefuxSupportEmailId = "jeyponramar@gmail.com";
+    public static string RefuxSupportEmailId = "";
     public static bool IsSMStoAllAdditonalContact = false;
     public static bool IsEmailtoAllAdditonalContact = false;
 
@@ -49,7 +48,6 @@ public class CustomSettings : ICustomSettings
     {
         get
         {
-            if (RefuxSupportEmailId == "") return "jeyponramar@gmail.com";
             return RefuxSupportEmailId;
         }
     }

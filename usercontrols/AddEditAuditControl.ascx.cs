@@ -1215,7 +1215,7 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
             Directory.CreateDirectory(Server.MapPath("~/upload/bankaudit/doc/" + Id));
         }
         string fileName = Server.MapPath("~/upload/bankaudit/doc/" + Id + "/AuditReport-" + GlobalUtilities.ConvertToString(_dr["bankaudit_guid"]) + ".pdf");
-        RPlusPdfGenerator_Finrex obj = new RPlusPdfGenerator_Finrex();
+        RPlusPdfGeneratorV1 obj = new RPlusPdfGeneratorV1();
         try
         {
             string html = "";
@@ -1315,7 +1315,7 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
             return false;
         }
     }
-    private void AddTitle(RPlusPdfGenerator_Finrex pdf, string title)
+    private void AddTitle(RPlusPdfGeneratorV1 pdf, string title)
     {
         pdf.AddTitle(title, "#D54715", "#D54715");
     }

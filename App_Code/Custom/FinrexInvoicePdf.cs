@@ -21,7 +21,7 @@ public class FinrexInvoicePdf
 	public string GenerateInvoice(int id)
 	{
         string fileName = "";
-        RPlusPdfGenerator_Finrex obj = new RPlusPdfGenerator_Finrex();
+        RPlusPdfGeneratorV1 obj = new RPlusPdfGeneratorV1();
         string query = @"SELECT * FROM tbl_invoice t1
 			              LEFT JOIN tbl_client t2 ON t1.invoice_clientid=t2.client_clientid 
                           Left Join tbl_setupfortermsandcondition t5 ON t5.setupfortermsandcondition_setupfortermsandconditionid=t1.invoice_setupfortermsandconditionid 	
@@ -132,7 +132,7 @@ public class FinrexInvoicePdf
         }
         return fileName;
 	}
-    public void AddHeader(RPlusPdfGenerator_Finrex obj)
+    public void AddHeader(RPlusPdfGeneratorV1 obj)
     {
         string html = "";
         PdfPTable table = obj.AddTable(2);
