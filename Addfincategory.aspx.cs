@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using WebComponent;
-public partial class AddFindoc : System.Web.UI.Page
+public partial class Addfincategory : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,21 +22,14 @@ public partial class AddFindoc : System.Web.UI.Page
         int clientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
         int clientUserId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientUserId"));
         Hashtable hstbl = new Hashtable();
-        hstbl.Add("findocdepartmentid", txtfindocdepartmentid.Text);
-        hstbl.Add("findoccategoryid", txtfindoccategoryid.Text);
-        hstbl.Add("findocsubcategoryid", txtfindocsubcategoryid.Text);
-        hstbl.Add("findocdocumenttypeid", txtfindocdocumenttypeid.Text);
-        hstbl.Add("clientid",clientId);
-        hstbl.Add("clientuserid",clientUserId);
-        hstbl.Add("subject", txtsubject.Text);
-        hstbl.Add("remarks", txtremarks.Text);
-        hstbl.Add("uploaddate", "getdate()");
+        hstbl.Add("categoryname", txtcategoryname.Text);
+        hstbl.Add("clientid", clientId);
+        hstbl.Add("clientuserid", clientUserId);
         InsertUpdate obj = new InsertUpdate();
-        int findocdocumentId = obj.InsertData(hstbl, "tbl_findocdocument");
-        if (findocdocumentId > 0)
+        int findoccategoryId = obj.InsertData(hstbl, "tbl_findoccategory");
+        if (findoccategoryId > 0)
         {
             lblmessage.Text = "Data saved successfully";
         }
-
     }
 }
