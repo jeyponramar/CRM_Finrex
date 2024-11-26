@@ -18,6 +18,11 @@ body{background-color:#fff !important;}
                             <td class="page-title2">View Findoc Document</td>
                        </tr>
                        <tr>
+                            <td align="right" style="padding-right:20px;">
+                                <a href="AddFindoc.aspx" class="add-link">Add Document</a>
+                            </td>
+                       </tr>
+                       <tr>
                 <td>
                     <asp:Literal ID="ltdata" runat="server"></asp:Literal>
                 </td>

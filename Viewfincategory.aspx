@@ -17,6 +17,11 @@ body{background-color:#fff !important;}
                             <td class="page-title2">View Findoc Category</td>
                        </tr>
                        <tr>
+                            <td align="right" style="padding-right:20px;">
+                                <a href="Addfincategory.aspx" class="add-link">Add Category</a>
+                            </td>
+                       </tr>
+                       <tr>
                         <td>
                             <asp:Literal ID="ltdata" runat="server"></asp:Literal>
                         </td>

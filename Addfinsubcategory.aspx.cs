@@ -45,7 +45,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
                " and findocsubcategory_subcategoryname=@subcategoryname";
         if (id > 0)
         {
-            query += "and findocsubcategory_findocsubcategoryid<>" + id;
+            query += " and findocsubcategory_findocsubcategoryid<>" + id;
         }
         Hashtable hstblP = new Hashtable();
         hstblP.Add("subcategoryname", txtsubcategoryname.Text);
@@ -70,7 +70,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         }
         else
         {
-            int findocsubcategoryId = obj.InsertData(hstbl, "tbl_findocsubcategory");
+            int findocsubcategoryId = obj.UpdateData(hstbl, "tbl_findocsubcategory", id);
             if (findocsubcategoryId > 0)
             {
                 Response.Redirect("~/viewfinsubcategory.aspx");

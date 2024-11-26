@@ -28,12 +28,15 @@ body{background-color:#fff !important;}
                        <td>
                             <table>
                                    <tr>
-                                       <td style="padding:15px;width:150px;"align="right" >Sub Category Name</td>
-                                       <td><asp:TextBox ID="txtsubcategoryname"  runat="server" class="textbox"></asp:TextBox></td>
+                                       <td style="padding:15px;width:150px;"align="right" >Sub Category Name <span class="error">*</span></td>
+                                       <td><asp:TextBox ID="txtsubcategoryname"  runat="server" class="textbox"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="rfvl" runat="server" ControlToValidate="txtsubcategoryname" ErrorMessage="Required Sub Category"
+                                         Display="Dynamic" ValidationGroup="vg"></asp:RequiredFieldValidator>
+                                       </td>
                                    </tr>
                                    <tr>
                                         <td></td>
-                                        <td><asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" /></td>
+                                        <td><asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" ValidationGroup="vg" /></td>
                                    </tr>
                             </table>
                        </td>
