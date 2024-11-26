@@ -14,10 +14,10 @@ body{background-color:#fff !important;}
                <uc:findocmenu id="findocmenu" runat="server" IsAdminPage="false"></uc:findocmenu>
             </td>
          <td class='page-inner2'>
-         <table>
+         <table width='100%'>
              <tr><td class="page-title2">Add FinDoc Document</td></tr>
       <table cellpadding='5' cellspacing='5'>
-             <tr><td colspan="2"><asp:Label ID="lblmessage" runat="server"></asp:Label></td></tr>
+             <tr><td colspan="2"><asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label></td></tr>
              <tr>
                  <td>FinDoc Department</td>
                  <td>

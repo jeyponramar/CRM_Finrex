@@ -22,22 +22,59 @@ public partial class Addfinsubcategory : System.Web.UI.Page
     }
     private void PopulateData()
     {
-        GlobalData objGlobalData = new GlobalData("tbl_findoccategory", "findoccategoryid");
-        objGlobalData.PopulateForm(form);
+        int id = Common.GetQueryStringValue("id");
+        if (id == 0) return;
+        GlobalData objGlobalData = new GlobalData("tbl_findocsubcategory", "findocsubcategoryid");
+        string query = "";
+        query = "select * from tbl_findocsubcategory where findocsubcategory_findocsubcategoryid=" + id +
+               " and findocsubcategory_clientid=" + Common.ClientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null)
+        {
+            Response.End();
+        }
+        objGlobalData.PopulateForm(dr, form);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        int clientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
-        int clientUserId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientUserId"));
+        int clientId = Common.ClientId;
+        int clientUserId = Common.ClientUserId;
+        int id = Common.GetQueryStringValue("id");
+        string query = "";
+        query="select * from tbl_findocsubcategory where findocsubcategory_clientid=" + Common.ClientId +
+               " and findocsubcategory_subcategoryname=@subcategoryname";
+        if (id > 0)
+        {
+            query += "and findocsubcategory_findocsubcategoryid<>" + id;
+        }
+        Hashtable hstblP = new Hashtable();
+        hstblP.Add("subcategoryname", txtsubcategoryname.Text);
+        DataRow dr = DbTable.ExecuteSelectRow(query,hstblP);
+        if (dr != null)
+        {
+            lblmessage.Text = "Data already exists.";
+            return;
+        }
         Hashtable hstbl = new Hashtable();
         hstbl.Add("subcategoryname", txtsubcategoryname.Text);
         hstbl.Add("clientid", clientId);
         hstbl.Add("clientuserid", clientUserId);
         InsertUpdate obj = new InsertUpdate();
-        int findocsubcategoryId = obj.InsertData(hstbl, "tbl_findocsubcategory");
-        if (findocsubcategoryId > 0)
+        if (id == 0)
         {
-            lblmessage.Text = "Data saved successfully";
+            int findocsubcategoryId = obj.InsertData(hstbl, "tbl_findocsubcategory");
+            if (findocsubcategoryId > 0)
+            {
+                Response.Redirect("~/viewfinsubcategory.aspx");
+            }
+        }
+        else
+        {
+            int findocsubcategoryId = obj.InsertData(hstbl, "tbl_findocsubcategory");
+            if (findocsubcategoryId > 0)
+            {
+                Response.Redirect("~/viewfinsubcategory.aspx");
+            }
         }
     }
 }

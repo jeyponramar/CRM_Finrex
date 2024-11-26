@@ -26,18 +26,19 @@ public partial class Viewfincategory : System.Web.UI.Page
     private void BindData()
     {
         string query = "";
-        query = "select * from tbl_findoccategory";
+        int clientId = Common.ClientId;
+        query = "select * from tbl_findoccategory where findoccategory_clientid=" + clientId;
         DataTable dttbl = DbTable.ExecuteSelect(query);
         StringBuilder html = new StringBuilder();
-
         html.Append("<table width='100%' cellpadding=7  border=1 class='grid-ui'>");
-        html.Append("<tr class='grid-ui-header'><td>Category Name</td></tr>");
+        html.Append("<tr class='grid-ui-header'><td>Category Name</td><td>Edit</td></tr>");
         for (int i = 0; i < dttbl.Rows.Count; i++)
         {
-            html.Append("<tr>");
-            html.Append("<td>" + dttbl.Rows[i]["findoccategory_categoryname"].ToString() + "</td>");
-            
+            int id = GlobalUtilities.ConvertToInt(dttbl.Rows[i]["findoccategory_findoccategoryid"]);
 
+            html.Append("<tr>");
+            html.Append("<td>" +GlobalUtilities.ConvertToString(dttbl.Rows[i]["findoccategory_categoryname"]) + "</td>");
+            html.Append("<td><a href='addfincategory.aspx?id=" + id + "'>Detail</a></td>");
             html.Append("</tr>");
         }
         html.Append("</table>");
