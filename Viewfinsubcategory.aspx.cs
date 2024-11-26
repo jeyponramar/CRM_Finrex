@@ -25,17 +25,19 @@ public partial class Viewfinsubcategory : System.Web.UI.Page
     private void BindData()
     {
         string query = "";
-        query = "select * from tbl_findocsubcategory";
+        int clientId = Common.ClientId;
+        query = "select * from tbl_findocsubcategory where findocsubcategory_clientid=" + clientId;
         DataTable dttbl = DbTable.ExecuteSelect(query);
         StringBuilder html = new StringBuilder();
 
         html.Append("<table width='100%' cellpadding=7  border=1 class='grid-ui'>");
-        html.Append("<tr class='grid-ui-header'><td>Subcategory Name</td></tr>");
+        html.Append("<tr class='grid-ui-header'><td>Subcategory Name</td><td>Edit</td></tr>");
         for (int i = 0; i < dttbl.Rows.Count; i++)
         {
+            int id = GlobalUtilities.ConvertToInt(dttbl.Rows[i]["findocsubcategory_findocsubcategoryid"]);
             html.Append("<tr>");
-            html.Append("<td>" + dttbl.Rows[i]["findocsubcategory_subcategoryname"].ToString() + "</td>");
-
+            html.Append("<td>" +GlobalUtilities.ConvertToString(dttbl.Rows[i]["findocsubcategory_subcategoryname"]) + "</td>");
+            html.Append("<td><a href='addfinsubcategory.aspx?id=" + id + "'>Detail</a></td>");
 
             html.Append("</tr>");
         }
