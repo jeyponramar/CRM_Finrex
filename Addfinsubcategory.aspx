@@ -21,22 +21,19 @@ body{background-color:#fff !important;}
                   </tr>
                   <tr>
                        <td>
-                            <asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label>
+                            <asp:Label ID="lblmessage" runat="server"></asp:Label>
                        </td>
                   </tr>
                   <tr>
                        <td>
                             <table>
                                    <tr>
-                                       <td style="padding:15px;width:150px;"align="right" >Sub Category Name <span class="error">*</span></td>
-                                       <td><asp:TextBox ID="txtsubcategoryname"  runat="server" class="textbox"></asp:TextBox>
-                                           <asp:RequiredFieldValidator ID="rfvl" runat="server" ControlToValidate="txtsubcategoryname" ErrorMessage="Required Subcategory"
-                                               Display="Dynamic" ValidationGroup="vg"></asp:RequiredFieldValidator>
-                                       </td>
+                                       <td style="padding:15px;width:150px;"align="right" >Sub Category Name</td>
+                                       <td><asp:TextBox ID="txtsubcategoryname"  runat="server" class="textbox"></asp:TextBox></td>
                                    </tr>
                                    <tr>
                                         <td></td>
-                                        <td><asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" ValidationGroup="vg" /></td>
+                                        <td><asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" /></td>
                                    </tr>
                             </table>
                        </td>
