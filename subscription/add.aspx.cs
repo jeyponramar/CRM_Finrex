@@ -187,6 +187,8 @@ public partial class Subscription_add : System.Web.UI.Page
     }
     private void SendAuditWelcomeEmail(int id)
     {
+        //As discussed with Himesh Sir, Audit welcome email has been stopped
+        return;
         string query = "";
         DataRow dr = gblData._CurrentRow;
         query = "select * from tbl_subscriptionprospects where subscriptionprospects_subscriptionid=" + id + 

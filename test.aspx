@@ -1,17 +1,28 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="test.aspx.cs" Inherits="test" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="test.aspx.cs" Inherits="test" Title="Untitled Page" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Untitled Page</title>
-    <script src="https://cdn.OneSignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<table>
+     <%--<tr>      <td class="label">FinDoc Department</td>      <td ti='0'>      <asp:TextBox ID="findocdepartment" dcn="findocdepartment_departmentname" MaxLength="100" runat="server" m="findocdepartment" cn="departmentname"       CssClass="textbox ac txtac"></asp:TextBox>      <asp:TextBox id="txtfindocdepartmentid"  dcn="findocdocument_findocdepartmentid"  Text="0" runat="server" class=" hdnac"/>      <img src="../images/down-arrow.png" class="quick-new epage"/></td>    </tr>--%>
     
-    </div>
-    </form>
-</body>
-</html>
+    <tr>
+        <td>FinDoc Department</td>
+        <td>
+            <asp:TextBox ID="findocdepartment" MaxLength="100" runat="server" m="findocdepartment" cn="departmentname"                 CssClass="textbox ac txtac"></asp:TextBox>
+            <asp:TextBox id="txtfindocdepartmentid"  Text="0" runat="server" class=" hdnac"/>
+            <img src="images/down-arrow.png" class="quick-new epage"/>
+        </td>
+    </tr>
+    <tr>
+        <td>FinDoc Department</td>
+        <td>
+            <asp:TextBox ID="cate" MaxLength="100" runat="server" m="findocdepartment" cn="departmentname"                 CssClass="textbox ac txtac"></asp:TextBox>
+            <asp:TextBox id="ttcatyeg"  Text="0" runat="server" class=" hdnac"/>
+            <img src="images/down-arrow.png" class="quick-new epage"/>
+        </td>
+    </tr>
+    
+</table>
+</asp:Content>
+

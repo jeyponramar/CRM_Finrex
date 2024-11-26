@@ -22,27 +22,61 @@ public partial class Addfindepartment : System.Web.UI.Page
     }
     private void PopulateData()
     {
+        int id = Common.GetQueryStringValue("id");
+        if (id == 0) return;
         GlobalData objGlobalData = new GlobalData("tbl_findocdepartment", "findocdepartmentid");
-        objGlobalData.PopulateForm(form);
+        string query = "";
+        query = "select * from tbl_findocdepartment where findocdepartment_findocdepartmentid=" + id +
+                " and findocdepartment_clientid=" + Common.ClientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null)
+        {
+            Response.End();
+        }
+        objGlobalData.PopulateForm(dr, form);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-       
-      
-        int clientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
-        int clientUserId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientUserId"));
+        int clientId = Common.ClientId;
+        int clientUserId = Common.ClientUserId;
+        int id = Common.GetQueryStringValue("id");
+        string query = "";
+        query = "select * from tbl_findocdepartment where findocdepartment_clientid=" + Common.ClientId + 
+                " and findocdepartment_departmentname=@departmentname";
+        if (id > 0)
+        {
+            query += " and findocdepartment_findocdepartmentid<>" + id;
+        }
+        Hashtable hstblp = new Hashtable();
+        hstblp.Add("departmentname", txtdepartmentname.Text);
+        DataRow dr = DbTable.ExecuteSelectRow(query, hstblp);
+        if (dr != null)
+        {
+            lblmessage.Text = "Data already exists.";
+            return;
+        }
         Hashtable hstbl = new Hashtable();
-        hstbl.Add("departmentname", departmentname.Text);
+        hstbl.Add("departmentname", txtdepartmentname.Text);
         hstbl.Add("clientid", clientId);
         hstbl.Add("clientuserid", clientUserId);
         InsertUpdate obj = new InsertUpdate();
-        int findocdepartmentId = obj.InsertData(hstbl, "tbl_findocdepartment");
-        if (findocdepartmentId > 0)
+        
+        if (id == 0)
         {
-            lblmessage.Text = "Data saved successfully";
+            int findocdepartmentId = obj.InsertData(hstbl, "tbl_findocdepartment");
+            if (findocdepartmentId > 0)
+            {
+                Response.Redirect("~/viewfindepartment.aspx");
+            }
         }
-
-
+        else
+        {
+            int findocdepartmentId = obj.UpdateData(hstbl, "tbl_findocdepartment", id);
+            if (findocdepartmentId > 0)
+            {
+                Response.Redirect("~/viewfindepartment.aspx");
+            }
+        }
     }
 
 }
