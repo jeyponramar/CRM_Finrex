@@ -25,16 +25,19 @@ public partial class Viewfindepartment : System.Web.UI.Page
     private void BindData()
     {
         string query = "";
-        query = "select * from tbl_findocdepartment";
+        int clientId = Common.ClientId;
+        query = "select * from tbl_findocdepartment where findocdepartment_clientid=" + clientId;
         DataTable dttbl = DbTable.ExecuteSelect(query);
         StringBuilder html = new StringBuilder();
 
         html.Append("<table width='100%' cellpadding=7  border=1 class='grid-ui'>");
-        html.Append("<tr class='grid-ui-header'><td>Department Name</td></tr>");
+        html.Append("<tr class='grid-ui-header'><td>Department Name</td><td>Edit</td></tr>");
         for (int i = 0; i < dttbl.Rows.Count; i++)
         {
+            int id = GlobalUtilities.ConvertToInt(dttbl.Rows[i]["findocdepartment_findocdepartmentid"]);
             html.Append("<tr>");
-            html.Append("<td>" + dttbl.Rows[i]["findocdepartment_departmentname"].ToString() + "</td>");
+            html.Append("<td>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["findocdepartment_departmentname"]) + "</td>");
+            html.Append("<td><a href='addfindepartment.aspx?id=" + id + "'>Detail</a></td>");
             html.Append("</tr>");
         }
         html.Append("</table>");

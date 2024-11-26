@@ -14,16 +14,16 @@
                   </tr>
                   <tr>
                        <td>
-                            <asp:Label ID="lblmessage" runat="server"></asp:Label>
+                            <asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label>
                        </td>
                   </tr>
                   <tr>
                        <td>
                             <table>
                                    <tr>
-                                       <td style="padding:15px;width:110px;"align="right" >Department Name <span class="error">*</span></td>
-                                       <td><asp:TextBox ID="departmentname"  runat="server" class="textbox"></asp:TextBox>
-                                           <asp:RequiredFieldValidator ID="rfvl" runat="server" ControlToValidate="departmentname" ErrorMessage="Required Department"
+                                       <td style="padding:15px;width:110px;"align="right">Department Name <span class="error">*</span></td>
+                                       <td><asp:TextBox ID="txtdepartmentname" runat="server" class="textbox"></asp:TextBox>
+                                           <asp:RequiredFieldValidator ID="rfvl" runat="server" ControlToValidate="txtdepartmentname" ErrorMessage="Required Department"
                                             Display="Dynamic" ValidationGroup="vg"></asp:RequiredFieldValidator>
                                        </td>
                                    </tr>
