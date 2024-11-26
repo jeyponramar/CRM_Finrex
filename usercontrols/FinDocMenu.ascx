@@ -12,7 +12,7 @@
         {
             pageurl = arr[3];
         }
-        var page = pageurl.split('.')[0].replace("view","");
+        var page = pageurl.split('.')[0].replace("view","").replace("add","");
         $(".jq-findocmenu").find("li").each(function(){
             var href = $(this).find("a").attr("href").toString().toLowerCase().replace("view","").replace(".aspx","");
             if(page == href)

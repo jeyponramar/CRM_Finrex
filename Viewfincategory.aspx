@@ -17,10 +17,10 @@ body{background-color:#fff !important;}
                             <td class="page-title2">View Findoc Category</td>
                        </tr>
                        <tr>
-                <td>
-                    <asp:Literal ID="ltdata" runat="server"></asp:Literal>
-                </td>
-            </tr>
+                        <td>
+                            <asp:Literal ID="ltdata" runat="server"></asp:Literal>
+                        </td>
+                    </tr>
                  </table>
              </td>
         </tr>

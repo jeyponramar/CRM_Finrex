@@ -127,6 +127,10 @@ type = "text/javascript"; e.parentNode.insertBefore($, e)
                         <div class="menu-initial" title="BankScan – Bank Charges Audit" style="background-color:#ff8080;">BS</div>
                         <div class="main-left-text">BankScan</div>
                     </div>
+                    <div class="main-left-menu" href="viewfindoc.aspx">
+                        <div class="menu-initial" title="FinDocuments – Manage your documents" style="background-color:#9B59B6;">FD</div>
+                        <div class="main-left-text">FinDocuments</div>
+                    </div>
                    <%-- <div class="main-left-menu" href="exportportal.aspx?pt=1" targetblank="true">
                         <div class="menu-initial" title="FEM – FX Exposure Management" style="background-color:#34A855;">FE</div>
                         <div class="main-left-text">FX Exposure Management</div>

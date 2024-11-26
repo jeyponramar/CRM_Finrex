@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using WebComponent;
+
 public partial class AddFindoc : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -25,7 +26,7 @@ public partial class AddFindoc : System.Web.UI.Page
         int id = Common.GetQueryStringValue("id");
         if (id == 0) return;
         GlobalData objGlobalData = new GlobalData("tbl_findocdocument","findocdocumentid");
-        string query="";
+        string query = "";
         query = @"select * from tbl_findocdocument 
                   left join tbl_findocdepartment on findocdepartment_findocdepartmentid=findocdocument_findocdepartmentid
                   left join tbl_findoccategory On findoccategory_findoccategoryid=findocdocument_findoccategoryid
@@ -52,7 +53,7 @@ public partial class AddFindoc : System.Web.UI.Page
         hstbl.Add("findoccategoryid", txtfindoccategoryid.Text);
         hstbl.Add("findocsubcategoryid", txtfindocsubcategoryid.Text);
         hstbl.Add("findocdocumenttypeid", txtfindocdocumenttypeid.Text);
-        hstbl.Add("clientid",clientId);
+        hstbl.Add("clientid", clientId);
         hstbl.Add("clientuserid",clientUserId);
         hstbl.Add("subject", txtsubject.Text);
         hstbl.Add("remarks", txtremarks.Text);

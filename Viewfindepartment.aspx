@@ -17,10 +17,15 @@ body{background-color:#fff !important;}
                             <td class="page-title2">View Findoc Department</td>
                        </tr>
                        <tr>
-                <td>
-                    <asp:Literal ID="ltdata" runat="server"></asp:Literal>
-                </td>
-            </tr>
+                            <td align="right" style="padding-right:20px;">
+                                <a href="addfindepartment.aspx" class="add-link">Add Department</a>
+                            </td>
+                       </tr>
+                       <tr>
+                        <td>
+                            <asp:Literal ID="ltdata" runat="server"></asp:Literal>
+                        </td>
+                    </tr>
                  </table>
              </td>
         </tr>
