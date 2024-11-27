@@ -94,5 +94,6 @@
 <!--JSCODE_START-->
 					
 					<!--JSCODE_END-->
+					<div style="text-align:right;"><a href="../importdata/import-customrate.aspx">Upload Custom Rate</a></div>
 
 </asp:Content>
