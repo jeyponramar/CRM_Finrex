@@ -72,7 +72,7 @@ public partial class Addfincategory : System.Web.UI.Page
         }
         else
         {
-            int findoccategoryId = obj.UpdateData(hstbl, "tbl_findoccategory",id);
+            int findoccategoryId = obj.UpdateData(hstbl, "tbl_findoccategory", id);
             if (findoccategoryId > 0)
             {
                 Response.Redirect("~/viewfincategory.aspx");

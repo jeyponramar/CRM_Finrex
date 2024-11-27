@@ -75,6 +75,7 @@ public partial class FinDocDocument_add : System.Web.UI.Page
 			
 			//SaveSubTable_END
             //SaveFile_START
+			mfuattachment.Save(id);
 			//SaveFile_END
             //ParentCountUpdate_START
 			

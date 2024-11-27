@@ -42,6 +42,10 @@
         {
             HttpContext.Current.Response.AppendHeader("Access-Control-Allow-Origin", "*");
         }
+        if (url.Contains("/upload/client/"))
+        {
+            
+        }
         if (!url.Contains("localhost:"))
         {
             if (ConfigurationManager.AppSettings["EnableHTTPS"] == "true")

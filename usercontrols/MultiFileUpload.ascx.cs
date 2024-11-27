@@ -93,6 +93,10 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
             trUpload.Visible = false;
         }
     }
+    public void SetTempFolderPath(string folderPath)
+    {
+        ViewState["TempFolderPath"] = folderPath;
+    }
     private void SetAttributes()
     {
         string filePrefix = Guid.NewGuid().ToString() + "_";
@@ -119,10 +123,10 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
     public string fileNames
     {
         get 
-        { 
-            //return h_FileName.Text; 
-            //DirectoryInfo dir = new DirectoryInfo(Server.MapPath(FolderPath));
-            DirectoryInfo dir = new DirectoryInfo(Server.MapPath("~/" + Convert.ToString(ViewState["TempFolderPath"])));
+        {
+            string tempFolderPath = Convert.ToString(ViewState["TempFolderPath"]);
+            if (tempFolderPath == "") return "";
+            DirectoryInfo dir = new DirectoryInfo(Server.MapPath("~/" + tempFolderPath));
             string files = "";
             if (dir.Exists)
             {
@@ -500,14 +504,11 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
     public void PopulateFiles(string folderpath)
     {
         if (!_IsPopulateFiles) return;
-        //if (folderpath.Replace("~", "").Replace("/", "").Replace("\\", "").Trim() == "") return;
-        //string[] filePaths = null;
         ArrayList arrFiles = new ArrayList();
         string singleFilePath = "";
         if (IsMultiple)
         {
             if (!Directory.Exists(Server.MapPath(folderpath))) return;
-            //filePaths = Directory.GetFiles(Server.MapPath(folderpath));
             string m = Common.GetModuleName();
             string colName = GlobalUtilities.ConvertToString(m + "_" + this.ID.Replace("mfu", ""));
             string query = "select " + colName + " from tbl_" + m + " WHERE " + m + "_" + m + "id=" + GetId();
@@ -650,6 +651,11 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
     public void BindMultiFiles(ArrayList arrFiles, string folderpath)
     {
         StringBuilder html = new StringBuilder();
+        string slash = "../";
+        if (folderpath.Contains("/client/"))
+        {
+            slash = "";
+        }
         for (int i = 0; i < arrFiles.Count; ++i)
         {
             string path = Convert.ToString(arrFiles[i]);
@@ -693,39 +699,39 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
                 }
                 else if (fileext == ".mp3" || fileext == ".wav")
                 {
-                    imgsrc = "../images/song-icon.png";
+                    imgsrc = slash + "images/song-icon.png";
                 }
                 else if (fileext == ".avi" || fileext == ".wmv" || fileext == ".mov" || fileext == ".mpg" || fileext == ".vob" || fileext == ".3g2")
                 {
-                    imgsrc = "../images/video-icon.png";
+                    imgsrc = slash + "images/video-icon.png";
                 }
                 else if (fileext == ".doc" || fileext == ".docx")
                 {
-                    imgsrc = "../images/doc-icon.png";
+                    imgsrc = slash + "images/doc-icon.png";
                 }
                 else if (fileext == ".txt")
                 {
-                    imgsrc = "../images/txt-icon.png";
+                    imgsrc = slash + "images/txt-icon.png";
                 }
                 else if (fileext == ".pdf")
                 {
-                    imgsrc = "../images/pdf-icon.png";
+                    imgsrc = slash + "images/pdf-icon.png";
                 }
                 else if (fileext == ".zip")
                 {
-                    imgsrc = "../images/icon/zip.png";
+                    imgsrc = slash + "images/icon/zip.png";
                 }
                 else if (fileext == ".xls" || fileext == ".xlsx")
                 {
-                    imgsrc = "../images/xl-icon.png";
+                    imgsrc = slash + "images/xl-icon.png";
                 }
                 else if (fileext == ".ppt")
                 {
-                    imgsrc = "../images/ppt-icon.png";
+                    imgsrc = slash + "images/ppt-icon.png";
                 }
                 else
                 {
-                    imgsrc = "../images/unknown.png";
+                    imgsrc = slash + "images/unknown.png";
                 }
                 string actualFileName = filename;
                 if (IsMultiple)
@@ -736,11 +742,11 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
                         filename = filename.Substring(index + 1);
                     }
                 }
-                html.Append("<tr><td align='center'><img src=\'" + imgsrc + "' width='25px'/>" +
+                html.Append("<tr><td align='center'><img src=\'" + imgsrc + "' width='50px'/>" +
                     "</td><td><a href='" + fullFileUrl + "' target='_blank'>" + filename + "</a></td>");
                 if (_isDetail == false)
                 {
-                    html.Append("<td><img src='../images/delete.png' class='deletefile hand' val='" + deleteimgsrc + "' fn='" + actualFileName + "' title='Delete'></td>");
+                    html.Append("<td><img src='"+slash+"images/delete.png' class='deletefile hand' val='" + deleteimgsrc + "' fn='" + actualFileName + "' title='Delete'></td>");
                 }
                 html.Append("</tr>");
             }

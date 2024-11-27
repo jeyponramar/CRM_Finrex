@@ -10,8 +10,8 @@
   <enablesorting>true</enablesorting>
   <enablesearch>true</enablesearch>
   <defaultsort>client_clientid DESC</defaultsort>
-  <columns>client_customercode,client_customername,client_panno,client_contactperson,designation_designation,client_mobileno,client_landlineno,client_emailid,state_state,area_areaname,client_website,client_address,industrytypes_industrytypes,campaign_campaignname,exposure_exposure,business_business,clientgroup_groupname,employee_employeename,subscriptionstatus_status,client_startdate,client_enddate,client_whatsappenddate,contacttype_contacttype</columns>
-  <columnlabels>Customer Code,Customer Name,Pan No,Contact Person,Designation,Mobile No,Landline No,Email Id,State,Area,Website,Address,Industry,Campaign,Exposure,Business,Client Group,Assign To,Subscription Status,Start Date,Software End Date,Whatsapp End Date,Contact Type</columnlabels>
+  <columns>client_customercode,client_customername,client_panno,client_contactperson,designation_designation,client_mobileno,client_landlineno,client_emailid,city_cityname,state_state,area_areaname,client_pincode,client_website,client_address,industrytypes_industrytypes,campaign_campaignname,exposure_exposure,business_business,clientgroup_groupname,employee_employeename,subscriptionstatus_status,client_startdate,client_enddate,client_whatsappenddate,contacttype_contacttype,ownername,ownermobile,financename,financemobile</columns>
+  <columnlabels>Customer Code,Customer Name,Pan No,Contact Person,Designation,Mobile No,Office Landline No,Email Id,City,State,Area,Pin Code,Website,Address,Industry,Campaign,Exposure,Business,Client Group,Assign To,Subscription Status,Start Date,Software End Date,Whatsapp End Date,Contact Type,Owner Name,Owner Mobile,Finance Name,Finance Mobile</columnlabels>
   <gridtype>grid</gridtype>
   <gridcolumn>
     <column ismobile="true" colspan="2" class="bold">
@@ -44,7 +44,7 @@
     </column>
     <column>
       <name>client_landlineno</name>
-      <headertext>Landline No</headertext>
+      <headertext>Office Landline No</headertext>
       <width>7%</width>
       <format>
       </format>
@@ -52,6 +52,34 @@
     <column>
       <name>client_emailid</name>
       <headertext>Email Id</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_address</name>
+      <headertext>Address</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>state_state</name>
+      <headertext>State</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>city_cityname</name>
+      <headertext>City</headertext>
+      <width>7%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>client_pincode</name>
+      <headertext>Pin Code</headertext>
       <width>7%</width>
       <format>
       </format>
@@ -84,11 +112,44 @@
       <format>
       </format>
     </column>
+    <column>
+      <name>ownername</name>
+      <headertext>Owner Name</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>ownermobile</name>
+      <headertext>Owner Mobile</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>financename</name>
+      <headertext>Finance Name</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>financemobile</name>
+      <headertext>Finance Mobile</headertext>
+      <width>10%</width>
+      <format>
+      </format>
+    </column>
   </gridcolumn>
 
   <hiddencolumns>client_clientid</hiddencolumns>
   <query>
-    SELECT * FROM tbl_client
+    SELECT
+    (select top 1 contacts_contactperson from tbl_contacts c1 where c1.contacts_clientid=client_clientid and c1.contacts_designationid=1)as ownername,
+    (select top 1 contacts_mobileno from tbl_contacts c1 where c1.contacts_clientid=client_clientid and c1.contacts_designationid=1)as ownermobile,
+    (select top 1 contacts_contactperson from tbl_contacts c1 where c1.contacts_clientid=client_clientid and c1.contacts_designationid=4)as financename,
+    (select top 1 contacts_mobileno from tbl_contacts c1 where c1.contacts_clientid=client_clientid and c1.contacts_designationid=4)as financemobile,
+    * FROM tbl_client
     LEFT JOIN tbl_designation ON designation_designationid=client_designationid
     LEFT JOIN tbl_state ON state_stateid=client_stateid
     LEFT JOIN tbl_city ON city_cityid=client_cityid

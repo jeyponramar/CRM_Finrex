@@ -1,7 +1,9 @@
  <%@ Page Language="C#" MasterPageFile="~/InnerMaster.master" AutoEventWireup="true" 
  CodeFile="add.aspx.cs" Inherits="FinDocDocument_add" EnableEventValidation="false" ValidateRequest="false"%>
  <%@ Register Src="~/usercontrols/NextPrevDetail.ascx" TagName="NextPrevDetail" TagPrefix="uc" %>
-<%--CONTROLREGISTER_START--%><%--CONTROLREGISTER_END--%>
+<%--CONTROLREGISTER_START--%>
+<%@ Register Src="~/Usercontrols/MultiFileUpload.ascx" TagName="MultiFileUpload" TagPrefix="uc" %>
+<%--CONTROLREGISTER_END--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <script>
     $(document).ready(function() {
@@ -81,6 +83,10 @@
 										<tr>
 											<td class="label">Remarks</td>
 											<td ti='8'><asp:TextBox TextMode="MultiLine" ID="txtremarks"  dcn="findocdocument_remarks" ml="300" runat="server" CssClass="textarea"></asp:TextBox></td>
+										</tr>
+										<tr>
+											<td class="label">Attachment</td>
+											<td ti='9'><uc:MultiFileUpload ID="mfuattachment"  IsMultiple="true" FileType="any" FolderPath="upload/client/findoc" runat="server" CssClass="textbox "></uc:MultiFileUpload></td>
 										</tr>
 										</table>
 									</td>
