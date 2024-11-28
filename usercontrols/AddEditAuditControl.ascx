@@ -389,7 +389,7 @@
         </tr>
     </table>
 </div>
-<div id="divbankscantabdialog" class="dialog" style="color:#000;width:600px;height:300px;">
+<%--<div id="divbankscantabdialog" class="dialog" style="color:#000;width:600px;height:300px;">
     <table width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td>
@@ -410,11 +410,11 @@
                 </table>
             </td>
         </tr>
-        <tr>
+       <tr>
             <td style="padding:10px;"><i><u>Note :</u> Green tick <img src="images/tick2.png" width="10"/> denotes the particular upload/step/process is been successfully done/completed.</i></td>
         </tr>
         <tr>
             <td align="right" style="padding:20px;"><input type="button" class="button closedialog" value="Got it" /></td>
         </tr>
     </table>
-</div>
+</div>--%>

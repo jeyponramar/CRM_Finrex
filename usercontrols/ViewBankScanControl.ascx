@@ -6,13 +6,13 @@
             <tr>
                 <td class="page-title2">BankScan</td>
             </tr>
-            <tr>
+           <%-- <tr>
                 <td style="padding:10px;padding-right:100px;" align="right"><a href="addbankaudit.aspx" style="color: #fff;
     background-color: #ff8080;
     padding: 7px 15px;
     text-decoration: none;
     border-radius: 5px;" class="jq-lnkaddbankaudit">Add New Audit</a></td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td>
                     <asp:Literal ID="ltdata" runat="server"></asp:Literal>
