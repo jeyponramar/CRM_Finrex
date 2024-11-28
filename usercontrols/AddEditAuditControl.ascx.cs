@@ -175,7 +175,14 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         }
         if (statusId > 1)
         {
-            lbltitle.Text = "Edit BankScan";
+            if (IsClientLoggedIn)
+            {
+                lbltitle.Text = "BankScan Details";
+            }
+            else
+            {
+                lbltitle.Text = "Edit BankScan";
+            }
         }
         if (IsClientLoggedIn)
         {

@@ -71,8 +71,8 @@ public partial class auditadvisor_dashboard : System.Web.UI.Page
         SetCount(countwhere, lbltotalcount);
         SetCount(countwhere + " and bankaudit_bankauditstatusid=1", lblopencount);
         SetCount(countwhere + " and bankaudit_bankauditstatusid=4", lblclosedcount);
-        SetCount(countwhere + " and bankaudit_bankauditstatusid<>4", lblpendingcount);
-        SetCount(countwhere + " and bankaudit_bankauditstatusid=3", lblpendingresponsecount);
+        //SetCount(countwhere + " and bankaudit_bankauditstatusid<>4", lblpendingcount);
+        //SetCount(countwhere + " and bankaudit_bankauditstatusid=3", lblpendingresponsecount);
     }
     private void SetCount(string extrawhere, Label lbl)
     {

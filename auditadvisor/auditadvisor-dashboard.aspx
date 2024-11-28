@@ -21,7 +21,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div style="width:20%;float:left;">
+                        <%--<div style="width:20%;float:left;">
                             <table class="dashboard-widget-count-panel spage" href="auditadvisor/viewbankaudit.aspx?t=3" cellspacing="0" title="Waiting for your response">
                                 <tr><td class="dashboard-widget-count" style="color:#f4292e;"><asp:Label ID="lblpendingresponsecount" runat="server"></asp:Label></td></tr>
                                 <tr><td class="dashboard-widget-desc">Waiting for your response</td></tr>
@@ -40,7 +40,7 @@
                                     </td>
                                 </tr>
                             </table>
-                        </div>
+                        </div>--%>
                         <div style="width:20%;float:left;">
                             <table class="dashboard-widget-count-panel spage" href="auditadvisor/viewbankaudit.aspx?t=2" cellspacing="0" title="Open Audits">
                                 <tr><td class="dashboard-widget-count" style="color:#e7540c;"><asp:Label ID="lblopencount" runat="server"></asp:Label></td></tr>

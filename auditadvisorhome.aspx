@@ -47,12 +47,12 @@
                          <div class='submenu hidden' style='position:absolute;left:100px;top:45px;' target='Bank Audit'>
                             <table><tr><td style='padding:0px;width:250px;vertical-align:top;'>
                             <table cellspacing=0 cellpadding=0>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/addbankaudit.aspx?t=1'>Add Audit</td></tr>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=2'>View Audits</td></tr>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=3'>Open Audits</td></tr>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=4'>Waiting Your Response</td></tr>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=5'>Pending Audits</td></tr>
-                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=6'>Closed Audits</td></tr>
+                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/addbankaudit.aspx'>Add Audit</td></tr>
+                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=1'>View Audits</td></tr>
+                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=2'>Open Audits</td></tr>
+                            <%--<tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=3'>Waiting Your Response</td></tr>
+                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=4'>Pending Audits</td></tr>--%>
+                            <tr><td class='lnksubmenu smenu-report' href='auditadvisor/viewbankaudit.aspx?t=5'>Closed Audits</td></tr>
                             </table>
                             </td>
                             </tr></table>
