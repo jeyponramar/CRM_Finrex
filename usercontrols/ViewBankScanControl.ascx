@@ -12,7 +12,7 @@
     padding: 7px 15px;
     text-decoration: none;
     border-radius: 5px;" class="jq-lnkaddbankaudit">Add New Audit</a></td>
-            </tr>--%>
+            </tr> --%>
             <tr>
                 <td>
                     <asp:Literal ID="ltdata" runat="server"></asp:Literal>

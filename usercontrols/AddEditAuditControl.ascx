@@ -17,7 +17,7 @@
             </table>
         </td>
         <td style="vertical-align:top;">
-            <table width="100%">
+            <table width="100%"> 
                  <tr>
                     <td class='page-inner2' style="padding-bottom:100px;padding-top:10px;">
                     <table width='100%'><tr><td class='page-title2'><asp:Label ID="lbltitle" runat="server" Text="New BankScan"></asp:Label></td></tr>
