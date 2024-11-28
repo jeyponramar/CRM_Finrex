@@ -26,19 +26,36 @@ public class ac : IHttpHandler, System.Web.SessionState.IRequiresSessionState
         string ec = context.Request.QueryString["ec"];
         string ev = context.Request.QueryString["ev"];
         string w = GlobalUtilities.ConvertToString(context.Request.QueryString["w"]);
+        string extraWhere = "";
+        
+        int loggedInClientId = GlobalUtilities.ConvertToInt(CustomSession.Session("Login_ClientId"));
+        if (loggedInClientId > 0)
+        {
+            w = "";
+            bool isValidRequest = false;
+            if (m.StartsWith("findoc"))
+            {
+                isValidRequest = true;
+                extraWhere = " AND (" + m + "_clientid = 0 OR " + m + "_clientid=" + loggedInClientId + ")";
+            }
+            if (!isValidRequest)
+            {
+                string clientAcModules = "fimimportorder,bank,month";
+                Array arrm = clientAcModules.Split(',');
+                isValidRequest = GlobalUtilities.IsDataExistsInArray(arrm, m);
+            }
+            if (!isValidRequest)
+            {
+                context.Response.Clear();
+                context.Response.End();
+                return;
+            }
+        }
         StringBuilder data = new StringBuilder();
         string tableName = "tbl_" + m.ToLower();
         int index = tableName.IndexOf('_');
         string prefix = tableName.Substring(index + 1);
-        //if (Common.UserId == 0)
-        //{
-        //    //for client user
-        //    Array arrm = "state,area".Split(',');
-        //    if (!GlobalUtilities.IsDataExistsInArray(arrm, m))
-        //    {
-        //        return;
-        //    }
-        //}
+        
         if (m == "client" || cm.StartsWith("client_"))
         {
             cn = "client_customername";
@@ -48,7 +65,7 @@ public class ac : IHttpHandler, System.Web.SessionState.IRequiresSessionState
         {
             columnName = prefix + "_" + columnName;
         }
-        string extraWhere = "";
+        
         if (ec != "" && ec != null)
         {
             Array arrEc = ec.Split(',');

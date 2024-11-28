@@ -54,15 +54,15 @@ public partial class ViewFindoc : System.Web.UI.Page
             Array arrfiles = attachment.Split(',');
             if (attachment != "")
             {
-                documentHtml.Append("<ul>");
-                for (int i = 0; i < arrfiles.Length; i++)
+                documentHtml.Append("<ul class='file-list-ul'>");
+                for (int j = 0; j < arrfiles.Length; j++)
                 {
                     string folderPath = Server.MapPath("~/upload/client/" + clientId + "/findoc/" + id);
-                    string fileName = arrfiles.GetValue(i).ToString();
+                    string fileName = arrfiles.GetValue(j).ToString();
                     if (File.Exists(folderPath + "/" + fileName))
                     {
-                        string fileName = Common.GetFileName(fileName);
-                        documentHtml.Append("<li><a href='' target='_blank'>" + fileName + "</a></li>");
+                        string acualFileName = Common.GetFileName(fileName);
+                        documentHtml.Append("<li><a href='upload/client/" + clientId + "/findoc/" + id + "/" + fileName + "' target='_blank'>" + acualFileName + "</a></li>");
                     }
                 }
                 documentHtml.Append("</ul>");

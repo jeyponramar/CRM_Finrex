@@ -42,8 +42,9 @@ public partial class Addfincategory : System.Web.UI.Page
         int clientUserId = Common.ClientUserId;
         int id = Common.GetQueryStringValue("id");
         string query = "";
-        query = "select * from tbl_findoccategory where findoccategory_clientid=" + Common.ClientId +
-               "and findoccategory_categoryname=@categoryname";
+        query = @"select * from tbl_findoccategory 
+                where (findoccategory_clientid = 0 OR findoccategory_clientid=" + Common.ClientId + ")" +
+               " and findoccategory_categoryname=@categoryname";
         if (id > 0)
         {
             query += " and findoccategory_findoccategoryid<>" + id;

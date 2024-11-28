@@ -26,7 +26,8 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         if (id == 0) return;
         GlobalData objGlobalData = new GlobalData("tbl_findocsubcategory", "findocsubcategoryid");
         string query = "";
-        query = "select * from tbl_findocsubcategory where findocsubcategory_findocsubcategoryid=" + id +
+        query = @"select * from tbl_findocsubcategory 
+                where findocsubcategory_findocsubcategoryid=" + id +
                " and findocsubcategory_clientid=" + Common.ClientId;
         DataRow dr = DbTable.ExecuteSelectRow(query);
         if (dr == null)
@@ -41,7 +42,8 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         int clientUserId = Common.ClientUserId;
         int id = Common.GetQueryStringValue("id");
         string query = "";
-        query="select * from tbl_findocsubcategory where findocsubcategory_clientid=" + Common.ClientId +
+        query = @"select * from tbl_findocsubcategory 
+                where (findocsubcategory_clientid = 0 OR findocsubcategory_clientid=" + Common.ClientId + ") " +
                " and findocsubcategory_subcategoryname=@subcategoryname";
         if (id > 0)
         {

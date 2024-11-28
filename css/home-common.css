@@ -1063,3 +1063,11 @@ a
     border-radius: 5px;
     line-height:30px;
 }
+.file-list-ul li
+{
+	padding-bottom:10px;
+}
+.file-list-ul li a
+{
+	text-decoration:none;
+}

@@ -29,7 +29,7 @@ body{background-color:#fff !important;}
                             <tr>
                                 <td width="500">
                                     <table cellpadding='5' cellspacing='5'>
-                                         <tr><td colspan="2"><asp:Label ID="lblmessage" runat="server"></asp:Label></td></tr>
+                                         <tr><td colspan="2"><asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label></td></tr>
                                          <tr>
                                              <td>FinDoc Department</td>
                                              <td>
@@ -52,7 +52,7 @@ body{background-color:#fff !important;}
                                              <td>FinDoc Sub Category</td>
                                              <td>
                                                 <asp:TextBox ID="findocsubcategory" MaxLength="100" runat="server" m="findocsubcategory" cn="subcategoryname" 
-                                                  CssClass="textbox ac txtac"></asp:TextBox>  
+                                                  CssClass="textbox ac txtac" acparent="findoccategoryid"></asp:TextBox>  
                                                  <asp:TextBox id="txtfindocsubcategoryid" Text="0" runat="server" class="hdnac" />
                                                  <img src="images/down-arrow.png" class="quick-new epage" />
                                              </td>
@@ -79,12 +79,12 @@ body{background-color:#fff !important;}
                                          <tr>
                                               <td>Subject</td>
                                               <td>
-                                              <asp:TextBox ID="txtsubject"  runat="server" class="textbox"></asp:TextBox>
+                                              <asp:TextBox ID="txtsubject" MaxLength="100" runat="server" class="textbox"></asp:TextBox>
                                               </td>
                                          </tr>
                                          <tr>
 				                             <td>Remarks</td>
-				                             <td><asp:TextBox TextMode="MultiLine" ID="txtremarks"   runat="server" CssClass="textarea" style="height:70px;"></asp:TextBox></td>
+				                             <td><asp:TextBox TextMode="MultiLine" ID="txtremarks" MaxLength="300" runat="server" CssClass="textarea" style="height:70px;"></asp:TextBox></td>
 			                             </tr>
                                          <tr>
                                              <td></td>

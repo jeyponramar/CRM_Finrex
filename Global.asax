@@ -35,6 +35,21 @@
         string url = Request.Url.ToString().ToLower();
 
     }
+    private void ValidateClientUploadFile(string url)
+    {
+        Array arr = url.Split('/');
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr.GetValue(i).ToString() == "client")
+            {
+                int clienId = GlobalUtilities.ConvertToInt(arr.GetValue(i + 1));
+                if (Common.ClientId == 0 || Common.ClientId != clienId)
+                {
+                    Response.End();
+                }
+            }
+        }
+    }
     void Application_BeginRequest(object sender, EventArgs e)
     {
         string url = Request.Url.ToString().ToLower();
@@ -44,7 +59,7 @@
         }
         if (url.Contains("/upload/client/"))
         {
-            
+            ValidateClientUploadFile(url);
         }
         if (!url.Contains("localhost:"))
         {
