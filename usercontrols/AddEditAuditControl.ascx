@@ -44,10 +44,10 @@
                                 <tr id="trclient" runat="server" visible="false">
                                     <td>Company</td><td><asp:Label ID="lblcompany" runat="server" CssClass="bold"></asp:Label></td>
                                 </tr>
-                                <tr>
+                                <tr id="trcustomer" runat="server" visible="false">
                                     <td>Customer</td>
                                     <td>    
-                                        <asp:TextBox ID="client" runat="server" CssClass="ac txtac" m="client" cn="customername"></asp:TextBox>
+                                        <asp:TextBox ID="client" runat="server" CssClass="textbox ac txtac" m="client" cn="customername"></asp:TextBox>
                                         <asp:TextBox ID="txtclientid" runat="server" CssClass="hdnac"></asp:TextBox>
                                     </td>
                                 </tr>
@@ -79,7 +79,7 @@
                                 <tr><td>&nbsp;</td></tr>
                                 <tr>
                                     <td></td><td><asp:Button ID="btnaddaudit" runat="server" Text="Continue" CssClass="button" OnClick="btnaddaudit_Click"/>
-                                    &nbsp;<asp:Button ID="btnReopen" runat="server" Text="ReOpen" CssClass="button" Visible="false"/>
+                                    
                                     </td>
                                 </tr>
                             </table>
@@ -222,10 +222,10 @@
                                             </table>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <%--<tr>
                                         <td align="center"><asp:Button ID="btnsendforreview_documents" style="background-color:#F58730;" Visible="false" runat="server" Text="Send for Review" 
                                         CssClass="button jq-btnsendforreview" OnClick="btnsendforreview_fromdoc_Click"/></td>   
-                                    </tr>
+                                    </tr>--%>
                                 </table>
                             </asp:PlaceHolder>
                             <asp:PlaceHolder ID="plstep6" runat="server" Visible="false">
@@ -280,7 +280,7 @@
                                                                 <td><asp:Label ID="lblfinrexremarks" runat="server"></asp:Label></td>
                                                             </tr>
                                                             <tr><td>&nbsp;</td></tr>
-                                                            <tr>
+                                                            <%--<tr>
                                                                 <td style="border: solid 1px #aaa;padding:10px;background-color:#ffcece;" colspan="2">
                                                                     <table>
                                                                         <tr>
@@ -291,14 +291,14 @@
                                                                         </tr>
                                                                     </table>
                                                                 </td>
-                                                            </tr>
+                                                            </tr>--%>
                                                         </table>
                                                     </td>
                                                 </tr>
                                                 <tr id="trfinrexremarks" runat="server" visible="false">
                                                     <td>
                                                         <table>
-                                                            <tr>
+                                                            <tr style="display:none;">
                                                                 <td>Client Last Remarks : </td>
                                                                 <td><asp:Label ID="lblclientremarks" runat="server"></asp:Label></td>
                                                             </tr>
@@ -324,9 +324,10 @@
                                                             <tr>
                                                                 <td><asp:Button ID="btnprevstep7" runat="server" Text="Previous" CssClass="button" OnClick="btnprevstep7_Click"/></td>       
                                                                 <td><asp:Button ID="btnfinalsave" runat="server" Text="Save" CssClass="button" OnClick="btnfinalsave_Click"/></td>       
-                                                                <td><asp:Button ID="btnsendforreview" style="background-color:#F58730;" Visible="false" runat="server" Text="Send for Review" CssClass="button jq-btnsendforreview" OnClick="btnsendforreview_Click"/></td>   
-                                                                <td><asp:Button ID="btnsubmitreview" style="background-color:#F58730;" Visible="false" runat="server" Text="Submit Review" CssClass="button jq-btnsubmitreview" OnClick="btnsubmitreview_Click"/></td>     
+                                                                <%--<td><asp:Button ID="btnsendforreview" style="background-color:#F58730;" Visible="false" runat="server" Text="Send for Review" CssClass="button jq-btnsendforreview" OnClick="btnsendforreview_Click"/></td>   
+                                                                <td><asp:Button ID="btnsubmitreview" style="background-color:#F58730;" Visible="false" runat="server" Text="Submit Review" CssClass="button jq-btnsubmitreview" OnClick="btnsubmitreview_Click"/></td>     --%>
                                                                 <td><asp:Button ID="btncompleteaudit" style="background-color:#039e65;" Visible="false" runat="server" Text="Close Audit" CssClass="button jq-btncompleteaudit" OnClick="btncompleteaudit_Click"/></td>     
+                                                                &nbsp;<asp:Button ID="btnReopen" runat="server" Text="ReOpen" CssClass="button" Visible="false" OnClick="btnreopenaudit_Click"/>
                                                             </tr>
                                                         </table>
                                                     </td>

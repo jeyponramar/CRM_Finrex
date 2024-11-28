@@ -42,6 +42,7 @@
         {
             if (arr.GetValue(i).ToString() == "client")
             {
+                if (arr.GetValue(i + 2).ToString() == "temp") return;
                 int clienId = GlobalUtilities.ConvertToInt(arr.GetValue(i + 1));
                 if (Common.ClientId == 0 || Common.ClientId != clienId)
                 {

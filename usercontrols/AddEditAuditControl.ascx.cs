@@ -20,8 +20,14 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
 {
     DataRow _dr = null;
     private bool _IsAdminPage = false;
+    int _LoggedInClientId = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Id == 0 && Common.ClientId > 0)//dont allow client to add
+        {
+            Response.End();
+            return;
+        }
         BindAuditDetails();
         if (!IsPostBack)
         {
@@ -44,7 +50,15 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
             }
             if (Id == 0)
             {
+                trcustomer.Visible = true;
                 ShowTabGuidelineModal();
+            }
+            else
+            {
+                if (!IsClientLoggedIn)
+                {
+                    trclient.Visible = true;
+                }
             }
             BindBasicDetails();
         }
@@ -74,13 +88,16 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
     {
         get
         {
-            if (LoggedInUserId > 0) return false;
-            return true;
+            if (Common.ClientId > 0) return true;
+            return false;
         }
     }
     private int LoggedInClientId
     {
-        get { return Common.ClientId; }
+        get 
+        {
+            return _LoggedInClientId;
+        }
     }
     private int LoggedInClientUserId
     {
@@ -101,14 +118,14 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
                     left join tbl_clientuser on clientuser_clientuserid=bankaudit_clientuserid
                     left join tbl_bankauditbank on bankauditbank_bankauditbankid=bankaudit_bankauditbankid
                     where bankaudit_bankauditid=" + Id;
-        if (IsClientLoggedIn) query += " and bankaudit_clientid=" + LoggedInClientId;
+        if (IsClientLoggedIn) query += " and bankaudit_clientid=" + Common.ClientId;
         _dr = DbTable.ExecuteSelectRow(query);
         if (_dr == null)
         {
             Response.Write("Error occurred");
             Response.End();
         }
-       
+        _LoggedInClientId = GlobalUtilities.ConvertToInt(_dr["bankaudit_clientid"]);
     }
     private void UpdateCustomerVisited()
     {
@@ -162,19 +179,32 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         }
         if (IsClientLoggedIn)
         {
-            if (statusId == 0 || statusId == 1 || statusId == 2)
+            hdnissaveenabled.Text = "0";
+            //if (statusId == 0 || statusId == 1 || statusId == 2)
+            //{
+            //    //btnsendforreview.Visible = true;
+            //    btnsendforreview_documents.Visible = true;
+            //}
+            //else
             {
-                btnsendforreview.Visible = true;
-                btnsendforreview_documents.Visible = true;
-            }
-            else
-            {
-                hdnissaveenabled.Text = "0";
                 btnfinalsave.Visible = false;
-                btnsendforreview.Visible = false;
+                //btnsendforreview.Visible = false;
                 btnsave2.Visible = false;
                 btnsave3.Visible = false;
                 btnsave4.Visible = false;
+                btnprevstep2.Visible = false;
+                btnprevstep3.Visible = false;
+                btnprevstep4.Visible = false;
+                btnprevstep5.Visible = false;
+                btnprevstep6.Visible = false;
+                btnprevstep7.Visible = false;
+
+                btnnextstep2.Visible = false;
+                btnnextstep3.Visible = false;
+                btnnextstep4.Visible = false;
+                btnnextstep5.Visible = false;
+                btnnextstep6.Visible = false;
+                btnReopen.Visible = false;
                 btnnextstep2.Text = "Next";
                 btnnextstep3.Text = "Next";
                 btnnextstep4.Text = "Next";
@@ -187,16 +217,17 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
             {
                 btnsendbankletter.Visible = true;
             }
-            if (statusId == 3)
+            if (statusId == 1)//open
             {
                 btncompleteaudit.Visible = true;
-                btnsubmitreview.Visible = true;
+                //btnsubmitreview.Visible = true;
             }
             else
             {
                 hdnissaveenabled.Text = "0";
                 btnfinalsave.Visible = false;
-                btnsendforreview.Visible = false;
+                //btnsendforreview.Visible = false;
+                btncompleteaudit.Visible = false;
                 btnsave2.Visible = false;
                 btnsave3.Visible = false;
                 btnsave4.Visible = false;
@@ -318,7 +349,8 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
     private string GetCode()
     {
         string query = "";
-        query = @"select top 1 * from tbl_subscription where subscription_clientid=" + Common.ClientId +
+        int clientId = GlobalUtilities.ConvertToInt(txtclientid.Text);
+        query = @"select top 1 * from tbl_subscription where subscription_clientid=" + clientId +
                     @" and subscription_subscriptionstatusid=2 order by subscription_subscriptionid desc";
         DataRow drs = DbTable.ExecuteSelectRow(query);
         if (drs == null)
@@ -328,7 +360,7 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         }
         string subscriptionCode = GlobalUtilities.ConvertToString(drs["subscription_subscriptioncode"]);
         query = @"select top 1 * from tbl_bankaudit 
-                    where bankaudit_clientid=" + Common.ClientId + //" and bankaudit_code like '" + subscriptionCode + @"-%'
+                    where bankaudit_clientid=" + clientId + //" and bankaudit_code like '" + subscriptionCode + @"-%'
                     " order by bankaudit_bankauditid desc";
         DataRow dr = DbTable.ExecuteSelectRow(query);
         int count = 1000;
@@ -356,11 +388,12 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
             InsertUpdate obj = new InsertUpdate();
             if (Id == 0)
             {
+                int clientId = GlobalUtilities.ConvertToInt(txtclientid.Text);
                 hstbl.Add("code", GetCode());
                 hstbl.Add("guid", Guid.NewGuid().ToString());
                 hstbl.Add("date", "getdate()");
-                hstbl.Add("clientid", LoggedInClientId);
-                hstbl.Add("clientuserid", LoggedInClientUserId);
+                hstbl.Add("clientid", clientId);
+                hstbl.Add("clientuserid", 0);
                 hstbl.Add("bankauditstatusid", "1");
                 hstbl.Add("completedsteps", "1");
                 int year = DateTime.Now.Year;
@@ -370,6 +403,7 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
                 id = obj.InsertData(hstbl, "tbl_bankaudit");
                 if (id > 0)
                 {
+                    _LoggedInClientId = clientId;
                     AddLastThreeYearTurnOver(id);
                     AddCurrencywiseTurnOver(id);
                     AddLastThreeYearBankingCost(id);
@@ -765,23 +799,27 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         int clientId = LoggedInClientId;
         bool isUploadEnabled = false;
         int statusId = StatusId;
-        if (isbankletter == 1)//only for finrex
+        if (IsClientLoggedIn == false)
         {
-            if (!IsClientLoggedIn)
-            { 
-                if(statusId == 3)
-                {
-                    isUploadEnabled = true;
-                }
-            }
+            isUploadEnabled = true;
         }
-        else
-        {
-            if (statusId == 1 || statusId == 2)
-            {
-                isUploadEnabled = true;
-            }
-        }
+        //if (isbankletter == 1)//only for finrex
+        //{
+        //    if (!IsClientLoggedIn)
+        //    { 
+        //        if(statusId == 3)
+        //        {
+        //            isUploadEnabled = true;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    if (statusId == 1 || statusId == 2)
+        //    {
+        //        isUploadEnabled = true;
+        //    }
+        //}
         html.Append("<table class='grid-ui' border='1' cellpadding='7' style='width:auto;'><tr class='grid-ui-header'><td style='min-width:200px;'>Document Name</td>");
         html.Append("<td>Upload</td></tr>");
         query = @"select * from tbl_bankauditdocumentlist 
@@ -1116,11 +1154,11 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         }
         else
         {
-            hstbl.Add("clientremarks", txtclientremarks.Text);
+            //hstbl.Add("clientremarks", txtclientremarks.Text);
             if (isSendToReview)
             {
                 hstbl.Add("finrexremarks", "");
-                hstbl.Add("lastremarks", txtclientremarks.Text);
+                //hstbl.Add("lastremarks", txtclientremarks.Text);
             }
         }
         if (statusId > 0)
@@ -1139,35 +1177,35 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         int id = obj.UpdateData(hstbl, "tbl_bankaudit", Id);
         lblMessage.Text = "Data saved successfully!";
     }
-    protected void btnsendforreview_fromdoc_Click(object sender, EventArgs e)
-    {
-        btnsendforreview_Click(sender, e);
-        BankAudit obj = new BankAudit();
-        obj.UpdateCompletedSteps(Id, _dr, BankAuditSteps.Documents);
-    }
-    protected void btnsendforreview_Click(object sender, EventArgs e)
-    {
-        SaveFinalBankAudit(true, 3);
-        SavebankAuditCommentHistory();
-        EmailToAdvisor();
-        lblMessage.Text = "We have received your request, our Finrex Audit team will respond to you soon.";
-        trhomelink.Visible = true;
-        lblMessage.Visible = true;
-        plstep6.Visible = false;
-        trpagecontent.Visible = false;
-        trsteps.Visible = false;
-    }
-    protected void btnsubmitreview_Click(object sender, EventArgs e)
-    {
-        SaveFinalBankAudit(true, 2);
-        SavebankAuditCommentHistory();
-        EmailToClient();
-        lblMessage.Text = "Your response has been submitted to client.";
-        lblMessage.Visible = true;
-        plstep6.Visible = false;
-        trpagecontent.Visible = false;
-        trsteps.Visible = false;
-    }
+    //protected void btnsendforreview_fromdoc_Click(object sender, EventArgs e)
+    //{
+    //    btnsendforreview_Click(sender, e);
+    //    BankAudit obj = new BankAudit();
+    //    obj.UpdateCompletedSteps(Id, _dr, BankAuditSteps.Documents);
+    //}
+    //protected void btnsendforreview_Click(object sender, EventArgs e)
+    //{
+    //    SaveFinalBankAudit(true, 3);
+    //    SavebankAuditCommentHistory();
+    //    EmailToAdvisor();
+    //    lblMessage.Text = "We have received your request, our Finrex Audit team will respond to you soon.";
+    //    trhomelink.Visible = true;
+    //    lblMessage.Visible = true;
+    //    plstep6.Visible = false;
+    //    trpagecontent.Visible = false;
+    //    trsteps.Visible = false;
+    //}
+    //protected void btnsubmitreview_Click(object sender, EventArgs e)
+    //{
+    //    SaveFinalBankAudit(true, 2);
+    //    SavebankAuditCommentHistory();
+    //    EmailToClient();
+    //    lblMessage.Text = "Your response has been submitted to client.";
+    //    lblMessage.Visible = true;
+    //    plstep6.Visible = false;
+    //    trpagecontent.Visible = false;
+    //    trsteps.Visible = false;
+    //}
     protected void btncompleteaudit_Click(object sender, EventArgs e)
     {
         bool isgenaretd = GenerateCloseAuditReport();
@@ -1186,6 +1224,7 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         plstep6.Visible = false;
         trpagecontent.Visible = false;
         trsteps.Visible = false;
+        btnReopen.Visible = true;
     }
     protected void btnsendbankletter_Click(object sender, EventArgs e)
     {
@@ -1494,15 +1533,15 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
     {
         Hashtable hstbl = new Hashtable();
         hstbl.Add("bankauditid", Id);
-        if (IsClientLoggedIn)
-        {
-            if (txtclientremarks.Text.Trim() == "") return;
-            hstbl.Add("clientid", LoggedInClientId);
-            hstbl.Add("clientuserid", LoggedInClientUserId);
-            hstbl.Add("isclientcomment", "1");
-            hstbl.Add("comment", txtclientremarks.Text);
-        }
-        else
+        //if (IsClientLoggedIn)
+        //{
+        //    if (txtclientremarks.Text.Trim() == "") return;
+        //    hstbl.Add("clientid", LoggedInClientId);
+        //    hstbl.Add("clientuserid", LoggedInClientUserId);
+        //    hstbl.Add("isclientcomment", "1");
+        //    hstbl.Add("comment", txtclientremarks.Text);
+        //}
+        //else
         {
             if (txtfinrexremarks.Text.Trim() == "") return;
             hstbl.Add("isclientcomment", "0");
@@ -1624,14 +1663,21 @@ public partial class usercontrols_AddEditAuditControl : System.Web.UI.UserContro
         txtforwardcontractremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_forwardcontractremarks"]);
         if (IsClientLoggedIn)
         {
-            txtclientremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_clientremarks"]);
+            //txtclientremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_clientremarks"]);
             lblfinrexremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_finrexremarks"]);
         }
         else
         {
             txtfinrexremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_finrexremarks"]);
-            lblclientremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_clientremarks"]);
+            //lblclientremarks.Text = GlobalUtilities.ConvertToString(_dr["bankaudit_clientremarks"]);
         }
+    }
+    protected void btnreopenaudit_Click(object sender, EventArgs e)
+    {
+        Hashtable hstbl = new Hashtable();
+        hstbl.Add("bankauditstatusid", "1");
+        InsertUpdate obj = new InsertUpdate();
+
     }
     public bool IsAdminPage
     {
