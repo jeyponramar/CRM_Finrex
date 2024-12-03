@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Apirequesthistory</title>
+  <module>apirequesthistory</module>
+  <table>tbl_apirequesthistory</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>apirequesthistory_apirequesthistoryid desc</defaultsort>
+  <columns>client_customername,apirequesttype_apirequesttype,apirequesthistory_requestdate</columns>
+  <columnlabels>Client,API Request Type,Request Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>100%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>apirequesttype_apirequesttype</name>
+      <headertext>API Request Type</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>apirequesthistory_requestdate</name>
+      <headertext>Request Date</headertext>
+      <width>33%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>apirequesthistory_apirequesthistoryid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_apirequesthistory
+
+ LEFT JOIN tbl_client ON client_clientid=apirequesthistory_clientid
+ LEFT JOIN tbl_apirequesttype ON apirequesttype_apirequesttypeid=apirequesthistory_apirequesttypeid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,API Request Type</searchbylabels>
+  <searchbycolumns>client_customername,apirequesttype_apirequesttype</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>
