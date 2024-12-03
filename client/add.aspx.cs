@@ -49,6 +49,10 @@ public partial class Client_add : System.Web.UI.Page
             //CallPopulateSubGrid_START
 			
 			//CallPopulateSubGrid_END
+            if (Common.RoleId != 1)//admin
+            {
+                btnapiconfig.Visible = false;
+            }
         }
         //PageTitle_START
         CommonPage.SetPageTitle(Page, lblPageTitle, "Client");

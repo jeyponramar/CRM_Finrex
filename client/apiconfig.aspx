@@ -30,6 +30,10 @@ Inherits="client_apiconfig" Title="Untitled Page" %>
                                            <td><asp:TextBox ID="txtmaxapicallsperday" runat="server" class="textbox val-i"></asp:TextBox></td>
                                        </tr>
                                        <tr>
+                                            <td>API Password</td>
+                                            <td><asp:Label ID="lblapipassword" runat="server"></asp:Label></td>
+                                       </tr>
+                                       <tr>
                                            <td></td>
                                            <td><asp:Button ID="btnSubmit" runat="server" Text="Save" CssClass="save button"  OnClick="btnSubmit_Click" ValidationGroup="vg"  /></td>
                                        </tr>
