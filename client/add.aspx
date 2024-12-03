@@ -64,6 +64,7 @@
 				<asp:Button ID="btnaddcompetitor" Text="Add Competitor" OnClick="btnaddcompetitor_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<asp:Button ID="btnviewcompetitor" Text="View Competitor" OnClick="btnviewcompetitor_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<asp:Button ID="btnupdatekycdetails" Text="Update KYC Details" OnClick="btnupdatekycdetails_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
+				<asp:Button ID="btnapiconfig" Text="API Config" OnClick="btnapiconfig_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<!--ACTION_END-->
             </td>
             <td align="right"> 

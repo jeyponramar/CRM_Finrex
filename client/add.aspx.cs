@@ -155,6 +155,7 @@ public partial class Client_add : System.Web.UI.Page
 		btnviewcompetitor.Visible = true;
 		btnupdatekycdetails.Visible = true;
 		btnDelete.Visible = true;
+        btnapiconfig.Visible = true;
 	}//EnableControlsOnEdit_END
     private int GetId()
     {
@@ -231,5 +232,9 @@ public partial class Client_add : System.Web.UI.Page
 	protected void btnupdatekycdetails_Click(object sender, EventArgs e)
 	{
         Common.Redirect("~/client/updateclientkycdetail.aspx?id=" + GetId());
+	}
+	protected void btnapiconfig_Click(object sender, EventArgs e)
+	{
+        Common.Redirect("~/client/apiconfig.aspx?id=" + GetId());
 	}
 }
