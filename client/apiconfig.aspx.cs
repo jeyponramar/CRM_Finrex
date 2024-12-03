@@ -16,6 +16,11 @@ public partial class client_apiconfig : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Common.RoleId != 1)
+        {
+            Session["S_Error"] = "You do not have access rights to perform this operation!";
+            Response.Redirect("../error.aspx");
+        }
         if (!IsPostBack)
         {
             PopulateData();
@@ -34,18 +39,24 @@ public partial class client_apiconfig : System.Web.UI.Page
             Response.End();
         }
         objGlobalData.PopulateForm(dr, form);
+        int maxCallsPerDay = GlobalUtilities.ConvertToInt(txtmaxapicallsperday.Text);
+        if (maxCallsPerDay == 0)
+        {
+            txtmaxapicallsperday.Text = "4";
+        }
+        if (txtapiusername.Text == "")
+        {
+            txtapiusername.Text = GlobalUtilities.ConvertToString(dr["client_customername"]).Replace(" ", "");
+        }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        int clientId = Common.ClientId;
         int id = Common.GetQueryStringValue("id");
         string query = "";
-        query = "select * from tbl_client where client_clientid=" + Common.ClientId + 
-                "and client_apiusername=@apiusername";
-        if (id > 0)
-        {
-            query += " and client_clientid<>" + id;
-        }
+        query = "select * from tbl_client where client_clientid=" + id + 
+                "and client_apiusername=@apiusername and client_clientid<>" + id;
+
+        string apiPassword = Guid.NewGuid().ToString();
         Hashtable hstblP = new Hashtable();
         hstblP.Add("apiusername", txtapiusername.Text);
         DataRow dr = DbTable.ExecuteSelectRow(query, hstblP);
@@ -56,6 +67,7 @@ public partial class client_apiconfig : System.Web.UI.Page
         Hashtable hstbl = new Hashtable();
         hstbl.Add("apiusername", txtapiusername.Text);
         hstbl.Add("maxapicallsperday", txtmaxapicallsperday.Text);
+        hstbl.Add("apipassword", apiPassword);
         InsertUpdate obj = new InsertUpdate();
         if (id > 0)
         {

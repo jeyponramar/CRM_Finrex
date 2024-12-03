@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<setting>
+  <title>View Apitoken</title>
+  <module>apitoken</module>
+  <table>tbl_apitoken</table>
+  <enablegridsetting>true</enablegridsetting>
+  <enablepaging>true</enablepaging>
+  <ismobile>False</ismobile>
+  <pagesize>20</pagesize>
+  <toprecords>0</toprecords>
+  <enablesorting>true</enablesorting>
+  <enablesearch>true</enablesearch>
+  <defaultsort>apitoken_apitokenid desc</defaultsort>
+  <columns>client_customername,apitoken_token,apitoken_tokendate</columns>
+  <columnlabels>Client,Token,Token Date</columnlabels>
+  <gridtype>grid</gridtype>
+  <gridcolumn>
+    <column>
+      <name>client_customername</name>
+      <headertext>Client</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>apitoken_token</name>
+      <headertext>Token</headertext>
+      <width>50%</width>
+      <format>
+      </format>
+    </column>
+    <column>
+      <name>apitoken_tokendate</name>
+      <headertext>Token Date</headertext>
+      <width>33%</width>
+      <format>DateTime</format>
+    </column>
+  </gridcolumn>
+  <hiddencolumns>apitoken_apitokenid</hiddencolumns>
+  <query>
+select $COLUMNS$ from tbl_apitoken
+
+ LEFT JOIN tbl_client ON client_clientid=apitoken_clientid
+ $Search$
+</query>
+  <customequery>
+  </customequery>
+  <where>
+  </where>
+  <searchbylabels>Client,Token</searchbylabels>
+  <searchbycolumns>client_customername,apitoken_token</searchbycolumns>
+  <isrightreport>False</isrightreport>
+  <applyviewrights>False</applyviewrights>
+</setting>

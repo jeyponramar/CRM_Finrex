@@ -10,9 +10,9 @@ using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 using System.Text;
 
-public partial class Service_add : System.Web.UI.Page
+public partial class APIToken_add : System.Web.UI.Page
 {
-    GlobalData gblData = new GlobalData("tbl_service", "serviceid");
+    GlobalData gblData = new GlobalData("tbl_apitoken", "apitokenid");
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,6 +28,7 @@ public partial class Service_add : System.Web.UI.Page
 			
 			//PopulateAcOnAdd_END
 				//PopulateOnAdd_START
+				DataRow drpop = CommonPage.PopulateOnAdd(form);//pop=true&popm=&popjoin=&popid=
 				//PopulateOnAdd_END
                 //SetDefault_START//SetDefault_END
             }
@@ -36,11 +37,6 @@ public partial class Service_add : System.Web.UI.Page
                 //Populate_START
                 gblData.PopulateForm(form, GetId());
                 //Populate_END
-                if (GetId() <= 1000)//restrict edit
-                {
-                    btnDelete.Visible = false;
-                    btnSubmit.Visible = false;
-                }
             }
             //CallPopulateSubGrid_START
 			
@@ -49,14 +45,14 @@ public partial class Service_add : System.Web.UI.Page
         //PageTitle_START
         if (Request.QueryString["id"] == null)
         {
-            lblPageTitle.Text = "Add Service";
+            lblPageTitle.Text = "Add API Token";
         }
         else
         {
-            lblPageTitle.Text = "Edit Service";
+            lblPageTitle.Text = "Edit API Token";
         }
         ClientScript.RegisterClientScriptBlock(typeof(Page), "title", "<script>setTitle('" + lblPageTitle.Text + "')</script>");
-        //PageTitle_START
+        //PageTitle_END
     }
     //PopulateSubGrid_START
 			
@@ -64,13 +60,6 @@ public partial class Service_add : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         SaveData(true);
-    }
-    protected void btnSaveAndView_Click(object sender, EventArgs e)
-    {
-        if(SaveData(false) > 0)
-        {
-			Response.Redirect("~/Service/view.aspx");
-		}
     }
     private int SaveData(bool isclose)
     {
