@@ -49,10 +49,7 @@ public partial class Client_add : System.Web.UI.Page
             //CallPopulateSubGrid_START
 			
 			//CallPopulateSubGrid_END
-            if (Common.RoleId != 1)//admin
-            {
-                btnapiconfig.Visible = false;
-            }
+            
         }
         //PageTitle_START
         CommonPage.SetPageTitle(Page, lblPageTitle, "Client");
@@ -159,7 +156,6 @@ public partial class Client_add : System.Web.UI.Page
 		btnviewcompetitor.Visible = true;
 		btnupdatekycdetails.Visible = true;
 		btnDelete.Visible = true;
-        btnapiconfig.Visible = true;
 	}//EnableControlsOnEdit_END
     private int GetId()
     {
@@ -237,8 +233,5 @@ public partial class Client_add : System.Web.UI.Page
 	{
         Common.Redirect("~/client/updateclientkycdetail.aspx?id=" + GetId());
 	}
-	protected void btnapiconfig_Click(object sender, EventArgs e)
-	{
-        Common.Redirect("~/client/apiconfig.aspx?id=" + GetId());
-	}
+	
 }

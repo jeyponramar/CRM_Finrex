@@ -17,7 +17,8 @@ public enum Enum_Prospect
     Import_Portal = 5,
     Metal_Commodity = 6,
     Mini_Finstation = 7,
-    BankScan = 8
+    BankScan = 8,
+    API = 20
 }
 public enum Enum_AppType
 {

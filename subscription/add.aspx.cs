@@ -77,6 +77,17 @@ public partial class Subscription_add : System.Web.UI.Page
                 {
                     btnfemportal.Visible = false;
                 }
+                int clientId = GlobalUtilities.ConvertToInt(txtclientid.Text);
+                query = @"select * from tbl_client where client_clientid="+clientId;
+                DataRow drclient = DbTable.ExecuteSelectRow(query);
+                if (Common.RoleId != 1)//admin
+                {
+                    btnapiconfig.Visible = false;
+                }
+                if (!GlobalUtilities.ConvertToBool(drclient["client_isapienabled"]))
+                {
+                    btnapiconfig.Visible = false;
+                }
             }
             //CallPopulateSubGrid_START
 			
@@ -160,6 +171,7 @@ public partial class Subscription_add : System.Web.UI.Page
 			//ParentCountUpdate_END
             UpdateSubscription();
             UpdateOpportunityStatus();
+            UpdateClientFeatureFlag(id);
             Custom.UpdateSubscriptionStatus(id);
             Custom.UpdateSubscriptionOnClient(id, false);
             Custom.UpdateClientProspects("subscription", id, GlobalUtilities.ConvertToInt(txtclientid.Text), 0);
@@ -212,6 +224,7 @@ public partial class Subscription_add : System.Web.UI.Page
 		btnDelete.Visible = true;
         btnupdatekycdetails.Visible = true;
         btnlogwhatsapp.Visible = true;
+        btnapiconfig.Visible = true;
 	}
     private int GetId()
     {
@@ -512,4 +525,24 @@ public partial class Subscription_add : System.Web.UI.Page
 	protected void btnlogwhatsapp_Click(object sender, EventArgs e)
 	{
 	}
+    private void UpdateClientFeatureFlag(int id)
+    {
+        string query = "";
+        int isApiEnabled = 0;
+        int clientId = GlobalUtilities.ConvertToInt(txtclientid.Text);
+        query = @"select * from tbl_subscriptionservices where subscriptionservices_subscriptionid=" + id + 
+                " and subscriptionservices_serviceid=20";
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr != null)
+        {
+            isApiEnabled = 1;
+        }
+        query = "update tbl_client set client_isapienabled=" + isApiEnabled + " where client_clientid=" + clientId;
+        DbTable.ExecuteQuery(query);
+    }
+    protected void btnapiconfig_Click(object sender, EventArgs e)
+    {
+        int clientId = GlobalUtilities.ConvertToInt(txtclientid.Text);
+        Common.Redirect("~/client/apiconfig.aspx?id=" + clientId);
+    }
 }
