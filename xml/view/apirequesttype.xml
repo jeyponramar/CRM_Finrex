@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<setting>
+		<title>View Apirequesttype</title>
+		<module>apirequesttype</module>
+		<table>tbl_apirequesttype</table>
+		<enablegridsetting>true</enablegridsetting>
+		<enablepaging>true</enablepaging>
+		<ismobile>False</ismobile>
+		<pagesize>20</pagesize>
+		<toprecords>0</toprecords>
+		<enablesorting>true</enablesorting>
+		<enablesearch>true</enablesearch>
+		<defaultsort>apirequesttype_apirequesttypeid desc</defaultsort>
+		<columns>apirequesttype_apirequesttype</columns>
+		<columnlabels>API Request Type</columnlabels>
+		<gridtype>grid</gridtype>
+		<gridcolumn><column><name>apirequesttype_apirequesttype</name><headertext>API Request Type</headertext><width>100%</width><format></format></column>
+		</gridcolumn>
+		<hiddencolumns>apirequesttype_apirequesttypeid</hiddencolumns>
+		<query>
+select $COLUMNS$ from tbl_apirequesttype
+
+ $Search$
+</query>
+		<customequery></customequery>
+		<where></where>
+		<searchbylabels>API Request Type</searchbylabels>
+		<searchbycolumns>apirequesttype_apirequesttype</searchbycolumns>
+		<isrightreport>False</isrightreport>
+		<applyviewrights>False</applyviewrights>
+	</setting>
