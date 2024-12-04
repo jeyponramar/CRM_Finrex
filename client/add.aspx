@@ -64,7 +64,6 @@
 				<asp:Button ID="btnaddcompetitor" Text="Add Competitor" OnClick="btnaddcompetitor_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<asp:Button ID="btnviewcompetitor" Text="View Competitor" OnClick="btnviewcompetitor_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<asp:Button ID="btnupdatekycdetails" Text="Update KYC Details" OnClick="btnupdatekycdetails_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
-				<asp:Button ID="btnapiconfig" Text="API Config" OnClick="btnapiconfig_Click"  Visible="false"  runat="server" CssClass="button btnaction "></asp:Button>
 				<!--ACTION_END-->
             </td>
             <td align="right"> 
@@ -189,6 +188,10 @@
 										<tr>
 											<td class="label">Contact Type</td>
 											<td ti='12'><asp:DropDownList ID="ddlcontacttypeid"  dcn="client_contacttypeid" runat="server" m="contacttype" cn="contacttype" CssClass="ddl"></asp:DropDownList></td>
+										</tr>
+										<tr>
+											<td class="label">Unique Id</td>
+											<td ti='13'><asp:TextBox ID="txtuniqueid"  Enabled="false"  MaxLength="100" runat="server"  dcn="client_uniqueid" CssClass="textbox"></asp:TextBox></td>
 										</tr>
 										</table>
 									</td>

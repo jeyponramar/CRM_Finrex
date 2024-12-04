@@ -21,12 +21,13 @@ public partial class dailydata_Uploaddailydata : System.Web.UI.Page
     }
     protected void btnUpload_Click(object sender, EventArgs e)
     {
-        if (fleupload.HasFile)
+        if (fleinofinupload.HasFile)
         {
-            string extension = System.IO.Path.GetExtension(fleupload.FileName);
+            string extension = System.IO.Path.GetExtension(fleinofinupload.FileName);
             if (extension == ".csv")
             {
-                fleupload.SaveAs(Server.MapPath("~/upload/sharedfiles/InoFinExportData.csv"));
+                fleinofinupload.SaveAs(Server.MapPath("~/upload/sharedfiles/InoFinExportData.csv"));
+                SendEmail();
                 lblmessage.Text = "File has been uploaded successfully";
             }
             else
@@ -38,5 +39,15 @@ public partial class dailydata_Uploaddailydata : System.Web.UI.Page
         {
             lblmessage.Text = "Please choose the file";
         }
+    }
+    private void SendEmail()
+    {
+        string message = Common.GetSetting("InoFinExportData File Upload Notification Email");
+        string url = "https://finstation.in/shareddata/download.aspx?t=inofinexportdata&cuid=abc";
+        string toEmailId = "jeyponramar@gmail.com";
+        string subject = "InoFinExportData File Upload Notification";
+        string error = "";
+        message = message.Replace("$fileurl$", url);
+        BulkEmail.SendMail(toEmailId, subject, message, "");
     }
 }

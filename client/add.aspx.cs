@@ -108,6 +108,10 @@ public partial class Client_add : System.Web.UI.Page
             lblMessage.Visible = true;
             return 0;
         }
+        if (Request.QueryString["id"] == null)
+        {
+            gblData.AddExtraValues("uniqueid", Guid.NewGuid().ToString());
+        }
         id = gblData.SaveForm(form, GetId());
 
         if (id > 0)
