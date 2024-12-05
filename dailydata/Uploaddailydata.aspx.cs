@@ -17,7 +17,10 @@ public partial class dailydata_Uploaddailydata : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            ltdownloadurl.Text = "<a href='" + DownloadUrl + "' target='_blank'>" + DownloadUrl + "</a>";
+        }
     }
     protected void btnUpload_Click(object sender, EventArgs e)
     {
@@ -40,14 +43,22 @@ public partial class dailydata_Uploaddailydata : System.Web.UI.Page
             lblmessage.Text = "Please choose the file";
         }
     }
+    private string DownloadUrl
+    {
+        get
+        {
+            string appUrl = Common.GetApplicationURL();
+            return appUrl + "/shareddata/download.aspx?t=inofinexportdata&cuid=5653012E-877D-4D68-8FF0-BBB0CDEF7120";
+        }
+    }
     private void SendEmail()
     {
         string message = Common.GetSetting("InoFinExportData File Upload Notification Email");
-        string url = "https://finstation.in/shareddata/download.aspx?t=inofinexportdata&cuid=abc";
-        string toEmailId = "jeyponramar@gmail.com";
+        string toEmailId = Common.GetSetting("InoFinExportData Notification Email Id");
+        if (toEmailId == "") return;
         string subject = "InoFinExportData File Upload Notification";
         string error = "";
-        message = message.Replace("$fileurl$", url);
+        message = message.Replace("$fileurl$", DownloadUrl);
         BulkEmail.SendMail(toEmailId, subject, message, "");
     }
 }

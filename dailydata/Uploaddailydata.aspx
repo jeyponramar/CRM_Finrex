@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <td>Url</td>
-                    <td>https://finstation.in/shareddata/download.aspx?t=inofinexportdata&cuid=</td>
+                    <td><asp:Literal ID="ltdownloadurl" runat="server"></asp:Literal></td>
                 </tr>
                 <tr>
                     <td></td>
