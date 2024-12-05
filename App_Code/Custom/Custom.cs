@@ -338,6 +338,7 @@ public static class Custom
         hstbl.Add("businessid", businessId);
         hstbl.Add("industrytypesid", industrytypeId);
         hstbl.Add("contacttypeid", 1);
+        hstbl.Add("uniqueid", Guid.NewGuid().ToString());
         int id = obj.InsertData(hstbl, "tbl_client");
         if (id > 0)
         {
