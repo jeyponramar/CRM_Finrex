@@ -1071,3 +1071,40 @@ a
 {
 	text-decoration:none;
 }
+.findocmenu
+{
+	position:relative;
+}
+.findocmenu:hover ul
+{
+	display:block;
+}
+.findocmenu ul
+{
+	list-style:none;	
+	width:250px;
+	margin:0px;padding:0px;
+	display:none;
+	background:#1F497C;
+	padding:0;
+	border:solid 1px #11375C;
+	z-index:99;
+	position:absolute;
+	right:0px;
+	top:30px;
+}
+.findocmenu ul li
+{
+	padding:10px;
+	text-align:left;
+	border-bottom:solid 1px #11375C;
+}
+.findocmenu ul li:hover
+{
+	background:#30859C;
+}
+.findocmenu ul li a
+{
+	text-decoration:none;
+	color:#fff;
+}

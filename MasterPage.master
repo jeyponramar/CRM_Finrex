@@ -127,10 +127,10 @@ type = "text/javascript"; e.parentNode.insertBefore($, e)
                         <div class="menu-initial" title="BankScan – Bank Charges Audit" style="background-color:#ff8080;">BS</div>
                         <div class="main-left-text">BankScan</div>
                     </div>
-                    <div class="main-left-menu" href="viewfindoc.aspx">
+                    <%--<div class="main-left-menu" href="viewfindoc.aspx">
                         <div class="menu-initial" title="FinDocuments – Manage your documents" style="background-color:#9B59B6;">FD</div>
                         <div class="main-left-text">FinDocuments</div>
-                    </div>
+                    </div>--%>
                    <%-- <div class="main-left-menu" href="exportportal.aspx?pt=1" targetblank="true">
                         <div class="menu-initial" title="FEM – FX Exposure Management" style="background-color:#34A855;">FE</div>
                         <div class="main-left-text">FX Exposure Management</div>
@@ -423,7 +423,12 @@ type = "text/javascript"; e.parentNode.insertBefore($, e)
                                                                     </li>
                                                                   </ul>
                                                              </td>
-                                                             <td class="i-mainmenu menu-home"><a href="economic-calendar.aspx">Economic Calendar</a></td>
+                                                             <td id="subsubmenu" class="submenutools jq-fullfinstation">
+                                                                <ul>
+                                                                    <li><a href="economic-calendar.aspx">Economic Calendar</a></li>
+                                                                </ul>
+                                                             
+                                                             </td>
                                                             <td id="subsubmenu" class="submenutools jq-fullfinstation" >
                                                               <ul>
                                                               <li><a href="#">Others</a>
@@ -447,6 +452,23 @@ type = "text/javascript"; e.parentNode.insertBefore($, e)
                                                               </li>
                                                               </ul>
                                                             </td>
+                                                            <td id="subsubmenu" class="submenutools jq-fullfinstation" style="background-color: #9B59B6;">
+                                                              <ul>
+                                                              <li><a href="ViewFindoc.aspx">FinDocs</a>
+                                                                <%--<ul>
+                                                                    <li><a href="ViewFindoc.aspx">View Document</a></li>
+                                                                    <li><a href="#">Setting</a>
+                                                                        <ul>
+                                                                            <li><a href="Viewfindepartment.aspx">Department</a></li>
+                                                                            <li><a href="Viewfincategory.aspx">Category</a></li>
+                                                                            <li><a href="Viewfinsubcategory.aspx">Sub Category</a></li>
+                                                                            <li><a href="Viewfindocumenttype.aspx">Type</a></li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>--%>
+                                                              </li>
+                                                              </ul>
+                                                            </td>
                                                             
                                                             <%--<td id="subsubmenu" class="submenutools jq-fullfinstation" >
                                                               <ul>
@@ -456,7 +478,7 @@ type = "text/javascript"; e.parentNode.insertBefore($, e)
                                                               </ul>
                                                             </td>--%>
                                                             <td class="i-mainmenu menu-exposureportal hand" align="right" id="tdExposurePortal" runat="server" 
-                                                            style="background-color:#34A855;padding-left:10px;padding-right:10px;font-weight:bold;" type="1" title="Finrex Exposure Manager">Finrex&nbsp;Exposure&nbsp;Manager</td>
+                                                            style="background-color:#34A855;padding-left:10px;padding-right:10px;font-weight:bold;" type="1" title="Finrex Exposure Manager">FEM</td>
                                                             
                                                             <%--<td class="i-mainmenu menu-commodity-metal hand" align="right" runat="server" id="tdmetal" 
                                                             style="background-color:#FEBD01;padding-left:10px;padding-right:10px;font-weight:bold;" title="Commodity">MetStation</td>

@@ -9,14 +9,17 @@ body{background-color:#fff !important;}
 <asp:PlaceHolder ID="form" runat="server" >
   <table width='100%'>
          <tr>
-         <td class="finmenubg">
-               <uc:findocmenu id="findocmenu" runat="server" IsAdminPage="false"></uc:findocmenu>
-            </td>
              <td class='page-inner2'>
                 <table width='100%'>
+                       
                        <tr>
                           <td class="page-title2">Add Findoc Document Type</td>
                        </tr>
+                       <tr>
+                            <td align="right" style="padding-right:10px;">
+                                <uc:findocmenu id="findocmenu1" runat="server" IsAdminPage="false"></uc:findocmenu>
+                            </td>
+                        </tr>
                        <tr>
                            <td><asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label></td>
                        </tr>

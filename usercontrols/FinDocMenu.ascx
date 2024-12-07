@@ -17,22 +17,37 @@
             var href = $(this).find("a").attr("href").toString().toLowerCase().replace("view","").replace(".aspx","");
             if(page == href)
             {
-                $(this).addClass("bankaudit-left-current");
+                $(this).addClass("findocmenu-active");
             }
         });
     });
 </script>
-<table width="100%">
+<div>
+    <div class="findocmenu" style="margin-right:200px;width:90px;">
+        <a href="#" class="add-link " style="background-color:#0b5295;">Settings <i class="icon ion-chevron-down"></i></a>
+        <ul class="jq-findocmenu">
+            <%--<li><a href="ViewFindoc.aspx">Documents</a></li>--%>
+            <li><a href="Viewfindepartment.aspx" class="jq-bankaudit-tab">Department</a></li>
+            <li><a href="Viewfincategory.aspx" class="jq-bankaudit-tab">Category</a></li>
+            <li><a href="Viewfinsubcategory.aspx" class="jq-bankaudit-tab">Sub Category</a></li>
+            <li><a href="Viewfindocumenttype.aspx" class="jq-bankaudit-tab">Type</a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    
+</div>
+<%--<table width="100%">
     <tr>
         <td>
             <ul class="bankaudit-leftmenu jq-findocmenu">
-                <li class=""><a href="ViewFindoc.aspx" class="">Documents</a></li>
-                <li class=""><a href="Viewfindepartment.aspx" class="jq-bankaudit-tab">Document Department</a></li>
-                <li class=""><a href="Viewfincategory.aspx" class="jq-bankaudit-tab">Document Category</a></li>
-                <li class=""><a href="Viewfinsubcategory.aspx" class="jq-bankaudit-tab">Document Sub Category</a></li>
-                <li class=""><a href="Viewfindocumenttype.aspx" class="jq-bankaudit-tab">Document Type</a></li>
+                <li><a href="ViewFindoc.aspx">Documents</a></li>
+                <li><a href="Viewfindepartment.aspx" class="jq-bankaudit-tab">Document Department</a></li>
+                <li><a href="Viewfincategory.aspx" class="jq-bankaudit-tab">Document Category</a></li>
+                <li><a href="Viewfinsubcategory.aspx" class="jq-bankaudit-tab">Document Sub Category</a></li>
+                <li><a href="Viewfindocumenttype.aspx" class="jq-bankaudit-tab">Document Type</a></li>
             </ul>
         </td>
     </tr>
-</table>
+</table>--%>
 

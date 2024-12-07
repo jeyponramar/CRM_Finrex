@@ -17,12 +17,16 @@ body{background-color:#fff !important;}
     <asp:PlaceHolder ID="form" runat="server">
      <table width='100%' cellpadding=0 cellspacing=0>
       <tr>
-        <td class="finmenubg">
-               <uc:findocmenu id="findocmenu" runat="server" IsAdminPage="false"></uc:findocmenu>
-         </td>
-         <td class='page-inner2'>
+            <td class='page-inner2'>
              <table width="100%">
+                
                  <tr><td class="page-title2">Add FinDoc Document</td></tr>
+                 <tr>
+                    <td align="right" style="padding-right:10px;">
+                        <uc:findocmenu id="findocmenu1" runat="server" IsAdminPage="false"></uc:findocmenu>
+                        
+                    </td>
+                </tr>
                  <tr>
                     <td>
                         <table width="100%">
@@ -88,7 +92,10 @@ body{background-color:#fff !important;}
 			                             </tr>
                                          <tr>
                                              <td></td>
-                                             <td><asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" /></td>
+                                             <td>
+                                                <asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" />&nbsp;
+                                                <asp:Button ID="btnDelete" runat="server"  Text="Delete" CssClass="delete button" OnClick="btnDelete_Click" />
+                                             </td>
                                          </tr>
                                   </table>
                                 </td>
