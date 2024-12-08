@@ -13,7 +13,7 @@ body{background-color:#fff !important;}
                 <table width='100%'>
                        
                        <tr>
-                          <td class="page-title2">Add Findoc Document Type</td>
+                          <td class="page-title2">Add Type</td>
                        </tr>
                        <tr>
                             <td align="right" style="padding-right:10px;">

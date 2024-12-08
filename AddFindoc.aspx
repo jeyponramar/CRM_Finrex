@@ -20,7 +20,7 @@ body{background-color:#fff !important;}
             <td class='page-inner2'>
              <table width="100%">
                 
-                 <tr><td class="page-title2">Add FinDoc Document</td></tr>
+                 <tr><td class="page-title2">Upload Document</td></tr>
                  <tr>
                     <td align="right" style="padding-right:10px;">
                         <uc:findocmenu id="findocmenu1" runat="server" IsAdminPage="false"></uc:findocmenu>
@@ -94,7 +94,7 @@ body{background-color:#fff !important;}
                                              <td></td>
                                              <td>
                                                 <asp:Button ID="btnSubmit" runat="server"  Text="Save" CssClass="save button" OnClick="btnSubmit_Click" />&nbsp;
-                                                <asp:Button ID="btnDelete" runat="server"  Text="Delete" CssClass="delete button" OnClick="btnDelete_Click" />
+                                                <asp:Button ID="btnDelete" runat="server"  Text="Delete" CssClass="delete button" OnClick="btnDelete_Click" Visible="false"/>
                                              </td>
                                          </tr>
                                   </table>

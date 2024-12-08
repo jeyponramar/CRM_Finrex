@@ -56,6 +56,7 @@ public partial class AddFindoc : System.Web.UI.Page
             arrfiles.Add(filePath);
         }
         mfuattachment.BindMultiFiles(arrfiles, folderPath);
+        btnDelete.Visible = true;
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {

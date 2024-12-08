@@ -14,7 +14,7 @@ body{background-color:#fff !important;}
            <table width='100%'>
                   
                   <tr>
-                      <td class="page-title2">Add Findoc SubCategory </td>
+                      <td class="page-title2">Add SubCategory </td>
                            
                   </tr>
                   <tr>
