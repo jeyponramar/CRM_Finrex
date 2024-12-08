@@ -41,8 +41,10 @@ public partial class client_apiconfig : System.Web.UI.Page
         for (int i = 0; i < dttbl.Rows.Count; i++)
         {
             html.Append("<tr>");
-          
-            html.Append("<td>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]) + "</td>");
+            // html.Append("<td><input type='checkbox' id='chkcontact" + i + "' name='chkcontact" + i + "'</td>");
+            //html.Append("<td>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]) + "</td>");
+            //html.Append("<td><input type='checkbox' id='vehicle1' name='vehicle1' value='bike'><label for='vehicle1'>I have bike</label></td>");
+            html.Append("<td><input type='checkbox' id='chkcontact' name='chkcontact' value='contact person'<label for='chkcontact'><label for='chkcontact'>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]) + "</td>");
         }
         html.Append("</table>");
         ltlcontact.Text = html.ToString();
