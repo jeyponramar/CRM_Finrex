@@ -56,6 +56,7 @@ public partial class AddFindoc : System.Web.UI.Page
             arrfiles.Add(filePath);
         }
         mfuattachment.BindMultiFiles(arrfiles, folderPath);
+        btnDelete.Visible = true;
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
@@ -117,6 +118,14 @@ public partial class AddFindoc : System.Web.UI.Page
             lblmessage.Visible = true;
         }
 
+    }
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        string query = "";
+        int id = Common.GetQueryStringValue("id");
+        query = "delete from tbl_findocdocument where findocdocument_findocdocumentid=" + id + " and findocdocument_clientid=" + Common.ClientId;
+        DbTable.ExecuteQuery(query);
+        Response.Redirect("~/viewfindoc.aspx");
     }
     public string VersionNo
     {

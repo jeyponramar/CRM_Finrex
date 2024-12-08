@@ -26,6 +26,7 @@ public partial class shareddata_download : System.Web.UI.Page
         string clientUniqueId = Common.GetQueryString("cuid");
         if (type != "inofinexportdata" || clientUniqueId == "")
         {
+            Response.Clear();
             Response.Write("Invalid");
             return;
         }
@@ -35,6 +36,7 @@ public partial class shareddata_download : System.Web.UI.Page
         DataRow dr = DbTable.ExecuteSelectRow(query, hstblp);
         if (dr == null)
         {
+            Response.Clear();
             Response.Write("Invalid.");
             return;
         }
@@ -49,6 +51,7 @@ public partial class shareddata_download : System.Web.UI.Page
             string fileActualPath = Server.MapPath("~/sharedfiles/InoFinExportData.csv");
             if (!System.IO.File.Exists(fileActualPath))
             {
+                Response.Clear();
                 Response.Write("Invalid file");
                 return;
             }
