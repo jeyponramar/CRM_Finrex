@@ -44,31 +44,13 @@ Inherits="client_apiconfig" Title="Api Config" %>
                                         </td>
                                         <td  style="vertical-align:top;">
                                             <table cellpadding='5' cellspacing='5'>
-                                               <%-- <tr>
-                                                    <td></td>
-                                                    <td><input type="checkbox" id="Checkbox1" name="checkbox1" />
-                                                        <label for="checkbox1">Contact Email 1</label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                     <td></td>
-                                                     <td><input type="checkbox" id="Checkbox2" name="checkbox2" />
-                                                        <label for="checkbox2">Contact Email 2</label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                     <td></td>
-                                                     <td><input type="checkbox" id="Checkbox3" name="checkbox3" />
-                                                        <label for="checkbox3">Contact Email 3</label>
-                                                    </td>
-                                                </tr>--%>
                                                 <tr>
                                                      <td></td>
                                                      <td><asp:Literal ID="ltlcontact" runat="server"></asp:Literal></td>
                                                 </tr>
                                                 <tr>
                                                      <td></td>
-                                                     <td><asp:Button ID="btnSend" runat="server" Text="Send Email" CssClass="save button" /></td>
+                                                     <td><asp:Button ID="btnSendEmail" runat="server" Text="Send Email" CssClass="button" OnClick="btnSendEmail_Click"/></td>
                                                 </tr>
                                                                
                                             </table>

@@ -24,14 +24,26 @@ body{background-color:#fff !important;}
                     </tr>
                   <tr>
                        <td>
-                            <asp:Label ID="lblmessage" runat="server"></asp:Label>
+                            <asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label>
                        </td>
                   </tr>
                   <tr>
                        <td>
-                            <table>
+                            <table cellpadding="10">
+                                  <tr>
+                                     <td>Category <span class="error">*</span></td>
+                                     <td>
+                                        <asp:TextBox ID="findoccategory" MaxLength="100" runat="server" m="findoccategory" cn="categoryname" 
+                                          CssClass="textbox ac txtac"></asp:TextBox>  
+                                         <asp:TextBox id="txtfindoccategoryid" Text="0" runat="server" class="hdnac" />
+                                         <img src="images/down-arrow.png" class="quick-new epage" />
+                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="findoccategory" 
+                                         ErrorMessage="Required Category"
+                                         Display="Dynamic" ValidationGroup="vg"></asp:RequiredFieldValidator>
+                                     </td>
+                                 </tr>
                                    <tr>
-                                       <td style="padding:15px;width:150px;"align="right" >Sub Category Name <span class="error">*</span></td>
+                                       <td>Sub Category Name <span class="error">*</span></td>
                                        <td><asp:TextBox ID="txtsubcategoryname"  runat="server" class="textbox"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="rfvl" runat="server" ControlToValidate="txtsubcategoryname" ErrorMessage="Required Sub Category"
                                          Display="Dynamic" ValidationGroup="vg"></asp:RequiredFieldValidator>

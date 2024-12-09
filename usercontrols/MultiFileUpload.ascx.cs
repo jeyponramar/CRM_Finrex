@@ -44,7 +44,6 @@ public partial class MultiFileUpload : System.Web.UI.UserControl
         {
             if (IsMultiple)
             {
-                //PopulateFiles("~/" + _folderPath + "/" + GetId());
                 PopulateFiles("~/" + _folderPath + "/");
             }
             else

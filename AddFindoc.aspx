@@ -35,7 +35,7 @@ body{background-color:#fff !important;}
                                     <table cellpadding='5' cellspacing='5'>
                                          <tr><td colspan="2"><asp:Label ID="lblmessage" runat="server" CssClass="error"></asp:Label></td></tr>
                                          <tr>
-                                             <td>FinDoc Department</td>
+                                             <td>Department</td>
                                              <td>
                                                 <asp:TextBox ID="findocdepartment" MaxLength="100" runat="server" m="findocdepartment" cn="departmentname" 
                                                   CssClass="textbox ac txtac"></asp:TextBox>  
@@ -44,16 +44,16 @@ body{background-color:#fff !important;}
                                              </td>
                                          </tr>
                                           <tr>
-                                             <td>FinDoc Category</td>
+                                             <td>Category</td>
                                              <td>
                                                 <asp:TextBox ID="findoccategory" MaxLength="100" runat="server" m="findoccategory" cn="categoryname" 
                                                   CssClass="textbox ac txtac"></asp:TextBox>  
-                                                 <asp:TextBox id="txtfindoccategoryid" Text="0" runat="server" class="hdnac" />
+                                                 <asp:TextBox id="txtfindoccategoryid" dcn="findocdocument_findoccategoryid" Text="0" runat="server" class="hdnac" />
                                                  <img src="images/down-arrow.png" class="quick-new epage" />
                                              </td>
                                          </tr>
                                           <tr>
-                                             <td>FinDoc Sub Category</td>
+                                             <td>Sub Category</td>
                                              <td>
                                                 <asp:TextBox ID="findocsubcategory" MaxLength="100" runat="server" m="findocsubcategory" cn="subcategoryname" 
                                                   CssClass="textbox ac txtac" acparent="findoccategoryid"></asp:TextBox>  
@@ -62,7 +62,7 @@ body{background-color:#fff !important;}
                                              </td>
                                          </tr>
                                           <tr>
-                                             <td>FinDoc Document Type </td>
+                                             <td>Document Type </td>
                                              <td>
                                                 <asp:TextBox ID="findocdocumenttype" MaxLength="100" runat="server" m="findocdocumenttype" cn="documenttype" 
                                                   CssClass="textbox ac txtac"></asp:TextBox>  
@@ -72,7 +72,7 @@ body{background-color:#fff !important;}
                                          </tr>
                                          <tr>
 											<td>Attachment <span class="error">*</span></td>
-											<td><uc:MultiFileUpload ID="mfuattachment"  IsMultiple="true" FileType="any" 
+											<td><uc:MultiFileUpload ID="mfuattachment" IsPopulateFiles="false" IsMultiple="true" FileType="any" 
 											FolderPath="upload/client/findoc" runat="server" CssClass="textbox "></uc:MultiFileUpload>
 											</td>
 										</tr>
@@ -107,7 +107,7 @@ body{background-color:#fff !important;}
                                         </tr>
                                         <tr>
                                             <td>Uploaded On</td>
-                                            <td><asp:Label ID="lbluploaddate" runat="server" CssClass="bold"></asp:Label></td>
+                                            <td><asp:Label ID="lbluploaddate" Format="DateTime" runat="server" CssClass="bold"></asp:Label></td>
                                         </tr>
                                     </table>
                                 </td>

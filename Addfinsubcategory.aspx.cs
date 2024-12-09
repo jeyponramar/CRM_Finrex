@@ -27,6 +27,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         GlobalData objGlobalData = new GlobalData("tbl_findocsubcategory", "findocsubcategoryid");
         string query = "";
         query = @"select * from tbl_findocsubcategory 
+                  join tbl_findoccategory on findoccategory_findoccategoryid=findocsubcategory_findoccategoryid
                 where findocsubcategory_findocsubcategoryid=" + id +
                " and findocsubcategory_clientid=" + Common.ClientId;
         DataRow dr = DbTable.ExecuteSelectRow(query);
@@ -43,7 +44,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         int id = Common.GetQueryStringValue("id");
         string query = "";
         query = @"select * from tbl_findocsubcategory 
-                where (findocsubcategory_clientid = 0 OR findocsubcategory_clientid=" + Common.ClientId + ") " +
+                where (findocsubcategory_clientid= 0 OR findocsubcategory_clientid=" + clientId + ")" +
                " and findocsubcategory_subcategoryname=@subcategoryname";
         if (id > 0)
         {
@@ -59,6 +60,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         }
         Hashtable hstbl = new Hashtable();
         hstbl.Add("subcategoryname", txtsubcategoryname.Text);
+        hstbl.Add("findoccategoryid", txtfindoccategoryid.Text);
         hstbl.Add("clientid", clientId);
         hstbl.Add("clientuserid", clientUserId);
         InsertUpdate obj = new InsertUpdate();

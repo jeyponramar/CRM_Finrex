@@ -42,8 +42,9 @@ public partial class Addfindocumenttype : System.Web.UI.Page
         int clientUserId = Common.ClientUserId;
         int id = Common.GetQueryStringValue("id");
         string query = "";
-        query="select * from tbl_findocdocumenttype where findocdocumenttype_clientid=" + Common.ClientId +
-                "and findocdocumenttype_documenttype=@documenttype";
+        query = @"select * from tbl_findocdocumenttype 
+                where (findocdocumenttype_clientid = 0 OR findocdocumenttype_clientid=" + Common.ClientId + ")" +
+                " and findocdocumenttype_documenttype=@documenttype";
         if (id > 0)
         {
             query += " and findocdocumenttype_findocdocumenttypeid<>" + id;

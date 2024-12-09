@@ -40,11 +40,18 @@ public partial class client_apiconfig : System.Web.UI.Page
         html.Append("<table><tr><td>Contact Person</td></tr>");
         for (int i = 0; i < dttbl.Rows.Count; i++)
         {
-            html.Append("<tr>");
-            // html.Append("<td><input type='checkbox' id='chkcontact" + i + "' name='chkcontact" + i + "'</td>");
-            //html.Append("<td>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]) + "</td>");
-            //html.Append("<td><input type='checkbox' id='vehicle1' name='vehicle1' value='bike'><label for='vehicle1'>I have bike</label></td>");
-            html.Append("<td><input type='checkbox' id='chkcontact' name='chkcontact' value='contact person'<label for='chkcontact'><label for='chkcontact'>" + GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]) + "</td>");
+            
+            string contactPerson = GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_contactperson"]);
+            string emailId = GlobalUtilities.ConvertToString(dttbl.Rows[i]["contacts_emailid"]);
+            if (emailId != "")
+            {
+                html.Append("<tr>");
+                html.Append("<td>");
+                html.Append("<input type='checkbox' id='chkapiconfigcontact" + i + "' name='chkapiconfigcontact" + i + "' value='" + emailId + "'>");
+                html.Append("<label for='chkapiconfigcontact" + i + "'>" + contactPerson + " (" + emailId + ")</label>");
+                html.Append("</td>");
+                html.Append("</tr>");
+            }
         }
         html.Append("</table>");
         ltlcontact.Text = html.ToString();
@@ -98,5 +105,37 @@ public partial class client_apiconfig : System.Web.UI.Page
             lblmessage.Text = "Data update successfully";
         }
 
+    }
+    protected void btnSendEmail_Click(object sender, EventArgs e)
+    {
+        StringBuilder emailIds = new StringBuilder();
+        for (int i = 0; i < Request.Form.Keys.Count; i++)
+        {
+            string key = Request.Form.Keys[i];
+            if (key.StartsWith("chkapiconfigcontact"))
+            {
+                string emailId = Request.Form[key];
+                if (emailId != "")
+                {
+                    if (emailIds.ToString() == "")
+                    {
+                        emailIds.Append(emailId);
+                    }
+                    else
+                    {
+                        emailIds.Append("," + emailId);
+                    }
+                }
+            }
+        }
+        if (emailIds.ToString() == "")
+        {
+            lblmessage.Text = "Please choose the email ids";
+            return;
+        }
+        string subject = "Finstation API Details";
+        string message = Common.GetSetting("API Email to Customer");
+        BulkEmail.SendMail(emailIds.ToString(), subject, message, "");
+        lblmessage.Text = "Email has been sent successfully";
     }
 }

@@ -28,7 +28,7 @@ public partial class AddFindoc : System.Web.UI.Page
         if (id == 0) return;
         int clientId = Common.ClientId;
         tbluploadby.Visible = true;
-        GlobalData objGlobalData = new GlobalData("tbl_findocdocument","findocdocumentid");
+        GlobalData objGlobalData = new GlobalData("tbl_findocdocument", "findocdocumentid");
         string query = "";
         query = @"select * from tbl_findocdocument 
                   left join tbl_findocdepartment on findocdepartment_findocdepartmentid=findocdocument_findocdepartmentid
@@ -36,8 +36,8 @@ public partial class AddFindoc : System.Web.UI.Page
                   left join tbl_findocsubcategory on findocsubcategory_findocsubcategoryid=findocdocument_findocsubcategoryid
                   left join tbl_findocdocumenttype on findocdocumenttype_findocdocumenttypeid=findocdocument_findocdocumenttypeid
                   left join tbl_clientuser on clientuser_clientuserid=findocdocument_clientuserid
-                where findocdocument_findocdocumentid=" + id +
-              " and findocdocument_clientid=" + clientId;
+                  where findocdocument_findocdocumentid=" + id +
+                  " and findocdocument_clientid=" + clientId;
         DataRow dr = DbTable.ExecuteSelectRow(query);
         if (dr == null)
         {

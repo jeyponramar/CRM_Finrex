@@ -59,6 +59,7 @@ public partial class ViewFindoc : System.Web.UI.Page
         if (findocsubcategoryid != 0) viewQuery.Append(" and findocdocument_findocsubcategoryid = " + findocsubcategoryid);
         if (findoccategoryid != 0) viewQuery.Append(" and findocdocument_findoccategoryid = " + findoccategoryid);
         
+        viewQuery.Append(" order by findocdocument_findocdocumentid desc");
         
         DataTable dttbl = DbTable.ExecuteSelect(viewQuery.ToString());
         StringBuilder html = new StringBuilder();
