@@ -34,29 +34,36 @@ body{background-color:#fff !important;}
                        </tr>
                        <tr>
                            <td>
-                                <table cellspacing="10">
+                                <table cellspacing="5">
                                     <tr>
-                                        <td class="bold">Date : From <asp:TextBox ID="txtfromdate"  Width="70" runat="server" CssClass="datepicker"></asp:TextBox>
-                                            &nbsp;To <asp:TextBox ID="txttodate" Width="70" runat="server" CssClass="datepicker"></asp:TextBox>
+                                        <td class="bold">Date : From <asp:TextBox ID="txtfromdate"  Width="62" runat="server" CssClass="datepicker"></asp:TextBox>
+                                            &nbsp;To <asp:TextBox ID="txttodate" Width="62" runat="server" CssClass="datepicker"></asp:TextBox>
                                         </td>
                                         <td class="bold">Department :
-                                            <asp:TextBox ID="findocdepartment" style="width:120px !important;min-width:80px !important;" runat="server" m="findocdepartment" cn="departmentname" 
+                                            <asp:TextBox ID="findocdepartment" style="width:90px !important;min-width:80px !important;" runat="server" m="findocdepartment" cn="departmentname" 
                                               CssClass="textbox ac txtac"></asp:TextBox>  
                                              <asp:TextBox id="txtfindocdepartmentid" Text="0" runat="server" class="hdnac" />
                                         </td>
                                         <td class="bold">Category :</td>
                                          <td>
-                                            <asp:TextBox ID="findoccategory" style="width:120px !important;min-width:80px !important;" runat="server" m="findoccategory" cn="categoryname" 
+                                            <asp:TextBox ID="findoccategory" style="width:90px !important;min-width:80px !important;" runat="server" m="findoccategory" cn="categoryname" 
                                               CssClass="textbox ac txtac"></asp:TextBox>  
-                                             <asp:TextBox id="txtfindoccategoryid" Text="0" runat="server" class="hdnac" />
+                                             <asp:TextBox id="txtfindoccategoryid" dcn="findocdocument_findoccategoryid" Text="0" runat="server" class="hdnac" />
                                          </td>
                                          <td class="bold">Sub Category : </td>
                                          <td>
-                                            <asp:TextBox ID="findocsubcategory" style="width:120px !important;min-width:80px !important;" runat="server" m="findocsubcategory" cn="subcategoryname" 
+                                            <asp:TextBox ID="findocsubcategory" style="width:90px !important;min-width:80px !important;" runat="server" m="findocsubcategory" cn="subcategoryname" 
                                               CssClass="textbox ac txtac" acparent="findoccategoryid"></asp:TextBox>  
                                              <asp:TextBox id="txtfindocsubcategoryid" Text="0" runat="server" class="hdnac" />
                                          </td>
-                                    
+                                         <td class="bold">Subject : </td>
+                                         <td>
+                                            <asp:TextBox ID="txtsubject" style="width:90px !important;min-width:80px !important;" runat="server" CssClass="textbox"></asp:TextBox>  
+                                         </td>
+                                         <td class="bold">Document Name : </td>
+                                         <td>
+                                            <asp:TextBox ID="txtattachment" style="width:90px !important;min-width:80px !important;" runat="server" CssClass="textbox"></asp:TextBox>  
+                                         </td>
                                         <td><asp:Button ID="btnSubmit" CssClass="button" runat="server" Text="Search" OnClick="btnSubmit_Click" /></td>
                                     </tr>
                                 

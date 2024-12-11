@@ -21,6 +21,7 @@ public partial class ViewFindoc : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            InitialSetup();
             BindData();
         }
 
@@ -55,13 +56,23 @@ public partial class ViewFindoc : System.Web.UI.Page
             viewQuery.Append(" AND cast(findocdocument_uploaddate as date)<=cast(@todate as date)");
             hstblp.Add("todate", GlobalUtilities.ConvertMMDateToDD(txttodate.Text));
         }
+        if (txtsubject.Text != "")
+        {
+            viewQuery.Append(" AND findocdocument_subject like '%' + @subject + '%'");
+            hstblp.Add("subject", txtsubject.Text);
+        }
+        if (txtattachment.Text != "")
+        {
+            viewQuery.Append(" AND findocdocument_attachment like '%' + @attachment + '%'");
+            hstblp.Add("attachment", txtattachment.Text);
+        }
         if (findocdepartmentid != 0) viewQuery.Append(" and findocdocument_findocdepartmentid = " + findocdepartmentid);
         if (findocsubcategoryid != 0) viewQuery.Append(" and findocdocument_findocsubcategoryid = " + findocsubcategoryid);
         if (findoccategoryid != 0) viewQuery.Append(" and findocdocument_findoccategoryid = " + findoccategoryid);
         
         viewQuery.Append(" order by findocdocument_findocdocumentid desc");
         
-        DataTable dttbl = DbTable.ExecuteSelect(viewQuery.ToString());
+        DataTable dttbl = DbTable.ExecuteSelect(viewQuery.ToString(), hstblp);
         StringBuilder html = new StringBuilder();
 
         html.Append("<table width='100%' cellpadding=7  border=1 class='grid-ui'>");
@@ -114,5 +125,30 @@ public partial class ViewFindoc : System.Web.UI.Page
     {
         BindData();
     }
-    
+    private void InitialSetup()
+    {
+        string query = "";
+        int clientId = Common.ClientId;
+        int clientUserId = Common.ClientUserId;
+        query = "select count(*) c from tbl_findoccategory where findoccategory_clientid=" + clientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (GlobalUtilities.ConvertToInt(dr["c"]) == 0)
+        {
+            query = @"insert into tbl_findoccategory(findoccategory_categoryname,findoccategory_clientid,findoccategory_clientuserid,findoccategory_createddate)
+                    select findoccategory_categoryname," + clientId + "," + clientUserId + @",getdate() from tbl_findoccategory
+                    where findoccategory_clientid=0 and findoccategory_categoryname not in(select findoccategory_categoryname from tbl_findoccategory where findoccategory_clientid=" + clientId + ")";
+            DbTable.ExecuteQuery(query);
+
+            query = @"insert into tbl_findocdocumenttype(findocdocumenttype_documenttype,findocdocumenttype_clientid,findocdocumenttype_clientuserid,findocdocumenttype_createddate)
+                    select findocdocumenttype_documenttype," + clientId + "," + clientUserId + @",getdate() from tbl_findocdocumenttype
+                    where findocdocumenttype_clientid=0 and findocdocumenttype_documenttype not in(select findocdocumenttype_documenttype from tbl_findocdocumenttype where findocdocumenttype_clientid=" + clientId + ")";
+            DbTable.ExecuteQuery(query);
+
+            query = @"insert into tbl_findocdepartment(findocdepartment_departmentname,findocdepartment_clientid,findocdepartment_clientuserid,findocdepartment_createddate)
+                    select findocdepartment_departmentname," + clientId + "," + clientUserId + @",getdate() from tbl_findocdepartment
+                    where findocdepartment_clientid=0 and findocdepartment_departmentname not in(select findocdepartment_departmentname from tbl_findocdepartment where findocdepartment_clientid=" + clientId + ")";
+            DbTable.ExecuteQuery(query);
+
+        }
+    }
 }

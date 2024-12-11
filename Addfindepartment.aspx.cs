@@ -42,7 +42,7 @@ public partial class Addfindepartment : System.Web.UI.Page
         int id = Common.GetQueryStringValue("id");
         string query = "";
         query = @"select * from tbl_findocdepartment 
-                where (findocdepartment_clientid = 0 OR findocdepartment_clientid=" + Common.ClientId + ")" + 
+                where findocdepartment_clientid=" + Common.ClientId + 
                 " and findocdepartment_departmentname=@departmentname";
         if (id > 0)
         {

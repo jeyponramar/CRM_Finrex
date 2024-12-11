@@ -44,7 +44,7 @@ public partial class Addfinsubcategory : System.Web.UI.Page
         int id = Common.GetQueryStringValue("id");
         string query = "";
         query = @"select * from tbl_findocsubcategory 
-                where (findocsubcategory_clientid= 0 OR findocsubcategory_clientid=" + clientId + ")" +
+                where findocsubcategory_clientid=" + clientId +
                " and findocsubcategory_subcategoryname=@subcategoryname";
         if (id > 0)
         {

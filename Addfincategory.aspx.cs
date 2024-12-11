@@ -22,10 +22,17 @@ public partial class Addfincategory : System.Web.UI.Page
     }
     private void PopulateData()
     {
-        
-        GlobalData objGlobalData = new GlobalData("tbl_findoccategory","findoccategoryid");
-       
-        objGlobalData.PopulateForm(form);
+        GlobalData objGlobalData = new GlobalData("tbl_findoccategory", "findoccategoryid");
+        string query = "";
+        int id = Common.GetQueryStringValue("id");
+        query = "select * from tbl_findoccategory where findoccategory_findoccategoryid=" + id +
+                " and findoccategory_clientid=" + Common.ClientId;
+        DataRow dr = DbTable.ExecuteSelectRow(query);
+        if (dr == null)
+        {
+            Response.End();
+        }
+        objGlobalData.PopulateForm(dr, form);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
@@ -34,7 +41,7 @@ public partial class Addfincategory : System.Web.UI.Page
         int id = Common.GetQueryStringValue("id");
         string query = "";
         query = @"select * from tbl_findoccategory 
-                where (findoccategory_clientid = 0 OR findoccategory_clientid=" + Common.ClientId + ")" +
+                where findoccategory_clientid=" + Common.ClientId +
                " and findoccategory_categoryname=@categoryname";
         if (id > 0)
         {

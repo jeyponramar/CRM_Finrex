@@ -36,7 +36,7 @@ public class ac : IHttpHandler, System.Web.SessionState.IRequiresSessionState
             if (m.StartsWith("findoc"))
             {
                 isValidRequest = true;
-                extraWhere = " AND (" + m + "_clientid = 0 OR " + m + "_clientid=" + loggedInClientId + ")";
+                extraWhere = " AND " + m + "_clientid=" + loggedInClientId;
             }
             if (!isValidRequest)
             {
