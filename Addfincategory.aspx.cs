@@ -22,9 +22,10 @@ public partial class Addfincategory : System.Web.UI.Page
     }
     private void PopulateData()
     {
+        int id = Common.GetQueryStringValue("id");
+        if (id == 0) return;
         GlobalData objGlobalData = new GlobalData("tbl_findoccategory", "findoccategoryid");
         string query = "";
-        int id = Common.GetQueryStringValue("id");
         query = "select * from tbl_findoccategory where findoccategory_findoccategoryid=" + id +
                 " and findoccategory_clientid=" + Common.ClientId;
         DataRow dr = DbTable.ExecuteSelectRow(query);
