@@ -123,7 +123,8 @@ public partial class AddFindoc : System.Web.UI.Page
     {
         string query = "";
         int id = Common.GetQueryStringValue("id");
-        query = "delete from tbl_findocdocument where findocdocument_findocdocumentid=" + id + " and findocdocument_clientid=" + Common.ClientId;
+        query = "delete from tbl_findocdocument where findocdocument_findocdocumentid=" + id + 
+                " and findocdocument_clientid=" + Common.ClientId;
         DbTable.ExecuteQuery(query);
         Response.Redirect("~/viewfindoc.aspx");
     }
